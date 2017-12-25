@@ -16,4 +16,8 @@
     <PackageReference Include="Discord.Net.WebSocket" Version="1.0.2" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Timers\" />
+  </ItemGroup>
+
 </Project>

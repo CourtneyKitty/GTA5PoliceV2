@@ -83,6 +83,7 @@ namespace GTA5PoliceV2
                 config.Token = Console.ReadLine();
                 Console.Write("Bot Token: ");
                 config.Token = Console.ReadLine();
+                config.LogsId = 0;
                 config.Save();
             }
             Console.WriteLine("Configuration has been loaded");

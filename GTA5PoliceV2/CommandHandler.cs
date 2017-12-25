@@ -27,6 +27,7 @@ namespace GTA5PoliceV2
             bot.UserLeft += AnnounceLeftUser;
             bot.Ready += SetGame;
             bot.MessageReceived += HandleCommand;
+            bot.MessageReceived += ProfanityCheck;
             commands = map.GetService<CommandService>();
         }
 
@@ -66,6 +67,45 @@ namespace GTA5PoliceV2
                 //If the command failed, notify the user
                 if (!result.IsSuccess && result.ErrorReason != "Unknown command.")
                     await errors.sendErrorTemp(pMsg.Channel, result.ErrorReason, Colours.errorCol);
+            }
+        }
+
+        public async Task ProfanityCheck(SocketMessage pMsg)
+        {
+            var message = pMsg as SocketUserMessage;
+            if (message == null)
+                return;
+
+            if (message.ToString().ToLower().Contains("testword"))
+            {
+                var user = pMsg.Author.Username;
+                var userId = pMsg.Author.Id;
+                var channel = pMsg.Channel.ToString();
+                var fullMsg = pMsg.ToString();
+                var logsChannel = BotConfig.Load().LogsId; //find the channel
+
+                await message.DeleteAsync(); //delete message
+
+                var warningEmbed = new EmbedBuilder() { Color = Colours.errorCol };
+                warningEmbed.Title = "";
+                warningEmbed.Description = user + " | Do not use that profanity, your message has been deleted.";
+                var msg = await pMsg.Channel.SendMessageAsync("", false, warningEmbed);
+                //Delete msg
+
+                var logEmbed = new EmbedBuilder() { Color = Colours.errorCol };
+                logEmbed.Title = "Discord Profanity Detected";
+                logEmbed.Description = "Message was deleted from the channel.";
+                var userField = new EmbedFieldBuilder() { Name = "User", Value = user };
+                var userIdField = new EmbedFieldBuilder() { Name = "User ID", Value = userId };
+                var channelField = new EmbedFieldBuilder() { Name = "Channel", Value = channel };
+                var wordField = new EmbedFieldBuilder() { Name = "Word", Value = "TestWord" };
+                var messageField = new EmbedFieldBuilder() { Name = "Full Message", Value = fullMsg };
+                logEmbed.AddField(userField);
+                logEmbed.AddField(userIdField);
+                logEmbed.AddField(channelField);
+                logEmbed.AddField(wordField);
+                logEmbed.AddField(messageField);
+                msg = await pMsg.Channel.SendMessageAsync("", false, logEmbed);
             }
         }
     }

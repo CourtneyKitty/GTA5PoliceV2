@@ -11,11 +11,13 @@ namespace GTA5PoliceV2.Config
 
         public string Prefix { get; set; }
         public string Token { get; set; }
+        public ulong LogsId { get; set; }
 
         public BotConfig()
         {
             Prefix = "!";
             Token = "";
+            LogsId = 0;
         }
 
         public void Save(string dir = "configuration/config.json")
