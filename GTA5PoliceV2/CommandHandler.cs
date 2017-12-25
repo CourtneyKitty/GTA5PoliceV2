@@ -8,6 +8,7 @@ using Microsoft.Extensions.DependencyInjection;
 using System.Linq;
 using GTA5PoliceV2.Config;
 using GTA5PoliceV2.Util;
+using GTA5PoliceV2.Connection;
 
 namespace GTA5PoliceV2
 {
