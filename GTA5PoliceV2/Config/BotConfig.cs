@@ -12,12 +12,16 @@ namespace GTA5PoliceV2.Config
         public string Prefix { get; set; }
         public string Token { get; set; }
         public ulong LogsId { get; set; }
+        public int StatusTimerInterval { get; set; }
+        public int MessageTimerInterval { get; set; }
 
         public BotConfig()
         {
             Prefix = "!";
             Token = "";
             LogsId = 0;
+            StatusTimerInterval = 1;
+            MessageTimerInterval = 30;
         }
 
         public void Save(string dir = "configuration/config.json")
