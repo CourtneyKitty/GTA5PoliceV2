@@ -164,8 +164,8 @@ namespace GTA5PoliceV2.Modules
             embed.WithAuthor("GTA5Police Help", References.gta5policeLogo);
             embed.Description = "Be sure to check out our rules and policies, as well as other useful links!";
             embed.WithThumbnailUrl(References.gta5policeLogo);
-            embed.AddField(new EmbedFieldBuilder() { Name = "!Apply", Value = "Police, EMS, Mechanic, and Whitelist Applications" });
             embed.AddField(new EmbedFieldBuilder() { Name = "!Rules", Value = "Rules and How We Ban." });
+            embed.AddField(new EmbedFieldBuilder() { Name = "!Apply", Value = "Police, EMS, Mechanic, and Whitelist Applications" });
             embed.AddField(new EmbedFieldBuilder() { Name = "!Links", Value = "Useful Links." });
             embed.AddField(new EmbedFieldBuilder() { Name = "!Status", Value = "View the current status of the servers." });
             embed.WithFooter("Message Timer with " + BotConfig.Load().MessageTimerInterval + " minute interval");
