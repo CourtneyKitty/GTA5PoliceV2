@@ -12,10 +12,12 @@ namespace GTA5PoliceV2.Modules
         public async Task Status()
         {
             ServerStatus status = new ServerStatus();
-            status.pingServers();
+            //status.pingServers();
 
             var channel = Context.Channel;
-            await status.displayStatus(channel);
+            var user = Context.User;
+            await Context.Message.DeleteAsync();
+            await status.displayStatus(channel, user);
         }
     }
 }
