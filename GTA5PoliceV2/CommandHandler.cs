@@ -76,7 +76,7 @@ namespace GTA5PoliceV2
             var message = pMsg as SocketUserMessage;
             await message.DeleteAsync();
 
-            var user = pMsg.Author.Username;
+            var user = pMsg.Author;
             var userId = pMsg.Author.Id;
             var channel = pMsg.Channel.ToString();
             var fullMsg = pMsg.ToString();
@@ -94,19 +94,17 @@ namespace GTA5PoliceV2
             var logChannel = server.GetTextChannel(BotConfig.Load().LogsId);
 
             var logEmbed = new EmbedBuilder() { Color = Colours.errorCol };
-            logEmbed.Title = "Profanity Detected (Discord)";
+            logEmbed.WithAuthor("Profanity detected in server chat");
             logEmbed.WithThumbnailUrl("https://cdn.discordapp.com/attachments/336338554424918017/353934612503855115/GTA5Police_Main.png");
-            logEmbed.Description = "Message was deleted from the channel.";
-            var userField = new EmbedFieldBuilder() { Name = "User", Value = user };
-            var userIdField = new EmbedFieldBuilder() { Name = "User ID", Value = userId };
+            logEmbed.Description = "Full message: " + fullMsg;
+            var userField = new EmbedFieldBuilder() { Name = "Discord User", Value = user };
+            var userIdField = new EmbedFieldBuilder() { Name = "DiscordId", Value = userId };
             var channelField = new EmbedFieldBuilder() { Name = "Channel", Value = channel };
             var wordField = new EmbedFieldBuilder() { Name = "Word", Value = word };
-            var messageField = new EmbedFieldBuilder() { Name = "Full Message", Value = fullMsg };
             logEmbed.AddField(userField);
             logEmbed.AddField(userIdField);
             logEmbed.AddField(channelField);
             logEmbed.AddField(wordField);
-            logEmbed.AddField(messageField);
             await logChannel.SendMessageAsync("", false, logEmbed);
         }
     }
