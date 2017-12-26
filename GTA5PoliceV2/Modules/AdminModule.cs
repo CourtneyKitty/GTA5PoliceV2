@@ -1,10 +1,10 @@
 ﻿using Discord.Commands;
+using System.Threading;
 using System.Threading.Tasks;
 using GTA5PoliceV2.Config;
 using GTA5PoliceV2.Util;
 using GTA5PoliceV2.Connection;
 using Discord;
-using System.Threading;
 
 namespace GTA5PoliceV2.Modules
 {
@@ -106,24 +106,22 @@ namespace GTA5PoliceV2.Modules
                     if (which.ToLower().Equals("status timer"))
                     {
                         Timer timer;
-                        int interval = BotConfig.Load().StatusTimerInterval;
                         ny = false;
                         la = false;
                         nywl = false;
                         lawl = false;
                         channel = Context.Channel;
 
-                        timer = new Timer(SendStatus, null, 0, 1000 * 60 * interval);
+                        timer = new Timer(SendStatus, null, 0, 1000 * 60 * BotConfig.Load().StatusTimerInterval);
 
                         await Context.Message.DeleteAsync();
                     }
                     else if (which.ToLower().Equals("message timer"))
                     {
                         Timer timer;
-                        int interval = BotConfig.Load().MessageTimerInterval;
                         channel = Context.Channel;
 
-                        timer = new Timer(SendMessage, null, 0, 1000 * 60 * interval);
+                        timer = new Timer(SendMessage, null, 0, 1000 * 60 * BotConfig.Load().MessageTimerInterval);
 
                         await Context.Message.DeleteAsync();
                     }
