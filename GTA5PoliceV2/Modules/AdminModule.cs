@@ -94,17 +94,23 @@ namespace GTA5PoliceV2.Modules
         [Command("timer start")]
         public async Task TimerStart()
         {
-            Timer timer;
-            int interval = BotConfig.Load().StatusTimerInterval;
-            ny = false;
-            la = false;
-            nywl = false;
-            lawl = false;
-            channel = Context.Channel;
+            for (int i = 0; i <= BotConfig.Load().Commanders - 1; i++)
+            {
+                if (Context.User.Id == BotConfig.Load().BotCommanders[i])
+                {
+                    Timer timer;
+                    int interval = BotConfig.Load().StatusTimerInterval;
+                    ny = false;
+                    la = false;
+                    nywl = false;
+                    lawl = false;
+                    channel = Context.Channel;
 
-            timer = new Timer(Send, null, 0, 1000 * 60 * interval);
-            
-            await Context.Message.DeleteAsync();
+                    timer = new Timer(Send, null, 0, 1000 * 60 * interval);
+
+                    await Context.Message.DeleteAsync();
+                }
+            }
         }
         
         async void Send(object state)
