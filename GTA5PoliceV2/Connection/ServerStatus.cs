@@ -27,8 +27,6 @@ namespace GTA5PoliceV2.Connection
         private bool isNyWlLive;
         private bool isLaWlLive;
 
-        public ServerStatus() { }
-
         /** Ping main server. If connection is good, try to connect to game servers. **/
         public void pingServers()
         {

@@ -26,8 +26,8 @@ namespace GTA5PoliceV2
             bot.UserLeft += AnnounceLeftUser;
             bot.Ready += SetGame;
             bot.MessageReceived += HandleCommand;
-            bot.MessageReceived += ProfanityCheck;
             commands = map.GetService<CommandService>();
+            bot.MessageReceived += ProfanityCheck;
         }
 
         public async Task AnnounceLeftUser(SocketGuildUser user) {}
