@@ -7,6 +7,9 @@ using Microsoft.Extensions.DependencyInjection;
 using GTA5PoliceV2.Config;
 using System.IO;
 using System.Collections.Generic;
+using System.Threading;
+using GTA5PoliceV2.Connection;
+using GTA5PoliceV2.Util;
 
 namespace GTA5PoliceV2
 {
@@ -86,6 +89,7 @@ namespace GTA5PoliceV2
                 config.Token = Console.ReadLine();
                 config.ServerId = 0;
                 config.LogsId = 0;
+                config.TimerChannelId = 0;
                 config.StatusTimerInterval = 1;
                 config.MessageTimerInterval = 30;
                 config.Commanders = 1;

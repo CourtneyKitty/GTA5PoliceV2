@@ -8,6 +8,8 @@ using Microsoft.Extensions.DependencyInjection;
 using GTA5PoliceV2.Config;
 using GTA5PoliceV2.Util;
 using System.Linq;
+using System.Threading;
+using GTA5PoliceV2.Connection;
 
 namespace GTA5PoliceV2
 {
@@ -25,6 +27,7 @@ namespace GTA5PoliceV2
             bot.UserJoined += AnnounceUserJoined;
             bot.UserLeft += AnnounceLeftUser;
             bot.Ready += SetGame;
+            bot.Ready += StartTimers;
             bot.MessageReceived += HandleCommand;
             commands = map.GetService<CommandService>();
             bot.MessageReceived += ProfanityCheck;
@@ -106,6 +109,72 @@ namespace GTA5PoliceV2
             logEmbed.AddField(channelField);
             logEmbed.AddField(wordField);
             await logChannel.SendMessageAsync("", false, logEmbed);
+        }
+
+        ServerStatus status = new ServerStatus();
+        Success success = new Success();
+        bool ny, la, nywl, lawl;
+        SocketGuild server;
+        IMessageChannel channel;
+
+        async Task StartTimers()
+        {
+            server = bot.Guilds.FirstOrDefault(x => x.Id == BotConfig.Load().ServerId);
+            channel = server.GetTextChannel(BotConfig.Load().TimerChannelId);
+       
+            Timer timerStatus;
+            ny = false;
+            la = false;
+            nywl = false;
+            lawl = false;
+            timerStatus = new Timer(SendStatus, null, 0, 1000 * 60 * BotConfig.Load().StatusTimerInterval);
+
+            Timer timerMessage;
+            timerMessage = new Timer(SendMessage, null, 0, 1000 * 60 * BotConfig.Load().MessageTimerInterval);
+        }
+
+        async void SendStatus(object state)
+        {
+            status.pingServers();
+            if (ny != status.getNyStatus())
+            {
+                if (status.getNyStatus()) await success.sendSuccess(channel, "Server Status Change", "New York has come online!", Colours.generalCol);
+                if (!status.getNyStatus()) await success.sendSuccess(channel, "Server Status Change", "New York has gone offline!", Colours.generalCol);
+                ny = status.getNyStatus();
+            }
+            if (la != status.getLaStatus())
+            {
+                if (status.getLaStatus()) await success.sendSuccess(channel, "Server Status Change", "Los Angeles has come online!", Colours.generalCol);
+                if (!status.getLaStatus()) await success.sendSuccess(channel, "Server Status Change", "Los Angeles has gone offline!", Colours.generalCol);
+                la = status.getLaStatus();
+            }
+            if (nywl != status.getNyWlStatus())
+            {
+                if (status.getNyWlStatus()) await success.sendSuccess(channel, "Server Status Change", "New York Whitelist has come online!", Colours.generalCol);
+                if (!status.getNyWlStatus()) await success.sendSuccess(channel, "Server Status Change", "New York Whitelist has gone offline!", Colours.generalCol);
+                nywl = status.getNyWlStatus();
+            }
+            if (lawl != status.getLaWlStatus())
+            {
+                if (status.getLaWlStatus()) await success.sendSuccess(channel, "Server Status Change", "Los Angeles Whitelist has come online!", Colours.generalCol);
+                if (!status.getLaWlStatus()) await success.sendSuccess(channel, "Server Status Change", "Los Angeles Whitelist has gone offline!", Colours.generalCol);
+                lawl = status.getLaWlStatus();
+            }
+        }
+        async void SendMessage(object state)
+        {
+            var embed = new EmbedBuilder() { Color = Colours.generalCol };
+            embed.WithAuthor("GTA5Police Help", References.gta5policeLogo);
+            embed.Description = "Be sure to check out our rules and policies, as well as other useful links!";
+            embed.WithThumbnailUrl(References.gta5policeLogo);
+            embed.AddField(new EmbedFieldBuilder() { Name = "!Rules", Value = "Rules and How We Ban." });
+            embed.AddField(new EmbedFieldBuilder() { Name = "!Apply", Value = "Police, EMS, Mechanic, and Whitelist Applications" });
+            embed.AddField(new EmbedFieldBuilder() { Name = "!Links", Value = "Useful Links." });
+            embed.AddField(new EmbedFieldBuilder() { Name = "!Status", Value = "View the current status of the servers." });
+            embed.WithFooter("Message Timer with " + BotConfig.Load().MessageTimerInterval + " minute interval");
+            embed.WithCurrentTimestamp();
+
+            await channel.SendMessageAsync("", false, embed);
         }
     }
 }

@@ -12,6 +12,7 @@ namespace GTA5PoliceV2.Config
             config.Token = BotConfig.Load().Token;
             config.ServerId = BotConfig.Load().ServerId;
             config.LogsId = BotConfig.Load().LogsId;
+            config.TimerChannelId = BotConfig.Load().TimerChannelId;
             config.MessageTimerInterval = BotConfig.Load().MessageTimerInterval;
             config.StatusTimerInterval = BotConfig.Load().StatusTimerInterval;
             config.Commanders = BotConfig.Load().Commanders;

@@ -13,6 +13,7 @@ namespace GTA5PoliceV2.Config
         public string Token { get; set; }
         public ulong ServerId { get; set; }
         public ulong LogsId { get; set; }
+        public ulong TimerChannelId { get; set; }
         public int StatusTimerInterval { get; set; }
         public int MessageTimerInterval { get; set; }
         public int Commanders { get; set; }
@@ -26,6 +27,7 @@ namespace GTA5PoliceV2.Config
             Token = "";
             ServerId = 0;
             LogsId = 0;
+            TimerChannelId = 0;
             StatusTimerInterval = 1;
             MessageTimerInterval = 30;
             Commanders = 1;
