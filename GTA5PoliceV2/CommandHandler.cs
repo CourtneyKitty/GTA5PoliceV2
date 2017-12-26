@@ -65,10 +65,10 @@ namespace GTA5PoliceV2
             if (message == null)
                 return;
 
-            if (message.ToString().ToLower().Contains("nigga")) await ProfanityMessage(pMsg, "Nigga");
-            if (message.ToString().ToLower().Contains("nibba")) await ProfanityMessage(pMsg, "Nibba");
-            if (message.ToString().ToLower().Contains("nigger")) await ProfanityMessage(pMsg, "Nigger");
-            if (message.ToString().ToLower().Contains("chink")) await ProfanityMessage(pMsg, "Chink");
+            for (int i = 0; i <= BotConfig.Load().Filters - 1; i++)
+            {
+                if (message.ToString().ToLower().Contains(BotConfig.Load().FilteredWords[i].ToLower())) await ProfanityMessage(pMsg, BotConfig.Load().FilteredWords[i]);
+            }
         }
 
         public async Task ProfanityMessage(SocketMessage pMsg, string word)

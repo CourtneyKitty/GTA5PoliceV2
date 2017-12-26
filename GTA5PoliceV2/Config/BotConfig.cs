@@ -15,6 +15,10 @@ namespace GTA5PoliceV2.Config
         public ulong LogsId { get; set; }
         public int StatusTimerInterval { get; set; }
         public int MessageTimerInterval { get; set; }
+        public int Commanders { get; set; }
+        public ulong[] BotCommanders { get; set; }
+        public int Filters { get; set; }
+        public string[] FilteredWords { get; set; }
 
         public BotConfig()
         {
@@ -24,6 +28,10 @@ namespace GTA5PoliceV2.Config
             LogsId = 0;
             StatusTimerInterval = 1;
             MessageTimerInterval = 30;
+            Commanders = 1;
+            BotCommanders = new ulong[10];
+            Filters = 4;
+            FilteredWords = new string[20];
         }
 
         public void Save(string dir = "configuration/config.json")

@@ -9,6 +9,7 @@ using System.Net;
 using Discord;
 using Discord.Commands;
 using GTA5PoliceV2.Util;
+using GTA5PoliceV2.Config;
 
 namespace GTA5PoliceV2.Connection
 {
@@ -16,10 +17,10 @@ namespace GTA5PoliceV2.Connection
     {
         //servers
         private Byte[] ip = new byte[] { 66, 150, 121, 131 };
-        private int nyPort = 30150;
-        private int laPort = 30141;
-        private int nyWlPort = 30151;
-        private int laWlPort = 30142;
+        private int nyPort = ConnectionsConfig.Load().NyPort;
+        private int laPort = ConnectionsConfig.Load().LaPort;
+        private int nyWlPort = ConnectionsConfig.Load().NyWlPort;
+        private int laWlPort = ConnectionsConfig.Load().LaWlPort;
 
         private bool mainStatus;
         private bool isNyLive;

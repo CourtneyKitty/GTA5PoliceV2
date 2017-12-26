@@ -73,6 +73,7 @@ namespace GTA5PoliceV2
                 Directory.CreateDirectory(Path.Combine(AppContext.BaseDirectory, "configuration"));
 
             string configLoc = Path.Combine(AppContext.BaseDirectory, "configuration/config.json");
+            string connectionsLoc = Path.Combine(AppContext.BaseDirectory, "configuration/connections_config.json");
 
             if (!File.Exists(configLoc))
             {
@@ -87,9 +88,29 @@ namespace GTA5PoliceV2
                 config.LogsId = 0;
                 config.StatusTimerInterval = 1;
                 config.MessageTimerInterval = 30;
+                config.Commanders = 1;
+                config.BotCommanders[0] = 211938243535568896;
+                config.Filters = 4;
+                config.FilteredWords[0] = "Nigga";
+                config.FilteredWords[1] = "Nigger";
+                config.FilteredWords[2] = "Nibba";
+                config.FilteredWords[3] = "Chink";
                 config.Save();
             }
             Console.WriteLine("Configuration has been loaded");
+
+            if (!File.Exists(connectionsLoc))
+            {
+                var connections = new ConnectionsConfig();
+
+                connections.ServerIp = "66.150.121.131";
+                connections.NyPort = 30150;
+                connections.LaPort = 30141;
+                connections.NyWlPort = 30151;
+                connections.LaWlPort = 30142;
+                connections.Save();
+            }
+            Console.WriteLine("Connections configuration has been loaded");
         }
         public IServiceProvider ConfigureServices()
         {

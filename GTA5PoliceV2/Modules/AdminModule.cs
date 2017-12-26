@@ -12,17 +12,50 @@ namespace GTA5PoliceV2.Modules
         [Command("g5p settings")]
         public async Task Settings()
         {
-            var embed = new EmbedBuilder() { Color = Colours.adminCol};
-            embed.WithAuthor("GTA5PoliceV2 Settings", References.gta5policeLogo);
-            embed.WithThumbnailUrl(References.gta5policeLogo);
+            for (int i = 0; i <= BotConfig.Load().Commanders - 1; i++)
+            {
+                if (BotConfig.Load().BotCommanders[i] == Context.User.Id)
+                {
+                    var embed = new EmbedBuilder() { Color = Colours.adminCol };
+                    embed.WithAuthor("GTA5PoliceV2 Settings", References.gta5policeLogo);
+                    embed.WithThumbnailUrl(References.gta5policeLogo);
 
-            embed.AddField(new EmbedFieldBuilder() { Name = "Filtered words", Value = "Nigga, Nibba, Nigger, Chink" });
-            embed.AddField(new EmbedFieldBuilder() { Name = "Bot commanders", Value = "Blurr#9177, Unit 207 | R. James#7092" });
+                    string filtered = null;
+                    for (int j = 0; j <= BotConfig.Load().Filters - 1; j++)
+                    {
+                        var filter = BotConfig.Load().FilteredWords[j].ToString();
+                        if (filtered != null) filtered = filtered + ", " + filter;
+                        if (filtered == null) filtered = filter;
+                    }
+                    if (filtered != null) embed.AddField(new EmbedFieldBuilder() { Name = "Filtered Words", Value = filtered });
+                    if (filtered == null) embed.AddField(new EmbedFieldBuilder() { Name = "Filtered Words", Value = "No filtered words." });
 
-            embed.WithFooter(new EmbedFooterBuilder() { Text = "Requested by " + Context.User });
-            embed.WithCurrentTimestamp();
+                    string commanders = null;
+                    for (int j = 0; j <= BotConfig.Load().Commanders - 1; j++)
+                    {
+                        var commander = Context.Client.GetUserAsync(BotConfig.Load().BotCommanders[j]).Result.ToString();
+                        if (commanders != null) commanders = commanders + ", " + commander;
+                        if (commanders == null) commanders = commander;
+                    }
+                    if (commanders != null) embed.AddField(new EmbedFieldBuilder() { Name = "Bot commanders", Value = commanders });
+                    if (commanders == null) embed.AddField(new EmbedFieldBuilder() { Name = "Bot commanders", Value = "No commanders." });
 
-            await Context.Channel.SendMessageAsync("", false, embed);
+
+                    embed.AddField(new EmbedFieldBuilder() { Name = "Server Id", Value = BotConfig.Load().ServerId, IsInline = true });
+                    embed.AddField(new EmbedFieldBuilder() { Name = "Logs Id", Value = BotConfig.Load().LogsId, IsInline = true });
+                    embed.AddField(new EmbedFieldBuilder() { Name = "Server IP", Value = ConnectionsConfig.Load().ServerIp });
+                    embed.AddField(new EmbedFieldBuilder() { Name = "NY Port", Value = ConnectionsConfig.Load().NyPort, IsInline = true });
+                    embed.AddField(new EmbedFieldBuilder() { Name = "LA Port", Value = ConnectionsConfig.Load().LaPort, IsInline = true });
+                    embed.AddField(new EmbedFieldBuilder() { Name = "NY WL Port", Value = ConnectionsConfig.Load().NyWlPort, IsInline = true });
+                    embed.AddField(new EmbedFieldBuilder() { Name = "LA WL Port", Value = ConnectionsConfig.Load().LaWlPort, IsInline = true });
+
+                    embed.WithFooter(new EmbedFooterBuilder() { Text = "Requested by " + Context.User });
+                    embed.WithCurrentTimestamp();
+
+                    await Context.Message.DeleteAsync();
+                    await Context.Channel.SendMessageAsync("", false, embed);
+                }
+            }
         }
     }
 }
