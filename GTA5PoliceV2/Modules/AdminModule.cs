@@ -57,5 +57,31 @@ namespace GTA5PoliceV2.Modules
                 }
             }
         }
+
+        [Command("filter add")]
+        public async Task FilterAdd(string word = null)
+        {
+            for (int i = 0; i <= BotConfig.Load().Commanders - 1; i++)
+            {
+                if (Context.User.Id == BotConfig.Load().BotCommanders[i])
+                {
+                    BotConfig config = new BotConfig();
+                    config = Update.UpdateConfig(config);
+                    config.FilteredWords[BotConfig.Load().Filters] = word;
+                    config.Filters = BotConfig.Load().Filters + 1;
+                    config.Save();
+
+                    var embed = new EmbedBuilder() { Color = Colours.adminCol };
+                    embed.WithAuthor("Successfully Added", References.gta5policeLogo);
+                    embed.WithThumbnailUrl(References.gta5policeLogo);
+                    embed.Description = "The word " + word + " was successfully blacklisted.";
+                    embed.WithFooter(new EmbedFooterBuilder() { Text = "Requested by " + Context.User });
+                    embed.WithCurrentTimestamp();
+
+                    await Context.Message.DeleteAsync();
+                    await Context.Channel.SendMessageAsync("", false, embed);
+                }
+            }
+        }
     }
 }
