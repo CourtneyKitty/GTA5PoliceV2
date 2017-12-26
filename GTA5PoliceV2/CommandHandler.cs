@@ -83,7 +83,7 @@ namespace GTA5PoliceV2
             var logsChannel = BotConfig.Load().LogsId; //find the channel
 
             var warningEmbed = new EmbedBuilder() { Color = Colours.errorCol };
-            warningEmbed.Title = "";
+            warningEmbed.WithAuthor("Profanity Detected!", "https://cdn.discordapp.com/attachments/336338554424918017/353934612503855115/GTA5Police_Main.png");
             warningEmbed.Description = user + " | Do not use that profanity, your message has been deleted.";
             var msg = await pMsg.Channel.SendMessageAsync("", false, warningEmbed);
             await Delete.DelayDeleteEmbed(msg, 10);
@@ -94,7 +94,8 @@ namespace GTA5PoliceV2
             var logChannel = server.GetTextChannel(BotConfig.Load().LogsId);
 
             var logEmbed = new EmbedBuilder() { Color = Colours.errorCol };
-            logEmbed.Title = "Discord Profanity Detected";
+            logEmbed.Title = "Profanity Detected (Discord)";
+            logEmbed.WithThumbnailUrl("https://cdn.discordapp.com/attachments/336338554424918017/353934612503855115/GTA5Police_Main.png");
             logEmbed.Description = "Message was deleted from the channel.";
             var userField = new EmbedFieldBuilder() { Name = "User", Value = user };
             var userIdField = new EmbedFieldBuilder() { Name = "User ID", Value = userId };
