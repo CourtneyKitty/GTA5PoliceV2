@@ -11,6 +11,7 @@ namespace GTA5PoliceV2.Config
 
         public string Prefix { get; set; }
         public string Token { get; set; }
+        public ulong ServerId { get; set; }
         public ulong LogsId { get; set; }
         public int StatusTimerInterval { get; set; }
         public int MessageTimerInterval { get; set; }
@@ -19,6 +20,7 @@ namespace GTA5PoliceV2.Config
         {
             Prefix = "!";
             Token = "";
+            ServerId = 0;
             LogsId = 0;
             StatusTimerInterval = 1;
             MessageTimerInterval = 30;

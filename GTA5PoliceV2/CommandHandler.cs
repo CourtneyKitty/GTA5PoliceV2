@@ -7,6 +7,7 @@ using System;
 using Microsoft.Extensions.DependencyInjection;
 using GTA5PoliceV2.Config;
 using GTA5PoliceV2.Util;
+using System.Linq;
 
 namespace GTA5PoliceV2
 {
@@ -30,19 +31,9 @@ namespace GTA5PoliceV2
         }
 
         public async Task AnnounceLeftUser(SocketGuildUser user) {}
-
         public async Task AnnounceUserJoined(SocketGuildUser user) {}
-
-
-        public async Task SetGame()
-        {
-            await bot.SetGameAsync(BotConfig.Load().Prefix + "help");
-        }
-
-        public async Task ConfigureAsync()
-        {
-            await commands.AddModulesAsync(Assembly.GetEntryAssembly());
-        }
+        public async Task SetGame() { await bot.SetGameAsync("GTA5Police.com"); }
+        public async Task ConfigureAsync() { await commands.AddModulesAsync(Assembly.GetEntryAssembly());}
 
         public async Task HandleCommand(SocketMessage pMsg)
         {
@@ -95,7 +86,12 @@ namespace GTA5PoliceV2
             warningEmbed.Title = "";
             warningEmbed.Description = user + " | Do not use that profanity, your message has been deleted.";
             var msg = await pMsg.Channel.SendMessageAsync("", false, warningEmbed);
-            //Delete msg
+            await Delete.DelayDeleteEmbed(msg, 10);
+
+            var context = new SocketCommandContext(bot, message);
+            //var logChannel = context.Guild.Channels.FirstOrDefault(x => x.Id == BotConfig.Load().LogsId);
+            var server = bot.Guilds.FirstOrDefault(x => x.Id == BotConfig.Load().ServerId);
+            var logChannel = server.GetTextChannel(BotConfig.Load().LogsId);
 
             var logEmbed = new EmbedBuilder() { Color = Colours.errorCol };
             logEmbed.Title = "Discord Profanity Detected";
@@ -110,7 +106,7 @@ namespace GTA5PoliceV2
             logEmbed.AddField(channelField);
             logEmbed.AddField(wordField);
             logEmbed.AddField(messageField);
-            await pMsg.Channel.SendMessageAsync("", false, logEmbed);
+            await logChannel.SendMessageAsync("", false, logEmbed);
         }
     }
 }
