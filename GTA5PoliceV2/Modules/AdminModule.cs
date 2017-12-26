@@ -88,32 +88,51 @@ namespace GTA5PoliceV2.Modules
 
         ServerStatus status = new ServerStatus();
         Success message = new Success();
+        Errors errors = new Errors();
         bool ny, la, nywl, lawl;
         IMessageChannel channel;
 
         [Command("timer start")]
-        public async Task TimerStart()
+        public async Task TimerStart([Remainder] string which = null)
         {
             for (int i = 0; i <= BotConfig.Load().Commanders - 1; i++)
             {
+                if (which == null) await errors.sendErrorTemp(Context.Channel, "You must enter which timer you want to start! " + BotConfig.Load().Prefix + "timer start <Message Timer|Status Timer", Colours.errorCol);
+
+
                 if (Context.User.Id == BotConfig.Load().BotCommanders[i])
                 {
-                    Timer timer;
-                    int interval = BotConfig.Load().StatusTimerInterval;
-                    ny = false;
-                    la = false;
-                    nywl = false;
-                    lawl = false;
-                    channel = Context.Channel;
+                    if (which == null) await errors.sendErrorTemp(Context.Channel, "You must enter which timer you want to start! " + BotConfig.Load().Prefix + "timer start <Message Timer|Status Timer", Colours.errorCol);
+                    if (which.ToLower().Equals("status timer"))
+                    {
+                        Timer timer;
+                        int interval = BotConfig.Load().StatusTimerInterval;
+                        ny = false;
+                        la = false;
+                        nywl = false;
+                        lawl = false;
+                        channel = Context.Channel;
 
-                    timer = new Timer(Send, null, 0, 1000 * 60 * interval);
+                        timer = new Timer(SendStatus, null, 0, 1000 * 60 * interval);
 
-                    await Context.Message.DeleteAsync();
+                        await Context.Message.DeleteAsync();
+                    }
+                    else if (which.ToLower().Equals("message timer"))
+                    {
+                        Timer timer;
+                        int interval = BotConfig.Load().MessageTimerInterval;
+                        channel = Context.Channel;
+
+                        timer = new Timer(SendMessage, null, 0, 1000 * 60 * interval);
+
+                        await Context.Message.DeleteAsync();
+                    }
+                    else await errors.sendErrorTemp(Context.Channel, "You must enter which timer you want to start! " + BotConfig.Load().Prefix + "timer start <Message Timer|Status Timer", Colours.errorCol);
                 }
             }
         }
-        
-        async void Send(object state)
+
+        async void SendStatus(object state)
         {
             status.pingServers();
             if (ny != status.getNyStatus())
@@ -140,6 +159,21 @@ namespace GTA5PoliceV2.Modules
                 if (!status.getLaWlStatus()) await message.sendSuccess(channel, "Server Status Change", "Los Angeles Whitelist has gone offline!", Colours.generalCol);
                 lawl = status.getLaWlStatus();
             }
+        }
+        async void SendMessage(object state)
+        {
+            var embed = new EmbedBuilder() { Color = Colours.generalCol };
+            embed.WithAuthor("GTA5Police Help", References.gta5policeLogo);
+            embed.Description = "Be sure to check out our rules and policies, as well as other useful links!";
+            embed.WithThumbnailUrl(References.gta5policeLogo);
+            embed.AddField(new EmbedFieldBuilder() { Name = "!Apply", Value = "Police, EMS, Mechanic, and Whitelist Applications" });
+            embed.AddField(new EmbedFieldBuilder() { Name = "!Rules", Value = "Rules and How We Ban." });
+            embed.AddField(new EmbedFieldBuilder() { Name = "!Links", Value = "Useful Links." });
+            embed.AddField(new EmbedFieldBuilder() { Name = "!Status", Value = "View the current status of the servers." });
+            embed.WithFooter("Message Timer with " + BotConfig.Load().MessageTimerInterval + " minute interval");
+            embed.WithCurrentTimestamp();
+
+            await channel.SendMessageAsync("", false, embed);
         }
     }
 }
