@@ -131,8 +131,8 @@ namespace GTA5PoliceV2.Connection
 
 
                 var embed = new EmbedBuilder() { Color = Colours.generalCol };
-                embed.WithAuthor("Current Server Status", "https://cdn.discordapp.com/attachments/336338554424918017/353934612503855115/GTA5Police_Main.png");
-                embed.WithThumbnailUrl("https://cdn.discordapp.com/attachments/336338554424918017/353934612503855115/GTA5Police_Main.png");
+                embed.WithAuthor("Current Server Status", References.gta5policeLogo);
+                embed.WithThumbnailUrl(References.gta5policeLogo);
                 embed.WithUrl("https://gta5police.com/panel/index.php");
                 var nyField = new EmbedFieldBuilder() { Name = "New York", Value = newyork };
                 var laField = new EmbedFieldBuilder() { Name = "Los Angeles", Value = losangeles };
@@ -149,8 +149,8 @@ namespace GTA5PoliceV2.Connection
             else
             {
                 var embed = new EmbedBuilder() { Color = Colours.errorCol };
-                embed.WithAuthor("Current Server Status", "https://cdn.discordapp.com/attachments/336338554424918017/353934612503855115/GTA5Police_Main.png");
-                embed.WithThumbnailUrl("https://cdn.discordapp.com/attachments/336338554424918017/353934612503855115/GTA5Police_Main.png");
+                embed.WithAuthor("Current Server Status", References.gta5policeLogo);
+                embed.WithThumbnailUrl(References.gta5policeLogo);
                 embed.WithUrl("https://gta5police.com/panel/index.php");
                 embed.AddField(new EmbedFieldBuilder() { Name = "OFFLINE", Value = "GTA5Police servers are currently down, check back later for an update!" });
                 embed.WithFooter(new EmbedFooterBuilder() { Text = "Requested by " + user });
