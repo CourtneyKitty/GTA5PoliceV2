@@ -4,6 +4,7 @@ using GTA5PoliceV2.Config;
 using GTA5PoliceV2.Util;
 using GTA5PoliceV2.Connection;
 using Discord;
+using System.Threading;
 
 namespace GTA5PoliceV2.Modules
 {
@@ -81,6 +82,57 @@ namespace GTA5PoliceV2.Modules
                     await Context.Message.DeleteAsync();
                     await Context.Channel.SendMessageAsync("", false, embed);
                 }
+            }
+        }
+
+
+        ServerStatus status = new ServerStatus();
+        Success message = new Success();
+        bool ny, la, nywl, lawl;
+        IMessageChannel channel;
+
+        [Command("timer start")]
+        public async Task TimerStart()
+        {
+            Timer timer;
+            int interval = BotConfig.Load().StatusTimerInterval;
+            ny = false;
+            la = false;
+            nywl = false;
+            lawl = false;
+            channel = Context.Channel;
+
+            timer = new Timer(Send, null, 0, 1000 * 60 * interval);
+            
+            await Context.Message.DeleteAsync();
+        }
+        
+        async void Send(object state)
+        {
+            status.pingServers();
+            if (ny != status.getNyStatus())
+            {
+                if (status.getNyStatus()) await message.sendSuccess(channel, "Server Status Change", "New York has come online!", Colours.generalCol);
+                if (!status.getNyStatus()) await message.sendSuccess(channel, "Server Status Change", "New York has gone offline!", Colours.generalCol);
+                ny = status.getNyStatus();
+            }
+            if (la != status.getLaStatus())
+            {
+                if (status.getLaStatus()) await message.sendSuccess(channel, "Server Status Change", "Los Angeles has come online!", Colours.generalCol);
+                if (!status.getLaStatus()) await message.sendSuccess(channel, "Server Status Change", "Los Angeles has gone offline!", Colours.generalCol);
+                la = status.getLaStatus();
+            }
+            if (nywl != status.getNyWlStatus())
+            {
+                if (status.getNyWlStatus()) await message.sendSuccess(channel, "Server Status Change", "New York Whitelist has come online!", Colours.generalCol);
+                if (!status.getNyWlStatus()) await message.sendSuccess(channel, "Server Status Change", "New York Whitelist has gone offline!", Colours.generalCol);
+                nywl = status.getNyWlStatus();
+            }
+            if (lawl != status.getLaWlStatus())
+            {
+                if (status.getLaWlStatus()) await message.sendSuccess(channel, "Server Status Change", "Los Angeles Whitelist has come online!", Colours.generalCol);
+                if (!status.getLaWlStatus()) await message.sendSuccess(channel, "Server Status Change", "Los Angeles Whitelist has gone offline!", Colours.generalCol);
+                lawl = status.getLaWlStatus();
             }
         }
     }
