@@ -28,9 +28,9 @@ namespace GTA5PoliceV2.Modules
 
             var embed = new EmbedBuilder() { Color = Colours.generalCol };
             embed.WithAuthor("GTA5Police Rules", References.gta5policeLogo);
+            embed.Title = "Click to view all GTA5Police rules.";
             embed.WithUrl(References.rulesURL);
             embed.WithThumbnailUrl(References.gta5policeLogo);
-            embed.Description = "Click to view all GTA5Police rules.";
             embed.WithImageUrl(References.howBanURL);
             embed.WithFooter("Requested by " + Context.User);
             embed.WithCurrentTimestamp();

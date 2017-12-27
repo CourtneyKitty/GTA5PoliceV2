@@ -97,7 +97,7 @@ namespace GTA5PoliceV2
             var logChannel = server.GetTextChannel(BotConfig.Load().LogsId);
 
             var logEmbed = new EmbedBuilder() { Color = Colours.errorCol };
-            logEmbed.WithAuthor("Profanity detected in server chat");
+            logEmbed.WithAuthor("Profanity detected in discord chat");
             logEmbed.WithThumbnailUrl(References.gta5policeLogo);
             logEmbed.Description = "Full message: " + fullMsg;
             var userField = new EmbedFieldBuilder() { Name = "Discord User", Value = user };
@@ -111,29 +111,27 @@ namespace GTA5PoliceV2
             await logChannel.SendMessageAsync("", false, logEmbed);
         }
 
+        Timer timerStatus, timerMessage;
         ServerStatus status = new ServerStatus();
         Success success = new Success();
         bool ny, la, nywl, lawl;
         SocketGuild server;
         IMessageChannel channel;
 
-        async Task StartTimers()
+        public async Task StartTimers()
         {
             server = bot.Guilds.FirstOrDefault(x => x.Id == BotConfig.Load().ServerId);
             channel = server.GetTextChannel(BotConfig.Load().TimerChannelId);
        
-            Timer timerStatus;
-            ny = false;
-            la = false;
-            nywl = false;
-            lawl = false;
+            
+            ny = false; la = false; nywl = false; lawl = false;
             timerStatus = new Timer(SendStatus, null, 0, 1000 * 60 * BotConfig.Load().StatusTimerInterval);
-
-            Timer timerMessage;
             timerMessage = new Timer(SendMessage, null, 0, 1000 * 60 * BotConfig.Load().MessageTimerInterval);
+
+            await channel.SendMessageAsync("Timers started.");
         }
 
-        async void SendStatus(object state)
+        public async void SendStatus(object state)
         {
             status.pingServers();
             if (ny != status.getNyStatus())
@@ -161,7 +159,7 @@ namespace GTA5PoliceV2
                 lawl = status.getLaWlStatus();
             }
         }
-        async void SendMessage(object state)
+        public async void SendMessage(object state)
         {
             var embed = new EmbedBuilder() { Color = Colours.generalCol };
             embed.WithAuthor("GTA5Police Help", References.gta5policeLogo);
