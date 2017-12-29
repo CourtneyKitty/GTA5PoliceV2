@@ -71,7 +71,10 @@ namespace GTA5PoliceV2
             if (message == null)
                 return;
 
-            messages++;
+            var server = bot.Guilds.FirstOrDefault(x => x.Id == BotConfig.Load().ServerId);
+            var timerChannel = server.GetTextChannel(BotConfig.Load().TimerChannelId);
+
+            if (pMsg.Channel == timerChannel) messages++;
         }
 
         public async Task ProfanityCheck(SocketMessage pMsg)
