@@ -29,9 +29,9 @@ namespace GTA5PoliceV2.Connection
         private bool isLaWlLive;
 
         /** Ping main server. If connection is good, try to connect to game servers. **/
+        string g5pIP = "66.150.121.131";
         public void pingServers()
         {
-            var g5pIP = "66.150.121.131";
             var ping = new Ping();
             var timeout = 60 * 1000; // 1 Minute timeout
 
@@ -133,6 +133,7 @@ namespace GTA5PoliceV2.Connection
 
                 var embed = new EmbedBuilder() { Color = Colours.generalCol };
                 embed.WithAuthor("Current Server Status", References.gta5policeLogo);
+                embed.WithDescription("IP: " + g5pIP);
                 embed.WithThumbnailUrl(References.gta5policeLogo);
                 embed.WithUrl("https://gta5police.com/panel/index.php");
                 var nyField = new EmbedFieldBuilder() { Name = "New York", Value = newyork };
