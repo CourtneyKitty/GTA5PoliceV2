@@ -15,6 +15,7 @@ namespace GTA5PoliceV2.Config
             config.TimerChannelId = BotConfig.Load().TimerChannelId;
             config.MessageTimerInterval = BotConfig.Load().MessageTimerInterval;
             config.StatusTimerInterval = BotConfig.Load().StatusTimerInterval;
+            config.MessageTimerCooldown = BotConfig.Load().MessageTimerCooldown;
             config.Commanders = BotConfig.Load().Commanders;
             config.Filters = BotConfig.Load().Filters;
             for (int j = 0; j <= BotConfig.Load().Commanders - 1; j++)

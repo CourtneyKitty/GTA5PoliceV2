@@ -31,6 +31,7 @@ namespace GTA5PoliceV2
             bot.MessageReceived += HandleCommand;
             commands = map.GetService<CommandService>();
             bot.MessageReceived += ProfanityCheck;
+            bot.MessageReceived += TimerCooldown;
         }
 
         public async Task AnnounceLeftUser(SocketGuildUser user) {}
@@ -60,6 +61,17 @@ namespace GTA5PoliceV2
                 if (!result.IsSuccess && result.ErrorReason != "Unknown command.")
                     await errors.sendErrorTemp(pMsg.Channel, result.ErrorReason, Colours.errorCol);
             }
+        }
+
+
+        public int messages = 0;
+        public async Task TimerCooldown(SocketMessage pMsg)
+        {
+            var message = pMsg as SocketUserMessage;
+            if (message == null)
+                return;
+
+            messages++;
         }
 
         public async Task ProfanityCheck(SocketMessage pMsg)
@@ -161,18 +173,22 @@ namespace GTA5PoliceV2
         }
         public async void SendMessage(object state)
         {
-            var embed = new EmbedBuilder() { Color = Colours.generalCol };
-            embed.WithAuthor("GTA5Police Help", References.gta5policeLogo);
-            embed.Description = "Be sure to check out our rules and policies, as well as other useful links!";
-            embed.WithThumbnailUrl(References.gta5policeLogo);
-            embed.AddField(new EmbedFieldBuilder() { Name = "!Rules", Value = "Rules and How We Ban." });
-            embed.AddField(new EmbedFieldBuilder() { Name = "!Apply", Value = "Police, EMS, Mechanic, and Whitelist Applications" });
-            embed.AddField(new EmbedFieldBuilder() { Name = "!Links", Value = "Useful Links." });
-            embed.AddField(new EmbedFieldBuilder() { Name = "!Status", Value = "View the current status of the servers." });
-            embed.WithFooter("Message Timer with " + BotConfig.Load().MessageTimerInterval + " minute interval");
-            embed.WithCurrentTimestamp();
+            if (messages >= BotConfig.Load().MessageTimerCooldown)
+            {
+                var embed = new EmbedBuilder() { Color = Colours.generalCol };
+                embed.WithAuthor("GTA5Police Help", References.gta5policeLogo);
+                embed.Description = "Be sure to check out our rules and policies, as well as other useful links!";
+                embed.WithThumbnailUrl(References.gta5policeLogo);
+                embed.AddField(new EmbedFieldBuilder() { Name = "!Rules", Value = "Rules and How We Ban." });
+                embed.AddField(new EmbedFieldBuilder() { Name = "!Apply", Value = "Police, EMS, Mechanic, and Whitelist Applications" });
+                embed.AddField(new EmbedFieldBuilder() { Name = "!Links", Value = "Useful Links." });
+                embed.AddField(new EmbedFieldBuilder() { Name = "!Status", Value = "View the current status of the servers." });
+                embed.WithFooter("Message Timer with " + BotConfig.Load().MessageTimerInterval + " minute interval");
+                embed.WithCurrentTimestamp();
 
-            await channel.SendMessageAsync("", false, embed);
+                await channel.SendMessageAsync("", false, embed);
+                messages = 0;
+            }
         }
     }
 }
