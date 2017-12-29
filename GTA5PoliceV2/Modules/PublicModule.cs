@@ -65,12 +65,14 @@ namespace GTA5PoliceV2.Modules
 
             var embed = new EmbedBuilder() { Color = Colours.generalCol };
             embed.WithAuthor("GTA5Police Applications", References.gta5policeLogo);
+            embed.WithUrl(References.applicationsURL);
             embed.Description = "Whitelist jobs and server applications.";
             embed.WithThumbnailUrl(References.gta5policeLogo);
             embed.AddField(new EmbedFieldBuilder() { Name = "Whitelist Servers", Value = References.whitelistURL });
             embed.AddField(new EmbedFieldBuilder() { Name = "Police", Value = References.policeURL });
             embed.AddField(new EmbedFieldBuilder() { Name = "EMS", Value = References.emsURL });
             embed.AddField(new EmbedFieldBuilder() { Name = "Mechanic", Value = References.mechanicURL });
+            embed.AddField(new EmbedFieldBuilder() { Name = "Taxi", Value = References.taxiURL });
             embed.WithFooter("Requested by " + Context.User);
             embed.WithCurrentTimestamp();
 

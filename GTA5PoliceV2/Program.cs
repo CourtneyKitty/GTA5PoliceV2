@@ -127,10 +127,12 @@ namespace GTA5PoliceV2
                 url.Support = "http://gta5police.com/forums/index.php?/support/";
                 url.Donate = "http://gta5police.com/forums/index.php?/donate/";
 
+                url.Applications = "https://goo.gl/DpTEyH";
                 url.Whitelist = "https://goo.gl/TLSGdf";
                 url.Police = "https://goo.gl/RYNDBA";
                 url.EMS = "https://goo.gl/vNzGvr";
                 url.Mechanic = "https://goo.gl/rChgek";
+                url.Taxi = "https://goo.gl/DbThWg";
 
                 url.Logo = "https://cdn.discordapp.com/attachments/336338554424918017/353934612503855115/GTA5Police_Main.png";
                 url.Rules = "http://goo.gl/7app1D";

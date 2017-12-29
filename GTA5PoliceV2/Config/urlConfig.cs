@@ -15,10 +15,12 @@ namespace GTA5PoliceV2.Config
         public string Support { get; set; }
         public string Donate { get; set; }
 
+        public string Applications { get; set; }
         public string Whitelist { get; set; }
         public string Police { get; set; }
         public string EMS { get; set; }
         public string Mechanic { get; set; }
+        public string Taxi { get; set; }
 
         public string Logo { get; set; }
         public string Rules { get; set; }
@@ -32,10 +34,12 @@ namespace GTA5PoliceV2.Config
             Support = "http://gta5police.com/forums/index.php?/support/";
             Donate = "http://gta5police.com/forums/index.php?/donate/";
 
+            Applications = "https://goo.gl/DpTEyH";
             Whitelist = "https://goo.gl/TLSGdf";
             Police = "https://goo.gl/RYNDBA";
             EMS = "https://goo.gl/vNzGvr";
             Mechanic = "https://goo.gl/rChgek";
+            Taxi = "https://goo.gl/DbThWg";
 
             Logo = "https://cdn.discordapp.com/attachments/336338554424918017/353934612503855115/GTA5Police_Main.png";
             Rules = "http://goo.gl/7app1D";
