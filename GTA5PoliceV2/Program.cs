@@ -77,6 +77,7 @@ namespace GTA5PoliceV2
 
             string configLoc = Path.Combine(AppContext.BaseDirectory, "configuration/config.json");
             string connectionsLoc = Path.Combine(AppContext.BaseDirectory, "configuration/connections_config.json");
+            string urlsLoc = Path.Combine(AppContext.BaseDirectory, "configuration/url_config.json");
 
             if (!File.Exists(configLoc))
             {
@@ -116,6 +117,28 @@ namespace GTA5PoliceV2
                 connections.Save();
             }
             Console.WriteLine("Connections configuration has been loaded");
+
+            if (!File.Exists(urlsLoc))
+            {
+                var url = new UrlConfig();
+                url.Website = "https://www.gta5police.com";
+                url.Dashboard = "https://gta5police.com/panel/index.php";
+                url.Forums = "https://gta5police.com/forums/";
+                url.Support = "http://gta5police.com/forums/index.php?/support/";
+                url.Donate = "http://gta5police.com/forums/index.php?/donate/";
+
+                url.Whitelist = "https://goo.gl/TLSGdf";
+                url.Police = "https://goo.gl/RYNDBA";
+                url.EMS = "https://goo.gl/vNzGvr";
+                url.Mechanic = "https://goo.gl/rChgek";
+
+                url.Logo = "https://cdn.discordapp.com/attachments/336338554424918017/353934612503855115/GTA5Police_Main.png";
+                url.Rules = "http://goo.gl/7app1D";
+                url.HowWeBan = "https://puu.sh/yG7Nv.png";
+
+                url.Save();
+            }
+            Console.WriteLine("URL configuration has been loaded");
         }
         public IServiceProvider ConfigureServices()
         {
