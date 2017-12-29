@@ -65,6 +65,11 @@ namespace GTA5PoliceV2
 
 
         public int messages = 0;
+        public static int statusMessages = BotConfig.Load().MessageTimerCooldown;
+        public static int rulesMessages = BotConfig.Load().MessageTimerCooldown;
+        public static int linksMessages = BotConfig.Load().MessageTimerCooldown;
+        public static int applyMessages = BotConfig.Load().MessageTimerCooldown;
+
         public async Task TimerCooldown(SocketMessage pMsg)
         {
             var message = pMsg as SocketUserMessage;
@@ -75,6 +80,10 @@ namespace GTA5PoliceV2
             var timerChannel = server.GetTextChannel(BotConfig.Load().TimerChannelId);
 
             if (pMsg.Channel == timerChannel) messages++;
+            statusMessages++;
+            rulesMessages++;
+            linksMessages++;
+            applyMessages++;
         }
 
         public async Task ProfanityCheck(SocketMessage pMsg)
