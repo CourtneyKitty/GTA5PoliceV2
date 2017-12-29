@@ -124,10 +124,10 @@ namespace GTA5PoliceV2.Connection
             if (mainStatus)
             {
                 String newyork, losangeles, newyorkWhitelist, losangelesWhitelist;
-                if (isNyLive) newyork = "Online"; else newyork = "Offline";
-                if (isLaLive) losangeles = "Online"; else losangeles = "Offline";
-                if (isNyWlLive) newyorkWhitelist = "Online"; else newyorkWhitelist = "Offline";
-                if (isLaWlLive) losangelesWhitelist = "Online"; else losangelesWhitelist = "Offline";
+                if (isNyLive) newyork = "Online using Port: " + nyPort; else newyork = "Offline";
+                if (isLaLive) losangeles = "Online using Port: " + laPort; else losangeles = "Offline";
+                if (isNyWlLive) newyorkWhitelist = "Online using Port: " + nyWlPort; else newyorkWhitelist = "Offline";
+                if (isLaWlLive) losangelesWhitelist = "Online using Port: " + laWlPort; else losangelesWhitelist = "Offline";
 
 
 
