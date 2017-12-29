@@ -148,26 +148,26 @@ namespace GTA5PoliceV2
             status.pingServers();
             if (ny != status.getNyStatus())
             {
-                if (status.getNyStatus()) await success.sendSuccess(channel, "Server Status Change", "New York has come online!", Colours.generalCol);
-                if (!status.getNyStatus()) await success.sendSuccess(channel, "Server Status Change", "New York has gone offline!", Colours.generalCol);
+                if (status.getNyStatus()) await success.sendSuccess(channel, "Server Status Change", "New York has come online!", Colours.generalCol, References.dashboardURL);
+                if (!status.getNyStatus()) await success.sendSuccess(channel, "Server Status Change", "New York has gone offline!", Colours.generalCol, References.dashboardURL);
                 ny = status.getNyStatus();
             }
             if (la != status.getLaStatus())
             {
-                if (status.getLaStatus()) await success.sendSuccess(channel, "Server Status Change", "Los Angeles has come online!", Colours.generalCol);
-                if (!status.getLaStatus()) await success.sendSuccess(channel, "Server Status Change", "Los Angeles has gone offline!", Colours.generalCol);
+                if (status.getLaStatus()) await success.sendSuccess(channel, "Server Status Change", "Los Angeles has come online!", Colours.generalCol, References.dashboardURL);
+                if (!status.getLaStatus()) await success.sendSuccess(channel, "Server Status Change", "Los Angeles has gone offline!", Colours.generalCol, References.dashboardURL);
                 la = status.getLaStatus();
             }
             if (nywl != status.getNyWlStatus())
             {
-                if (status.getNyWlStatus()) await success.sendSuccess(channel, "Server Status Change", "New York Whitelist has come online!", Colours.generalCol);
-                if (!status.getNyWlStatus()) await success.sendSuccess(channel, "Server Status Change", "New York Whitelist has gone offline!", Colours.generalCol);
+                if (status.getNyWlStatus()) await success.sendSuccess(channel, "Server Status Change", "New York Whitelist has come online!", Colours.generalCol, References.dashboardURL);
+                if (!status.getNyWlStatus()) await success.sendSuccess(channel, "Server Status Change", "New York Whitelist has gone offline!", Colours.generalCol, References.dashboardURL);
                 nywl = status.getNyWlStatus();
             }
             if (lawl != status.getLaWlStatus())
             {
-                if (status.getLaWlStatus()) await success.sendSuccess(channel, "Server Status Change", "Los Angeles Whitelist has come online!", Colours.generalCol);
-                if (!status.getLaWlStatus()) await success.sendSuccess(channel, "Server Status Change", "Los Angeles Whitelist has gone offline!", Colours.generalCol);
+                if (status.getLaWlStatus()) await success.sendSuccess(channel, "Server Status Change", "Los Angeles Whitelist has come online!", Colours.generalCol, References.dashboardURL);
+                if (!status.getLaWlStatus()) await success.sendSuccess(channel, "Server Status Change", "Los Angeles Whitelist has gone offline!", Colours.generalCol, References.dashboardURL);
                 lawl = status.getLaWlStatus();
             }
         }
@@ -177,6 +177,7 @@ namespace GTA5PoliceV2
             {
                 var embed = new EmbedBuilder() { Color = Colours.generalCol };
                 embed.WithAuthor("GTA5Police Help", References.gta5policeLogo);
+                embed.WithUrl(References.dashboardURL);
                 embed.Description = "Be sure to check out our rules and policies, as well as other useful links!";
                 embed.WithThumbnailUrl(References.gta5policeLogo);
                 embed.AddField(new EmbedFieldBuilder() { Name = "!Rules", Value = "Rules and How We Ban." });
@@ -188,7 +189,9 @@ namespace GTA5PoliceV2
 
                 await channel.SendMessageAsync("", false, embed);
                 messages = 0;
+                Console.WriteLine("Message timer has delivered the message!");
             }
+            Console.WriteLine("Message timer has not delivered the message!");
         }
     }
 }

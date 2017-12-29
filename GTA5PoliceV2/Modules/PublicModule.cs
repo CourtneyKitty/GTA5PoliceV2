@@ -45,12 +45,13 @@ namespace GTA5PoliceV2.Modules
 
             var embed = new EmbedBuilder() { Color = Colours.generalCol };
             embed.WithAuthor("GTA5Police Links", References.gta5policeLogo);
-            embed.Description = "Useful GTA5Police links for you.";
+            embed.Description = "Useful GTA5Police links for you. Teamspeak IP: gta5police.com";
             embed.WithThumbnailUrl(References.gta5policeLogo);
-            embed.AddField(new EmbedFieldBuilder() { Name = "Website", Value = "https://www.gta5police.com" });
-            embed.AddField(new EmbedFieldBuilder() { Name = "Forums", Value = "https://gta5police.com/forums/" });
-            embed.AddField(new EmbedFieldBuilder() { Name = "Support", Value = "http://gta5police.com/forums/index.php?/support/" });
-            embed.AddField(new EmbedFieldBuilder() { Name = "Donations", Value = "http://gta5police.com/forums/index.php?/donate/" });
+            embed.AddField(new EmbedFieldBuilder() { Name = "Website", Value = References.websiteURL });
+            embed.AddField(new EmbedFieldBuilder() { Name = "Dashboard", Value = References.dashboardURL });
+            embed.AddField(new EmbedFieldBuilder() { Name = "Forums", Value = References.forumsURL });
+            embed.AddField(new EmbedFieldBuilder() { Name = "Support", Value = References.supportURL });
+            embed.AddField(new EmbedFieldBuilder() { Name = "Donations", Value = References.donateURL });
             embed.WithFooter("Requested by " + Context.User);
             embed.WithCurrentTimestamp();
 
@@ -66,10 +67,10 @@ namespace GTA5PoliceV2.Modules
             embed.WithAuthor("GTA5Police Applications", References.gta5policeLogo);
             embed.Description = "Whitelist jobs and server applications.";
             embed.WithThumbnailUrl(References.gta5policeLogo);
-            embed.AddField(new EmbedFieldBuilder() { Name = "Whitelist Servers", Value = "https://goo.gl/TLSGdf" });
-            embed.AddField(new EmbedFieldBuilder() { Name = "Police", Value = "https://goo.gl/RYNDBA" });
-            embed.AddField(new EmbedFieldBuilder() { Name = "EMS", Value = "https://goo.gl/vNzGvr" });
-            embed.AddField(new EmbedFieldBuilder() { Name = "Mechanic", Value = "https://goo.gl/rChgek" });
+            embed.AddField(new EmbedFieldBuilder() { Name = "Whitelist Servers", Value = References.whitelistURL });
+            embed.AddField(new EmbedFieldBuilder() { Name = "Police", Value = References.policeURL });
+            embed.AddField(new EmbedFieldBuilder() { Name = "EMS", Value = References.emsURL });
+            embed.AddField(new EmbedFieldBuilder() { Name = "Mechanic", Value = References.mechanicURL });
             embed.WithFooter("Requested by " + Context.User);
             embed.WithCurrentTimestamp();
 
