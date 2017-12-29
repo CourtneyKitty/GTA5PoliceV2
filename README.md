@@ -1,10 +1,11 @@
 # GTA5PoliceV2
-New version to my old GTA5Police bot
+Rewrite of my old GTA5Police Bot.
 
 ## Unique Features
 - Server status detection. This will detect whether the servers specified are online or not.
 - Status update timer. This will create an announcement if a server switches state.
 - Message timer. This will send a set message every <MessageTimerInterval> amount of minutes.
+- Profanity Filter. This will delete any messages with the blacklisted words and will send admins the information for the message.
 
 ## Commands
 - !rules - Displays the rules
@@ -14,7 +15,7 @@ New version to my old GTA5Police bot
 
 ## Bot Commander Commands
 - !g5p settings - Displays the current filtered words, commanders, serverId, logsId, serverIp and ServerPorts
-- filter add <word> - Adds the word to the filtered words
+- !filter add <word> - Adds the word to the filtered words
 
 ## Config
   - "Prefix": "!", - Bot prefix
@@ -27,4 +28,4 @@ New version to my old GTA5Police bot
   - "Commanders": 0, - Amount of commanders
   - "BotCommanders": [], - Array of all commander ids
   - "Filters": 0, - Amount of filtered words
-  - "FilteredWords": [] - Array of filtered words
+  - "FilteredWords": [] - Array of all filtered words
