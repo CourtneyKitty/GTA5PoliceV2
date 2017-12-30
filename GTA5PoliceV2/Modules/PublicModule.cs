@@ -31,7 +31,7 @@ namespace GTA5PoliceV2.Modules
             else
             {
                 await Context.Message.DeleteAsync();
-                CommandHandler.statusMessages--;
+                if (CommandHandler.statusMessages > 0) CommandHandler.statusMessages--;
                 await errors.sendErrorTemp(channel, user + errorMessage, Colours.errorCol);
             }
         }
@@ -41,8 +41,6 @@ namespace GTA5PoliceV2.Modules
         {
             var channel = Context.Channel;
             var user = Context.User;
-
-            await Context.Message.DeleteAsync();
 
             if (CommandHandler.rulesMessages >= BotConfig.Load().MessageTimerCooldown)
             {
@@ -62,7 +60,7 @@ namespace GTA5PoliceV2.Modules
             else
             {
                 await Context.Message.DeleteAsync();
-                CommandHandler.rulesMessages--;
+                if (CommandHandler.rulesMessages > 0) CommandHandler.rulesMessages--;
                 await errors.sendErrorTemp(channel, user + errorMessage, Colours.errorCol);
             }
         }
@@ -72,9 +70,6 @@ namespace GTA5PoliceV2.Modules
         {
             var channel = Context.Channel;
             var user = Context.User;
-
-
-            await Context.Message.DeleteAsync();
 
             if (CommandHandler.linksMessages >= BotConfig.Load().MessageTimerCooldown)
             {
@@ -97,7 +92,8 @@ namespace GTA5PoliceV2.Modules
             else
             {
                 await Context.Message.DeleteAsync();
-                CommandHandler.linksMessages--;
+
+                if (CommandHandler.linksMessages > 0) CommandHandler.linksMessages--;
                 await errors.sendErrorTemp(channel, user + errorMessage, Colours.errorCol);
             }
         }
@@ -107,8 +103,6 @@ namespace GTA5PoliceV2.Modules
         {
             var channel = Context.Channel;
             var user = Context.User;
-
-            await Context.Message.DeleteAsync();
 
             if (CommandHandler.applyMessages >= BotConfig.Load().MessageTimerCooldown)
             {
@@ -131,7 +125,7 @@ namespace GTA5PoliceV2.Modules
             else
             {
                 await Context.Message.DeleteAsync();
-                CommandHandler.applyMessages--;
+                if (CommandHandler.applyMessages > 0) CommandHandler.applyMessages--;
                 await errors.sendErrorTemp(channel, user + errorMessage, Colours.errorCol);
             }
         }
@@ -141,8 +135,6 @@ namespace GTA5PoliceV2.Modules
         {
             var channel = Context.Channel;
             var user = Context.User;
-
-            await Context.Message.DeleteAsync();
 
             if (CommandHandler.clearcacheMessages >= BotConfig.Load().MessageTimerCooldown)
             {
@@ -161,7 +153,7 @@ namespace GTA5PoliceV2.Modules
             else
             {
                 await Context.Message.DeleteAsync();
-                CommandHandler.clearcacheMessages--;
+                if (CommandHandler.clearcacheMessages > 0) CommandHandler.clearcacheMessages--;
                 await errors.sendErrorTemp(channel, user + errorMessage, Colours.errorCol);
             }
         }
