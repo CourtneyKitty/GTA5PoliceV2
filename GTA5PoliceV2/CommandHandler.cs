@@ -26,6 +26,8 @@ namespace GTA5PoliceV2
             bot = map.GetService<DiscordSocketClient>();
             bot.UserJoined += AnnounceUserJoined;
             bot.UserLeft += AnnounceLeftUser;
+            bot.UserBanned += AnnounceBannedUser;
+            bot.UserUnbanned += AnnounceUnbannedUser;
             bot.Ready += SetGame;
             bot.Ready += StartTimers;
             bot.MessageReceived += HandleCommand;
@@ -36,6 +38,15 @@ namespace GTA5PoliceV2
 
         public async Task AnnounceLeftUser(SocketGuildUser user) {}
         public async Task AnnounceUserJoined(SocketGuildUser user) {}
+        public async Task AnnounceBannedUser(SocketGuildUser user)
+        {
+            //Post to server logs that user was banned
+        }
+        public async Task AnnounceUnBannedUser(SocketGuildUser user)
+        {
+            //Post to server logs that user was unbanned
+        }
+
         public async Task SetGame() { await bot.SetGameAsync("GTA5Police.com"); }
         public async Task ConfigureAsync() { await commands.AddModulesAsync(Assembly.GetEntryAssembly());}
 
@@ -62,7 +73,6 @@ namespace GTA5PoliceV2
                     await errors.sendErrorTemp(pMsg.Channel, result.ErrorReason, Colours.errorCol);
             }
         }
-
 
         public int messages = 0;
         public static int statusMessages = BotConfig.Load().MessageTimerCooldown;
@@ -149,7 +159,8 @@ namespace GTA5PoliceV2
             timerStatus = new Timer(SendStatus, null, 0, 1000 * 60 * BotConfig.Load().StatusTimerInterval);
             timerMessage = new Timer(SendMessage, null, 0, 1000 * 60 * BotConfig.Load().MessageTimerInterval);
 
-            await channel.SendMessageAsync("Timers started.");
+            var message = await channel.SendMessageAsync("Timers started.");
+            await Delete.DelayDeleteMessage(message, 5);
         }
 
         public async void SendStatus(object state)
