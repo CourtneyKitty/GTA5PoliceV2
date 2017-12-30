@@ -38,13 +38,31 @@ namespace GTA5PoliceV2
 
         public async Task AnnounceLeftUser(SocketGuildUser user) {}
         public async Task AnnounceUserJoined(SocketGuildUser user) {}
-        public async Task AnnounceBannedUser(SocketGuildUser user)
+        public async Task AnnounceBannedUser(SocketUser user, SocketGuild guild)
         {
-            //Post to server logs that user was banned
+            var server = bot.Guilds.FirstOrDefault(x => x.Id == BotConfig.Load().ServerId);
+            var logChannel = server.GetTextChannel(BotConfig.Load().LogsId);
+
+            var logEmbed = new EmbedBuilder() { Color = Colours.errorCol };
+            logEmbed.WithAuthor("User was banned from Discord");
+            logEmbed.WithThumbnailUrl(References.gta5policeLogo);
+            logEmbed.AddField(new EmbedFieldBuilder() { Name = "Discord User", Value = user.Username.ToString() });
+            logEmbed.AddField(new EmbedFieldBuilder() { Name = "DiscordId", Value = user.Id });
+
+            await logChannel.SendMessageAsync("", false, logEmbed);
         }
-        public async Task AnnounceUnBannedUser(SocketGuildUser user)
+        public async Task AnnounceUnbannedUser(SocketUser user, SocketGuild guild)
         {
-            //Post to server logs that user was unbanned
+            var server = bot.Guilds.FirstOrDefault(x => x.Id == BotConfig.Load().ServerId);
+            var logChannel = server.GetTextChannel(BotConfig.Load().LogsId);
+
+            var logEmbed = new EmbedBuilder() { Color = Colours.adminCol };
+            logEmbed.WithAuthor("User was unbanned from Discord");
+            logEmbed.WithThumbnailUrl(References.gta5policeLogo);
+            logEmbed.AddField(new EmbedFieldBuilder() { Name = "Discord User", Value = user.Username.ToString() });
+            logEmbed.AddField(new EmbedFieldBuilder() { Name = "DiscordId", Value = user.Id });
+
+            await logChannel.SendMessageAsync("", false, logEmbed);
         }
 
         public async Task SetGame() { await bot.SetGameAsync("GTA5Police.com"); }
