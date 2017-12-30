@@ -76,10 +76,7 @@ namespace GTA5PoliceV2
             if (message == null)
                 return;
 
-            var server = bot.Guilds.FirstOrDefault(x => x.Id == BotConfig.Load().ServerId);
-            var timerChannel = server.GetTextChannel(BotConfig.Load().TimerChannelId);
-
-            if (pMsg.Channel == timerChannel) messages++;
+            if (pMsg.Channel.Id.Equals(BotConfig.Load().TimerChannelId)) messages++;
             statusMessages++;
             rulesMessages++;
             linksMessages++;
