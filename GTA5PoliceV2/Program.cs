@@ -102,6 +102,7 @@ namespace GTA5PoliceV2
                 config.FilteredWords[2] = "Nibba";
                 config.FilteredWords[3] = "Chink";
                 config.Save();
+                Console.WriteLine("Bot config generated");
             }
             Console.WriteLine("Configuration has been loaded");
 
@@ -115,6 +116,7 @@ namespace GTA5PoliceV2
                 connections.NyWlPort = 30151;
                 connections.LaWlPort = 30142;
                 connections.Save();
+                Console.WriteLine("Connections config generated");
             }
             Console.WriteLine("Connections configuration has been loaded");
 
@@ -139,6 +141,7 @@ namespace GTA5PoliceV2
                 url.HowWeBan = "https://puu.sh/yG7Nv.png";
 
                 url.Save();
+                Console.WriteLine("URL config generated");
             }
             Console.WriteLine("URL configuration has been loaded");
         }
