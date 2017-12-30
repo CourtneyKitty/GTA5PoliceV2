@@ -16,6 +16,7 @@ namespace GTA5PoliceV2.Util
         public static string forumsURL = UrlConfig.Load().Forums;
         public static string supportURL = UrlConfig.Load().Support;
         public static string donateURL = UrlConfig.Load().Donate;
+        public static string vacbannedURL = UrlConfig.Load().Vacbanned;
 
         public static string applicationsURL = UrlConfig.Load().Applications;
         public static string whitelistURL = UrlConfig.Load().Whitelist;

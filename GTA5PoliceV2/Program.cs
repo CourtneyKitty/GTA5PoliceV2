@@ -128,6 +128,7 @@ namespace GTA5PoliceV2
                 url.Forums = "https://gta5police.com/forums/";
                 url.Support = "http://gta5police.com/forums/index.php?/support/";
                 url.Donate = "http://gta5police.com/forums/index.php?/donate/";
+                url.Vacbanned = "http://www.vacbanned.com";
 
                 url.Applications = "https://goo.gl/DpTEyH";
                 url.Whitelist = "https://goo.gl/TLSGdf";

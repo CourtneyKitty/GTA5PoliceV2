@@ -25,6 +25,7 @@ namespace GTA5PoliceV2.Config
         public string Logo { get; set; }
         public string Rules { get; set; }
         public string HowWeBan { get; set; }
+        public string Vacbanned { get; set; }
 
         public UrlConfig()
         {
@@ -33,6 +34,7 @@ namespace GTA5PoliceV2.Config
             Forums = "https://gta5police.com/forums/";
             Support = "http://gta5police.com/forums/index.php?/support/";
             Donate = "http://gta5police.com/forums/index.php?/donate/";
+            Vacbanned = "http://www.vacbanned.com";
 
             Applications = "https://goo.gl/DpTEyH";
             Whitelist = "https://goo.gl/TLSGdf";

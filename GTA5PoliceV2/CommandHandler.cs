@@ -46,8 +46,8 @@ namespace GTA5PoliceV2
             var logEmbed = new EmbedBuilder() { Color = Colours.errorCol };
             logEmbed.WithAuthor("User was banned from Discord");
             logEmbed.WithThumbnailUrl(References.gta5policeLogo);
-            logEmbed.AddField(new EmbedFieldBuilder() { Name = "Discord User", Value = user.Username.ToString() });
-            logEmbed.AddField(new EmbedFieldBuilder() { Name = "DiscordId", Value = user.Id });
+            logEmbed.AddField(new EmbedFieldBuilder() { Name = "Discord User", Value = user.Username.ToString(), IsInline = true });
+            logEmbed.AddField(new EmbedFieldBuilder() { Name = "DiscordId", Value = user.Id, IsInline = true });
 
             await logChannel.SendMessageAsync("", false, logEmbed);
         }
@@ -59,8 +59,8 @@ namespace GTA5PoliceV2
             var logEmbed = new EmbedBuilder() { Color = Colours.adminCol };
             logEmbed.WithAuthor("User was unbanned from Discord");
             logEmbed.WithThumbnailUrl(References.gta5policeLogo);
-            logEmbed.AddField(new EmbedFieldBuilder() { Name = "Discord User", Value = user.Username.ToString() });
-            logEmbed.AddField(new EmbedFieldBuilder() { Name = "DiscordId", Value = user.Id });
+            logEmbed.AddField(new EmbedFieldBuilder() { Name = "Discord User", Value = user.Username.ToString(), IsInline = true });
+            logEmbed.AddField(new EmbedFieldBuilder() { Name = "DiscordId", Value = user.Id, IsInline = true });
 
             await logChannel.SendMessageAsync("", false, logEmbed);
         }
