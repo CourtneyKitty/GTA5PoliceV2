@@ -10,6 +10,7 @@ namespace GTA5PoliceV2.Util
         public static string gta5policeLogo = UrlConfig.Load().Logo;
         public static string rulesURL = UrlConfig.Load().Rules;
         public static string howBanURL = UrlConfig.Load().HowWeBan;
+        public static string clearcacheURL = UrlConfig.Load().ClearCache;
 
         public static string websiteURL = UrlConfig.Load().Website;
         public static string dashboardURL = UrlConfig.Load().Dashboard;

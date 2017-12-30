@@ -97,6 +97,7 @@ namespace GTA5PoliceV2
         public static int rulesMessages = BotConfig.Load().MessageTimerCooldown;
         public static int linksMessages = BotConfig.Load().MessageTimerCooldown;
         public static int applyMessages = BotConfig.Load().MessageTimerCooldown;
+        public static int clearcacheMessages = BotConfig.Load().MessageTimerCooldown;
 
         public async Task TimerCooldown(SocketMessage pMsg)
         {
@@ -109,6 +110,7 @@ namespace GTA5PoliceV2
             rulesMessages++;
             linksMessages++;
             applyMessages++;
+            clearcacheMessages++;
         }
 
         public async Task ProfanityCheck(SocketMessage pMsg)

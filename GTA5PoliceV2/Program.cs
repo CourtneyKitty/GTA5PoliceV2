@@ -140,6 +140,7 @@ namespace GTA5PoliceV2
                 url.Logo = "https://cdn.discordapp.com/attachments/336338554424918017/353934612503855115/GTA5Police_Main.png";
                 url.Rules = "http://goo.gl/7app1D";
                 url.HowWeBan = "https://puu.sh/yG7Nv.png";
+                url.ClearCache = "http://obliviontek.com/forum/index.php?threads/guide-got-graphical-glitches-clear-cache-howto.5/";
 
                 url.Save();
                 Console.WriteLine("URL config generated");

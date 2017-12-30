@@ -135,5 +135,35 @@ namespace GTA5PoliceV2.Modules
                 await errors.sendErrorTemp(channel, user + errorMessage, Colours.errorCol);
             }
         }
+
+        [Command("clearcache")]
+        public async Task ClearCache()
+        {
+            var channel = Context.Channel;
+            var user = Context.User;
+
+            await Context.Message.DeleteAsync();
+
+            if (CommandHandler.clearcacheMessages >= BotConfig.Load().MessageTimerCooldown)
+            {
+                var embed = new EmbedBuilder() { Color = Colours.generalCol };
+                embed.WithAuthor("How to clear your cache", References.gta5policeLogo);
+                embed.WithUrl(References.clearcacheURL);
+                embed.Title = "Click here to learn how!";
+                embed.Description = "Clearing your FiveM cache will help with many errors. This includes resources not loading, graphical issues and fps issues.";
+                embed.WithThumbnailUrl(References.gta5policeLogo);
+                embed.WithFooter("Requested by " + Context.User);
+                embed.WithCurrentTimestamp();
+
+                await Context.Channel.SendMessageAsync("", false, embed);
+                CommandHandler.clearcacheMessages = 0;
+            }
+            else
+            {
+                await Context.Message.DeleteAsync();
+                CommandHandler.clearcacheMessages--;
+                await errors.sendErrorTemp(channel, user + errorMessage, Colours.errorCol);
+            }
+        }
     }
 }
