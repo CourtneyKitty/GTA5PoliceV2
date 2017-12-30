@@ -22,9 +22,7 @@ namespace GTA5PoliceV2.Modules
             {
                 ServerStatus status = new ServerStatus();
                 status.pingServers();
-
-
-                await Context.Message.DeleteAsync();
+                
                 await status.displayStatus(channel, user);
                 CommandHandler.statusMessages = 0;
             }
