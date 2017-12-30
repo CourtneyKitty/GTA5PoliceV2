@@ -10,7 +10,7 @@ namespace GTA5PoliceV2.Modules
     public class PublicModule : ModuleBase
     {
         Errors errors = new Errors();
-        string errorMessage = user + ": This command has been used recently.";
+        string errorMessage = ": This command has been used recently.";
 
         [Command("status")]
         public async Task Status()
@@ -32,7 +32,7 @@ namespace GTA5PoliceV2.Modules
             {
                 await Context.Message.DeleteAsync();
                 CommandHandler.statusMessages--;
-                await errors.sendErrorTemp(channel, errorMessage, Colours.errorCol);
+                await errors.sendErrorTemp(channel, user + errorMessage, Colours.errorCol);
             }
         }
 
@@ -63,7 +63,7 @@ namespace GTA5PoliceV2.Modules
             {
                 await Context.Message.DeleteAsync();
                 CommandHandler.rulesMessages--;
-                await errors.sendErrorTemp(channel, errorMessage, Colours.errorCol);
+                await errors.sendErrorTemp(channel, user + errorMessage, Colours.errorCol);
             }
         }
 
@@ -97,7 +97,7 @@ namespace GTA5PoliceV2.Modules
             {
                 await Context.Message.DeleteAsync();
                 CommandHandler.linksMessages--;
-                await errors.sendErrorTemp(channel, errorMessage, Colours.errorCol);
+                await errors.sendErrorTemp(channel, user + errorMessage, Colours.errorCol);
             }
         }
 
@@ -131,7 +131,7 @@ namespace GTA5PoliceV2.Modules
             {
                 await Context.Message.DeleteAsync();
                 CommandHandler.applyMessages--;
-                await errors.sendErrorTemp(channel, errorMessage, Colours.errorCol);
+                await errors.sendErrorTemp(channel, user + errorMessage, Colours.errorCol);
             }
         }
     }
