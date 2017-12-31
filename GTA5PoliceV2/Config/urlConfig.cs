@@ -47,7 +47,7 @@ namespace GTA5PoliceV2.Config
             Logo = "https://cdn.discordapp.com/attachments/336338554424918017/353934612503855115/GTA5Police_Main.png";
             Rules = "http://goo.gl/7app1D";
             HowWeBan = "https://puu.sh/yG7Nv.png";
-            ClearCache = "http://obliviontek.com/forum/index.php?threads/guide-got-graphical-glitches-clear-cache-howto.5/";
+            ClearCache = "https://gta5police.com/forums/index.php?/topic/921-how-to-clear-fivem-cache/";
         }
 
         public void Save(string dir = "configuration/url_config.json")
