@@ -18,8 +18,8 @@ namespace GTA5PoliceV2.Modules
                 if (BotConfig.Load().BotCommanders[i] == Context.User.Id)
                 {
                     var embed = new EmbedBuilder() { Color = Colours.adminCol };
-                    embed.WithAuthor("GTA5PoliceV2 Settings", References.gta5policeLogo);
-                    embed.WithThumbnailUrl(References.gta5policeLogo);
+                    embed.WithAuthor("GTA5PoliceV2 Settings", References.gta5policeLogo());
+                    embed.WithThumbnailUrl(References.gta5policeLogo());
 
                     string filtered = null;
                     for (int j = 0; j <= BotConfig.Load().Filters - 1; j++)
@@ -76,8 +76,8 @@ namespace GTA5PoliceV2.Modules
                     config.Save();
 
                     var embed = new EmbedBuilder() { Color = Colours.adminCol };
-                    embed.WithAuthor("Successfully Added", References.gta5policeLogo);
-                    embed.WithThumbnailUrl(References.gta5policeLogo);
+                    embed.WithAuthor("Successfully Added", References.gta5policeLogo());
+                    embed.WithThumbnailUrl(References.gta5policeLogo());
                     embed.Description = "The word " + word + " was successfully blacklisted.";
                     embed.WithFooter(new EmbedFooterBuilder() { Text = "Requested by " + Context.User });
                     embed.WithCurrentTimestamp();

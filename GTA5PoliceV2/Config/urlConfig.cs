@@ -30,24 +30,24 @@ namespace GTA5PoliceV2.Config
 
         public UrlConfig()
         {
-            Website = "https://www.gta5police.com";
-            Dashboard = "https://gta5police.com/panel/index.php";
-            Forums = "https://gta5police.com/forums/";
-            Support = "http://gta5police.com/forums/index.php?/support/";
-            Donate = "http://gta5police.com/forums/index.php?/donate/";
-            Vacbanned = "http://www.vacbanned.com";
+            Website = "";
+            Dashboard = "";
+            Forums = "";
+            Support = "";
+            Donate = "";
+            Vacbanned = "";
 
-            Applications = "https://goo.gl/DpTEyH";
-            Whitelist = "https://goo.gl/TLSGdf";
-            Police = "https://goo.gl/RYNDBA";
-            EMS = "https://goo.gl/vNzGvr";
-            Mechanic = "https://goo.gl/rChgek";
-            Taxi = "https://goo.gl/DbThWg";
+            Applications = "";
+            Whitelist = "";
+            Police = "";
+            EMS = "";
+            Mechanic = "";
+            Taxi = "";
 
-            Logo = "https://cdn.discordapp.com/attachments/336338554424918017/353934612503855115/GTA5Police_Main.png";
-            Rules = "http://goo.gl/7app1D";
-            HowWeBan = "https://puu.sh/yG7Nv.png";
-            ClearCache = "https://gta5police.com/forums/index.php?/topic/921-how-to-clear-fivem-cache/";
+            Logo = "";
+            Rules = "";
+            HowWeBan = "";
+            ClearCache = "";
         }
 
         public void Save(string dir = "configuration/url_config.json")

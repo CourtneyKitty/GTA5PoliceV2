@@ -44,11 +44,11 @@ namespace GTA5PoliceV2.Modules
             {
 
                 var embed = new EmbedBuilder() { Color = Colours.generalCol };
-                embed.WithAuthor("GTA5Police Rules", References.gta5policeLogo);
+                embed.WithAuthor("GTA5Police Rules", References.gta5policeLogo());
                 embed.Title = "Click to view all GTA5Police rules.";
-                embed.WithUrl(References.rulesURL);
-                embed.WithThumbnailUrl(References.gta5policeLogo);
-                embed.WithImageUrl(References.howBanURL);
+                embed.WithUrl(References.rulesURL());
+                embed.WithThumbnailUrl(References.gta5policeLogo());
+                embed.WithImageUrl(References.howBanURL());
                 embed.WithFooter("Requested by " + Context.User);
                 embed.WithCurrentTimestamp();
 
@@ -72,15 +72,15 @@ namespace GTA5PoliceV2.Modules
             if (CommandHandler.linksMessages >= BotConfig.Load().MessageTimerCooldown)
             {
                 var embed = new EmbedBuilder() { Color = Colours.generalCol };
-                embed.WithAuthor("GTA5Police Links", References.gta5policeLogo);
+                embed.WithAuthor("GTA5Police Links", References.gta5policeLogo());
                 embed.Description = "Useful GTA5Police links for you. Teamspeak IP: gta5police.com";
-                embed.WithThumbnailUrl(References.gta5policeLogo);
-                embed.AddField(new EmbedFieldBuilder() { Name = "Website", Value = References.websiteURL });
-                embed.AddField(new EmbedFieldBuilder() { Name = "Dashboard", Value = References.dashboardURL });
-                embed.AddField(new EmbedFieldBuilder() { Name = "Forums", Value = References.forumsURL });
-                embed.AddField(new EmbedFieldBuilder() { Name = "Support", Value = References.supportURL });
-                embed.AddField(new EmbedFieldBuilder() { Name = "Donations", Value = References.donateURL });
-                embed.AddField(new EmbedFieldBuilder() { Name = "Vacbanned - For Steam Hex", Value = References.vacbannedURL });
+                embed.WithThumbnailUrl(References.gta5policeLogo());
+                embed.AddField(new EmbedFieldBuilder() { Name = "Website", Value = References.websiteURL() });
+                embed.AddField(new EmbedFieldBuilder() { Name = "Dashboard", Value = References.dashboardURL() });
+                embed.AddField(new EmbedFieldBuilder() { Name = "Forums", Value = References.forumsURL() });
+                embed.AddField(new EmbedFieldBuilder() { Name = "Support", Value = References.supportURL() });
+                embed.AddField(new EmbedFieldBuilder() { Name = "Donations", Value = References.donateURL() });
+                embed.AddField(new EmbedFieldBuilder() { Name = "Vacbanned - For Steam Hex", Value = References.vacbannedURL() });
                 embed.WithFooter("Requested by " + Context.User);
                 embed.WithCurrentTimestamp();
 
@@ -105,15 +105,15 @@ namespace GTA5PoliceV2.Modules
             if (CommandHandler.applyMessages >= BotConfig.Load().MessageTimerCooldown)
             {
                 var embed = new EmbedBuilder() { Color = Colours.generalCol };
-                embed.WithAuthor("GTA5Police Applications", References.gta5policeLogo);
-                embed.WithUrl(References.applicationsURL);
+                embed.WithAuthor("GTA5Police Applications", References.gta5policeLogo());
+                embed.WithUrl(References.applicationsURL());
                 embed.Description = "Whitelist jobs and server applications.";
-                embed.WithThumbnailUrl(References.gta5policeLogo);
-                embed.AddField(new EmbedFieldBuilder() { Name = "Whitelist Servers", Value = References.whitelistURL });
-                embed.AddField(new EmbedFieldBuilder() { Name = "Police", Value = References.policeURL });
-                embed.AddField(new EmbedFieldBuilder() { Name = "EMS", Value = References.emsURL });
-                embed.AddField(new EmbedFieldBuilder() { Name = "Mechanic", Value = References.mechanicURL });
-                embed.AddField(new EmbedFieldBuilder() { Name = "Taxi", Value = References.taxiURL });
+                embed.WithThumbnailUrl(References.gta5policeLogo());
+                embed.AddField(new EmbedFieldBuilder() { Name = "Whitelist Servers", Value = References.whitelistURL() });
+                embed.AddField(new EmbedFieldBuilder() { Name = "Police", Value = References.policeURL() });
+                embed.AddField(new EmbedFieldBuilder() { Name = "EMS", Value = References.emsURL() });
+                embed.AddField(new EmbedFieldBuilder() { Name = "Mechanic", Value = References.mechanicURL() });
+                embed.AddField(new EmbedFieldBuilder() { Name = "Taxi", Value = References.taxiURL() });
                 embed.WithFooter("Requested by " + Context.User);
                 embed.WithCurrentTimestamp();
 
@@ -137,11 +137,11 @@ namespace GTA5PoliceV2.Modules
             if (CommandHandler.clearcacheMessages >= BotConfig.Load().MessageTimerCooldown)
             {
                 var embed = new EmbedBuilder() { Color = Colours.generalCol };
-                embed.WithAuthor("How to clear your cache", References.gta5policeLogo);
-                embed.WithUrl(References.clearcacheURL);
+                embed.WithAuthor("How to clear your cache", References.gta5policeLogo());
+                embed.WithUrl(References.clearcacheURL());
                 embed.Title = "Click here to learn how!";
                 embed.Description = "Clearing your FiveM cache will help with many errors. This includes resources not loading, graphical issues and fps issues.";
-                embed.WithThumbnailUrl(References.gta5policeLogo);
+                embed.WithThumbnailUrl(References.gta5policeLogo());
                 embed.WithFooter("Requested by " + Context.User);
                 embed.WithCurrentTimestamp();
 

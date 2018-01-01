@@ -17,7 +17,7 @@ namespace GTA5PoliceV2.Config
 
         public ConnectionsConfig()
         {
-            ServerIp = "66.150.121.131";
+            ServerIp = "";
             NyPort = 30150;
             LaPort = 30141;
             NyWlPort = 30151;

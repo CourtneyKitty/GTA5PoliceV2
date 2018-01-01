@@ -45,7 +45,7 @@ namespace GTA5PoliceV2
 
             var logEmbed = new EmbedBuilder() { Color = Colours.errorCol };
             logEmbed.WithAuthor("User was banned from Discord");
-            logEmbed.WithThumbnailUrl(References.gta5policeLogo);
+            logEmbed.WithThumbnailUrl(References.gta5policeLogo());
             logEmbed.AddField(new EmbedFieldBuilder() { Name = "Discord User", Value = user.Username.ToString(), IsInline = true });
             logEmbed.AddField(new EmbedFieldBuilder() { Name = "DiscordId", Value = user.Id, IsInline = true });
 
@@ -58,7 +58,7 @@ namespace GTA5PoliceV2
 
             var logEmbed = new EmbedBuilder() { Color = Colours.adminCol };
             logEmbed.WithAuthor("User was unbanned from Discord");
-            logEmbed.WithThumbnailUrl(References.gta5policeLogo);
+            logEmbed.WithThumbnailUrl(References.gta5policeLogo());
             logEmbed.AddField(new EmbedFieldBuilder() { Name = "Discord User", Value = user.Username.ToString(), IsInline = true });
             logEmbed.AddField(new EmbedFieldBuilder() { Name = "DiscordId", Value = user.Id, IsInline = true });
 
@@ -137,7 +137,7 @@ namespace GTA5PoliceV2
             var logsChannel = BotConfig.Load().LogsId; //find the channel
 
             var warningEmbed = new EmbedBuilder() { Color = Colours.errorCol };
-            warningEmbed.WithAuthor("Profanity Detected!", References.gta5policeLogo);
+            warningEmbed.WithAuthor("Profanity Detected!", References.gta5policeLogo());
             warningEmbed.Description = user + " | Do not use that profanity, your message has been deleted.";
             var msg = await pMsg.Channel.SendMessageAsync("", false, warningEmbed);
             await Delete.DelayDeleteEmbed(msg, 10);
@@ -149,7 +149,7 @@ namespace GTA5PoliceV2
 
             var logEmbed = new EmbedBuilder() { Color = Colours.errorCol };
             logEmbed.WithAuthor("Profanity detected in discord chat");
-            logEmbed.WithThumbnailUrl(References.gta5policeLogo);
+            logEmbed.WithThumbnailUrl(References.gta5policeLogo());
             logEmbed.Description = "Full message: " + fullMsg;
             var userField = new EmbedFieldBuilder() { Name = "Discord User", Value = user };
             var userIdField = new EmbedFieldBuilder() { Name = "DiscordId", Value = userId };
@@ -188,26 +188,26 @@ namespace GTA5PoliceV2
             status.pingServers();
             if (ny != status.getNyStatus())
             {
-                if (status.getNyStatus()) await success.sendSuccess(channel, "Server Status Change", "New York has come online!", Colours.generalCol, References.dashboardURL);
-                if (!status.getNyStatus()) await success.sendSuccess(channel, "Server Status Change", "New York has gone offline!", Colours.generalCol, References.dashboardURL);
+                if (status.getNyStatus()) await success.sendSuccess(channel, "Server Status Change", "New York has come online!", Colours.generalCol, References.dashboardURL());
+                if (!status.getNyStatus()) await success.sendSuccess(channel, "Server Status Change", "New York has gone offline!", Colours.generalCol, References.dashboardURL());
                 ny = status.getNyStatus();
             }
             if (la != status.getLaStatus())
             {
-                if (status.getLaStatus()) await success.sendSuccess(channel, "Server Status Change", "Los Angeles has come online!", Colours.generalCol, References.dashboardURL);
-                if (!status.getLaStatus()) await success.sendSuccess(channel, "Server Status Change", "Los Angeles has gone offline!", Colours.generalCol, References.dashboardURL);
+                if (status.getLaStatus()) await success.sendSuccess(channel, "Server Status Change", "Los Angeles has come online!", Colours.generalCol, References.dashboardURL());
+                if (!status.getLaStatus()) await success.sendSuccess(channel, "Server Status Change", "Los Angeles has gone offline!", Colours.generalCol, References.dashboardURL());
                 la = status.getLaStatus();
             }
             if (nywl != status.getNyWlStatus())
             {
-                if (status.getNyWlStatus()) await success.sendSuccess(channel, "Server Status Change", "New York Whitelist has come online!", Colours.generalCol, References.dashboardURL);
-                if (!status.getNyWlStatus()) await success.sendSuccess(channel, "Server Status Change", "New York Whitelist has gone offline!", Colours.generalCol, References.dashboardURL);
+                if (status.getNyWlStatus()) await success.sendSuccess(channel, "Server Status Change", "New York Whitelist has come online!", Colours.generalCol, References.dashboardURL());
+                if (!status.getNyWlStatus()) await success.sendSuccess(channel, "Server Status Change", "New York Whitelist has gone offline!", Colours.generalCol, References.dashboardURL());
                 nywl = status.getNyWlStatus();
             }
             if (lawl != status.getLaWlStatus())
             {
-                if (status.getLaWlStatus()) await success.sendSuccess(channel, "Server Status Change", "Los Angeles Whitelist has come online!", Colours.generalCol, References.dashboardURL);
-                if (!status.getLaWlStatus()) await success.sendSuccess(channel, "Server Status Change", "Los Angeles Whitelist has gone offline!", Colours.generalCol, References.dashboardURL);
+                if (status.getLaWlStatus()) await success.sendSuccess(channel, "Server Status Change", "Los Angeles Whitelist has come online!", Colours.generalCol, References.dashboardURL());
+                if (!status.getLaWlStatus()) await success.sendSuccess(channel, "Server Status Change", "Los Angeles Whitelist has gone offline!", Colours.generalCol, References.dashboardURL());
                 lawl = status.getLaWlStatus();
             }
         }
@@ -216,10 +216,10 @@ namespace GTA5PoliceV2
             if (messages >= BotConfig.Load().MessageTimerCooldown)
             {
                 var embed = new EmbedBuilder() { Color = Colours.generalCol };
-                embed.WithAuthor("GTA5Police Help", References.gta5policeLogo);
-                embed.WithUrl(References.dashboardURL);
+                embed.WithAuthor("GTA5Police Help", References.gta5policeLogo());
+                embed.WithUrl(References.dashboardURL());
                 embed.Description = "Be sure to check out our rules and policies, as well as other useful links!";
-                embed.WithThumbnailUrl(References.gta5policeLogo);
+                embed.WithThumbnailUrl(References.gta5policeLogo());
                 embed.AddField(new EmbedFieldBuilder() { Name = "!Rules", Value = "Rules and How We Ban." });
                 embed.AddField(new EmbedFieldBuilder() { Name = "!Apply", Value = "Police, EMS, Mechanic, and Whitelist Applications" });
                 embed.AddField(new EmbedFieldBuilder() { Name = "!Links", Value = "Useful Links." });

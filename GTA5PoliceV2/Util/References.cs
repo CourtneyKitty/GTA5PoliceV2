@@ -7,23 +7,23 @@ namespace GTA5PoliceV2.Util
 {
     class References
     {
-        public static string gta5policeLogo = UrlConfig.Load().Logo;
-        public static string rulesURL = UrlConfig.Load().Rules;
-        public static string howBanURL = UrlConfig.Load().HowWeBan;
-        public static string clearcacheURL = UrlConfig.Load().ClearCache;
+        public static string gta5policeLogo() { return UrlConfig.Load().Logo; }
+        public static string rulesURL() { return UrlConfig.Load().Rules; }
+        public static string howBanURL() { return UrlConfig.Load().HowWeBan; }
+        public static string clearcacheURL() { return UrlConfig.Load().ClearCache; }
 
-        public static string websiteURL = UrlConfig.Load().Website;
-        public static string dashboardURL = UrlConfig.Load().Dashboard;
-        public static string forumsURL = UrlConfig.Load().Forums;
-        public static string supportURL = UrlConfig.Load().Support;
-        public static string donateURL = UrlConfig.Load().Donate;
-        public static string vacbannedURL = UrlConfig.Load().Vacbanned;
+        public static string websiteURL() { return UrlConfig.Load().Website; }
+        public static string dashboardURL() { return UrlConfig.Load().Dashboard; }
+        public static string forumsURL() { return UrlConfig.Load().Forums; }
+        public static string supportURL() { return UrlConfig.Load().Support; }
+        public static string donateURL() { return UrlConfig.Load().Donate; }
+        public static string vacbannedURL() { return UrlConfig.Load().Vacbanned; }
 
-        public static string applicationsURL = UrlConfig.Load().Applications;
-        public static string whitelistURL = UrlConfig.Load().Whitelist;
-        public static string policeURL = UrlConfig.Load().Police;
-        public static string emsURL = UrlConfig.Load().EMS;
-        public static string mechanicURL = UrlConfig.Load().Mechanic;
-        public static string taxiURL = UrlConfig.Load().Taxi;
+        public static string applicationsURL() { return UrlConfig.Load().Applications; }
+        public static string whitelistURL() { return UrlConfig.Load().Whitelist; }
+        public static string policeURL() { return UrlConfig.Load().Police; }
+        public static string emsURL() {  return UrlConfig.Load().EMS; }
+        public static string mechanicURL() { return UrlConfig.Load().Mechanic; }
+        public static string taxiURL() { return UrlConfig.Load().Taxi; }
     }
 }
