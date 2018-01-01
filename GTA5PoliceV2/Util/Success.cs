@@ -77,5 +77,15 @@ namespace GTA5PoliceV2.Util
             var errorMessage = await channel.SendMessageAsync("", false, embed);
             await Delete.DelayDeleteEmbed(errorMessage, 30);
         }
+
+        public async Task sendSuccessTemp(IMessageChannel channel, string title, string desc, Color color, string url, int time)
+        {
+            var embed = new EmbedBuilder() { Color = color };
+            embed.Title = (title);
+            embed.Description = (desc);
+            embed.WithUrl(url);
+            var errorMessage = await channel.SendMessageAsync("", false, embed);
+            await Delete.DelayDeleteEmbed(errorMessage, time);
+        }
     }
 }

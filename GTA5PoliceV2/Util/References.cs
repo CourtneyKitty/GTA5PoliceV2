@@ -25,5 +25,7 @@ namespace GTA5PoliceV2.Util
         public static string emsURL() {  return UrlConfig.Load().EMS; }
         public static string mechanicURL() { return UrlConfig.Load().Mechanic; }
         public static string taxiURL() { return UrlConfig.Load().Taxi; }
+
+        public static bool isStartUp = true;
     }
 }

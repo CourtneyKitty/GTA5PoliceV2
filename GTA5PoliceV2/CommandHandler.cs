@@ -188,28 +188,61 @@ namespace GTA5PoliceV2
             status.pingServers();
             if (ny != status.getNyStatus())
             {
-                if (status.getNyStatus()) await success.sendSuccess(channel, "Server Status Change", "New York has come online!", Colours.generalCol, References.dashboardURL());
-                if (!status.getNyStatus()) await success.sendSuccess(channel, "Server Status Change", "New York has gone offline!", Colours.generalCol, References.dashboardURL());
+                if (References.isStartUp == true)
+                {
+                    if (status.getNyStatus()) await success.sendSuccessTemp(channel, "Server Status Change", "New York has come online!", Colours.generalCol, References.dashboardURL(), 5);
+                    if (!status.getNyStatus()) await success.sendSuccessTemp(channel, "Server Status Change", "New York has gone offline!", Colours.generalCol, References.dashboardURL(), 5);
+                }
+                else
+                {
+                    if (status.getNyStatus()) await success.sendSuccess(channel, "Server Status Change", "New York has come online!", Colours.generalCol, References.dashboardURL());
+                    if (!status.getNyStatus()) await success.sendSuccess(channel, "Server Status Change", "New York has gone offline!", Colours.generalCol, References.dashboardURL());
+                }
                 ny = status.getNyStatus();
             }
             if (la != status.getLaStatus())
             {
-                if (status.getLaStatus()) await success.sendSuccess(channel, "Server Status Change", "Los Angeles has come online!", Colours.generalCol, References.dashboardURL());
-                if (!status.getLaStatus()) await success.sendSuccess(channel, "Server Status Change", "Los Angeles has gone offline!", Colours.generalCol, References.dashboardURL());
+                if (References.isStartUp == true)
+                {
+                    if (status.getLaStatus()) await success.sendSuccessTemp(channel, "Server Status Change", "Los Angeles has come online!", Colours.generalCol, References.dashboardURL(), 5);
+                    if (!status.getLaStatus()) await success.sendSuccessTemp(channel, "Server Status Change", "Los Angeles has gone offline!", Colours.generalCol, References.dashboardURL(), 5);
+                }
+                else
+                {
+                    if (status.getLaStatus()) await success.sendSuccess(channel, "Server Status Change", "Los Angeles has come online!", Colours.generalCol, References.dashboardURL());
+                    if (!status.getLaStatus()) await success.sendSuccess(channel, "Server Status Change", "Los Angeles has gone offline!", Colours.generalCol, References.dashboardURL());
+                }
                 la = status.getLaStatus();
             }
             if (nywl != status.getNyWlStatus())
             {
-                if (status.getNyWlStatus()) await success.sendSuccess(channel, "Server Status Change", "New York Whitelist has come online!", Colours.generalCol, References.dashboardURL());
-                if (!status.getNyWlStatus()) await success.sendSuccess(channel, "Server Status Change", "New York Whitelist has gone offline!", Colours.generalCol, References.dashboardURL());
+                if (References.isStartUp == true)
+                {
+                    if (status.getNyWlStatus()) await success.sendSuccessTemp(channel, "Server Status Change", "New York Whitelist has come online!", Colours.generalCol, References.dashboardURL(), 5);
+                    if (!status.getNyWlStatus()) await success.sendSuccessTemp(channel, "Server Status Change", "New York Whitelist has gone offline!", Colours.generalCol, References.dashboardURL(), 5);
+                }
+                else
+                {
+                    if (status.getNyWlStatus()) await success.sendSuccess(channel, "Server Status Change", "New York Whitelist has come online!", Colours.generalCol, References.dashboardURL());
+                    if (!status.getNyWlStatus()) await success.sendSuccess(channel, "Server Status Change", "New York Whitelist has gone offline!", Colours.generalCol, References.dashboardURL());
+                }
                 nywl = status.getNyWlStatus();
             }
             if (lawl != status.getLaWlStatus())
             {
-                if (status.getLaWlStatus()) await success.sendSuccess(channel, "Server Status Change", "Los Angeles Whitelist has come online!", Colours.generalCol, References.dashboardURL());
-                if (!status.getLaWlStatus()) await success.sendSuccess(channel, "Server Status Change", "Los Angeles Whitelist has gone offline!", Colours.generalCol, References.dashboardURL());
+                if (References.isStartUp == true)
+                {
+                    if (status.getLaWlStatus()) await success.sendSuccessTemp(channel, "Server Status Change", "Los Angeles Whitelist has come online!", Colours.generalCol, References.dashboardURL(), 5);
+                    if (!status.getLaWlStatus()) await success.sendSuccessTemp(channel, "Server Status Change", "Los Angeles Whitelist has gone offline!", Colours.generalCol, References.dashboardURL(), 5);
+                }
+                else
+                {
+                    if (status.getLaWlStatus()) await success.sendSuccess(channel, "Server Status Change", "Los Angeles Whitelist has come online!", Colours.generalCol, References.dashboardURL());
+                    if (!status.getLaWlStatus()) await success.sendSuccess(channel, "Server Status Change", "Los Angeles Whitelist has gone offline!", Colours.generalCol, References.dashboardURL());
+                }
                 lawl = status.getLaWlStatus();
             }
+            if (References.isStartUp == true) References.isStartUp = false;
         }
         public async void SendMessage(object state)
         {

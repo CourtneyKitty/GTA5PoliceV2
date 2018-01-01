@@ -137,7 +137,7 @@ namespace GTA5PoliceV2.Modules
             if (CommandHandler.clearcacheMessages >= BotConfig.Load().MessageTimerCooldown)
             {
                 var embed = new EmbedBuilder() { Color = Colours.generalCol };
-                embed.WithAuthor("How to clear your cache", References.gta5policeLogo());
+                embed.WithAuthor("How to clear your cache 101", References.gta5policeLogo());
                 embed.WithUrl(References.clearcacheURL());
                 embed.Title = "Click here to learn how!";
                 embed.Description = "Clearing your FiveM cache will help with many errors. This includes resources not loading, graphical issues and fps issues.";
