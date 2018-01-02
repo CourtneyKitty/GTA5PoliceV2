@@ -25,13 +25,12 @@ namespace GTA5PoliceV2
             map = provider;
             bot = map.GetService<DiscordSocketClient>();
             bot.UserJoined += AnnounceUserJoined;
-            //bot.UserJoined += WelcomeUserJoined;
+            bot.UserJoined += WelcomeUserJoined;
             bot.UserLeft += AnnounceLeftUser;
             bot.UserBanned += AnnounceBannedUser;
             bot.UserUnbanned += AnnounceUnbannedUser;
             bot.Ready += SetGame;
             bot.Ready += StartTimers;
-            //bot.Ready += RestartAsync;
             bot.MessageReceived += HandleCommand;
             commands = map.GetService<CommandService>();
             bot.MessageReceived += ProfanityCheck;
@@ -285,17 +284,9 @@ namespace GTA5PoliceV2
                 await channel.SendMessageAsync("", false, embed);
                 messages = 0;
                 Console.WriteLine("Message timer has delivered the message!");
+                await Program.Logger(new LogMessage(LogSeverity.Info, "GTA5Police", "Timer message delivered successfully."));
             }
-            Console.WriteLine("Message timer has not delivered the message!");
-        }
-
-        public async Task RestartAsync()
-        {
-            int hours = 6;
-            //await Task.Delay(1000 * 60 * 60 * hours);
-            await Task.Delay(1000 * 10);
-            System.Diagnostics.Process.Start("launch.cmd");
-            Environment.Exit(0);
+            await Program.Logger(new LogMessage(LogSeverity.Info, "GTA5Police", "Timer message was not delivered due to the cooldown."));
         }
     }
 }
