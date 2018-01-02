@@ -5,6 +5,7 @@ using GTA5PoliceV2.Config;
 using GTA5PoliceV2.Util;
 using GTA5PoliceV2.Connection;
 using Discord;
+using Discord.WebSocket;
 
 namespace GTA5PoliceV2.Modules
 {
@@ -86,6 +87,31 @@ namespace GTA5PoliceV2.Modules
                     await Context.Message.DeleteAsync();
                     var message = await Context.Channel.SendMessageAsync("", false, embed);
                     await Delete.DelayDeleteEmbed(message, 120);
+                }
+            }
+        }
+
+        [Command("clear")]
+        [RequireUserPermission(ChannelPermission.ManageMessages)]
+        public async Task Clear(int amount = 100, SocketGuildUser user = null)
+        {
+            Errors errors = new Errors();
+            await Context.Message.DeleteAsync();
+
+            if (user == null)
+            {
+                if (amount > 100)
+                {
+                    await errors.sendError(Context.Channel, "You can not clear more than 100! Deleting 100.", Colours.errorCol);
+                    var messageHistory = await Context.Channel.GetMessagesAsync(101).Flatten();
+                    await Context.Channel.DeleteMessagesAsync(messageHistory);
+                }
+                else if (amount < 1) await errors.sendErrorTemp(Context.Channel, "You can not clear a negative amount of messages!", Colours.errorCol);
+                else
+                {
+                    var messageHistory = await Context.Channel.GetMessagesAsync(amount).Flatten();
+
+                    await Context.Channel.DeleteMessagesAsync(messageHistory);
                 }
             }
         }
