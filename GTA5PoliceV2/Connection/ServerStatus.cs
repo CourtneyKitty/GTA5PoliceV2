@@ -146,7 +146,8 @@ namespace GTA5PoliceV2.Connection
                 embed.AddField(laWlField);
                 embed.WithFooter(new EmbedFooterBuilder() { Text = "Requested by " + user } );
                 embed.WithCurrentTimestamp();
-                await channel.SendMessageAsync("", false, embed);
+                var message = await channel.SendMessageAsync("", false, embed);
+                await Delete.DelayDeleteEmbed(message, 120);
             }
             else
             {
@@ -157,7 +158,9 @@ namespace GTA5PoliceV2.Connection
                 embed.AddField(new EmbedFieldBuilder() { Name = "OFFLINE", Value = "GTA5Police servers are currently down, check back later for an update!" });
                 embed.WithFooter(new EmbedFooterBuilder() { Text = "Requested by " + user });
                 embed.WithCurrentTimestamp();
-                await channel.SendMessageAsync("", false, embed);
+                var message = await channel.SendMessageAsync("", false, embed);
+                await Delete.DelayDeleteEmbed(message, 120);
+
             }
         }
 

@@ -17,6 +17,7 @@ namespace GTA5PoliceV2.Modules
         {
             var channel = Context.Channel;
             var user = Context.User;
+            await Context.Message.DeleteAsync();
 
             if (CommandHandler.statusMessages >= BotConfig.Load().MessageTimerCooldown)
             {
@@ -39,6 +40,7 @@ namespace GTA5PoliceV2.Modules
         {
             var channel = Context.Channel;
             var user = Context.User;
+            await Context.Message.DeleteAsync();
 
             if (CommandHandler.rulesMessages >= BotConfig.Load().MessageTimerCooldown)
             {
@@ -52,7 +54,8 @@ namespace GTA5PoliceV2.Modules
                 embed.WithFooter("Requested by " + Context.User);
                 embed.WithCurrentTimestamp();
 
-                await Context.Channel.SendMessageAsync("", false, embed);
+                var message = await Context.Channel.SendMessageAsync("", false, embed);
+                await Delete.DelayDeleteEmbed(message, 120);
                 CommandHandler.rulesMessages = 0;
             }
             else
@@ -68,6 +71,7 @@ namespace GTA5PoliceV2.Modules
         {
             var channel = Context.Channel;
             var user = Context.User;
+            await Context.Message.DeleteAsync();
 
             if (CommandHandler.linksMessages >= BotConfig.Load().MessageTimerCooldown)
             {
@@ -84,7 +88,8 @@ namespace GTA5PoliceV2.Modules
                 embed.WithFooter("Requested by " + Context.User);
                 embed.WithCurrentTimestamp();
 
-                await Context.Channel.SendMessageAsync("", false, embed);
+                var message = await Context.Channel.SendMessageAsync("", false, embed);
+                await Delete.DelayDeleteEmbed(message, 120);
                 CommandHandler.linksMessages = 0;
             }
             else
@@ -101,6 +106,7 @@ namespace GTA5PoliceV2.Modules
         {
             var channel = Context.Channel;
             var user = Context.User;
+            await Context.Message.DeleteAsync();
 
             if (CommandHandler.applyMessages >= BotConfig.Load().MessageTimerCooldown)
             {
@@ -117,7 +123,8 @@ namespace GTA5PoliceV2.Modules
                 embed.WithFooter("Requested by " + Context.User);
                 embed.WithCurrentTimestamp();
 
-                await Context.Channel.SendMessageAsync("", false, embed);
+                var message = await Context.Channel.SendMessageAsync("", false, embed);
+                await Delete.DelayDeleteEmbed(message, 120);
                 CommandHandler.applyMessages = 0;
             }
             else
@@ -133,6 +140,7 @@ namespace GTA5PoliceV2.Modules
         {
             var channel = Context.Channel;
             var user = Context.User;
+            await Context.Message.DeleteAsync();
 
             if (CommandHandler.clearcacheMessages >= BotConfig.Load().MessageTimerCooldown)
             {
@@ -145,7 +153,8 @@ namespace GTA5PoliceV2.Modules
                 embed.WithFooter("Requested by " + Context.User);
                 embed.WithCurrentTimestamp();
 
-                await Context.Channel.SendMessageAsync("", false, embed);
+                var message = await Context.Channel.SendMessageAsync("", false, embed);
+                await Delete.DelayDeleteEmbed(message, 120);
                 CommandHandler.clearcacheMessages = 0;
             }
             else

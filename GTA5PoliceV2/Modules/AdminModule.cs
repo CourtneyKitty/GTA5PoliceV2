@@ -57,7 +57,8 @@ namespace GTA5PoliceV2.Modules
                     embed.WithCurrentTimestamp();
 
                     await Context.Message.DeleteAsync();
-                    await Context.Channel.SendMessageAsync("", false, embed);
+                    var message = await Context.Channel.SendMessageAsync("", false, embed);
+                    await Delete.DelayDeleteEmbed(message, 120);
                 }
             }
         }
@@ -83,7 +84,8 @@ namespace GTA5PoliceV2.Modules
                     embed.WithCurrentTimestamp();
 
                     await Context.Message.DeleteAsync();
-                    await Context.Channel.SendMessageAsync("", false, embed);
+                    var message = await Context.Channel.SendMessageAsync("", false, embed);
+                    await Delete.DelayDeleteEmbed(message, 120);
                 }
             }
         }
