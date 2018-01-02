@@ -25,6 +25,7 @@ namespace GTA5PoliceV2
             map = provider;
             bot = map.GetService<DiscordSocketClient>();
             bot.UserJoined += AnnounceUserJoined;
+            //bot.UserJoined += WelcomeUserJoined;
             bot.UserLeft += AnnounceLeftUser;
             bot.UserBanned += AnnounceBannedUser;
             bot.UserUnbanned += AnnounceUnbannedUser;
@@ -38,6 +39,26 @@ namespace GTA5PoliceV2
 
         public async Task AnnounceLeftUser(SocketGuildUser user) {}
         public async Task AnnounceUserJoined(SocketGuildUser user) {}
+        public async Task WelcomeUserJoined(SocketGuildUser user)
+        {
+            var embed = new EmbedBuilder() { Color = Colours.generalCol };
+            string desc = "We strive to maintain the *highest* possible level of RP. If you have any concerns about issues, we encourage you to file a report on our forums.";
+
+            embed.WithAuthor("Welcome to GTA5Police", References.gta5policeLogo());
+            embed.WithDescription(desc);
+            embed.WithThumbnailUrl(References.gta5policeLogo());
+            embed.WithUrl(References.websiteURL());
+            embed.AddField(new EmbedFieldBuilder() { Name = "Forums", Value = References.forumsURL() });
+            embed.AddField(new EmbedFieldBuilder() { Name = "Support", Value = References.supportURL() });
+            embed.AddField(new EmbedFieldBuilder() { Name = "Rules", Value = References.rulesURL() });
+            embed.AddField(new EmbedFieldBuilder() { Name = "Donations", Value = References.donateURL() });
+            embed.AddField(new EmbedFieldBuilder() { Name = "Whitelist Jobs and Servers Applications", Value = References.applicationsURL() });
+            embed.AddField(new EmbedFieldBuilder() { Name = "Teamspeak IP", Value = "gta5police.com" });
+            embed.WithImageUrl(References.howBanURL());
+            embed.WithFooter("We hope you enjoy your stay!");
+            embed.WithCurrentTimestamp();
+            await user.SendMessageAsync("", false, embed);
+        }
         public async Task AnnounceBannedUser(SocketUser user, SocketGuild guild)
         {
             var server = bot.Guilds.FirstOrDefault(x => x.Id == BotConfig.Load().ServerId);
