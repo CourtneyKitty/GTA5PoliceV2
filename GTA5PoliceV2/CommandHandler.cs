@@ -31,6 +31,7 @@ namespace GTA5PoliceV2
             bot.UserUnbanned += AnnounceUnbannedUser;
             bot.Ready += SetGame;
             bot.Ready += StartTimers;
+            //bot.Ready += RestartAsync;
             bot.MessageReceived += HandleCommand;
             commands = map.GetService<CommandService>();
             bot.MessageReceived += ProfanityCheck;
@@ -286,6 +287,15 @@ namespace GTA5PoliceV2
                 Console.WriteLine("Message timer has delivered the message!");
             }
             Console.WriteLine("Message timer has not delivered the message!");
+        }
+
+        public async Task RestartAsync()
+        {
+            int hours = 6;
+            //await Task.Delay(1000 * 60 * 60 * hours);
+            await Task.Delay(1000 * 10);
+            System.Diagnostics.Process.Start("launch.cmd");
+            Environment.Exit(0);
         }
     }
 }
