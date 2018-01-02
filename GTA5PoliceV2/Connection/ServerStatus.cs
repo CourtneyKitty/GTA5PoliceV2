@@ -65,7 +65,7 @@ namespace GTA5PoliceV2.Connection
                 try
                 {
                     sender.Connect(remoteEP);
-                    Program.Logger(new LogMessage(LogSeverity.Info, "GTA5Police", "Successfully connected to server ID: " + id));
+                    Program.Logger(new LogMessage(LogSeverity.Debug, "GTA5Police", "Successfully connected to server ID: " + id));
                     if (id == 1) isNyLive = true;
                     if (id == 2) isLaLive = true;
                     if (id == 3) isNyWlLive = true;
