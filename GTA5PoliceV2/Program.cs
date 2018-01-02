@@ -41,7 +41,7 @@ namespace GTA5PoliceV2
             //Block this program untill it is closed
             await Task.Delay(-1);
         }
-        private static Task Logger(LogMessage lmsg)
+        public static Task Logger(LogMessage lmsg)
         {
             var cc = Console.ForegroundColor;
             switch (lmsg.Severity)
@@ -83,7 +83,7 @@ namespace GTA5PoliceV2
             {
                 var config = new BotConfig();
 
-                Console.WriteLine("Please enter the following information to save into your configuration/config.json file");
+                Logger(new LogMessage(LogSeverity.Debug, "GTA5Police", "Enter the following info for the config."));
                 Console.Write("Bot Prefix: ");
                 config.Token = Console.ReadLine();
                 Console.Write("Bot Token: ");
@@ -102,9 +102,9 @@ namespace GTA5PoliceV2
                 config.FilteredWords[2] = "Nibba";
                 config.FilteredWords[3] = "Chink";
                 config.Save();
-                Console.WriteLine("Bot config generated");
+                Logger(new LogMessage(LogSeverity.Debug, "GTA5Police", "Bot config generated"));
             }
-            Console.WriteLine("Configuration has been loaded");
+            Logger(new LogMessage(LogSeverity.Debug, "GTA5Police", "Configuration has been loaded"));
 
             if (!File.Exists(connectionsLoc))
             {
@@ -116,9 +116,9 @@ namespace GTA5PoliceV2
                 connections.NyWlPort = 30151;
                 connections.LaWlPort = 30142;
                 connections.Save();
-                Console.WriteLine("Connections config generated");
+                Logger(new LogMessage(LogSeverity.Debug, "GTA5Police", "Connections config generated"));
             }
-            Console.WriteLine("Connections configuration has been loaded");
+            Logger(new LogMessage(LogSeverity.Debug, "GTA5Police", "Connections configuration has been loaded"));
 
             if (!File.Exists(urlsLoc))
             {
@@ -143,9 +143,9 @@ namespace GTA5PoliceV2
                 url.ClearCache = "https://gta5police.com/forums/index.php?/topic/921-how-to-clear-fivem-cache/";
 
                 url.Save();
-                Console.WriteLine("URL config generated");
+                Logger(new LogMessage(LogSeverity.Debug, "GTA5Police", "URL config generated"));
             }
-            Console.WriteLine("URL configuration has been loaded");
+            Logger(new LogMessage(LogSeverity.Debug, "GTA5Police", "URL configuration has been loaded"));
         }
         public IServiceProvider ConfigureServices()
         {
