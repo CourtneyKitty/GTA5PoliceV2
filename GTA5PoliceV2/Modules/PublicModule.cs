@@ -18,6 +18,7 @@ namespace GTA5PoliceV2.Modules
             var channel = Context.Channel;
             var user = Context.User;
             await Context.Message.DeleteAsync();
+            await Context.Channel.TriggerTypingAsync();
 
             if (CommandHandler.statusMessages >= BotConfig.Load().MessageTimerCooldown)
             {
@@ -29,7 +30,6 @@ namespace GTA5PoliceV2.Modules
             }
             else
             {
-                await Context.Message.DeleteAsync();
                 if (CommandHandler.statusMessages > 0) CommandHandler.statusMessages--;
                 await errors.sendErrorTemp(channel, user + errorMessage, Colours.errorCol);
             }

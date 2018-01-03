@@ -147,6 +147,7 @@ namespace GTA5PoliceV2.Connection
                 embed.AddField(laWlField);
                 embed.WithFooter(new EmbedFooterBuilder() { Text = "Requested by " + user } );
                 embed.WithCurrentTimestamp();
+                
                 var message = await channel.SendMessageAsync("", false, embed);
                 await Delete.DelayDeleteEmbed(message, 120);
             }
