@@ -4,6 +4,7 @@ using GTA5PoliceV2.Config;
 using GTA5PoliceV2.Util;
 using GTA5PoliceV2.Connection;
 using Discord;
+using System;
 
 namespace GTA5PoliceV2.Modules
 {
@@ -27,6 +28,7 @@ namespace GTA5PoliceV2.Modules
                 
                 await status.displayStatus(channel, user);
                 CommandHandler.statusMessages = 0;
+                CommandHandler.outgoingMessages++;
             }
             else
             {
@@ -57,6 +59,7 @@ namespace GTA5PoliceV2.Modules
                 var message = await Context.Channel.SendMessageAsync("", false, embed);
                 await Delete.DelayDeleteEmbed(message, 120);
                 CommandHandler.rulesMessages = 0;
+                CommandHandler.outgoingMessages++;
             }
             else
             {
@@ -91,6 +94,7 @@ namespace GTA5PoliceV2.Modules
                 var message = await Context.Channel.SendMessageAsync("", false, embed);
                 await Delete.DelayDeleteEmbed(message, 120);
                 CommandHandler.linksMessages = 0;
+                CommandHandler.outgoingMessages++;
             }
             else
             {
@@ -126,6 +130,7 @@ namespace GTA5PoliceV2.Modules
                 var message = await Context.Channel.SendMessageAsync("", false, embed);
                 await Delete.DelayDeleteEmbed(message, 120);
                 CommandHandler.applyMessages = 0;
+                CommandHandler.outgoingMessages++;
             }
             else
             {
@@ -156,6 +161,7 @@ namespace GTA5PoliceV2.Modules
                 var message = await Context.Channel.SendMessageAsync("", false, embed);
                 await Delete.DelayDeleteEmbed(message, 120);
                 CommandHandler.clearcacheMessages = 0;
+                CommandHandler.outgoingMessages++;
             }
             else
             {
@@ -163,6 +169,35 @@ namespace GTA5PoliceV2.Modules
                 if (CommandHandler.clearcacheMessages > 0) CommandHandler.clearcacheMessages--;
                 await errors.sendErrorTemp(channel, user + errorMessage, Colours.errorCol);
             }
+        }
+
+        [Command("uptime")]
+        [Alias("stats", "statistics")]
+        public async Task Uptime()
+        {
+            await Context.Message.DeleteAsync();
+            CommandHandler.outgoingMessages++;
+
+            var embed = new EmbedBuilder() { Color = Colours.generalCol };
+            var blankField = new EmbedFieldBuilder() { Name = "\u200b", Value = "\u200b" };
+            embed.WithAuthor("Bot Uptime and Statistics", References.gta5policeLogo());
+            embed.WithDescription("Here are all the statistics since last startup.");
+            embed.WithThumbnailUrl(References.gta5policeLogo());
+            embed.WithUrl("http://www.blurrdev.com/gta5police.html");
+            embed.AddField(new EmbedFieldBuilder() { Name = "Time of Bot Launch (Currently " + DateTime.Now.ToString("h:mm:ss tt") + ")", Value = CommandHandler.startupTime });
+            embed.AddField(new EmbedFieldBuilder() { Name = "Incoming Messages", Value = CommandHandler.incomingMessages, IsInline = true });
+            embed.AddField(new EmbedFieldBuilder() { Name = "Outgoing Messages", Value = CommandHandler.outgoingMessages, IsInline = true });
+            embed.AddField(new EmbedFieldBuilder() { Name = "Command Requests", Value = CommandHandler.commandRequests, IsInline = true });
+            embed.AddField(blankField);
+            embed.AddField(new EmbedFieldBuilder() { Name = "Profanity Detected", Value = CommandHandler.profanityDetected, IsInline = true });
+            embed.AddField(new EmbedFieldBuilder() { Name = "Errors Detected", Value = CommandHandler.errorsDetected, IsInline = true });
+            embed.AddField(new EmbedFieldBuilder() { Name = "Timer Messages", Value = CommandHandler.timerMessages, IsInline = true });
+            embed.AddField(new EmbedFieldBuilder() { Name = "Status Changes", Value = CommandHandler.statusChanges, IsInline = true });
+            embed.WithFooter("Requested by " + Context.User);
+            embed.WithCurrentTimestamp();
+
+            var message = await Context.Channel.SendMessageAsync("", false, embed);
+            await Delete.DelayDeleteEmbed(message, 120);
         }
     }
 }

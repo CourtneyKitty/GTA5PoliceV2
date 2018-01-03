@@ -8,6 +8,7 @@ namespace GTA5PoliceV2.Util
     {
         public async Task sendSuccess(ISocketMessageChannel channel, string title, string desc, Color color)
         {
+            CommandHandler.outgoingMessages++;
             var embed = new EmbedBuilder() { Color = color };
             embed.Title = (title);
             embed.Description = (desc);
@@ -16,6 +17,7 @@ namespace GTA5PoliceV2.Util
 
         public async Task sendSuccess(IMessageChannel channel, string title, string desc, Color color)
         {
+            CommandHandler.outgoingMessages++;
             var embed = new EmbedBuilder() { Color = color };
             embed.Title = (title);
             embed.Description = (desc);
@@ -24,6 +26,7 @@ namespace GTA5PoliceV2.Util
 
         public async Task sendSuccess(ISocketMessageChannel channel, string title, string desc, Color color, string url)
         {
+            CommandHandler.outgoingMessages++;
             var embed = new EmbedBuilder() { Color = color };
             embed.Title = (title);
             embed.Description = (desc);
@@ -33,6 +36,7 @@ namespace GTA5PoliceV2.Util
 
         public async Task sendSuccess(IMessageChannel channel, string title, string desc, Color color, string url)
         {
+            CommandHandler.outgoingMessages++;
             var embed = new EmbedBuilder() { Color = color };
             embed.Title = (title);
             embed.Description = (desc);
@@ -42,6 +46,7 @@ namespace GTA5PoliceV2.Util
 
         public async Task sendSuccessTemp(ISocketMessageChannel channel, string title, string desc, Color color)
         {
+            CommandHandler.outgoingMessages++;
             var embed = new EmbedBuilder() { Color = color };
             embed.Title = (title);
             embed.Description = (desc);
@@ -51,6 +56,7 @@ namespace GTA5PoliceV2.Util
 
         public async Task sendSuccessTemp(IMessageChannel channel, string title, string desc, Color color)
         {
+            CommandHandler.outgoingMessages++;
             var embed = new EmbedBuilder() { Color = color };
             embed.Title = (title);
             embed.Description = (desc);
@@ -60,6 +66,7 @@ namespace GTA5PoliceV2.Util
 
         public async Task sendSuccessTemp(ISocketMessageChannel channel, string title, string desc, Color color, string url)
         {
+            CommandHandler.outgoingMessages++;
             var embed = new EmbedBuilder() { Color = color };
             embed.Title = (title);
             embed.Description = (desc);
@@ -70,6 +77,7 @@ namespace GTA5PoliceV2.Util
 
         public async Task sendSuccessTemp(IMessageChannel channel, string title, string desc, Color color, string url)
         {
+            CommandHandler.outgoingMessages++;
             var embed = new EmbedBuilder() { Color = color };
             embed.Title = (title);
             embed.Description = (desc);
@@ -80,6 +88,7 @@ namespace GTA5PoliceV2.Util
 
         public async Task sendSuccessTemp(IMessageChannel channel, string title, string desc, Color color, string url, int time)
         {
+            CommandHandler.outgoingMessages++;
             var embed = new EmbedBuilder() { Color = color };
             embed.Title = (title);
             embed.Description = (desc);

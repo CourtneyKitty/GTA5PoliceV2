@@ -10,6 +10,8 @@ namespace GTA5PoliceV2.Util
     {
         public async Task sendError(ISocketMessageChannel channel, string error, Color color)
         {
+            CommandHandler.errorsDetected++;
+            CommandHandler.outgoingMessages++;
             var embed = new EmbedBuilder() { Color = color };
             embed.Title = ("ERROR");
             embed.Description = (error);
@@ -18,16 +20,19 @@ namespace GTA5PoliceV2.Util
 
         public async Task sendError(IMessageChannel channel, string error, Color color)
         {
+            CommandHandler.errorsDetected++;
+            CommandHandler.outgoingMessages++;
             var embed = new EmbedBuilder() { Color = color };
             embed.Title = ("ERROR");
             embed.Description = (error);
             await channel.SendMessageAsync("", false, embed);
             Console.WriteLine("Error message was sent to the user.");
-
         }
 
         public async Task sendErrorTemp(ISocketMessageChannel channel, string error, Color color)
         {
+            CommandHandler.errorsDetected++;
+            CommandHandler.outgoingMessages++;
             var embed = new EmbedBuilder() { Color = color };
             embed.Title = ("ERROR");
             embed.Description = (error);
@@ -37,6 +42,8 @@ namespace GTA5PoliceV2.Util
 
         public async Task sendErrorTemp(IMessageChannel channel, string error, Color color)
         {
+            CommandHandler.errorsDetected++;
+            CommandHandler.outgoingMessages++;
             var embed = new EmbedBuilder() { Color = color };
             embed.Title = ("ERROR");
             embed.Description = (error);

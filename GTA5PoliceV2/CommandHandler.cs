@@ -31,6 +31,7 @@ namespace GTA5PoliceV2
             bot.UserUnbanned += AnnounceUnbannedUser;
             bot.Ready += SetGame;
             bot.Ready += StartTimers;
+            bot.Ready += ResetUptime;
             bot.MessageReceived += HandleCommand;
             commands = map.GetService<CommandService>();
             bot.MessageReceived += ProfanityCheck;
@@ -58,6 +59,7 @@ namespace GTA5PoliceV2
             embed.WithFooter("We hope you enjoy your stay!");
             embed.WithCurrentTimestamp();
             await user.SendMessageAsync("", false, embed);
+            outgoingMessages++;
         }
         public async Task AnnounceBannedUser(SocketUser user, SocketGuild guild)
         {
@@ -71,6 +73,7 @@ namespace GTA5PoliceV2
             logEmbed.AddField(new EmbedFieldBuilder() { Name = "DiscordId", Value = user.Id, IsInline = true });
 
             await logChannel.SendMessageAsync("", false, logEmbed);
+            outgoingMessages++;
         }
         public async Task AnnounceUnbannedUser(SocketUser user, SocketGuild guild)
         {
@@ -84,10 +87,25 @@ namespace GTA5PoliceV2
             logEmbed.AddField(new EmbedFieldBuilder() { Name = "DiscordId", Value = user.Id, IsInline = true });
 
             await logChannel.SendMessageAsync("", false, logEmbed);
+            outgoingMessages++;
         }
 
         public async Task SetGame() { await bot.SetGameAsync("GTA5Police.com"); }
         public async Task ConfigureAsync() { await commands.AddModulesAsync(Assembly.GetEntryAssembly());}
+
+        public static int incomingMessages, outgoingMessages, commandRequests, timerMessages, statusChanges, errorsDetected, profanityDetected;
+        public static string startupTime;
+        public async Task ResetUptime()
+        {
+            startupTime = DateTime.Now.ToString("h:mm:ss tt");
+            incomingMessages = 0;
+            outgoingMessages = 0;
+            commandRequests = 0;
+            timerMessages = 0;
+            statusChanges = 0;
+            errorsDetected = 0;
+            profanityDetected = 0;
+        }
 
         public async Task HandleCommand(SocketMessage pMsg)
         {
@@ -95,6 +113,7 @@ namespace GTA5PoliceV2
             var message = pMsg as SocketUserMessage;
             if (message == null)
                 return;
+            incomingMessages++;
             var context = new SocketCommandContext(bot, message);
 
             //Mark where the prefix ends and the command begins
@@ -102,6 +121,8 @@ namespace GTA5PoliceV2
             //Determine if the message has a valid prefix, adjust argPos
             if (message.HasStringPrefix(BotConfig.Load().Prefix, ref argPos))
             {
+                commandRequests++;
+
                 if (message.Author.IsBot)
                     return;
                 //Execute the command, store the result
@@ -148,6 +169,8 @@ namespace GTA5PoliceV2
 
         public async Task ProfanityMessage(SocketMessage pMsg, string word)
         {
+            profanityDetected++;
+
             var message = pMsg as SocketUserMessage;
             await message.DeleteAsync();
 
@@ -181,6 +204,7 @@ namespace GTA5PoliceV2
             logEmbed.AddField(channelField);
             logEmbed.AddField(wordField);
             await logChannel.SendMessageAsync("", false, logEmbed);
+            outgoingMessages++;
         }
 
         Timer timerStatus, timerMessage;
@@ -209,6 +233,7 @@ namespace GTA5PoliceV2
             status.pingServers();
             if (ny != status.getNyStatus())
             {
+                statusChanges++;
                 if (References.isStartUp == true)
                 {
                     if (status.getNyStatus()) await success.sendSuccessTemp(channel, "Server Status Change", "New York has come online!", Colours.generalCol, References.dashboardURL(), 5);
@@ -223,6 +248,7 @@ namespace GTA5PoliceV2
             }
             if (la != status.getLaStatus())
             {
+                statusChanges++;
                 if (References.isStartUp == true)
                 {
                     if (status.getLaStatus()) await success.sendSuccessTemp(channel, "Server Status Change", "Los Angeles has come online!", Colours.generalCol, References.dashboardURL(), 5);
@@ -237,6 +263,7 @@ namespace GTA5PoliceV2
             }
             if (nywl != status.getNyWlStatus())
             {
+                statusChanges++;
                 if (References.isStartUp == true)
                 {
                     if (status.getNyWlStatus()) await success.sendSuccessTemp(channel, "Server Status Change", "New York Whitelist has come online!", Colours.generalCol, References.dashboardURL(), 5);
@@ -251,6 +278,7 @@ namespace GTA5PoliceV2
             }
             if (lawl != status.getLaWlStatus())
             {
+                statusChanges++;
                 if (References.isStartUp == true)
                 {
                     if (status.getLaWlStatus()) await success.sendSuccessTemp(channel, "Server Status Change", "Los Angeles Whitelist has come online!", Colours.generalCol, References.dashboardURL(), 5);
@@ -269,6 +297,7 @@ namespace GTA5PoliceV2
         {
             if (messages >= BotConfig.Load().MessageTimerCooldown)
             {
+                timerMessages++;
                 var embed = new EmbedBuilder() { Color = Colours.generalCol };
                 embed.WithAuthor("GTA5Police Help", References.gta5policeLogo());
                 embed.WithUrl(References.dashboardURL());
