@@ -135,11 +135,12 @@ namespace GTA5PoliceV2
         }
 
         public int messages = 0;
-        public static int statusMessages = BotConfig.Load().MessageTimerCooldown;
-        public static int rulesMessages = BotConfig.Load().MessageTimerCooldown;
-        public static int linksMessages = BotConfig.Load().MessageTimerCooldown;
-        public static int applyMessages = BotConfig.Load().MessageTimerCooldown;
-        public static int clearcacheMessages = BotConfig.Load().MessageTimerCooldown;
+        public static int statusMessages = BotConfig.Load().MessageTimerCooldown / 2;
+        public static int rulesMessages = BotConfig.Load().MessageTimerCooldown / 2;
+        public static int linksMessages = BotConfig.Load().MessageTimerCooldown / 2;
+        public static int applyMessages = BotConfig.Load().MessageTimerCooldown / 2;
+        public static int clearcacheMessages = BotConfig.Load().MessageTimerCooldown / 2;
+        public static int uptimeMessages = BotConfig.Load().MessageTimerCooldown / 2;
 
         public async Task TimerCooldown(SocketMessage pMsg)
         {
@@ -153,6 +154,7 @@ namespace GTA5PoliceV2
             linksMessages++;
             applyMessages++;
             clearcacheMessages++;
+            uptimeMessages++;
         }
 
         public async Task ProfanityCheck(SocketMessage pMsg)

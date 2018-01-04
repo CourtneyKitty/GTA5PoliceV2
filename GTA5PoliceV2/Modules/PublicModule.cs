@@ -21,7 +21,7 @@ namespace GTA5PoliceV2.Modules
             await Context.Message.DeleteAsync();
             await Context.Channel.TriggerTypingAsync();
 
-            if (CommandHandler.statusMessages >= BotConfig.Load().MessageTimerCooldown)
+            if (CommandHandler.statusMessages >= BotConfig.Load().MessageTimerCooldown / 2)
             {
                 ServerStatus status = new ServerStatus();
                 status.pingServers();
@@ -44,7 +44,7 @@ namespace GTA5PoliceV2.Modules
             var user = Context.User;
             await Context.Message.DeleteAsync();
 
-            if (CommandHandler.rulesMessages >= BotConfig.Load().MessageTimerCooldown)
+            if (CommandHandler.rulesMessages >= BotConfig.Load().MessageTimerCooldown / 2)
             {
 
                 var embed = new EmbedBuilder() { Color = Colours.generalCol };
@@ -75,7 +75,7 @@ namespace GTA5PoliceV2.Modules
             var user = Context.User;
             await Context.Message.DeleteAsync();
 
-            if (CommandHandler.linksMessages >= BotConfig.Load().MessageTimerCooldown)
+            if (CommandHandler.linksMessages >= BotConfig.Load().MessageTimerCooldown / 2)
             {
                 var embed = new EmbedBuilder() { Color = Colours.generalCol };
                 embed.WithAuthor("GTA5Police Links", References.gta5policeLogo());
@@ -109,7 +109,7 @@ namespace GTA5PoliceV2.Modules
             var user = Context.User;
             await Context.Message.DeleteAsync();
 
-            if (CommandHandler.applyMessages >= BotConfig.Load().MessageTimerCooldown)
+            if (CommandHandler.applyMessages >= BotConfig.Load().MessageTimerCooldown / 2)
             {
                 var embed = new EmbedBuilder() { Color = Colours.generalCol };
                 embed.WithAuthor("GTA5Police Applications", References.gta5policeLogo());
@@ -143,7 +143,7 @@ namespace GTA5PoliceV2.Modules
             var user = Context.User;
             await Context.Message.DeleteAsync();
 
-            if (CommandHandler.clearcacheMessages >= BotConfig.Load().MessageTimerCooldown)
+            if (CommandHandler.clearcacheMessages >= BotConfig.Load().MessageTimerCooldown / 2)
             {
                 var embed = new EmbedBuilder() { Color = Colours.generalCol };
                 embed.WithAuthor("How to clear your cache 101", References.gta5policeLogo());
@@ -170,29 +170,40 @@ namespace GTA5PoliceV2.Modules
         [Alias("stats", "statistics")]
         public async Task Uptime()
         {
+            var channel = Context.Channel;
+            var user = Context.User;
             await Context.Message.DeleteAsync();
-            CommandHandler.outgoingMessages++;
 
-            var embed = new EmbedBuilder() { Color = Colours.generalCol };
-            var blankField = new EmbedFieldBuilder() { Name = "\u200b", Value = "\u200b" };
-            embed.WithAuthor("Bot Uptime and Statistics", References.gta5policeLogo());
-            embed.WithDescription("Here are all the statistics since last startup.");
-            embed.WithThumbnailUrl(References.gta5policeLogo());
-            embed.WithUrl("http://www.blurrdev.com/gta5police.html");
-            embed.AddField(new EmbedFieldBuilder() { Name = "Time of Bot Launch (Currently " + DateTime.Now.ToString("h:mm:ss tt") + ")", Value = CommandHandler.startupTime });
-            embed.AddField(new EmbedFieldBuilder() { Name = "Incoming Messages", Value = CommandHandler.incomingMessages, IsInline = true });
-            embed.AddField(new EmbedFieldBuilder() { Name = "Outgoing Messages", Value = CommandHandler.outgoingMessages, IsInline = true });
-            embed.AddField(new EmbedFieldBuilder() { Name = "Command Requests", Value = CommandHandler.commandRequests, IsInline = true });
-            embed.AddField(blankField);
-            embed.AddField(new EmbedFieldBuilder() { Name = "Profanity Detected", Value = CommandHandler.profanityDetected, IsInline = true });
-            embed.AddField(new EmbedFieldBuilder() { Name = "Errors Detected", Value = CommandHandler.errorsDetected, IsInline = true });
-            embed.AddField(new EmbedFieldBuilder() { Name = "Timer Messages", Value = CommandHandler.timerMessages, IsInline = true });
-            embed.AddField(new EmbedFieldBuilder() { Name = "Status Changes", Value = CommandHandler.statusChanges, IsInline = true });
-            embed.WithFooter("Requested by " + Context.User);
-            embed.WithCurrentTimestamp();
+            if (CommandHandler.uptimeMessages >= BotConfig.Load().MessageTimerCooldown / 2)
+            {
+                var embed = new EmbedBuilder() { Color = Colours.generalCol };
+                var blankField = new EmbedFieldBuilder() { Name = "\u200b", Value = "\u200b" };
+                embed.WithAuthor("Bot Uptime and Statistics", References.gta5policeLogo());
+                embed.WithDescription("Here are all the statistics since last startup.");
+                embed.WithThumbnailUrl(References.gta5policeLogo());
+                embed.WithUrl("http://www.blurrdev.com/gta5police.html");
+                embed.AddField(new EmbedFieldBuilder() { Name = "Time of Bot Launch (Currently " + DateTime.Now.ToString("h:mm:ss tt") + ")", Value = CommandHandler.startupTime });
+                embed.AddField(new EmbedFieldBuilder() { Name = "Incoming Messages", Value = CommandHandler.incomingMessages, IsInline = true });
+                embed.AddField(new EmbedFieldBuilder() { Name = "Outgoing Messages", Value = CommandHandler.outgoingMessages, IsInline = true });
+                embed.AddField(new EmbedFieldBuilder() { Name = "Command Requests", Value = CommandHandler.commandRequests, IsInline = true });
+                embed.AddField(blankField);
+                embed.AddField(new EmbedFieldBuilder() { Name = "Profanity Detected", Value = CommandHandler.profanityDetected, IsInline = true });
+                embed.AddField(new EmbedFieldBuilder() { Name = "Errors Detected", Value = CommandHandler.errorsDetected, IsInline = true });
+                embed.AddField(new EmbedFieldBuilder() { Name = "Timer Messages", Value = CommandHandler.timerMessages, IsInline = true });
+                embed.AddField(new EmbedFieldBuilder() { Name = "Status Changes", Value = CommandHandler.statusChanges, IsInline = true });
+                embed.WithFooter("Requested by " + Context.User);
+                embed.WithCurrentTimestamp();
 
-            var message = await Context.Channel.SendMessageAsync("", false, embed);
-            await Delete.DelayDeleteEmbed(message, 120);
+                var message = await Context.Channel.SendMessageAsync("", false, embed);
+                await Delete.DelayDeleteEmbed(message, 120);
+                CommandHandler.outgoingMessages++;
+                CommandHandler.uptimeMessages = 0;
+            }
+            else
+            {
+                if (CommandHandler.uptimeMessages > 0) CommandHandler.uptimeMessages--;
+                await errors.sendErrorTemp(channel, user + errorMessage, Colours.errorCol);
+            }
         }
     }
 }
