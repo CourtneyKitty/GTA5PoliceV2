@@ -95,10 +95,10 @@ namespace GTA5PoliceV2
         public async Task ConfigureAsync() { await commands.AddModulesAsync(Assembly.GetEntryAssembly());}
 
         public static int incomingMessages, outgoingMessages, commandRequests, timerMessages, statusChanges, errorsDetected, profanityDetected;
-        public static string startupTime;
+        public static TimeSpan startupTime;
         public async Task ResetUptime()
         {
-            startupTime = DateTime.Now.ToString("h:mm:ss tt");
+            startupTime = DateTime.Now.TimeOfDay;
             incomingMessages = 0;
             outgoingMessages = 0;
             commandRequests = 0;
