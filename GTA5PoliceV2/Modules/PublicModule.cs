@@ -63,7 +63,6 @@ namespace GTA5PoliceV2.Modules
             }
             else
             {
-                await Context.Message.DeleteAsync();
                 if (CommandHandler.rulesMessages > 0) CommandHandler.rulesMessages--;
                 await errors.sendErrorTemp(channel, user + errorMessage, Colours.errorCol);
             }
@@ -98,8 +97,6 @@ namespace GTA5PoliceV2.Modules
             }
             else
             {
-                await Context.Message.DeleteAsync();
-
                 if (CommandHandler.linksMessages > 0) CommandHandler.linksMessages--;
                 await errors.sendErrorTemp(channel, user + errorMessage, Colours.errorCol);
             }
@@ -134,7 +131,6 @@ namespace GTA5PoliceV2.Modules
             }
             else
             {
-                await Context.Message.DeleteAsync();
                 if (CommandHandler.applyMessages > 0) CommandHandler.applyMessages--;
                 await errors.sendErrorTemp(channel, user + errorMessage, Colours.errorCol);
             }
@@ -165,7 +161,6 @@ namespace GTA5PoliceV2.Modules
             }
             else
             {
-                await Context.Message.DeleteAsync();
                 if (CommandHandler.clearcacheMessages > 0) CommandHandler.clearcacheMessages--;
                 await errors.sendErrorTemp(channel, user + errorMessage, Colours.errorCol);
             }
