@@ -94,6 +94,7 @@ namespace GTA5PoliceV2
                 config.StatusTimerInterval = 1;
                 config.MessageTimerInterval = 30;
                 config.MessageTimerCooldown = 5;
+                config.CommandCooldown = 120.0d;
                 config.Commanders = 1;
                 config.BotCommanders[0] = 211938243535568896;
                 config.Filters = 4;

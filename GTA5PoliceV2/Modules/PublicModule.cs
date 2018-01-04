@@ -24,7 +24,7 @@ namespace GTA5PoliceV2.Modules
             TimeSpan last = CommandHandler.statusLast;
             TimeSpan current = DateTime.Now.TimeOfDay;
             double difference = current.TotalSeconds - last.TotalSeconds;
-            if (difference >= CommandHandler.commandCooldown)
+            if (difference >= CommandHandler.GetCommandCooldown())
             {
                 ServerStatus status = new ServerStatus();
                 status.pingServers();
@@ -33,7 +33,7 @@ namespace GTA5PoliceV2.Modules
                 CommandHandler.statusLast = current;
                 CommandHandler.outgoingMessages++;
             }
-            else await errors.sendErrorTemp(channel, user + errorMessage + "\nCooldown " + difference + "/120 seconds", Colours.errorCol);
+            else await errors.sendErrorTemp(channel, user + errorMessage + "\nCooldown " + difference + "/" + CommandHandler.GetCommandCooldown() + " seconds", Colours.errorCol);
         }
 
         [Command("rules")]
@@ -47,7 +47,7 @@ namespace GTA5PoliceV2.Modules
             TimeSpan current = DateTime.Now.TimeOfDay;
             double difference = current.TotalSeconds - last.TotalSeconds;
 
-            if (difference >= CommandHandler.commandCooldown)
+            if (difference >= CommandHandler.GetCommandCooldown())
             {
                 var embed = new EmbedBuilder() { Color = Colours.generalCol };
                 embed.WithAuthor("GTA5Police Rules", References.gta5policeLogo());
@@ -64,7 +64,7 @@ namespace GTA5PoliceV2.Modules
                 CommandHandler.rulesLast = current;
                 CommandHandler.outgoingMessages++;
             }
-            else await errors.sendErrorTemp(channel, user + errorMessage + "\nCooldown " + difference + "/120 seconds", Colours.errorCol);
+            else await errors.sendErrorTemp(channel, user + errorMessage + "\nCooldown " + difference + "/" + CommandHandler.GetCommandCooldown() + " seconds", Colours.errorCol);
         }
 
         [Command("links")]
@@ -78,7 +78,7 @@ namespace GTA5PoliceV2.Modules
             TimeSpan current = DateTime.Now.TimeOfDay;
             double difference = current.TotalSeconds - last.TotalSeconds;
 
-            if (difference >= CommandHandler.commandCooldown)
+            if (difference >= CommandHandler.GetCommandCooldown())
             {
                 var embed = new EmbedBuilder() { Color = Colours.generalCol };
                 embed.WithAuthor("GTA5Police Links", References.gta5policeLogo());
@@ -99,7 +99,7 @@ namespace GTA5PoliceV2.Modules
                 CommandHandler.linksLast = current;
                 CommandHandler.outgoingMessages++;
             }
-            else await errors.sendErrorTemp(channel, user + errorMessage + "\nCooldown " + difference + "/120 seconds", Colours.errorCol);
+            else await errors.sendErrorTemp(channel, user + errorMessage + "\nCooldown " + difference + "/" + CommandHandler.GetCommandCooldown() + " seconds", Colours.errorCol);
         }
 
         [Command("apply")]
@@ -113,7 +113,7 @@ namespace GTA5PoliceV2.Modules
             TimeSpan current = DateTime.Now.TimeOfDay;
             double difference = current.TotalSeconds - last.TotalSeconds;
 
-            if (difference >= CommandHandler.commandCooldown)
+            if (difference >= CommandHandler.GetCommandCooldown())
             {
                 var embed = new EmbedBuilder() { Color = Colours.generalCol };
                 embed.WithAuthor("GTA5Police Applications", References.gta5policeLogo());
@@ -134,7 +134,7 @@ namespace GTA5PoliceV2.Modules
                 CommandHandler.applyLast = current;
                 CommandHandler.outgoingMessages++;
             }
-            else await errors.sendErrorTemp(channel, user + errorMessage + "\nCooldown " + difference + "/120 seconds", Colours.errorCol);
+            else await errors.sendErrorTemp(channel, user + errorMessage + "\nCooldown " + difference + "/" + CommandHandler.GetCommandCooldown() + " seconds", Colours.errorCol);
         }
 
         [Command("clearcache")]
@@ -148,7 +148,7 @@ namespace GTA5PoliceV2.Modules
             TimeSpan current = DateTime.Now.TimeOfDay;
             double difference = current.TotalSeconds - last.TotalSeconds;
 
-            if (difference >= CommandHandler.commandCooldown)
+            if (difference >= CommandHandler.GetCommandCooldown())
             {
                 var embed = new EmbedBuilder() { Color = Colours.generalCol };
                 embed.WithAuthor("How to clear your cache 101", References.gta5policeLogo());
@@ -165,7 +165,7 @@ namespace GTA5PoliceV2.Modules
                 CommandHandler.clearcacheLast = current;
                 CommandHandler.outgoingMessages++;
             }
-            else await errors.sendErrorTemp(channel, user + errorMessage + "\nCooldown " + difference + "/120 seconds", Colours.errorCol);
+            else await errors.sendErrorTemp(channel, user + errorMessage + "\nCooldown " + difference + "/" + CommandHandler.GetCommandCooldown() + " seconds", Colours.errorCol);
         }
 
         [Command("uptime")]
@@ -180,7 +180,7 @@ namespace GTA5PoliceV2.Modules
             TimeSpan current = DateTime.Now.TimeOfDay;
             double difference = current.TotalSeconds - last.TotalSeconds;
 
-            if (difference >= CommandHandler.commandCooldown)
+            if (difference >= CommandHandler.GetCommandCooldown())
             {
                 var embed = new EmbedBuilder() { Color = Colours.generalCol };
                 var blankField = new EmbedFieldBuilder() { Name = "\u200b", Value = "\u200b" };
@@ -206,7 +206,7 @@ namespace GTA5PoliceV2.Modules
                 CommandHandler.uptimeLast = current;
                 CommandHandler.outgoingMessages++;
             }
-            else await errors.sendErrorTemp(channel, user + errorMessage + "\nCooldown " + difference + "/120 seconds", Colours.errorCol);
+            else await errors.sendErrorTemp(channel, user + errorMessage + "\nCooldown " + difference + "/" + CommandHandler.GetCommandCooldown() + " seconds", Colours.errorCol);
         }
     }
 }

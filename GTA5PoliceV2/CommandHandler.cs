@@ -136,16 +136,8 @@ namespace GTA5PoliceV2
         }
 
         public int messages = 0;
-        public static int statusMessages = BotConfig.Load().MessageTimerCooldown / 2;
-        public static int rulesMessages = BotConfig.Load().MessageTimerCooldown / 2;
-        public static int linksMessages = BotConfig.Load().MessageTimerCooldown / 2;
-        public static int applyMessages = BotConfig.Load().MessageTimerCooldown / 2;
-        public static int clearcacheMessages = BotConfig.Load().MessageTimerCooldown / 2;
-        public static int uptimeMessages = BotConfig.Load().MessageTimerCooldown / 2;
-
-        public static double commandCooldown = 120.0D;
+        public static double GetCommandCooldown() { return BotConfig.Load().CommandCooldown; }
         public static TimeSpan statusLast, rulesLast, linksLast, applyLast, clearcacheLast, uptimeLast;
-
         public async Task TimerCooldown(SocketMessage pMsg)
         {
             var message = pMsg as SocketUserMessage;
@@ -153,14 +145,7 @@ namespace GTA5PoliceV2
                 return;
 
             if (pMsg.Channel.Id.Equals(BotConfig.Load().TimerChannelId)) messages++;
-            statusMessages++;
-            rulesMessages++;
-            linksMessages++;
-            applyMessages++;
-            clearcacheMessages++;
-            uptimeMessages++;
         }
-
         public async Task CommandCooldown()
         {
             statusLast = DateTime.Now.TimeOfDay;

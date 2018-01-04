@@ -17,6 +17,7 @@ namespace GTA5PoliceV2.Config
         public int StatusTimerInterval { get; set; }
         public int MessageTimerInterval { get; set; }
         public int MessageTimerCooldown { get; set; }
+        public double CommandCooldown { get; set; }
         public int Commanders { get; set; }
         public ulong[] BotCommanders { get; set; }
         public int Filters { get; set; }
@@ -32,6 +33,7 @@ namespace GTA5PoliceV2.Config
             StatusTimerInterval = 1;
             MessageTimerInterval = 30;
             MessageTimerCooldown = 5;
+            CommandCooldown = 120.0d;
             Commanders = 1;
             BotCommanders = new ulong[10];
             Filters = 4;
