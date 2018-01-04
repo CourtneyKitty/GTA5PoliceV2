@@ -32,6 +32,7 @@ namespace GTA5PoliceV2
             bot.Ready += SetGame;
             bot.Ready += StartTimers;
             bot.Ready += ResetUptime;
+            bot.Ready += CommandCooldown;
             bot.MessageReceived += HandleCommand;
             commands = map.GetService<CommandService>();
             bot.MessageReceived += ProfanityCheck;
@@ -142,6 +143,9 @@ namespace GTA5PoliceV2
         public static int clearcacheMessages = BotConfig.Load().MessageTimerCooldown / 2;
         public static int uptimeMessages = BotConfig.Load().MessageTimerCooldown / 2;
 
+        public static double commandCooldown = 120.0D;
+        public static TimeSpan statusLast, rulesLast, linksLast, applyLast, clearcacheLast, uptimeLast;
+
         public async Task TimerCooldown(SocketMessage pMsg)
         {
             var message = pMsg as SocketUserMessage;
@@ -155,6 +159,16 @@ namespace GTA5PoliceV2
             applyMessages++;
             clearcacheMessages++;
             uptimeMessages++;
+        }
+
+        public async Task CommandCooldown()
+        {
+            statusLast = DateTime.Now.TimeOfDay;
+            rulesLast = DateTime.Now.TimeOfDay;
+            linksLast = DateTime.Now.TimeOfDay;
+            applyLast = DateTime.Now.TimeOfDay;
+            clearcacheLast = DateTime.Now.TimeOfDay;
+            uptimeLast = DateTime.Now.TimeOfDay;
         }
 
         public async Task ProfanityCheck(SocketMessage pMsg)
