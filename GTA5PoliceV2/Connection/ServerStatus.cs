@@ -149,7 +149,7 @@ namespace GTA5PoliceV2.Connection
                 embed.WithCurrentTimestamp();
                 
                 var message = await channel.SendMessageAsync("", false, embed);
-                await Delete.DelayDeleteEmbed(message, 120);
+                await Delete.DelayDeleteEmbed(message, (int)CommandHandler.GetCommandCooldown());
             }
             else
             {
@@ -161,7 +161,7 @@ namespace GTA5PoliceV2.Connection
                 embed.WithFooter(new EmbedFooterBuilder() { Text = "Requested by " + user });
                 embed.WithCurrentTimestamp();
                 var message = await channel.SendMessageAsync("", false, embed);
-                await Delete.DelayDeleteEmbed(message, 120);
+                await Delete.DelayDeleteEmbed(message, (int)CommandHandler.GetCommandCooldown());
 
             }
         }

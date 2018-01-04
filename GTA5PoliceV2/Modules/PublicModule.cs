@@ -59,7 +59,7 @@ namespace GTA5PoliceV2.Modules
                 embed.WithCurrentTimestamp();
 
                 var message = await Context.Channel.SendMessageAsync("", false, embed);
-                await Delete.DelayDeleteEmbed(message, 120);
+                await Delete.DelayDeleteEmbed(message, (int) CommandHandler.GetCommandCooldown());
 
                 CommandHandler.rulesLast = current;
                 CommandHandler.outgoingMessages++;
@@ -94,7 +94,7 @@ namespace GTA5PoliceV2.Modules
                 embed.WithCurrentTimestamp();
 
                 var message = await Context.Channel.SendMessageAsync("", false, embed);
-                await Delete.DelayDeleteEmbed(message, 120);
+                await Delete.DelayDeleteEmbed(message, (int)CommandHandler.GetCommandCooldown());
 
                 CommandHandler.linksLast = current;
                 CommandHandler.outgoingMessages++;
@@ -129,7 +129,7 @@ namespace GTA5PoliceV2.Modules
                 embed.WithCurrentTimestamp();
 
                 var message = await Context.Channel.SendMessageAsync("", false, embed);
-                await Delete.DelayDeleteEmbed(message, 120);
+                await Delete.DelayDeleteEmbed(message, (int)CommandHandler.GetCommandCooldown());
 
                 CommandHandler.applyLast = current;
                 CommandHandler.outgoingMessages++;
@@ -160,7 +160,7 @@ namespace GTA5PoliceV2.Modules
                 embed.WithCurrentTimestamp();
 
                 var message = await Context.Channel.SendMessageAsync("", false, embed);
-                await Delete.DelayDeleteEmbed(message, 120);
+                await Delete.DelayDeleteEmbed(message, (int)CommandHandler.GetCommandCooldown());
 
                 CommandHandler.clearcacheLast = current;
                 CommandHandler.outgoingMessages++;
@@ -201,7 +201,7 @@ namespace GTA5PoliceV2.Modules
                 embed.WithCurrentTimestamp();
 
                 var message = await Context.Channel.SendMessageAsync("", false, embed);
-                await Delete.DelayDeleteEmbed(message, 120);
+                await Delete.DelayDeleteEmbed(message, (int)CommandHandler.GetCommandCooldown());
 
                 CommandHandler.uptimeLast = current;
                 CommandHandler.outgoingMessages++;
