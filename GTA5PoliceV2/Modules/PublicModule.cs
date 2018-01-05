@@ -30,6 +30,7 @@ namespace GTA5PoliceV2.Modules
                 status.pingServers();
 
                 await status.displayStatus(channel, user);
+                await Program.Logger(new LogMessage(LogSeverity.Info, "GTA5Police", "Status command was used by " + user + "."));
                 CommandHandler.statusLast = current;
                 CommandHandler.outgoingMessages++;
             }
@@ -61,6 +62,7 @@ namespace GTA5PoliceV2.Modules
                 var message = await Context.Channel.SendMessageAsync("", false, embed);
                 await Delete.DelayDeleteEmbed(message, (int) CommandHandler.GetCommandCooldown());
 
+                await Program.Logger(new LogMessage(LogSeverity.Info, "GTA5Police", "Rules command was used by " + user + "."));
                 CommandHandler.rulesLast = current;
                 CommandHandler.outgoingMessages++;
             }
@@ -96,6 +98,7 @@ namespace GTA5PoliceV2.Modules
                 var message = await Context.Channel.SendMessageAsync("", false, embed);
                 await Delete.DelayDeleteEmbed(message, (int)CommandHandler.GetCommandCooldown());
 
+                await Program.Logger(new LogMessage(LogSeverity.Info, "GTA5Police", "Links command was used by " + user + "."));
                 CommandHandler.linksLast = current;
                 CommandHandler.outgoingMessages++;
             }
@@ -131,6 +134,7 @@ namespace GTA5PoliceV2.Modules
                 var message = await Context.Channel.SendMessageAsync("", false, embed);
                 await Delete.DelayDeleteEmbed(message, (int)CommandHandler.GetCommandCooldown());
 
+                await Program.Logger(new LogMessage(LogSeverity.Info, "GTA5Police", "Apply command was used by " + user + "."));
                 CommandHandler.applyLast = current;
                 CommandHandler.outgoingMessages++;
             }
@@ -162,6 +166,7 @@ namespace GTA5PoliceV2.Modules
                 var message = await Context.Channel.SendMessageAsync("", false, embed);
                 await Delete.DelayDeleteEmbed(message, (int)CommandHandler.GetCommandCooldown());
 
+                await Program.Logger(new LogMessage(LogSeverity.Info, "GTA5Police", "Clearcache command was used by " + user + "."));
                 CommandHandler.clearcacheLast = current;
                 CommandHandler.outgoingMessages++;
             }
@@ -203,6 +208,7 @@ namespace GTA5PoliceV2.Modules
                 var message = await Context.Channel.SendMessageAsync("", false, embed);
                 await Delete.DelayDeleteEmbed(message, (int)CommandHandler.GetCommandCooldown());
 
+                await Program.Logger(new LogMessage(LogSeverity.Info, "GTA5Police", "Uptime command was used by " + user + "."));
                 CommandHandler.uptimeLast = current;
                 CommandHandler.outgoingMessages++;
             }

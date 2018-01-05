@@ -60,6 +60,8 @@ namespace GTA5PoliceV2.Modules
                     await Context.Message.DeleteAsync();
                     var message = await Context.Channel.SendMessageAsync("", false, embed);
                     await Delete.DelayDeleteEmbed(message, 120);
+
+                    await Program.Logger(new LogMessage(LogSeverity.Info, "GTA5Police", "Settings command was used by " + Context.User + "."));
                     CommandHandler.outgoingMessages++;
                 }
             }
@@ -88,6 +90,8 @@ namespace GTA5PoliceV2.Modules
                     await Context.Message.DeleteAsync();
                     var message = await Context.Channel.SendMessageAsync("", false, embed);
                     await Delete.DelayDeleteEmbed(message, 120);
+
+                    await Program.Logger(new LogMessage(LogSeverity.Info, "GTA5Police", "Filter add command was used by " + Context.User + "."));
                     CommandHandler.outgoingMessages++;
                 }
             }
@@ -107,6 +111,8 @@ namespace GTA5PoliceV2.Modules
                     await errors.sendError(Context.Channel, "You can not clear more than 100! Deleting 100.", Colours.errorCol);
                     var messageHistory = await Context.Channel.GetMessagesAsync(101).Flatten();
                     await Context.Channel.DeleteMessagesAsync(messageHistory);
+                    await Program.Logger(new LogMessage(LogSeverity.Info, "GTA5Police", "Clear command was used by " + Context.User + "."));
+                    await Program.Logger(new LogMessage(LogSeverity.Verbose, "GTA5Police", "100 messages were deleted in the channel " + Context.Channel.Name + " by " + Context.User + "."));
                 }
                 else if (amount < 1) await errors.sendErrorTemp(Context.Channel, "You can not clear a negative amount of messages!", Colours.errorCol);
                 else
@@ -114,6 +120,9 @@ namespace GTA5PoliceV2.Modules
                     var messageHistory = await Context.Channel.GetMessagesAsync(amount).Flatten();
 
                     await Context.Channel.DeleteMessagesAsync(messageHistory);
+
+                    await Program.Logger(new LogMessage(LogSeverity.Info, "GTA5Police", "Clear command was used by " + Context.User + "."));
+                    await Program.Logger(new LogMessage(LogSeverity.Verbose, "GTA5Police", amount + " messages were deleted in the channel " + Context.Channel.Name + " by " + Context.User + "."));
                 }
             }
         }

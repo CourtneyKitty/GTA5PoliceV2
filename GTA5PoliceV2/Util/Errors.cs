@@ -12,6 +12,7 @@ namespace GTA5PoliceV2.Util
         {
             CommandHandler.errorsDetected++;
             CommandHandler.outgoingMessages++;
+            await Program.Logger(new LogMessage(LogSeverity.Error, "GTA5Police", error));
             var embed = new EmbedBuilder() { Color = color };
             embed.Title = ("ERROR");
             embed.Description = (error);
@@ -22,6 +23,7 @@ namespace GTA5PoliceV2.Util
         {
             CommandHandler.errorsDetected++;
             CommandHandler.outgoingMessages++;
+            await Program.Logger(new LogMessage(LogSeverity.Error, "GTA5Police", error));
             var embed = new EmbedBuilder() { Color = color };
             embed.Title = ("ERROR");
             embed.Description = (error);
@@ -33,6 +35,7 @@ namespace GTA5PoliceV2.Util
         {
             CommandHandler.errorsDetected++;
             CommandHandler.outgoingMessages++;
+            await Program.Logger(new LogMessage(LogSeverity.Error, "GTA5Police", error));
             var embed = new EmbedBuilder() { Color = color };
             embed.Title = ("ERROR");
             embed.Description = (error);
@@ -44,6 +47,7 @@ namespace GTA5PoliceV2.Util
         {
             CommandHandler.errorsDetected++;
             CommandHandler.outgoingMessages++;
+            await Program.Logger(new LogMessage(LogSeverity.Error, "GTA5Police", error));
             var embed = new EmbedBuilder() { Color = color };
             embed.Title = ("ERROR");
             embed.Description = (error);
