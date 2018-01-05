@@ -294,10 +294,15 @@ namespace GTA5PoliceV2
             }
             if (References.isStartUp == true) References.isStartUp = false;
         }
+        
+        public static IUserMessage lastTimerMessage = null;
+
         public async void SendMessage(object state)
         {
             if (messages >= BotConfig.Load().MessageTimerCooldown)
             {
+                if (lastTimerMessage != null) await lastTimerMessage.DeleteAsync();
+
                 timerMessages++;
                 var embed = new EmbedBuilder() { Color = Colours.generalCol };
                 embed.WithAuthor("GTA5Police Help", References.gta5policeLogo());
@@ -311,9 +316,8 @@ namespace GTA5PoliceV2
                 embed.WithFooter("Message Timer with " + BotConfig.Load().MessageTimerInterval + " minute interval");
                 embed.WithCurrentTimestamp();
 
-                await channel.SendMessageAsync("", false, embed);
+                lastTimerMessage = await channel.SendMessageAsync("", false, embed);
                 messages = 0;
-                Console.WriteLine("Message timer has delivered the message!");
                 await Program.Logger(new LogMessage(LogSeverity.Info, "GTA5Police", "Timer message delivered successfully."));
             }
             await Program.Logger(new LogMessage(LogSeverity.Info, "GTA5Police", "Timer message was not delivered due to the cooldown."));
