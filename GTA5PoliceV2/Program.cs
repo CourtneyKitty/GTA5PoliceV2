@@ -31,12 +31,19 @@ namespace GTA5PoliceV2
             });
 
             client.Log += Logger;
-            await client.LoginAsync(TokenType.Bot, BotConfig.Load().Token);
-            await client.StartAsync();
+            await Logger(new LogMessage(LogSeverity.Info, "GTA5Police", "Starting up bot."));
 
+            await Logger(new LogMessage(LogSeverity.Info, "GTA5Police", "Logging in started."));
+            await client.LoginAsync(TokenType.Bot, BotConfig.Load().Token);
+
+            await client.StartAsync();
+            await Logger(new LogMessage(LogSeverity.Info, "GTA5Police", "Started up bot."));
+
+            await Logger(new LogMessage(LogSeverity.Info, "GTA5Police", "Doing service provider stuff."));
             var serviceProvider = ConfigureServices();
             handler = new CommandHandler(serviceProvider);
             await handler.ConfigureAsync();
+            await Logger(new LogMessage(LogSeverity.Info, "GTA5Police", "Start up fully complete."));
 
             //Block this program untill it is closed
             await Task.Delay(-1);
