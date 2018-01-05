@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using Discord;
+using Newtonsoft.Json;
 using System;
 using System.IO;
 
@@ -44,11 +45,13 @@ namespace GTA5PoliceV2.Config
         {
             string file = Path.Combine(appdir, dir);
             File.WriteAllText(file, ToJson());
+            Program.Logger(new LogMessage(LogSeverity.Info, "GTA5Police", "Bot configuration saved successfully."));
         }
         public static BotConfig Load(string dir = "configuration/config.json")
         {
             string file = Path.Combine(appdir, dir);
             return JsonConvert.DeserializeObject<BotConfig>(File.ReadAllText(file));
+            Program.Logger(new LogMessage(LogSeverity.Info, "GTA5Police", "Bot configuration loaded successfully."));
         }
         public string ToJson()
             => JsonConvert.SerializeObject(this, Formatting.Indented);

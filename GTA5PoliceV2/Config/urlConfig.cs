@@ -54,11 +54,13 @@ namespace GTA5PoliceV2.Config
         {
             string file = Path.Combine(appdir, dir);
             File.WriteAllText(file, ToJson());
+            Program.Logger(new LogMessage(LogSeverity.Info, "GTA5Police", "URL configuration saved successfully."));
         }
         public static UrlConfig Load(string dir = "configuration/url_config.json")
         {
             string file = Path.Combine(appdir, dir);
             return JsonConvert.DeserializeObject<UrlConfig>(File.ReadAllText(file));
+            Program.Logger(new LogMessage(LogSeverity.Info, "GTA5Police", "URL configuration loaded successfully."));
         }
         public string ToJson()
             => JsonConvert.SerializeObject(this, Formatting.Indented);
