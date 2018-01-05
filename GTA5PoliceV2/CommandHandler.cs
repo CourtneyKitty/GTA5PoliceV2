@@ -148,12 +148,12 @@ namespace GTA5PoliceV2
         }
         public async Task CommandCooldown()
         {
-            statusLast = DateTime.Now.TimeOfDay;
-            rulesLast = DateTime.Now.TimeOfDay;
-            linksLast = DateTime.Now.TimeOfDay;
-            applyLast = DateTime.Now.TimeOfDay;
-            clearcacheLast = DateTime.Now.TimeOfDay;
-            uptimeLast = DateTime.Now.TimeOfDay;
+            statusLast = DateTime.Now.TimeOfDay.Subtract(new TimeSpan(0, 0, (int) BotConfig.Load().CommandCooldown));
+            rulesLast = DateTime.Now.TimeOfDay.Subtract(new TimeSpan(0, 0, (int)BotConfig.Load().CommandCooldown));
+            linksLast = DateTime.Now.TimeOfDay.Subtract(new TimeSpan(0, 0, (int)BotConfig.Load().CommandCooldown));
+            applyLast = DateTime.Now.TimeOfDay.Subtract(new TimeSpan(0, 0, (int)BotConfig.Load().CommandCooldown));
+            clearcacheLast = DateTime.Now.TimeOfDay.Subtract(new TimeSpan(0, 0, (int)BotConfig.Load().CommandCooldown));
+            uptimeLast = DateTime.Now.TimeOfDay.Subtract(new TimeSpan(0, 0, (int)BotConfig.Load().CommandCooldown));
         }
 
         public async Task ProfanityCheck(SocketMessage pMsg)
