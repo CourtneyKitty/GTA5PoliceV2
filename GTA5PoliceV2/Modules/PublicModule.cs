@@ -24,7 +24,7 @@ namespace GTA5PoliceV2.Modules
             TimeSpan last = CommandHandler.statusLast;
             TimeSpan current = DateTime.Now.TimeOfDay;
             double difference = current.TotalSeconds - last.TotalSeconds;
-            if (difference >= CommandHandler.GetCommandCooldown())
+            if (difference >= CommandHandler.GetCommandCooldown() || difference < 0)
             {
                 ServerStatus status = new ServerStatus();
                 status.pingServers();
@@ -48,7 +48,7 @@ namespace GTA5PoliceV2.Modules
             TimeSpan current = DateTime.Now.TimeOfDay;
             double difference = current.TotalSeconds - last.TotalSeconds;
 
-            if (difference >= CommandHandler.GetCommandCooldown())
+            if (difference >= CommandHandler.GetCommandCooldown() || difference < 0)
             {
                 var embed = new EmbedBuilder() { Color = Colours.generalCol };
                 embed.WithAuthor("GTA5Police Rules", References.gta5policeLogo());
@@ -80,7 +80,7 @@ namespace GTA5PoliceV2.Modules
             TimeSpan current = DateTime.Now.TimeOfDay;
             double difference = current.TotalSeconds - last.TotalSeconds;
 
-            if (difference >= CommandHandler.GetCommandCooldown())
+            if (difference >= CommandHandler.GetCommandCooldown() || difference < 0)
             {
                 var embed = new EmbedBuilder() { Color = Colours.generalCol };
                 embed.WithAuthor("GTA5Police Links", References.gta5policeLogo());
@@ -116,7 +116,7 @@ namespace GTA5PoliceV2.Modules
             TimeSpan current = DateTime.Now.TimeOfDay;
             double difference = current.TotalSeconds - last.TotalSeconds;
 
-            if (difference >= CommandHandler.GetCommandCooldown())
+            if (difference >= CommandHandler.GetCommandCooldown() || difference < 0)
             {
                 var embed = new EmbedBuilder() { Color = Colours.generalCol };
                 embed.WithAuthor("GTA5Police Applications", References.gta5policeLogo());
@@ -152,7 +152,7 @@ namespace GTA5PoliceV2.Modules
             TimeSpan current = DateTime.Now.TimeOfDay;
             double difference = current.TotalSeconds - last.TotalSeconds;
 
-            if (difference >= CommandHandler.GetCommandCooldown())
+            if (difference >= CommandHandler.GetCommandCooldown() || difference < 0)
             {
                 var embed = new EmbedBuilder() { Color = Colours.generalCol };
                 embed.WithAuthor("How to clear your cache 101", References.gta5policeLogo());
@@ -185,7 +185,7 @@ namespace GTA5PoliceV2.Modules
             TimeSpan current = DateTime.Now.TimeOfDay;
             double difference = current.TotalSeconds - last.TotalSeconds;
 
-            if (difference >= CommandHandler.GetCommandCooldown())
+            if (difference >= CommandHandler.GetCommandCooldown() || difference < 0)
             {
                 var embed = new EmbedBuilder() { Color = Colours.generalCol };
                 var blankField = new EmbedFieldBuilder() { Name = "\u200b", Value = "\u200b" };
