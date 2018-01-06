@@ -53,17 +53,17 @@ namespace GTA5PoliceV2
             var embed = new EmbedBuilder() { Color = Colours.generalCol };
             string desc = "We strive to maintain the *highest* possible level of RP. If you have any concerns about issues, we encourage you to file a report on our forums.";
 
-            embed.WithAuthor("Welcome to GTA5Police", References.gta5policeLogo());
+            embed.WithAuthor("Welcome to GTA5Police", References.GetGta5policeLogo());
             embed.WithDescription(desc);
-            embed.WithThumbnailUrl(References.gta5policeLogo());
-            embed.WithUrl(References.websiteURL());
-            embed.AddField(new EmbedFieldBuilder() { Name = "Forums", Value = References.forumsURL() });
-            embed.AddField(new EmbedFieldBuilder() { Name = "Support", Value = References.supportURL() });
-            embed.AddField(new EmbedFieldBuilder() { Name = "Rules", Value = References.rulesURL() });
-            embed.AddField(new EmbedFieldBuilder() { Name = "Donations", Value = References.donateURL() });
-            embed.AddField(new EmbedFieldBuilder() { Name = "Whitelist Jobs and Servers Applications", Value = References.applicationsURL() });
+            embed.WithThumbnailUrl(References.GetGta5policeLogo());
+            embed.WithUrl(References.GetWebsiteURL());
+            embed.AddField(new EmbedFieldBuilder() { Name = "Forums", Value = References.GetForumsURL() });
+            embed.AddField(new EmbedFieldBuilder() { Name = "Support", Value = References.GetSupportURL() });
+            embed.AddField(new EmbedFieldBuilder() { Name = "Rules", Value = References.GetRulesURL() });
+            embed.AddField(new EmbedFieldBuilder() { Name = "Donations", Value = References.GetDonateURL() });
+            embed.AddField(new EmbedFieldBuilder() { Name = "Whitelist Jobs and Servers Applications", Value = References.GetApplicationsURL() });
             embed.AddField(new EmbedFieldBuilder() { Name = "Teamspeak IP", Value = "gta5police.com" });
-            embed.WithImageUrl(References.howBanURL());
+            embed.WithImageUrl(References.GetHowBanURL());
             embed.WithFooter("We hope you enjoy your stay!");
             embed.WithCurrentTimestamp();
             await user.SendMessageAsync("", false, embed);
@@ -76,7 +76,7 @@ namespace GTA5PoliceV2
 
             var logEmbed = new EmbedBuilder() { Color = Colours.errorCol };
             logEmbed.WithAuthor("User was banned from Discord");
-            logEmbed.WithThumbnailUrl(References.gta5policeLogo());
+            logEmbed.WithThumbnailUrl(References.GetGta5policeLogo());
             logEmbed.AddField(new EmbedFieldBuilder() { Name = "Discord User", Value = user.Username.ToString(), IsInline = true });
             logEmbed.AddField(new EmbedFieldBuilder() { Name = "DiscordId", Value = user.Id, IsInline = true });
 
@@ -90,7 +90,7 @@ namespace GTA5PoliceV2
 
             var logEmbed = new EmbedBuilder() { Color = Colours.adminCol };
             logEmbed.WithAuthor("User was unbanned from Discord");
-            logEmbed.WithThumbnailUrl(References.gta5policeLogo());
+            logEmbed.WithThumbnailUrl(References.GetGta5policeLogo());
             logEmbed.AddField(new EmbedFieldBuilder() { Name = "Discord User", Value = user.Username.ToString(), IsInline = true });
             logEmbed.AddField(new EmbedFieldBuilder() { Name = "DiscordId", Value = user.Id, IsInline = true });
 
@@ -183,64 +183,64 @@ namespace GTA5PoliceV2
             if (ny != status.getNyStatus())
             {
                 statusChanges++;
-                if (References.isStartUp == true)
+                if (References.IsStartUp == true)
                 {
-                    if (status.getNyStatus()) await success.sendSuccessTempAsync(channel, "Server Status Change", "New York has come online!", Colours.generalCol, References.dashboardURL(), 5);
-                    if (!status.getNyStatus()) await success.sendSuccessTempAsync(channel, "Server Status Change", "New York has gone offline!", Colours.generalCol, References.dashboardURL(), 5);
+                    if (status.getNyStatus()) await success.sendSuccessTempAsync(channel, "Server Status Change", "New York has come online!", Colours.generalCol, References.GetDashboardURL(), 5);
+                    if (!status.getNyStatus()) await success.sendSuccessTempAsync(channel, "Server Status Change", "New York has gone offline!", Colours.generalCol, References.GetDashboardURL(), 5);
                 }
                 else
                 {
-                    if (status.getNyStatus()) await success.sendSuccessAsync(channel, "Server Status Change", "New York has come online!", Colours.generalCol, References.dashboardURL());
-                    if (!status.getNyStatus()) await success.sendSuccessAsync(channel, "Server Status Change", "New York has gone offline!", Colours.generalCol, References.dashboardURL());
+                    if (status.getNyStatus()) await success.sendSuccessAsync(channel, "Server Status Change", "New York has come online!", Colours.generalCol, References.GetDashboardURL());
+                    if (!status.getNyStatus()) await success.sendSuccessAsync(channel, "Server Status Change", "New York has gone offline!", Colours.generalCol, References.GetDashboardURL());
                 }
                 ny = status.getNyStatus();
             }
             if (la != status.getLaStatus())
             {
                 statusChanges++;
-                if (References.isStartUp == true)
+                if (References.IsStartUp == true)
                 {
-                    if (status.getLaStatus()) await success.sendSuccessTempAsync(channel, "Server Status Change", "Los Angeles has come online!", Colours.generalCol, References.dashboardURL(), 5);
-                    if (!status.getLaStatus()) await success.sendSuccessTempAsync(channel, "Server Status Change", "Los Angeles has gone offline!", Colours.generalCol, References.dashboardURL(), 5);
+                    if (status.getLaStatus()) await success.sendSuccessTempAsync(channel, "Server Status Change", "Los Angeles has come online!", Colours.generalCol, References.GetDashboardURL(), 5);
+                    if (!status.getLaStatus()) await success.sendSuccessTempAsync(channel, "Server Status Change", "Los Angeles has gone offline!", Colours.generalCol, References.GetDashboardURL(), 5);
                 }
                 else
                 {
-                    if (status.getLaStatus()) await success.sendSuccessAsync(channel, "Server Status Change", "Los Angeles has come online!", Colours.generalCol, References.dashboardURL());
-                    if (!status.getLaStatus()) await success.sendSuccessAsync(channel, "Server Status Change", "Los Angeles has gone offline!", Colours.generalCol, References.dashboardURL());
+                    if (status.getLaStatus()) await success.sendSuccessAsync(channel, "Server Status Change", "Los Angeles has come online!", Colours.generalCol, References.GetDashboardURL());
+                    if (!status.getLaStatus()) await success.sendSuccessAsync(channel, "Server Status Change", "Los Angeles has gone offline!", Colours.generalCol, References.GetDashboardURL());
                 }
                 la = status.getLaStatus();
             }
             if (nywl != status.getNyWlStatus())
             {
                 statusChanges++;
-                if (References.isStartUp == true)
+                if (References.IsStartUp == true)
                 {
-                    if (status.getNyWlStatus()) await success.sendSuccessTempAsync(channel, "Server Status Change", "New York Whitelist has come online!", Colours.generalCol, References.dashboardURL(), 5);
-                    if (!status.getNyWlStatus()) await success.sendSuccessTempAsync(channel, "Server Status Change", "New York Whitelist has gone offline!", Colours.generalCol, References.dashboardURL(), 5);
+                    if (status.getNyWlStatus()) await success.sendSuccessTempAsync(channel, "Server Status Change", "New York Whitelist has come online!", Colours.generalCol, References.GetDashboardURL(), 5);
+                    if (!status.getNyWlStatus()) await success.sendSuccessTempAsync(channel, "Server Status Change", "New York Whitelist has gone offline!", Colours.generalCol, References.GetDashboardURL(), 5);
                 }
                 else
                 {
-                    if (status.getNyWlStatus()) await success.sendSuccessAsync(channel, "Server Status Change", "New York Whitelist has come online!", Colours.generalCol, References.dashboardURL());
-                    if (!status.getNyWlStatus()) await success.sendSuccessAsync(channel, "Server Status Change", "New York Whitelist has gone offline!", Colours.generalCol, References.dashboardURL());
+                    if (status.getNyWlStatus()) await success.sendSuccessAsync(channel, "Server Status Change", "New York Whitelist has come online!", Colours.generalCol, References.GetDashboardURL());
+                    if (!status.getNyWlStatus()) await success.sendSuccessAsync(channel, "Server Status Change", "New York Whitelist has gone offline!", Colours.generalCol, References.GetDashboardURL());
                 }
                 nywl = status.getNyWlStatus();
             }
             if (lawl != status.getLaWlStatus())
             {
                 statusChanges++;
-                if (References.isStartUp == true)
+                if (References.IsStartUp == true)
                 {
-                    if (status.getLaWlStatus()) await success.sendSuccessTempAsync(channel, "Server Status Change", "Los Angeles Whitelist has come online!", Colours.generalCol, References.dashboardURL(), 5);
-                    if (!status.getLaWlStatus()) await success.sendSuccessTempAsync(channel, "Server Status Change", "Los Angeles Whitelist has gone offline!", Colours.generalCol, References.dashboardURL(), 5);
+                    if (status.getLaWlStatus()) await success.sendSuccessTempAsync(channel, "Server Status Change", "Los Angeles Whitelist has come online!", Colours.generalCol, References.GetDashboardURL(), 5);
+                    if (!status.getLaWlStatus()) await success.sendSuccessTempAsync(channel, "Server Status Change", "Los Angeles Whitelist has gone offline!", Colours.generalCol, References.GetDashboardURL(), 5);
                 }
                 else
                 {
-                    if (status.getLaWlStatus()) await success.sendSuccessAsync(channel, "Server Status Change", "Los Angeles Whitelist has come online!", Colours.generalCol, References.dashboardURL());
-                    if (!status.getLaWlStatus()) await success.sendSuccessAsync(channel, "Server Status Change", "Los Angeles Whitelist has gone offline!", Colours.generalCol, References.dashboardURL());
+                    if (status.getLaWlStatus()) await success.sendSuccessAsync(channel, "Server Status Change", "Los Angeles Whitelist has come online!", Colours.generalCol, References.GetDashboardURL());
+                    if (!status.getLaWlStatus()) await success.sendSuccessAsync(channel, "Server Status Change", "Los Angeles Whitelist has gone offline!", Colours.generalCol, References.GetDashboardURL());
                 }
                 lawl = status.getLaWlStatus();
             }
-            if (References.isStartUp == true) References.isStartUp = false;
+            if (References.IsStartUp == true) References.IsStartUp = false;
         }
 
         public async void SendMessageAsync(object state)
@@ -251,10 +251,10 @@ namespace GTA5PoliceV2
 
                 timerMessages++;
                 var embed = new EmbedBuilder() { Color = Colours.generalCol };
-                embed.WithAuthor("GTA5Police Help", References.gta5policeLogo());
-                embed.WithUrl(References.dashboardURL());
+                embed.WithAuthor("GTA5Police Help", References.GetGta5policeLogo());
+                embed.WithUrl(References.GetDashboardURL());
                 embed.Description = "Be sure to check out our rules and policies, as well as other useful links!";
-                embed.WithThumbnailUrl(References.gta5policeLogo());
+                embed.WithThumbnailUrl(References.GetGta5policeLogo());
                 embed.AddField(new EmbedFieldBuilder() { Name = "!Rules", Value = "Rules and How We Ban." });
                 embed.AddField(new EmbedFieldBuilder() { Name = "!Apply", Value = "Police, EMS, Mechanic, and Whitelist Applications" });
                 embed.AddField(new EmbedFieldBuilder() { Name = "!Links", Value = "Useful Links." });

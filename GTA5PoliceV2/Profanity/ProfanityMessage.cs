@@ -20,7 +20,7 @@ namespace GTA5PoliceV2.Profanity
             var user = pMsg.Author;
 
             var warningEmbed = new EmbedBuilder() { Color = Colours.errorCol };
-            warningEmbed.WithAuthor("Profanity Detected!", References.gta5policeLogo());
+            warningEmbed.WithAuthor("Profanity Detected!", References.GetGta5policeLogo());
             warningEmbed.Description = user + " | Do not use that profanity, your message has been deleted.";
             var msg = await pMsg.Channel.SendMessageAsync("", false, warningEmbed);
             await Delete.DelayDeleteEmbedAsync(msg, 10);
@@ -41,7 +41,7 @@ namespace GTA5PoliceV2.Profanity
 
             var logEmbed = new EmbedBuilder() { Color = Colours.errorCol };
             logEmbed.WithAuthor("Profanity detected in discord chat");
-            logEmbed.WithThumbnailUrl(References.gta5policeLogo());
+            logEmbed.WithThumbnailUrl(References.GetGta5policeLogo());
             logEmbed.Description = "Full message: " + fullMsg;
             var userField = new EmbedFieldBuilder() { Name = "Discord User", Value = user };
             var userIdField = new EmbedFieldBuilder() { Name = "DiscordId", Value = userId };
@@ -61,9 +61,9 @@ namespace GTA5PoliceV2.Profanity
             var user = pMsg.Author;
             var server = bot.Guilds.FirstOrDefault(x => x.Id == BotConfig.Load().ServerId);
             var dmMessage = new EmbedBuilder() { Color = Colours.errorCol };
-            dmMessage.WithAuthor("Profanity Detected!", References.gta5policeLogo());
+            dmMessage.WithAuthor("Profanity Detected!", References.GetGta5policeLogo());
             dmMessage.Description = user + " | Do not use that profanity, your message has been deleted and you have been banned from the discord.";
-            dmMessage.AddField(new EmbedFieldBuilder() { Name = "How to appeal", Value = "Head over to " + References.supportURL() + " and fill out an appeal or head to Teamspeak using IP gta5police.com" });
+            dmMessage.AddField(new EmbedFieldBuilder() { Name = "How to appeal", Value = "Head over to " + References.GetSupportURL() + " and fill out an appeal or head to Teamspeak using IP gta5police.com" });
             var iDMChannel = await user.GetOrCreateDMChannelAsync();
             await iDMChannel.SendMessageAsync("", false, dmMessage);
             CommandHandler.AddOutgoingMessages();

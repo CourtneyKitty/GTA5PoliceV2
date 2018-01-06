@@ -19,8 +19,8 @@ namespace GTA5PoliceV2.Modules
                 if (BotConfig.Load().BotCommanders[i] == Context.User.Id)
                 {
                     var embed = new EmbedBuilder() { Color = Colours.adminCol };
-                    embed.WithAuthor("GTA5PoliceV2 Settings", References.gta5policeLogo());
-                    embed.WithThumbnailUrl(References.gta5policeLogo());
+                    embed.WithAuthor("GTA5PoliceV2 Settings", References.GetGta5policeLogo());
+                    embed.WithThumbnailUrl(References.GetGta5policeLogo());
 
                     string filtered = null;
                     for (int j = 0; j <= BotConfig.Load().Filters - 1; j++)
@@ -81,8 +81,8 @@ namespace GTA5PoliceV2.Modules
                     config.Save();
 
                     var embed = new EmbedBuilder() { Color = Colours.adminCol };
-                    embed.WithAuthor("Successfully Added", References.gta5policeLogo());
-                    embed.WithThumbnailUrl(References.gta5policeLogo());
+                    embed.WithAuthor("Successfully Added", References.GetGta5policeLogo());
+                    embed.WithThumbnailUrl(References.GetGta5policeLogo());
                     embed.Description = "The word " + word + " was successfully blacklisted.";
                     embed.WithFooter(new EmbedFooterBuilder() { Text = "Requested by " + Context.User });
                     embed.WithCurrentTimestamp();
@@ -133,17 +133,17 @@ namespace GTA5PoliceV2.Modules
             var embed = new EmbedBuilder() { Color = Colours.generalCol };
             string desc = "We strive to maintain the *highest* possible level of RP. If you have any concerns about issues, we encourage you to file a report on our forums.";
 
-            embed.WithAuthor("Welcome to GTA5Police", References.gta5policeLogo());
+            embed.WithAuthor("Welcome to GTA5Police", References.GetGta5policeLogo());
             embed.WithDescription(desc);
-            embed.WithThumbnailUrl(References.gta5policeLogo());
-            embed.WithUrl(References.websiteURL());
-            embed.AddField(new EmbedFieldBuilder() { Name = "Forums", Value = References.forumsURL() });
-            embed.AddField(new EmbedFieldBuilder() { Name = "Support", Value = References.supportURL() });
-            embed.AddField(new EmbedFieldBuilder() { Name = "Rules", Value = References.rulesURL() });
-            embed.AddField(new EmbedFieldBuilder() { Name = "Donations", Value = References.donateURL() });
-            embed.AddField(new EmbedFieldBuilder() { Name = "Whitelist Jobs and Servers Applications", Value = References.applicationsURL() });
+            embed.WithThumbnailUrl(References.GetGta5policeLogo());
+            embed.WithUrl(References.GetWebsiteURL());
+            embed.AddField(new EmbedFieldBuilder() { Name = "Forums", Value = References.GetForumsURL() });
+            embed.AddField(new EmbedFieldBuilder() { Name = "Support", Value = References.GetSupportURL() });
+            embed.AddField(new EmbedFieldBuilder() { Name = "Rules", Value = References.GetRulesURL() });
+            embed.AddField(new EmbedFieldBuilder() { Name = "Donations", Value = References.GetDonateURL() });
+            embed.AddField(new EmbedFieldBuilder() { Name = "Whitelist Jobs and Servers Applications", Value = References.GetApplicationsURL() });
             embed.AddField(new EmbedFieldBuilder() { Name = "Teamspeak IP", Value = "gta5police.com" });
-            embed.WithImageUrl(References.howBanURL());
+            embed.WithImageUrl(References.GetHowBanURL());
             embed.WithFooter("We hope you enjoy your stay!");
             embed.WithCurrentTimestamp();
             await Context.User.SendMessageAsync("", false, embed);
@@ -165,8 +165,8 @@ namespace GTA5PoliceV2.Modules
                     devConfig.Save();
 
                     var embed = new EmbedBuilder() { Color = Colours.adminCol };
-                    embed.WithAuthor("Successfully Added", References.gta5policeLogo());
-                    embed.WithThumbnailUrl(References.gta5policeLogo());
+                    embed.WithAuthor("Successfully Added", References.GetGta5policeLogo());
+                    embed.WithThumbnailUrl(References.GetGta5policeLogo());
                     embed.Description = "The developer " + developer + " was successfully added.";
                     embed.WithFooter(new EmbedFooterBuilder() { Text = "Requested by " + Context.User });
                     embed.WithCurrentTimestamp();
