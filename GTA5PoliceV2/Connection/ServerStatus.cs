@@ -134,7 +134,7 @@ namespace GTA5PoliceV2.Connection
 
                 var embed = new EmbedBuilder() { Color = Colours.generalCol };
                 embed.WithAuthor("Current Server Status", References.GetGta5policeLogo());
-                embed.WithDescription("IP: " + g5pIP);
+                embed.WithDescription("IP: " + g5pIP + ":PORT");
                 embed.WithThumbnailUrl(References.GetGta5policeLogo());
                 embed.WithUrl("https://gta5police.com/panel/index.php");
                 var nyField = new EmbedFieldBuilder() { Name = "New York", Value = newyork };
