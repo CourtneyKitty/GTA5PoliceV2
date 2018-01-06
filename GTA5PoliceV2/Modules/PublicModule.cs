@@ -29,12 +29,12 @@ namespace GTA5PoliceV2.Modules
                 ServerStatus status = new ServerStatus();
                 status.pingServers();
 
-                await status.displayStatus(channel, user);
+                await status.DisplayStatusAsync(channel, user);
                 await Program.Logger(new LogMessage(LogSeverity.Info, "GTA5Police", "Status command was used by " + user + "."));
                 CommandHandler.statusLast = current;
-                CommandHandler.outgoingMessages++;
+                CommandHandler.AddOutgoingMessages();
             }
-            else await errors.sendErrorTemp(channel, user + errorMessage + "\nCooldown " + difference + "/" + CommandHandler.GetCommandCooldown() + " seconds", Colours.errorCol);
+            else await errors.sendErrorTempAsync(channel, user + errorMessage + "\nCooldown " + difference + "/" + CommandHandler.GetCommandCooldown() + " seconds", Colours.errorCol);
         }
 
         [Command("rules")]
@@ -60,13 +60,13 @@ namespace GTA5PoliceV2.Modules
                 embed.WithCurrentTimestamp();
 
                 var message = await Context.Channel.SendMessageAsync("", false, embed);
-                await Delete.DelayDeleteEmbed(message, (int) CommandHandler.GetCommandCooldown());
+                await Delete.DelayDeleteEmbedAsync(message, (int) CommandHandler.GetCommandCooldown());
 
                 await Program.Logger(new LogMessage(LogSeverity.Info, "GTA5Police", "Rules command was used by " + user + "."));
                 CommandHandler.rulesLast = current;
-                CommandHandler.outgoingMessages++;
+                CommandHandler.AddOutgoingMessages();
             }
-            else await errors.sendErrorTemp(channel, user + errorMessage + "\nCooldown " + difference + "/" + CommandHandler.GetCommandCooldown() + " seconds", Colours.errorCol);
+            else await errors.sendErrorTempAsync(channel, user + errorMessage + "\nCooldown " + difference + "/" + CommandHandler.GetCommandCooldown() + " seconds", Colours.errorCol);
         }
 
         [Command("links")]
@@ -96,13 +96,13 @@ namespace GTA5PoliceV2.Modules
                 embed.WithCurrentTimestamp();
 
                 var message = await Context.Channel.SendMessageAsync("", false, embed);
-                await Delete.DelayDeleteEmbed(message, (int)CommandHandler.GetCommandCooldown());
+                await Delete.DelayDeleteEmbedAsync(message, (int)CommandHandler.GetCommandCooldown());
 
                 await Program.Logger(new LogMessage(LogSeverity.Info, "GTA5Police", "Links command was used by " + user + "."));
                 CommandHandler.linksLast = current;
-                CommandHandler.outgoingMessages++;
+                CommandHandler.AddOutgoingMessages();
             }
-            else await errors.sendErrorTemp(channel, user + errorMessage + "\nCooldown " + difference + "/" + CommandHandler.GetCommandCooldown() + " seconds", Colours.errorCol);
+            else await errors.sendErrorTempAsync(channel, user + errorMessage + "\nCooldown " + difference + "/" + CommandHandler.GetCommandCooldown() + " seconds", Colours.errorCol);
         }
 
         [Command("apply")]
@@ -132,13 +132,13 @@ namespace GTA5PoliceV2.Modules
                 embed.WithCurrentTimestamp();
 
                 var message = await Context.Channel.SendMessageAsync("", false, embed);
-                await Delete.DelayDeleteEmbed(message, (int)CommandHandler.GetCommandCooldown());
+                await Delete.DelayDeleteEmbedAsync(message, (int)CommandHandler.GetCommandCooldown());
 
                 await Program.Logger(new LogMessage(LogSeverity.Info, "GTA5Police", "Apply command was used by " + user + "."));
                 CommandHandler.applyLast = current;
-                CommandHandler.outgoingMessages++;
+                CommandHandler.AddOutgoingMessages();
             }
-            else await errors.sendErrorTemp(channel, user + errorMessage + "\nCooldown " + difference + "/" + CommandHandler.GetCommandCooldown() + " seconds", Colours.errorCol);
+            else await errors.sendErrorTempAsync(channel, user + errorMessage + "\nCooldown " + difference + "/" + CommandHandler.GetCommandCooldown() + " seconds", Colours.errorCol);
         }
 
         [Command("clearcache")]
@@ -164,13 +164,13 @@ namespace GTA5PoliceV2.Modules
                 embed.WithCurrentTimestamp();
 
                 var message = await Context.Channel.SendMessageAsync("", false, embed);
-                await Delete.DelayDeleteEmbed(message, (int)CommandHandler.GetCommandCooldown());
+                await Delete.DelayDeleteEmbedAsync(message, (int)CommandHandler.GetCommandCooldown());
 
                 await Program.Logger(new LogMessage(LogSeverity.Info, "GTA5Police", "Clearcache command was used by " + user + "."));
                 CommandHandler.clearcacheLast = current;
-                CommandHandler.outgoingMessages++;
+                CommandHandler.AddOutgoingMessages();
             }
-            else await errors.sendErrorTemp(channel, user + errorMessage + "\nCooldown " + difference + "/" + CommandHandler.GetCommandCooldown() + " seconds", Colours.errorCol);
+            else await errors.sendErrorTempAsync(channel, user + errorMessage + "\nCooldown " + difference + "/" + CommandHandler.GetCommandCooldown() + " seconds", Colours.errorCol);
         }
 
         [Command("uptime")]
@@ -193,26 +193,26 @@ namespace GTA5PoliceV2.Modules
                 embed.WithDescription("Here are all the statistics since last startup.");
                 embed.WithThumbnailUrl(References.gta5policeLogo());
                 embed.WithUrl("http://www.blurrdev.com/gta5police.html");
-                embed.AddField(new EmbedFieldBuilder() { Name = "Bot Uptime", Value = DateTime.Now.TimeOfDay - CommandHandler.startupTime });
-                embed.AddField(new EmbedFieldBuilder() { Name = "Incoming Messages", Value = CommandHandler.incomingMessages, IsInline = true });
-                embed.AddField(new EmbedFieldBuilder() { Name = "Outgoing Messages", Value = CommandHandler.outgoingMessages, IsInline = true });
-                embed.AddField(new EmbedFieldBuilder() { Name = "Command Requests", Value = CommandHandler.commandRequests, IsInline = true });
+                embed.AddField(new EmbedFieldBuilder() { Name = "Bot Uptime", Value = DateTime.Now.TimeOfDay - CommandHandler.GetStartupTime() });
+                embed.AddField(new EmbedFieldBuilder() { Name = "Incoming Messages", Value = CommandHandler.GetIncomingMessages(), IsInline = true });
+                embed.AddField(new EmbedFieldBuilder() { Name = "Outgoing Messages", Value = CommandHandler.GetOutgoingMessages(), IsInline = true });
+                embed.AddField(new EmbedFieldBuilder() { Name = "Command Requests", Value = CommandHandler.GetCommandRequests(), IsInline = true });
                 embed.AddField(blankField);
-                embed.AddField(new EmbedFieldBuilder() { Name = "Profanity Detected", Value = CommandHandler.profanityDetected, IsInline = true });
-                embed.AddField(new EmbedFieldBuilder() { Name = "Errors Detected", Value = CommandHandler.errorsDetected, IsInline = true });
-                embed.AddField(new EmbedFieldBuilder() { Name = "Timer Messages", Value = CommandHandler.timerMessages, IsInline = true });
-                embed.AddField(new EmbedFieldBuilder() { Name = "Status Changes", Value = CommandHandler.statusChanges, IsInline = true });
+                embed.AddField(new EmbedFieldBuilder() { Name = "Profanity Detected", Value = CommandHandler.GetProfanityDetected(), IsInline = true });
+                embed.AddField(new EmbedFieldBuilder() { Name = "Errors Detected", Value = CommandHandler.GetErrorsDetected(), IsInline = true });
+                embed.AddField(new EmbedFieldBuilder() { Name = "Timer Messages", Value = CommandHandler.GetTimerMessages(), IsInline = true });
+                embed.AddField(new EmbedFieldBuilder() { Name = "Status Changes", Value = CommandHandler.GetStatusChanges(), IsInline = true });
                 embed.WithFooter("Requested by " + Context.User);
                 embed.WithCurrentTimestamp();
 
                 var message = await Context.Channel.SendMessageAsync("", false, embed);
-                await Delete.DelayDeleteEmbed(message, (int)CommandHandler.GetCommandCooldown());
+                await Delete.DelayDeleteEmbedAsync(message, (int)CommandHandler.GetCommandCooldown());
 
                 await Program.Logger(new LogMessage(LogSeverity.Info, "GTA5Police", "Uptime command was used by " + user + "."));
                 CommandHandler.uptimeLast = current;
-                CommandHandler.outgoingMessages++;
+                CommandHandler.AddOutgoingMessages();
             }
-            else await errors.sendErrorTemp(channel, user + errorMessage + "\nCooldown " + difference + "/" + CommandHandler.GetCommandCooldown() + " seconds", Colours.errorCol);
+            else await errors.sendErrorTempAsync(channel, user + errorMessage + "\nCooldown " + difference + "/" + CommandHandler.GetCommandCooldown() + " seconds", Colours.errorCol);
         }
     }
 }

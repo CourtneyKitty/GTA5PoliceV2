@@ -11,6 +11,7 @@ using System.Linq;
 using System.Threading;
 using GTA5PoliceV2.Connection;
 using GTA5PoliceV2.DevReports;
+using GTA5PoliceV2.Profanity;
 
 namespace GTA5PoliceV2
 {
@@ -18,32 +19,36 @@ namespace GTA5PoliceV2
     {
         Errors errors = new Errors();
         private CommandService commands;
-        private DiscordSocketClient bot;
+        private static DiscordSocketClient bot;
         private IServiceProvider map;
+
+        private static int incomingMessages, outgoingMessages, commandRequests, timerMessages, statusChanges, errorsDetected, profanityDetected;
+        private static TimeSpan startupTime;
+        private static IUserMessage lastTimerMessage = null;
 
         public CommandHandler(IServiceProvider provider)
         {
             map = provider;
             bot = map.GetService<DiscordSocketClient>();
-            bot.UserJoined += AnnounceUserJoined;
-            bot.UserJoined += WelcomeUserJoined;
-            bot.UserLeft += AnnounceLeftUser;
-            bot.UserBanned += AnnounceBannedUser;
-            bot.UserUnbanned += AnnounceUnbannedUser;
-            bot.Ready += SetGame;
-            bot.Ready += StartTimers;
-            bot.Ready += ResetUptime;
-            bot.Ready += CommandCooldown;
-            bot.MessageReceived += HandleCommand;
+            bot.UserJoined += AnnounceUserJoinedAsync;
+            bot.UserJoined += WelcomeUserJoinedAsync;
+            bot.UserLeft += AnnounceLeftUserAsync;
+            bot.UserBanned += AnnounceBannedUserAsync;
+            bot.UserUnbanned += AnnounceUnbannedUserAsync;
+            bot.Ready += SetGameAsync;
+            bot.Ready += StartTimersAsync;
+            bot.Ready += ResetUptimeAsync;
+            bot.Ready += CommandCooldownAsync;
+            bot.MessageReceived += HandleCommandAsync;
             commands = map.GetService<CommandService>();
-            bot.MessageReceived += Reports.HandleReport;
-            bot.MessageReceived += ProfanityCheck;
-            bot.MessageReceived += TimerCooldown;
+            bot.MessageReceived += Reports.HandleReportAsync;
+            bot.MessageReceived += ProfanityFilter.ProfanityCheckAsync;
+            bot.MessageReceived += TimerCooldownAsync;
         }
 
-        public async Task AnnounceLeftUser(SocketGuildUser user) {}
-        public async Task AnnounceUserJoined(SocketGuildUser user) {}
-        public async Task WelcomeUserJoined(SocketGuildUser user)
+        public async Task AnnounceLeftUserAsync(SocketGuildUser user) {}
+        public async Task AnnounceUserJoinedAsync(SocketGuildUser user) {}
+        public async Task WelcomeUserJoinedAsync(SocketGuildUser user)
         {
             var embed = new EmbedBuilder() { Color = Colours.generalCol };
             string desc = "We strive to maintain the *highest* possible level of RP. If you have any concerns about issues, we encourage you to file a report on our forums.";
@@ -64,7 +69,7 @@ namespace GTA5PoliceV2
             await user.SendMessageAsync("", false, embed);
             outgoingMessages++;
         }
-        public async Task AnnounceBannedUser(SocketUser user, SocketGuild guild)
+        public async Task AnnounceBannedUserAsync(SocketUser user, SocketGuild guild)
         {
             var server = bot.Guilds.FirstOrDefault(x => x.Id == BotConfig.Load().ServerId);
             var logChannel = server.GetTextChannel(BotConfig.Load().LogsId);
@@ -78,7 +83,7 @@ namespace GTA5PoliceV2
             await logChannel.SendMessageAsync("", false, logEmbed);
             outgoingMessages++;
         }
-        public async Task AnnounceUnbannedUser(SocketUser user, SocketGuild guild)
+        public async Task AnnounceUnbannedUserAsync(SocketUser user, SocketGuild guild)
         {
             var server = bot.Guilds.FirstOrDefault(x => x.Id == BotConfig.Load().ServerId);
             var logChannel = server.GetTextChannel(BotConfig.Load().LogsId);
@@ -93,12 +98,10 @@ namespace GTA5PoliceV2
             outgoingMessages++;
         }
 
-        public async Task SetGame() { await bot.SetGameAsync("GTA5Police.com"); }
+        public async Task SetGameAsync() { await bot.SetGameAsync("GTA5Police.com"); }
         public async Task ConfigureAsync() { await commands.AddModulesAsync(Assembly.GetEntryAssembly());}
 
-        public static int incomingMessages, outgoingMessages, commandRequests, timerMessages, statusChanges, errorsDetected, profanityDetected;
-        public static TimeSpan startupTime;
-        public async Task ResetUptime()
+        public async Task ResetUptimeAsync()
         {
             startupTime = DateTime.Now.TimeOfDay;
             incomingMessages = 0;
@@ -110,7 +113,7 @@ namespace GTA5PoliceV2
             profanityDetected = 0;
         }
 
-        public async Task HandleCommand(SocketMessage pMsg)
+        public async Task HandleCommandAsync(SocketMessage pMsg)
         {
             var message = pMsg as SocketUserMessage;
             if (message == null)
@@ -128,14 +131,14 @@ namespace GTA5PoliceV2
                 var result = await commands.ExecuteAsync(context, argPos, map);
                 
                 if (!result.IsSuccess && result.ErrorReason != "Unknown command.")
-                    await errors.sendErrorTemp(pMsg.Channel, result.ErrorReason, Colours.errorCol);
+                    await errors.sendErrorTempAsync(pMsg.Channel, result.ErrorReason, Colours.errorCol);
             }
         }
 
         public int messages = 0;
         public static double GetCommandCooldown() { return BotConfig.Load().CommandCooldown; }
         public static TimeSpan statusLast, rulesLast, linksLast, applyLast, clearcacheLast, uptimeLast;
-        public async Task TimerCooldown(SocketMessage pMsg)
+        public async Task TimerCooldownAsync(SocketMessage pMsg)
         {
             var message = pMsg as SocketUserMessage;
             if (message == null)
@@ -143,7 +146,7 @@ namespace GTA5PoliceV2
 
             if (pMsg.Channel.Id.Equals(BotConfig.Load().TimerChannelId)) messages++;
         }
-        public async Task CommandCooldown()
+        public async Task CommandCooldownAsync()
         {
             statusLast = DateTime.Now.TimeOfDay.Subtract(new TimeSpan(0, 0, (int) BotConfig.Load().CommandCooldown));
             rulesLast = DateTime.Now.TimeOfDay.Subtract(new TimeSpan(0, 0, (int)BotConfig.Load().CommandCooldown));
@@ -153,69 +156,6 @@ namespace GTA5PoliceV2
             uptimeLast = DateTime.Now.TimeOfDay.Subtract(new TimeSpan(0, 0, (int)BotConfig.Load().CommandCooldown));
         }
 
-        public async Task ProfanityCheck(SocketMessage pMsg)
-        {
-            var message = pMsg as SocketUserMessage;
-            if (message == null)
-                return;
-
-            for (int i = 0; i <= BotConfig.Load().Filters - 1; i++)
-            {
-                if (message.ToString().ToLower().Contains(BotConfig.Load().FilteredWords[i].ToLower())) await ProfanityMessage(pMsg, BotConfig.Load().FilteredWords[i]);
-            }
-        }
-
-        public async Task ProfanityMessage(SocketMessage pMsg, string word)
-        {
-            profanityDetected++;
-
-            var message = pMsg as SocketUserMessage;
-            await message.DeleteAsync();
-
-            var user = pMsg.Author;
-            var userId = pMsg.Author.Id;
-            var channel = pMsg.Channel.ToString();
-            var fullMsg = pMsg.ToString();
-            var logsChannel = BotConfig.Load().LogsId; //find the channel
-
-            var warningEmbed = new EmbedBuilder() { Color = Colours.errorCol };
-            warningEmbed.WithAuthor("Profanity Detected!", References.gta5policeLogo());
-            warningEmbed.Description = user + " | Do not use that profanity, your message has been deleted.";
-            var msg = await pMsg.Channel.SendMessageAsync("", false, warningEmbed);
-            await Delete.DelayDeleteEmbed(msg, 10);
-
-            var context = new SocketCommandContext(bot, message);
-            //var logChannel = context.Guild.Channels.FirstOrDefault(x => x.Id == BotConfig.Load().LogsId);
-            var server = bot.Guilds.FirstOrDefault(x => x.Id == BotConfig.Load().ServerId);
-            var logChannel = server.GetTextChannel(BotConfig.Load().LogsId);
-
-            var logEmbed = new EmbedBuilder() { Color = Colours.errorCol };
-            logEmbed.WithAuthor("Profanity detected in discord chat");
-            logEmbed.WithThumbnailUrl(References.gta5policeLogo());
-            logEmbed.Description = "Full message: " + fullMsg;
-            var userField = new EmbedFieldBuilder() { Name = "Discord User", Value = user };
-            var userIdField = new EmbedFieldBuilder() { Name = "DiscordId", Value = userId };
-            var channelField = new EmbedFieldBuilder() { Name = "Channel", Value = channel };
-            var wordField = new EmbedFieldBuilder() { Name = "Word", Value = word };
-            logEmbed.AddField(userField);
-            logEmbed.AddField(userIdField);
-            logEmbed.AddField(channelField);
-            logEmbed.AddField(wordField);
-            await logChannel.SendMessageAsync("", false, logEmbed);
-            outgoingMessages++;
-
-            var dmMessage = new EmbedBuilder() { Color = Colours.errorCol };
-            dmMessage.WithAuthor("Profanity Detected!", References.gta5policeLogo());
-            dmMessage.Description = user + " | Do not use that profanity, your message has been deleted and you have been banned from the discord.";
-            dmMessage.AddField(new EmbedFieldBuilder() { Name = "How to appeal", Value = "Head over to " + References.supportURL() + " and fill out an appeal or head to Teamspeak using IP gta5police.com" });
-
-            var iDMChannel = await user.GetOrCreateDMChannelAsync();
-            await iDMChannel.SendMessageAsync("", false, dmMessage);
-
-            await server.AddBanAsync(pMsg.Author, 7, "Profanity detected in discord chat. Check server logs for more information.");
-            outgoingMessages++;
-        }
-
         Timer timerStatus, timerMessage;
         ServerStatus status = new ServerStatus();
         Success success = new Success();
@@ -223,21 +163,21 @@ namespace GTA5PoliceV2
         SocketGuild server;
         IMessageChannel channel;
 
-        public async Task StartTimers()
+        public async Task StartTimersAsync()
         {
             server = bot.Guilds.FirstOrDefault(x => x.Id == BotConfig.Load().ServerId);
             channel = server.GetTextChannel(BotConfig.Load().TimerChannelId);
        
             
             ny = false; la = false; nywl = false; lawl = false;
-            timerStatus = new Timer(SendStatus, null, 0, 1000 * 60 * BotConfig.Load().StatusTimerInterval);
-            timerMessage = new Timer(SendMessage, null, 0, 1000 * 60 * BotConfig.Load().MessageTimerInterval);
+            timerStatus = new Timer(SendStatusAsync, null, 0, 1000 * 60 * BotConfig.Load().StatusTimerInterval);
+            timerMessage = new Timer(SendMessageAsync, null, 0, 1000 * 60 * BotConfig.Load().MessageTimerInterval);
 
             var message = await channel.SendMessageAsync("Timers started.");
-            await Delete.DelayDeleteMessage(message, 5);
+            await Delete.DelayDeleteMessageAsync(message, 5);
         }
 
-        public async void SendStatus(object state)
+        public async void SendStatusAsync(object state)
         {
             status.pingServers();
             if (ny != status.getNyStatus())
@@ -245,13 +185,13 @@ namespace GTA5PoliceV2
                 statusChanges++;
                 if (References.isStartUp == true)
                 {
-                    if (status.getNyStatus()) await success.sendSuccessTemp(channel, "Server Status Change", "New York has come online!", Colours.generalCol, References.dashboardURL(), 5);
-                    if (!status.getNyStatus()) await success.sendSuccessTemp(channel, "Server Status Change", "New York has gone offline!", Colours.generalCol, References.dashboardURL(), 5);
+                    if (status.getNyStatus()) await success.sendSuccessTempAsync(channel, "Server Status Change", "New York has come online!", Colours.generalCol, References.dashboardURL(), 5);
+                    if (!status.getNyStatus()) await success.sendSuccessTempAsync(channel, "Server Status Change", "New York has gone offline!", Colours.generalCol, References.dashboardURL(), 5);
                 }
                 else
                 {
-                    if (status.getNyStatus()) await success.sendSuccess(channel, "Server Status Change", "New York has come online!", Colours.generalCol, References.dashboardURL());
-                    if (!status.getNyStatus()) await success.sendSuccess(channel, "Server Status Change", "New York has gone offline!", Colours.generalCol, References.dashboardURL());
+                    if (status.getNyStatus()) await success.sendSuccessAsync(channel, "Server Status Change", "New York has come online!", Colours.generalCol, References.dashboardURL());
+                    if (!status.getNyStatus()) await success.sendSuccessAsync(channel, "Server Status Change", "New York has gone offline!", Colours.generalCol, References.dashboardURL());
                 }
                 ny = status.getNyStatus();
             }
@@ -260,13 +200,13 @@ namespace GTA5PoliceV2
                 statusChanges++;
                 if (References.isStartUp == true)
                 {
-                    if (status.getLaStatus()) await success.sendSuccessTemp(channel, "Server Status Change", "Los Angeles has come online!", Colours.generalCol, References.dashboardURL(), 5);
-                    if (!status.getLaStatus()) await success.sendSuccessTemp(channel, "Server Status Change", "Los Angeles has gone offline!", Colours.generalCol, References.dashboardURL(), 5);
+                    if (status.getLaStatus()) await success.sendSuccessTempAsync(channel, "Server Status Change", "Los Angeles has come online!", Colours.generalCol, References.dashboardURL(), 5);
+                    if (!status.getLaStatus()) await success.sendSuccessTempAsync(channel, "Server Status Change", "Los Angeles has gone offline!", Colours.generalCol, References.dashboardURL(), 5);
                 }
                 else
                 {
-                    if (status.getLaStatus()) await success.sendSuccess(channel, "Server Status Change", "Los Angeles has come online!", Colours.generalCol, References.dashboardURL());
-                    if (!status.getLaStatus()) await success.sendSuccess(channel, "Server Status Change", "Los Angeles has gone offline!", Colours.generalCol, References.dashboardURL());
+                    if (status.getLaStatus()) await success.sendSuccessAsync(channel, "Server Status Change", "Los Angeles has come online!", Colours.generalCol, References.dashboardURL());
+                    if (!status.getLaStatus()) await success.sendSuccessAsync(channel, "Server Status Change", "Los Angeles has gone offline!", Colours.generalCol, References.dashboardURL());
                 }
                 la = status.getLaStatus();
             }
@@ -275,13 +215,13 @@ namespace GTA5PoliceV2
                 statusChanges++;
                 if (References.isStartUp == true)
                 {
-                    if (status.getNyWlStatus()) await success.sendSuccessTemp(channel, "Server Status Change", "New York Whitelist has come online!", Colours.generalCol, References.dashboardURL(), 5);
-                    if (!status.getNyWlStatus()) await success.sendSuccessTemp(channel, "Server Status Change", "New York Whitelist has gone offline!", Colours.generalCol, References.dashboardURL(), 5);
+                    if (status.getNyWlStatus()) await success.sendSuccessTempAsync(channel, "Server Status Change", "New York Whitelist has come online!", Colours.generalCol, References.dashboardURL(), 5);
+                    if (!status.getNyWlStatus()) await success.sendSuccessTempAsync(channel, "Server Status Change", "New York Whitelist has gone offline!", Colours.generalCol, References.dashboardURL(), 5);
                 }
                 else
                 {
-                    if (status.getNyWlStatus()) await success.sendSuccess(channel, "Server Status Change", "New York Whitelist has come online!", Colours.generalCol, References.dashboardURL());
-                    if (!status.getNyWlStatus()) await success.sendSuccess(channel, "Server Status Change", "New York Whitelist has gone offline!", Colours.generalCol, References.dashboardURL());
+                    if (status.getNyWlStatus()) await success.sendSuccessAsync(channel, "Server Status Change", "New York Whitelist has come online!", Colours.generalCol, References.dashboardURL());
+                    if (!status.getNyWlStatus()) await success.sendSuccessAsync(channel, "Server Status Change", "New York Whitelist has gone offline!", Colours.generalCol, References.dashboardURL());
                 }
                 nywl = status.getNyWlStatus();
             }
@@ -290,22 +230,20 @@ namespace GTA5PoliceV2
                 statusChanges++;
                 if (References.isStartUp == true)
                 {
-                    if (status.getLaWlStatus()) await success.sendSuccessTemp(channel, "Server Status Change", "Los Angeles Whitelist has come online!", Colours.generalCol, References.dashboardURL(), 5);
-                    if (!status.getLaWlStatus()) await success.sendSuccessTemp(channel, "Server Status Change", "Los Angeles Whitelist has gone offline!", Colours.generalCol, References.dashboardURL(), 5);
+                    if (status.getLaWlStatus()) await success.sendSuccessTempAsync(channel, "Server Status Change", "Los Angeles Whitelist has come online!", Colours.generalCol, References.dashboardURL(), 5);
+                    if (!status.getLaWlStatus()) await success.sendSuccessTempAsync(channel, "Server Status Change", "Los Angeles Whitelist has gone offline!", Colours.generalCol, References.dashboardURL(), 5);
                 }
                 else
                 {
-                    if (status.getLaWlStatus()) await success.sendSuccess(channel, "Server Status Change", "Los Angeles Whitelist has come online!", Colours.generalCol, References.dashboardURL());
-                    if (!status.getLaWlStatus()) await success.sendSuccess(channel, "Server Status Change", "Los Angeles Whitelist has gone offline!", Colours.generalCol, References.dashboardURL());
+                    if (status.getLaWlStatus()) await success.sendSuccessAsync(channel, "Server Status Change", "Los Angeles Whitelist has come online!", Colours.generalCol, References.dashboardURL());
+                    if (!status.getLaWlStatus()) await success.sendSuccessAsync(channel, "Server Status Change", "Los Angeles Whitelist has gone offline!", Colours.generalCol, References.dashboardURL());
                 }
                 lawl = status.getLaWlStatus();
             }
             if (References.isStartUp == true) References.isStartUp = false;
         }
-        
-        public static IUserMessage lastTimerMessage = null;
 
-        public async void SendMessage(object state)
+        public async void SendMessageAsync(object state)
         {
             if (messages >= BotConfig.Load().MessageTimerCooldown)
             {
@@ -330,5 +268,26 @@ namespace GTA5PoliceV2
             }
             await Program.Logger(new LogMessage(LogSeverity.Info, "GTA5Police", "Timer message was not delivered due to the cooldown."));
         }
+
+        /** Getters and Setters **/
+        public static DiscordSocketClient GetBot() { return bot; }
+
+        public static int GetIncomingMessages() { return incomingMessages; }
+        public static int GetOutgoingMessages() { return outgoingMessages; }
+        public static int GetCommandRequests() { return commandRequests; }
+        public static int GetTimerMessages() { return timerMessages; }
+        public static int GetStatusChanges() { return statusChanges; }
+        public static int GetErrorsDetected() { return errorsDetected; }
+        public static int GetProfanityDetected() { return profanityDetected; }
+
+        public static void AddIncomingMessages() { incomingMessages++; }
+        public static void AddOutgoingMessages() { outgoingMessages++; }
+        public static void AddCommandRequests() { commandRequests++; }
+        public static void AddTimerMessages() { timerMessages++; }
+        public static void AddStatusChanges() { statusChanges++; }
+        public static void AddErrorsDetected() { errorsDetected++; }
+        public static void AddProfanityDetected() { profanityDetected++; }
+
+        public static TimeSpan GetStartupTime() { return startupTime; }
     }
 }

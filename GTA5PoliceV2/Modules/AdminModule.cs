@@ -12,7 +12,7 @@ namespace GTA5PoliceV2.Modules
     public class AdminModule : ModuleBase
     {
         [Command("g5p settings")]
-        public async Task Settings()
+        public async Task SettingsCommandAsync()
         {
             for (int i = 0; i <= BotConfig.Load().Commanders - 1; i++)
             {
@@ -59,16 +59,16 @@ namespace GTA5PoliceV2.Modules
 
                     await Context.Message.DeleteAsync();
                     var message = await Context.Channel.SendMessageAsync("", false, embed);
-                    await Delete.DelayDeleteEmbed(message, 120);
+                    await Delete.DelayDeleteEmbedAsync(message, 120);
 
                     await Program.Logger(new LogMessage(LogSeverity.Info, "GTA5Police", "Settings command was used by " + Context.User + "."));
-                    CommandHandler.outgoingMessages++;
+                    CommandHandler.AddOutgoingMessages();
                 }
             }
         }
 
         [Command("filter add")]
-        public async Task FilterAdd(string word = null)
+        public async Task FilterAddCommandAsync(string word = null)
         {
             for (int i = 0; i <= BotConfig.Load().Commanders - 1; i++)
             {
@@ -89,17 +89,17 @@ namespace GTA5PoliceV2.Modules
 
                     await Context.Message.DeleteAsync();
                     var message = await Context.Channel.SendMessageAsync("", false, embed);
-                    await Delete.DelayDeleteEmbed(message, 120);
+                    await Delete.DelayDeleteEmbedAsync(message, 120);
 
                     await Program.Logger(new LogMessage(LogSeverity.Info, "GTA5Police", "Filter add command was used by " + Context.User + "."));
-                    CommandHandler.outgoingMessages++;
+                    CommandHandler.AddOutgoingMessages();
                 }
             }
         }
 
         [Command("clear")]
         [RequireUserPermission(ChannelPermission.ManageMessages)]
-        public async Task Clear(int amount = 100, SocketGuildUser user = null)
+        public async Task ClearCommandAsync(int amount = 100, SocketGuildUser user = null)
         {
             Errors errors = new Errors();
             await Context.Message.DeleteAsync();
@@ -108,13 +108,13 @@ namespace GTA5PoliceV2.Modules
             {
                 if (amount > 100)
                 {
-                    await errors.sendError(Context.Channel, "You can not clear more than 100! Deleting 100.", Colours.errorCol);
+                    await errors.sendErrorAsync(Context.Channel, "You can not clear more than 100! Deleting 100.", Colours.errorCol);
                     var messageHistory = await Context.Channel.GetMessagesAsync(101).Flatten();
                     await Context.Channel.DeleteMessagesAsync(messageHistory);
                     await Program.Logger(new LogMessage(LogSeverity.Info, "GTA5Police", "Clear command was used by " + Context.User + "."));
                     await Program.Logger(new LogMessage(LogSeverity.Verbose, "GTA5Police", "100 messages were deleted in the channel " + Context.Channel.Name + " by " + Context.User + "."));
                 }
-                else if (amount < 1) await errors.sendErrorTemp(Context.Channel, "You can not clear a negative amount of messages!", Colours.errorCol);
+                else if (amount < 1) await errors.sendErrorTempAsync(Context.Channel, "You can not clear a negative amount of messages!", Colours.errorCol);
                 else
                 {
                     var messageHistory = await Context.Channel.GetMessagesAsync(amount).Flatten();
@@ -128,7 +128,7 @@ namespace GTA5PoliceV2.Modules
         }
 
         [Command("welcometohell")]
-        public async Task Welcome()
+        public async Task WelcomeCommandAsync()
         {
             var embed = new EmbedBuilder() { Color = Colours.generalCol };
             string desc = "We strive to maintain the *highest* possible level of RP. If you have any concerns about issues, we encourage you to file a report on our forums.";
@@ -150,7 +150,7 @@ namespace GTA5PoliceV2.Modules
         }
 
         [Command("dev add")]
-        public async Task DevAdd(IUser developer)
+        public async Task DevAddCommandAsync(IUser developer)
         {
             for (int i = 0; i <= BotConfig.Load().Commanders - 1; i++)
             {
@@ -173,10 +173,10 @@ namespace GTA5PoliceV2.Modules
 
                     await Context.Message.DeleteAsync();
                     var message = await Context.Channel.SendMessageAsync("", false, embed);
-                    await Delete.DelayDeleteEmbed(message, 120);
+                    await Delete.DelayDeleteEmbedAsync(message, 120);
 
                     await Program.Logger(new LogMessage(LogSeverity.Info, "GTA5Police", "Dev add command was used by " + Context.User + "."));
-                    CommandHandler.outgoingMessages++;
+                    CommandHandler.AddOutgoingMessages();
                 }
             }
         }

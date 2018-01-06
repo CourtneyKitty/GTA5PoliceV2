@@ -5,7 +5,7 @@ namespace GTA5PoliceV2.Util
 {
     class Delete
     {
-        public static async Task DelayDeleteMessage(IUserMessage message, int time = 0)
+        public static async Task DelayDeleteMessageAsync(IUserMessage message, int time = 0)
         {
             var delete = Task.Run(async () =>
             {
@@ -17,7 +17,7 @@ namespace GTA5PoliceV2.Util
             });
         }
 
-        public static async Task DelayDeleteEmbed(IMessage message, int time = 0)
+        public static async Task DelayDeleteEmbedAsync(IMessage message, int time = 0)
         {
             var delete = Task.Run(async () =>
             {

@@ -17,11 +17,11 @@ namespace GTA5PoliceV2
     {
         public static List<ulong> modRoleID = new List<ulong>();
         public static ulong[] modRoleIDs;
-        public static void Main(string[] args) => new Program().Start().GetAwaiter().GetResult();
+        public static void Main(string[] args) => new Program().StartAsync().GetAwaiter().GetResult();
         private DiscordSocketClient client;
         private CommandHandler handler;
 
-        public async Task Start()
+        public async Task StartAsync()
         {
             EnsureBotConfigExists(); // Ensure that the bot configuration json file has been created.
 

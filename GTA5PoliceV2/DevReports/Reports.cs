@@ -11,7 +11,7 @@ namespace GTA5PoliceV2.DevReports
     class Reports
     {
 
-        public static async Task HandleReport(SocketMessage pMsg)
+        public static async Task HandleReportAsync(SocketMessage pMsg)
         {
             Errors errors = new Errors();
             var message = pMsg as SocketUserMessage;
@@ -28,7 +28,7 @@ namespace GTA5PoliceV2.DevReports
             if (ReportChecks.IsCorrectLayout(pMsg.ToString()) == true)
                 return;
 
-            await errors.sendErrorTemp(message.Channel, message.Author.Mention + " please use the correct message layout, it is pinned in this channel!", Colours.errorCol);
+            await errors.sendErrorTempAsync(message.Channel, message.Author.Mention + " please use the correct message layout, it is pinned in this channel!", Colours.errorCol);
             var iDMChannel = await user.GetOrCreateDMChannelAsync();
             await iDMChannel.SendMessageAsync("Here is a copy of your bug report that was the wrong layout.\n```\n" + pMsg.ToString() + "\n```\nPlease use the layout that is pinned in the bug reports channel!");
             await pMsg.DeleteAsync();
