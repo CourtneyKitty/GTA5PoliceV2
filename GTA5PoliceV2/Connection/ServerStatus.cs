@@ -29,27 +29,25 @@ namespace GTA5PoliceV2.Connection
         private bool isLaWlLive;
 
         /** Ping main server. If connection is good, try to connect to game servers. **/
-        //string g5pIP = "66.150.121.131";
         string g5pIP = ConnectionsConfig.Load().ServerIp;
         public void pingServers()
         {
             var ping = new Ping();
-            var timeout = 60 * 1000; // 1 Minute timeout
             
-            /**var reply = ping.Send(g5pIP, timeout);
-            if (reply.Status.ToString().Equals("Success"))
-            {**/
+            var reply = ping.Send(g5pIP);
+            if (!reply.Status.Equals(IPStatus.Success))
+            {
                 mainStatus = true;
                 pingServer(nyPort, 1);
                 pingServer(laPort, 2);
                 pingServer(nyWlPort, 3);
                 pingServer(laWlPort, 4);
-            /**}
+            }
             else
             {
                 Program.Logger(new LogMessage(LogSeverity.Critical, "GTA5Police", "Houston we have a problem!"));
                 mainStatus = false;
-            }**/
+            }
         }
 
         /** Connect to the server **/
