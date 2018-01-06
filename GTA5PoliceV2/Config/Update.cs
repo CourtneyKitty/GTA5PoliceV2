@@ -29,5 +29,15 @@ namespace GTA5PoliceV2.Config
             }
             return config;
         }
+
+        public static DevConfig UpdateDevConfig(DevConfig config)
+        {
+            config.Devs = DevConfig.Load().Devs;
+            for (int j = 0; j <= DevConfig.Load().Devs - 1; j++)
+            {
+                config.Developers[j] = DevConfig.Load().Developers[j];
+            }
+            return config;
+        }
     }
 }

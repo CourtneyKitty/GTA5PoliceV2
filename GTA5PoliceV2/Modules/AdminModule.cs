@@ -148,5 +148,37 @@ namespace GTA5PoliceV2.Modules
             embed.WithCurrentTimestamp();
             await Context.User.SendMessageAsync("", false, embed);
         }
+
+        [Command("dev add")]
+        public async Task DevAdd(IUser developer)
+        {
+            for (int i = 0; i <= BotConfig.Load().Commanders - 1; i++)
+            {
+                if (Context.User.Id == BotConfig.Load().BotCommanders[i])
+                {
+                    var dev = developer.Id;
+
+                    DevConfig devConfig = new DevConfig();
+                    devConfig = Update.UpdateDevConfig(devConfig);
+                    devConfig.Developers[DevConfig.Load().Devs] = dev;
+                    devConfig.Devs = DevConfig.Load().Devs + 1;
+                    devConfig.Save();
+
+                    var embed = new EmbedBuilder() { Color = Colours.adminCol };
+                    embed.WithAuthor("Successfully Added", References.gta5policeLogo());
+                    embed.WithThumbnailUrl(References.gta5policeLogo());
+                    embed.Description = "The developer " + developer + " was successfully added.";
+                    embed.WithFooter(new EmbedFooterBuilder() { Text = "Requested by " + Context.User });
+                    embed.WithCurrentTimestamp();
+
+                    await Context.Message.DeleteAsync();
+                    var message = await Context.Channel.SendMessageAsync("", false, embed);
+                    await Delete.DelayDeleteEmbed(message, 120);
+
+                    await Program.Logger(new LogMessage(LogSeverity.Info, "GTA5Police", "Dev add command was used by " + Context.User + "."));
+                    CommandHandler.outgoingMessages++;
+                }
+            }
+        }
     }
 }
