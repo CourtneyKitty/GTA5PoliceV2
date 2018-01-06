@@ -23,7 +23,7 @@ namespace GTA5PoliceV2
         private IServiceProvider map;
 
         private static int incomingMessages, outgoingMessages, commandRequests, timerMessages, statusChanges, errorsDetected, profanityDetected;
-        private static TimeSpan startupTime;
+        //private static TimeSpan startupTime;
         private static IUserMessage lastTimerMessage = null;
 
         public CommandHandler(IServiceProvider provider)
@@ -38,12 +38,12 @@ namespace GTA5PoliceV2
             bot.Ready += SetGameAsync;
             bot.Ready += StartTimersAsync;
             bot.Ready += ResetUptimeAsync;
-            bot.Ready += CommandCooldownAsync;
+            bot.Ready += Cooldowns.ResetCommandCooldownAsync;
             bot.MessageReceived += HandleCommandAsync;
             commands = map.GetService<CommandService>();
             bot.MessageReceived += Reports.HandleReportAsync;
             bot.MessageReceived += ProfanityFilter.ProfanityCheckAsync;
-            bot.MessageReceived += TimerCooldownAsync;
+            bot.MessageReceived += Cooldowns.TimerCooldownAsync;
         }
 
         public async Task AnnounceLeftUserAsync(SocketGuildUser user) {}
@@ -103,7 +103,7 @@ namespace GTA5PoliceV2
 
         public async Task ResetUptimeAsync()
         {
-            startupTime = DateTime.Now.TimeOfDay;
+            Cooldowns.SetStartupTime(DateTime.Now.TimeOfDay);
             incomingMessages = 0;
             outgoingMessages = 0;
             commandRequests = 0;
@@ -133,27 +133,6 @@ namespace GTA5PoliceV2
                 if (!result.IsSuccess && result.ErrorReason != "Unknown command.")
                     await errors.sendErrorTempAsync(pMsg.Channel, result.ErrorReason, Colours.errorCol);
             }
-        }
-
-        public int messages = 0;
-        public static double GetCommandCooldown() { return BotConfig.Load().CommandCooldown; }
-        public static TimeSpan statusLast, rulesLast, linksLast, applyLast, clearcacheLast, uptimeLast;
-        public async Task TimerCooldownAsync(SocketMessage pMsg)
-        {
-            var message = pMsg as SocketUserMessage;
-            if (message == null)
-                return;
-
-            if (pMsg.Channel.Id.Equals(BotConfig.Load().TimerChannelId)) messages++;
-        }
-        public async Task CommandCooldownAsync()
-        {
-            statusLast = DateTime.Now.TimeOfDay.Subtract(new TimeSpan(0, 0, (int) BotConfig.Load().CommandCooldown));
-            rulesLast = DateTime.Now.TimeOfDay.Subtract(new TimeSpan(0, 0, (int)BotConfig.Load().CommandCooldown));
-            linksLast = DateTime.Now.TimeOfDay.Subtract(new TimeSpan(0, 0, (int)BotConfig.Load().CommandCooldown));
-            applyLast = DateTime.Now.TimeOfDay.Subtract(new TimeSpan(0, 0, (int)BotConfig.Load().CommandCooldown));
-            clearcacheLast = DateTime.Now.TimeOfDay.Subtract(new TimeSpan(0, 0, (int)BotConfig.Load().CommandCooldown));
-            uptimeLast = DateTime.Now.TimeOfDay.Subtract(new TimeSpan(0, 0, (int)BotConfig.Load().CommandCooldown));
         }
 
         Timer timerStatus, timerMessage;
@@ -245,7 +224,7 @@ namespace GTA5PoliceV2
 
         public async void SendMessageAsync(object state)
         {
-            if (messages >= BotConfig.Load().MessageTimerCooldown)
+            if (Cooldowns.GetMessageTimerCooldown() >= BotConfig.Load().MessageTimerCooldown)
             {
                 if (lastTimerMessage != null) await lastTimerMessage.DeleteAsync();
 
@@ -263,7 +242,7 @@ namespace GTA5PoliceV2
                 embed.WithCurrentTimestamp();
 
                 lastTimerMessage = await channel.SendMessageAsync("", false, embed);
-                messages = 0;
+                Cooldowns.ResetMessageTimerCooldown();
                 await Program.Logger(new LogMessage(LogSeverity.Info, "GTA5Police", "Timer message delivered successfully."));
             }
             await Program.Logger(new LogMessage(LogSeverity.Info, "GTA5Police", "Timer message was not delivered due to the cooldown."));
@@ -288,6 +267,5 @@ namespace GTA5PoliceV2
         public static void AddErrorsDetected() { errorsDetected++; }
         public static void AddProfanityDetected() { profanityDetected++; }
 
-        public static TimeSpan GetStartupTime() { return startupTime; }
     }
 }
