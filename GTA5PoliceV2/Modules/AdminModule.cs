@@ -62,7 +62,7 @@ namespace GTA5PoliceV2.Modules
                     await Delete.DelayDeleteEmbedAsync(message, 120);
 
                     await Program.Logger(new LogMessage(LogSeverity.Info, "GTA5Police", "Settings command was used by " + Context.User + "."));
-                    CommandHandler.AddOutgoingMessages();
+                    Statistics.AddOutgoingMessages();
                 }
             }
         }
@@ -92,7 +92,7 @@ namespace GTA5PoliceV2.Modules
                     await Delete.DelayDeleteEmbedAsync(message, 120);
 
                     await Program.Logger(new LogMessage(LogSeverity.Info, "GTA5Police", "Filter add command was used by " + Context.User + "."));
-                    CommandHandler.AddOutgoingMessages();
+                    Statistics.AddOutgoingMessages();
                 }
             }
         }
@@ -176,7 +176,7 @@ namespace GTA5PoliceV2.Modules
                     await Delete.DelayDeleteEmbedAsync(message, 120);
 
                     await Program.Logger(new LogMessage(LogSeverity.Info, "GTA5Police", "Dev add command was used by " + Context.User + "."));
-                    CommandHandler.AddOutgoingMessages();
+                    Statistics.AddOutgoingMessages();
                 }
             }
         }

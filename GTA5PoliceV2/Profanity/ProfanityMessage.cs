@@ -24,6 +24,7 @@ namespace GTA5PoliceV2.Profanity
             warningEmbed.Description = user + " | Do not use that profanity, your message has been deleted.";
             var msg = await pMsg.Channel.SendMessageAsync("", false, warningEmbed);
             await Delete.DelayDeleteEmbedAsync(msg, 10);
+            Statistics.AddOutgoingMessages();
         }
 
         public static async Task LogMessageAsync(DiscordSocketClient bot, SocketMessage pMsg, string word)
@@ -52,7 +53,7 @@ namespace GTA5PoliceV2.Profanity
             logEmbed.AddField(channelField);
             logEmbed.AddField(wordField);
             await logChannel.SendMessageAsync("", false, logEmbed);
-            CommandHandler.AddOutgoingMessages();
+            Statistics.AddOutgoingMessages();
         }
 
         public static async Task DMMessageAsync(DiscordSocketClient bot, SocketMessage pMsg, string word)
@@ -66,7 +67,7 @@ namespace GTA5PoliceV2.Profanity
             dmMessage.AddField(new EmbedFieldBuilder() { Name = "How to appeal", Value = "Head over to " + References.GetSupportURL() + " and fill out an appeal or head to Teamspeak using IP gta5police.com" });
             var iDMChannel = await user.GetOrCreateDMChannelAsync();
             await iDMChannel.SendMessageAsync("", false, dmMessage);
-            CommandHandler.AddOutgoingMessages();
+            Statistics.AddOutgoingMessages();
         }
     }
 }

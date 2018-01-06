@@ -1,5 +1,6 @@
 ﻿using Discord.WebSocket;
 using GTA5PoliceV2.Config;
+using GTA5PoliceV2.Util;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,7 +25,7 @@ namespace GTA5PoliceV2.Profanity
                     await ProfanityMessage.LogMessageAsync(CommandHandler.GetBot(), pMsg, BotConfig.Load().FilteredWords[i]);
                     await ProfanityMessage.DMMessageAsync(CommandHandler.GetBot(), pMsg, BotConfig.Load().FilteredWords[i]);
                     await ProfanityBanAsync(CommandHandler.GetBot(), pMsg);
-                    CommandHandler.AddProfanityDetected();
+                    Statistics.AddProfanityDetected();
                 }
             }
         }

@@ -10,8 +10,8 @@ namespace GTA5PoliceV2.Util
     {
         public async Task sendErrorAsync(ISocketMessageChannel channel, string error, Color color)
         {
-            CommandHandler.AddErrorsDetected();
-            CommandHandler.AddOutgoingMessages();
+            Statistics.AddErrorsDetected();
+            Statistics.AddOutgoingMessages();
             await Program.Logger(new LogMessage(LogSeverity.Error, "GTA5Police", error));
             var embed = new EmbedBuilder() { Color = color };
             embed.Title = ("ERROR");
@@ -21,8 +21,8 @@ namespace GTA5PoliceV2.Util
 
         public async Task sendErrorAsync(IMessageChannel channel, string error, Color color)
         {
-            CommandHandler.AddErrorsDetected();
-            CommandHandler.AddOutgoingMessages();
+            Statistics.AddErrorsDetected();
+            Statistics.AddOutgoingMessages();
             await Program.Logger(new LogMessage(LogSeverity.Error, "GTA5Police", error));
             var embed = new EmbedBuilder() { Color = color };
             embed.Title = ("ERROR");
@@ -33,8 +33,8 @@ namespace GTA5PoliceV2.Util
 
         public async Task sendErrorTempAsync(ISocketMessageChannel channel, string error, Color color)
         {
-            CommandHandler.AddErrorsDetected();
-            CommandHandler.AddOutgoingMessages();
+            Statistics.AddErrorsDetected();
+            Statistics.AddOutgoingMessages();
             await Program.Logger(new LogMessage(LogSeverity.Error, "GTA5Police", error));
             var embed = new EmbedBuilder() { Color = color };
             embed.Title = ("ERROR");
@@ -45,8 +45,8 @@ namespace GTA5PoliceV2.Util
 
         public async Task sendErrorTempAsync(IMessageChannel channel, string error, Color color)
         {
-            CommandHandler.AddErrorsDetected();
-            CommandHandler.AddOutgoingMessages();
+            Statistics.AddErrorsDetected();
+            Statistics.AddOutgoingMessages();
             await Program.Logger(new LogMessage(LogSeverity.Error, "GTA5Police", error));
             var embed = new EmbedBuilder() { Color = color };
             embed.Title = ("ERROR");

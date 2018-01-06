@@ -8,7 +8,7 @@ namespace GTA5PoliceV2.Util
     {
         public async Task sendSuccessAsync(ISocketMessageChannel channel, string title, string desc, Color color)
         {
-            CommandHandler.AddOutgoingMessages();
+            Statistics.AddOutgoingMessages();
             await Program.Logger(new LogMessage(LogSeverity.Verbose, "GTA5Police", title + ": " + desc));
             var embed = new EmbedBuilder() { Color = color };
             embed.Title = (title);
@@ -18,7 +18,7 @@ namespace GTA5PoliceV2.Util
 
         public async Task sendSuccessAsync(IMessageChannel channel, string title, string desc, Color color)
         {
-            CommandHandler.AddOutgoingMessages();
+            Statistics.AddOutgoingMessages();
             await Program.Logger(new LogMessage(LogSeverity.Verbose, "GTA5Police", title + ": " + desc));
             var embed = new EmbedBuilder() { Color = color };
             embed.Title = (title);
@@ -28,7 +28,7 @@ namespace GTA5PoliceV2.Util
 
         public async Task sendSuccessAsync(ISocketMessageChannel channel, string title, string desc, Color color, string url)
         {
-            CommandHandler.AddOutgoingMessages();
+            Statistics.AddOutgoingMessages();
             await Program.Logger(new LogMessage(LogSeverity.Verbose, "GTA5Police", title + ": " + desc));
             var embed = new EmbedBuilder() { Color = color };
             embed.Title = (title);
@@ -39,7 +39,7 @@ namespace GTA5PoliceV2.Util
 
         public async Task sendSuccessAsync(IMessageChannel channel, string title, string desc, Color color, string url)
         {
-            CommandHandler.AddOutgoingMessages();
+            Statistics.AddOutgoingMessages();
             await Program.Logger(new LogMessage(LogSeverity.Verbose, "GTA5Police", title + ": " + desc));
             var embed = new EmbedBuilder() { Color = color };
             embed.Title = (title);
@@ -50,7 +50,7 @@ namespace GTA5PoliceV2.Util
 
         public async Task sendSuccessTempAsync(ISocketMessageChannel channel, string title, string desc, Color color)
         {
-            CommandHandler.AddOutgoingMessages();
+            Statistics.AddOutgoingMessages();
             await Program.Logger(new LogMessage(LogSeverity.Verbose, "GTA5Police", title + ": " + desc));
             var embed = new EmbedBuilder() { Color = color };
             embed.Title = (title);
@@ -61,7 +61,7 @@ namespace GTA5PoliceV2.Util
 
         public async Task sendSuccessTempAsync(IMessageChannel channel, string title, string desc, Color color)
         {
-            CommandHandler.AddOutgoingMessages();
+            Statistics.AddOutgoingMessages();
             await Program.Logger(new LogMessage(LogSeverity.Verbose, "GTA5Police", title + ": " + desc));
             var embed = new EmbedBuilder() { Color = color };
             embed.Title = (title);
@@ -72,7 +72,7 @@ namespace GTA5PoliceV2.Util
 
         public async Task sendSuccessTempAsync(ISocketMessageChannel channel, string title, string desc, Color color, string url)
         {
-            CommandHandler.AddOutgoingMessages();
+            Statistics.AddOutgoingMessages();
             await Program.Logger(new LogMessage(LogSeverity.Verbose, "GTA5Police", title + ": " + desc));
             var embed = new EmbedBuilder() { Color = color };
             embed.Title = (title);
@@ -84,7 +84,7 @@ namespace GTA5PoliceV2.Util
 
         public async Task sendSuccessTempAsync(IMessageChannel channel, string title, string desc, Color color, string url)
         {
-            CommandHandler.AddOutgoingMessages();
+            Statistics.AddOutgoingMessages();
             await Program.Logger(new LogMessage(LogSeverity.Verbose, "GTA5Police", title + ": " + desc));
             var embed = new EmbedBuilder() { Color = color };
             embed.Title = (title);
@@ -96,7 +96,7 @@ namespace GTA5PoliceV2.Util
 
         public async Task sendSuccessTempAsync(IMessageChannel channel, string title, string desc, Color color, string url, int time)
         {
-            CommandHandler.AddOutgoingMessages();
+            Statistics.AddOutgoingMessages();
             await Program.Logger(new LogMessage(LogSeverity.Verbose, "GTA5Police", title + ": " + desc));
             var embed = new EmbedBuilder() { Color = color };
             embed.Title = (title);
