@@ -159,7 +159,8 @@ namespace GTA5PoliceV2
             if (!File.Exists(devConfigLoc))
             {
                 var config = new DevConfig();
-                
+
+                config.DevReports = 394177874657148940;
                 config.Devs = 0;
                 config.Save();
                 Logger(new LogMessage(LogSeverity.Debug, "GTA5Police", "Dev config generated"));

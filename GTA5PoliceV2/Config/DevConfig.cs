@@ -10,11 +10,13 @@ namespace GTA5PoliceV2.Config
         [JsonIgnore]
         public static readonly string appdir = AppContext.BaseDirectory;
         
+        public ulong DevReports { get; set; }
         public int Devs { get; set; }
         public ulong[] Developers { get; set; }
 
         public DevConfig()
         {
+            DevReports = 0;
             Devs = 0;
             Developers = new ulong[15];
         }

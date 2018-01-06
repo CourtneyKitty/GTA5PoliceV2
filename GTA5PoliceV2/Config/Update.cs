@@ -32,6 +32,7 @@ namespace GTA5PoliceV2.Config
 
         public static DevConfig UpdateDevConfig(DevConfig config)
         {
+            config.DevReports = DevConfig.Load().DevReports;
             config.Devs = DevConfig.Load().Devs;
             for (int j = 0; j <= DevConfig.Load().Devs - 1; j++)
             {

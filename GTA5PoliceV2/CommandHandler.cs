@@ -10,6 +10,7 @@ using GTA5PoliceV2.Util;
 using System.Linq;
 using System.Threading;
 using GTA5PoliceV2.Connection;
+using GTA5PoliceV2.DevReports;
 
 namespace GTA5PoliceV2
 {
@@ -35,6 +36,7 @@ namespace GTA5PoliceV2
             bot.Ready += CommandCooldown;
             bot.MessageReceived += HandleCommand;
             commands = map.GetService<CommandService>();
+            bot.MessageReceived += Reports.HandleReport;
             bot.MessageReceived += ProfanityCheck;
             bot.MessageReceived += TimerCooldown;
         }
