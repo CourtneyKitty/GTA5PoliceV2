@@ -110,26 +110,21 @@ namespace GTA5PoliceV2
 
         public async Task HandleCommand(SocketMessage pMsg)
         {
-            //Don't handle the command if it is a system message
             var message = pMsg as SocketUserMessage;
             if (message == null)
                 return;
             incomingMessages++;
             var context = new SocketCommandContext(bot, message);
-
-            //Mark where the prefix ends and the command begins
+            
             int argPos = 0;
-            //Determine if the message has a valid prefix, adjust argPos
             if (message.HasStringPrefix(BotConfig.Load().Prefix, ref argPos))
             {
                 commandRequests++;
 
                 if (message.Author.IsBot)
                     return;
-                //Execute the command, store the result
                 var result = await commands.ExecuteAsync(context, argPos, map);
-
-                //If the command failed, notify the user
+                
                 if (!result.IsSuccess && result.ErrorReason != "Unknown command.")
                     await errors.sendErrorTemp(pMsg.Channel, result.ErrorReason, Colours.errorCol);
             }
