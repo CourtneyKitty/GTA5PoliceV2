@@ -43,7 +43,7 @@ namespace GTA5PoliceV2
             commands = map.GetService<CommandService>();
             bot.MessageReceived += Reports.HandleReportAsync;
             bot.MessageReceived += ProfanityFilter.ProfanityCheckAsync;
-            bot.MessageReceived += Cooldowns.TimerCooldownAsync;
+            bot.MessageReceived += Cooldowns.AddCooldownMessageAsync;
         }
 
         public async Task AnnounceLeftUserAsync(SocketGuildUser user) {}

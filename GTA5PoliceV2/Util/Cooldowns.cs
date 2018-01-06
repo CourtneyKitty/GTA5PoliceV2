@@ -14,9 +14,9 @@ namespace GTA5PoliceV2.Util
         private static TimeSpan CommandCooldown;
 
         private static int MessageTimerCooldown = 0;
-
-        private static double GetCommandCooldown() { return BotConfig.Load().CommandCooldown; }
         private static TimeSpan statusLast, rulesLast, linksLast, applyLast, clearcacheLast, uptimeLast;
+
+        public static double GetCommandCooldown() { return BotConfig.Load().CommandCooldown; }
 
         public static async Task ResetCommandCooldownAsync()
         {
@@ -29,7 +29,7 @@ namespace GTA5PoliceV2.Util
             await Program.Logger(new LogMessage(LogSeverity.Info, "GTA5Police", "Command cooldowns reset."));
         }
 
-        public async Task AddCooldownMessageAsync(SocketMessage pMsg)
+        public static async Task AddCooldownMessageAsync(SocketMessage pMsg)
         {
             var message = pMsg as SocketUserMessage;
             if (message == null)
@@ -44,6 +44,19 @@ namespace GTA5PoliceV2.Util
         public static void AddMessageToCooldown() { MessageTimerCooldown++; }
         public static void ResetMessageTimerCooldown() { MessageTimerCooldown = 0; }
         public static int GetMessageTimerCooldown() { return MessageTimerCooldown; }
+
+        public static void SetStatusLast(TimeSpan last) { statusLast = last; }
+        public static TimeSpan GetStatusLast() { return statusLast; }
+        public static void SetRulesLast(TimeSpan last) { rulesLast = last; }
+        public static TimeSpan GetRulesLast() { return rulesLast; }
+        public static void SetLinksLast(TimeSpan last) { linksLast = last; }
+        public static TimeSpan GetLinksLast() { return linksLast; }
+        public static void SetApplyLast(TimeSpan last) { applyLast = last; }
+        public static TimeSpan GetApplyLast() { return applyLast; }
+        public static void SetClearcacheLast(TimeSpan last) { clearcacheLast = last; }
+        public static TimeSpan GetClearcacheLast() { return clearcacheLast; }
+        public static void SetUptimeLast(TimeSpan last) { uptimeLast = last; }
+        public static TimeSpan GetUptimeLast() { return uptimeLast; }
     }
 
 }
