@@ -136,6 +136,7 @@ namespace GTA5PoliceV2
                 url.Dashboard = "https://gta5police.com/panel/index.php";
                 url.Forums = "https://gta5police.com/forums/";
                 url.Support = "http://gta5police.com/forums/index.php?/support/";
+                url.Suggestions = "https://gta5police.com/forums/index.php?/forum/5-suggestions/";
                 url.Donate = "http://gta5police.com/forums/index.php?/donate/";
                 url.Vacbanned = "http://www.vacbanned.com";
 
@@ -145,6 +146,7 @@ namespace GTA5PoliceV2
                 url.EMS = "https://goo.gl/vNzGvr";
                 url.Mechanic = "https://goo.gl/rChgek";
                 url.Taxi = "https://goo.gl/DbThWg";
+                url.Stream = "https://goo.gl/EPZpNR";
 
                 url.Logo = "https://cdn.discordapp.com/attachments/336338554424918017/353934612503855115/GTA5Police_Main.png";
                 url.Rules = "http://goo.gl/7app1D";

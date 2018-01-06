@@ -14,6 +14,7 @@ namespace GTA5PoliceV2.Config
         public string Dashboard { get; set; }
         public string Forums { get; set; }
         public string Support { get; set; }
+        public string Suggestions { get; set; }
         public string Donate { get; set; }
         public string Vacbanned { get; set; }
 
@@ -23,6 +24,7 @@ namespace GTA5PoliceV2.Config
         public string EMS { get; set; }
         public string Mechanic { get; set; }
         public string Taxi { get; set; }
+        public string Stream { get; set; }
 
         public string Logo { get; set; }
         public string Rules { get; set; }
@@ -35,6 +37,7 @@ namespace GTA5PoliceV2.Config
             Dashboard = "";
             Forums = "";
             Support = "";
+            Suggestions = "";
             Donate = "";
             Vacbanned = "";
 
@@ -44,6 +47,7 @@ namespace GTA5PoliceV2.Config
             EMS = "";
             Mechanic = "";
             Taxi = "";
+            Stream = "";
 
             Logo = "";
             Rules = "";
