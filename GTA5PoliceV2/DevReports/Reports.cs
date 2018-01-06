@@ -14,20 +14,23 @@ namespace GTA5PoliceV2.DevReports
         public static async Task HandleReport(SocketMessage pMsg)
         {
             Errors errors = new Errors();
-
             var message = pMsg as SocketUserMessage;
+            var user = message.Author;
+
             if (message == null)
                 return;
-            if (message.Author.IsBot)
+            if (user.IsBot)
                 return;
             if (message.Channel.Id != DevConfig.Load().DevReports)
                 return;
-            if (ReportChecks.IsDev(pMsg.Author) == true)
+            if (ReportChecks.IsDev(user) == true)
                 return;
             if (ReportChecks.IsCorrectLayout(pMsg.ToString()) == true)
                 return;
 
             await errors.sendErrorTemp(message.Channel, message.Author.Mention + " please use the correct message layout, it is pinned in this channel!", Colours.errorCol);
+            var iDMChannel = await user.GetOrCreateDMChannelAsync();
+            await iDMChannel.SendMessageAsync("Here is a copy of your bug report that was the wrong layout.\n```\n" + pMsg.ToString() + "\n```\nPlease use the layout that is pinned in the bug reports channel!");
             await pMsg.DeleteAsync();
         }
     }

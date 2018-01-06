@@ -203,6 +203,17 @@ namespace GTA5PoliceV2
             logEmbed.AddField(wordField);
             await logChannel.SendMessageAsync("", false, logEmbed);
             outgoingMessages++;
+
+            var dmMessage = new EmbedBuilder() { Color = Colours.errorCol };
+            dmMessage.WithAuthor("Profanity Detected!", References.gta5policeLogo());
+            dmMessage.Description = user + " | Do not use that profanity, your message has been deleted and you have been banned from the discord.";
+            dmMessage.AddField(new EmbedFieldBuilder() { Name = "How to appeal", Value = "Head over to " + References.supportURL() + " and fill out an appeal or head to Teamspeak using IP gta5police.com" });
+
+            var iDMChannel = await user.GetOrCreateDMChannelAsync();
+            await iDMChannel.SendMessageAsync("", false, dmMessage);
+
+            await server.AddBanAsync(pMsg.Author, 7, "Profanity detected in discord chat. Check server logs for more information.");
+            outgoingMessages++;
         }
 
         Timer timerStatus, timerMessage;
