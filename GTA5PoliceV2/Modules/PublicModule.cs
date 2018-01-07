@@ -27,7 +27,7 @@ namespace GTA5PoliceV2.Modules
             if (difference >= Cooldowns.GetCommandCooldown() || difference < 0)
             {
                 ServerStatus status = new ServerStatus();
-                status.pingServers();
+                status.PingServers();
 
                 await status.DisplayStatusAsync(channel, user);
                 await Program.Logger(new LogMessage(LogSeverity.Info, "GTA5Police", "Status command was used by " + user + "."));

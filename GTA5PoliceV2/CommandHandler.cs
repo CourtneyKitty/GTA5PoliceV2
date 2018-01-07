@@ -156,7 +156,7 @@ namespace GTA5PoliceV2
 
         public async void SendStatusAsync(object state)
         {
-            status.pingServers();
+            status.PingServers();
             if (ny != status.getNyStatus())
             {
                 Statistics.AddStatusChanges();
