@@ -6,6 +6,8 @@ using GTA5PoliceV2.Util;
 using GTA5PoliceV2.Connection;
 using Discord;
 using Discord.WebSocket;
+using System.Diagnostics;
+using System;
 
 namespace GTA5PoliceV2.Modules
 {
@@ -179,6 +181,16 @@ namespace GTA5PoliceV2.Modules
                     Statistics.AddOutgoingMessages();
                 }
             }
+        }
+
+        int restartTime = 30;
+        [Command("restart")]
+        public async Task RestartAsync()
+        {
+            await Program.Logger(new LogMessage(LogSeverity.Info, "GTA5Police", "Terminating bot for restart..."));
+            // Terminate
+            var wait = Task.Run(async () => { if (restartTime == 0) await Task.Delay(2500); else await Task.Delay(restartTime * 1000); });
+            // Run
         }
     }
 }
