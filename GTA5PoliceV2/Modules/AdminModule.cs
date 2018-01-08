@@ -191,6 +191,7 @@ namespace GTA5PoliceV2.Modules
             // Terminate
             var wait = Task.Run(async () => { if (restartTime == 0) await Task.Delay(2500); else await Task.Delay(restartTime * 1000); });
             // Run
+            await Program.Logger(new LogMessage(LogSeverity.Info, "GTA5Police", "This will probably never work and never properly be implemented!.."));
         }
     }
 }
