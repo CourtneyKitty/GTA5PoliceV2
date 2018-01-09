@@ -183,6 +183,42 @@ namespace GTA5PoliceV2.Modules
             }
         }
 
+        [Command("ban")]
+        [RequireUserPermission(GuildPermission.BanMembers)]
+        [Alias("b")]
+        public async Task BanAsync(IUser user = null, [Remainder] string reason = null)
+        {
+            Errors errors = new Errors();
+
+            if (user == null) await errors.sendErrorTempAsync(Context.Channel, "Please mention the user you would like to ban.", Colours.errorCol);
+            if (reason == null) await errors.sendErrorTempAsync(Context.Channel, "Please provide a reason for the ban!", Colours.errorCol);
+
+            if (user != null && reason != null)
+            {
+                //await Context.Guild.AddBanAsync(user, 7, reason);
+
+                IUser banHammerOwner = Context.Message.Author;
+                int banDay = DateTime.Now.Day;
+                int banMonth = DateTime.Now.Month;
+                int banYear = DateTime.Now.Year;
+                TimeSpan banTime = DateTime.Now.TimeOfDay;
+
+                var embed = new EmbedBuilder() { Color = Colours.errorCol };
+                embed.WithAuthor("User was banned from Discord");
+                embed.WithThumbnailUrl(References.GetGta5policeLogo());
+                embed.AddField(new EmbedFieldBuilder() { Name = "Discord User", Value = user.Username.ToString(), IsInline = true });
+                embed.AddField(new EmbedFieldBuilder() { Name = "Discord Id", Value = user.Id, IsInline = true });
+                embed.AddField(new EmbedFieldBuilder() { Name = "Reason", Value = reason, IsInline = false });
+                embed.AddField(new EmbedFieldBuilder() { Name = "Banned By", Value = banHammerOwner, IsInline = true });
+                embed.AddField(new EmbedFieldBuilder() { Name = "Time", Value = banMonth + "/" + banDay + "/" + banYear + " - " + banTime, IsInline = true });
+
+                await Context.Channel.SendMessageAsync("", false, embed);
+
+                await Program.Logger(new LogMessage(LogSeverity.Info, "GTA5Police", "Ban command was used by " + Context.User + "."));
+                Statistics.AddOutgoingMessages();
+            }
+        }
+
         int restartTime = 30;
         [Command("restart")]
         public async Task RestartAsync()

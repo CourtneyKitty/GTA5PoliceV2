@@ -139,6 +139,7 @@ namespace GTA5PoliceV2
         bool ny, la, nywl, lawl;
         SocketGuild server;
         IMessageChannel channel;
+        IMessage nyStatusMessage, laStatusMessage, nyWlStatusMessage, laWlStatusMessage;
 
         public async Task StartTimersAsync()
         {
@@ -160,6 +161,7 @@ namespace GTA5PoliceV2
             if (ny != status.getNyStatus())
             {
                 Statistics.AddStatusChanges();
+                await nyStatusMessage.DeleteAsync();
                 if (References.IsStartUp == true)
                 {
                     if (status.getNyStatus()) await success.sendSuccessTempAsync(channel, "Server Status Change", "New York has come online!", Colours.generalCol, References.GetDashboardURL(), 5);
@@ -175,6 +177,7 @@ namespace GTA5PoliceV2
             if (la != status.getLaStatus())
             {
                 Statistics.AddStatusChanges();
+                await laStatusMessage.DeleteAsync();
                 if (References.IsStartUp == true)
                 {
                     if (status.getLaStatus()) await success.sendSuccessTempAsync(channel, "Server Status Change", "Los Angeles has come online!", Colours.generalCol, References.GetDashboardURL(), 5);
@@ -190,6 +193,7 @@ namespace GTA5PoliceV2
             if (nywl != status.getNyWlStatus())
             {
                 Statistics.AddStatusChanges();
+                await nyWlStatusMessage.DeleteAsync();
                 if (References.IsStartUp == true)
                 {
                     if (status.getNyWlStatus()) await success.sendSuccessTempAsync(channel, "Server Status Change", "New York Whitelist has come online!", Colours.generalCol, References.GetDashboardURL(), 5);
@@ -205,6 +209,7 @@ namespace GTA5PoliceV2
             if (lawl != status.getLaWlStatus())
             {
                 Statistics.AddStatusChanges();
+                await laWlStatusMessage.DeleteAsync();
                 if (References.IsStartUp == true)
                 {
                     if (status.getLaWlStatus()) await success.sendSuccessTempAsync(channel, "Server Status Change", "Los Angeles Whitelist has come online!", Colours.generalCol, References.GetDashboardURL(), 5);
