@@ -86,6 +86,7 @@ namespace GTA5PoliceV2
             string connectionsLoc = Path.Combine(AppContext.BaseDirectory, "configuration/connections_config.json");
             string urlsLoc = Path.Combine(AppContext.BaseDirectory, "configuration/url_config.json");
             string devConfigLoc = Path.Combine(AppContext.BaseDirectory, "configuration/dev_config.json");
+            string ranksConfigLoc = Path.Combine(AppContext.BaseDirectory, "configuration/ranks_config.json");
 
             if (!File.Exists(configLoc))
             {
@@ -168,6 +169,16 @@ namespace GTA5PoliceV2
                 Logger(new LogMessage(LogSeverity.Debug, "GTA5Police", "Dev config generated"));
             }
             Logger(new LogMessage(LogSeverity.Debug, "GTA5Police", "Developer configuration has been loaded"));
+
+            if (!File.Exists(ranksConfigLoc))
+            {
+                var config = new RanksConfig();
+                config.EMSHighRanks = 0;
+                config.PDHighRanks = 0;
+                config.Save();
+                Logger(new LogMessage(LogSeverity.Debug, "GTA5Police", "Ranks config generated"));
+            }
+            Logger(new LogMessage(LogSeverity.Debug, "GTA5Police", "Ranks configuration has been loaded"));
         }
         public IServiceProvider ConfigureServices()
         {

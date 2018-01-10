@@ -40,5 +40,22 @@ namespace GTA5PoliceV2.Config
             }
             return config;
         }
+
+        public static RanksConfig UpdateRanksConfig(RanksConfig config)
+        {
+            config.EMSHighRanks = RanksConfig.Load().EMSHighRanks;
+            for (int j = 0; j <= RanksConfig.Load().EMSHighRanks - 1; j++)
+            {
+                config.EMSHighRanksArray[j] = RanksConfig.Load().EMSHighRanksArray[j];
+            }
+
+            config.PDHighRanks = RanksConfig.Load().PDHighRanks;
+            for (int j = 0; j <= RanksConfig.Load().PDHighRanks - 1; j++)
+            {
+                config.PDHighRanksArray[j] = RanksConfig.Load().PDHighRanksArray[j];
+            }
+
+            return config;
+        }
     }
 }

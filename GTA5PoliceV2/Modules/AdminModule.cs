@@ -220,23 +220,6 @@ namespace GTA5PoliceV2.Modules
             }
         }
 
-        [Command("emsadd")]
-        public async Task EmsAddAsync(IGuildUser user = null, [Remainder] IRole rank = null)
-        {
-            await Context.Message.DeleteAsync();
-
-            Errors errors = new Errors();
-            if (user == null) await errors.sendErrorTempAsync(Context.Channel, "Please enter the user you would like to add.", Colours.errorCol);
-            if (user == null) await errors.sendErrorTempAsync(Context.Channel, "Please enter the rank you would like to add the user to.", Colours.errorCol);
-
-            Success success = new Success();
-            if (user != null && rank !=null)
-            {
-                await user.AddRoleAsync(rank);
-                await success.sendSuccessTempAsync(Context.Channel, "Successful!", "Successfully added " + user + " to " + rank + "!", Colours.adminCol);
-            }
-        }
-
         [Command("kick")]
         [RequireUserPermission(GuildPermission.KickMembers)]
         [Alias("k")]
@@ -272,6 +255,27 @@ namespace GTA5PoliceV2.Modules
 
                 await Program.Logger(new LogMessage(LogSeverity.Info, "GTA5Police", "Kick command was used by " + Context.User + "."));
                 Statistics.AddOutgoingMessages();
+            }
+        }
+
+        [Command("emsadd")]
+        public async Task EmsAddAsync(IGuildUser user = null, [Remainder] IRole rank = null)
+        {
+            await Context.Message.DeleteAsync();
+
+            Errors errors = new Errors();
+            if (user == null) await errors.sendErrorTempAsync(Context.Channel, "Please enter the user you would like to add.", Colours.errorCol);
+            if (user == null) await errors.sendErrorTempAsync(Context.Channel, "Please enter the rank you would like to add the user to.", Colours.errorCol);
+
+            Success success = new Success();
+            if (user != null && rank != null)
+            {
+                if (rank.Name.ToLower().Equals("ems probationary") || rank.Name.ToLower().Equals("ems paramedic") || rank.Name.ToLower().Equals("ems specialist/doctor"))
+                {
+                    await user.AddRoleAsync(rank);
+                    await success.sendSuccessTempAsync(Context.Channel, "Successful!", "Successfully added " + user + " to " + rank + "!", Colours.adminCol);
+                }
+                else await errors.sendErrorTempAsync(Context.Channel, "That isn't even a ems rank you fool!", Colours.errorCol);
             }
         }
 
