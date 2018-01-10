@@ -224,12 +224,18 @@ namespace GTA5PoliceV2.Modules
         [Command("restart")]
         public async Task RestartAsync()
         {
-            await Context.Message.DeleteAsync();
+            for (int i = 0; i <= BotConfig.Load().Commanders - 1; i++)
+            {
+                if (Context.User.Id == BotConfig.Load().BotCommanders[i])
+                {
+                    await Context.Message.DeleteAsync();
 
-            await Program.Logger(new LogMessage(LogSeverity.Info, "GTA5Police", "Attempting restart..."));
-            if (References.IsStartUp() == false) References.SetStartUp(true);
-            await Cooldowns.ResetCommandCooldownAsync();
-            Program.Main(null);
+                    await Program.Logger(new LogMessage(LogSeverity.Info, "GTA5Police", "Attempting restart..."));
+                    if (References.IsStartUp() == false) References.SetStartUp(true);
+                    await Cooldowns.ResetCommandCooldownAsync();
+                    Program.Main(null);
+                }
+            }
         }
     }
 }
