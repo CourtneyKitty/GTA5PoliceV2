@@ -28,6 +28,9 @@ namespace GTA5PoliceV2.Util
         public static string GetTaxiURL() { return UrlConfig.Load().Taxi; }
         public static string GetStreamURL() { return UrlConfig.Load().Stream; }
 
-        public static bool IsStartUp = true;
+        private static bool startUp = true;
+
+        public static bool IsStartUp() { return startUp; }
+        public static void SetStartUp(bool isStartUp) { startUp = isStartUp; }
     }
 }

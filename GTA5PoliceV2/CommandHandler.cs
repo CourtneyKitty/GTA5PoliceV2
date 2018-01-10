@@ -160,7 +160,7 @@ namespace GTA5PoliceV2
             if (ny != status.getNyStatus())
             {
                 Statistics.AddStatusChanges();
-                if (References.IsStartUp == true)
+                if (References.IsStartUp() == true)
                 {
                     if (status.getNyStatus()) await success.sendSuccessTempAsync(channel, "Server Status Change", "New York has come online!", Colours.generalCol, References.GetDashboardURL(), 5);
                     if (!status.getNyStatus()) await success.sendSuccessTempAsync(channel, "Server Status Change", "New York has gone offline!", Colours.generalCol, References.GetDashboardURL(), 5);
@@ -175,7 +175,7 @@ namespace GTA5PoliceV2
             if (la != status.getLaStatus())
             {
                 Statistics.AddStatusChanges();
-                if (References.IsStartUp == true)
+                if (References.IsStartUp() == true)
                 {
                     if (status.getLaStatus()) await success.sendSuccessTempAsync(channel, "Server Status Change", "Los Angeles has come online!", Colours.generalCol, References.GetDashboardURL(), 5);
                     if (!status.getLaStatus()) await success.sendSuccessTempAsync(channel, "Server Status Change", "Los Angeles has gone offline!", Colours.generalCol, References.GetDashboardURL(), 5);
@@ -190,7 +190,7 @@ namespace GTA5PoliceV2
             if (nywl != status.getNyWlStatus())
             {
                 Statistics.AddStatusChanges();
-                if (References.IsStartUp == true)
+                if (References.IsStartUp() == true)
                 {
                     if (status.getNyWlStatus()) await success.sendSuccessTempAsync(channel, "Server Status Change", "New York Whitelist has come online!", Colours.generalCol, References.GetDashboardURL(), 5);
                     if (!status.getNyWlStatus()) await success.sendSuccessTempAsync(channel, "Server Status Change", "New York Whitelist has gone offline!", Colours.generalCol, References.GetDashboardURL(), 5);
@@ -205,7 +205,7 @@ namespace GTA5PoliceV2
             if (lawl != status.getLaWlStatus())
             {
                 Statistics.AddStatusChanges();
-                if (References.IsStartUp == true)
+                if (References.IsStartUp() == true)
                 {
                     if (status.getLaWlStatus()) await success.sendSuccessTempAsync(channel, "Server Status Change", "Los Angeles Whitelist has come online!", Colours.generalCol, References.GetDashboardURL(), 5);
                     if (!status.getLaWlStatus()) await success.sendSuccessTempAsync(channel, "Server Status Change", "Los Angeles Whitelist has gone offline!", Colours.generalCol, References.GetDashboardURL(), 5);
@@ -217,7 +217,7 @@ namespace GTA5PoliceV2
                 }
                 lawl = status.getLaWlStatus();
             }
-            if (References.IsStartUp == true) References.IsStartUp = false;
+            if (References.IsStartUp() == true) References.SetStartUp(false);
         }
 
         public async void SendMessageAsync(object state)

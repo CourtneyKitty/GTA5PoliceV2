@@ -182,7 +182,7 @@ namespace GTA5PoliceV2.Modules
                 }
             }
         }
-
+        
         [Command("ban")]
         [RequireUserPermission(GuildPermission.BanMembers)]
         [Alias("b")]
@@ -195,7 +195,7 @@ namespace GTA5PoliceV2.Modules
 
             if (user != null && reason != null)
             {
-                //await Context.Guild.AddBanAsync(user, 7, reason);
+                await Context.Guild.AddBanAsync(user, 7, reason);
 
                 IUser banHammerOwner = Context.Message.Author;
                 int banDay = DateTime.Now.Day;
@@ -212,7 +212,8 @@ namespace GTA5PoliceV2.Modules
                 embed.AddField(new EmbedFieldBuilder() { Name = "Banned By", Value = banHammerOwner, IsInline = true });
                 embed.AddField(new EmbedFieldBuilder() { Name = "Time", Value = banMonth + "/" + banDay + "/" + banYear + " - " + banTime, IsInline = true });
 
-                await Context.Channel.SendMessageAsync("", false, embed);
+                var chan = await Context.Guild.GetTextChannelAsync(BotConfig.Load().LogsId);
+                await chan.SendMessageAsync("", false, embed);
 
                 await Program.Logger(new LogMessage(LogSeverity.Info, "GTA5Police", "Ban command was used by " + Context.User + "."));
                 Statistics.AddOutgoingMessages();
@@ -223,11 +224,12 @@ namespace GTA5PoliceV2.Modules
         [Command("restart")]
         public async Task RestartAsync()
         {
-            await Program.Logger(new LogMessage(LogSeverity.Info, "GTA5Police", "Terminating bot for restart..."));
-            // Terminate
-            var wait = Task.Run(async () => { if (restartTime == 0) await Task.Delay(2500); else await Task.Delay(restartTime * 1000); });
-            // Run
-            await Program.Logger(new LogMessage(LogSeverity.Info, "GTA5Police", "This will probably never work and never properly be implemented!.."));
+            await Context.Message.DeleteAsync();
+
+            await Program.Logger(new LogMessage(LogSeverity.Info, "GTA5Police", "Attempting restart..."));
+            if (References.IsStartUp() == false) References.SetStartUp(true);
+            await Cooldowns.ResetCommandCooldownAsync();
+            Program.Main(null);
         }
     }
 }
