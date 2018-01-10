@@ -17,10 +17,10 @@ namespace GTA5PoliceV2.Config
 
         public RanksConfig()
         {
-            EMSHighRanks = 0;
-            EMSHighRanksArray = new string[16];
-            PDHighRanks = 0;
-            PDHighRanksArray = new string[16];
+            EMSHighRanks = 2;
+            EMSHighRanksArray = new string[2];
+            PDHighRanks = 5;
+            PDHighRanksArray = new string[5];
         }
 
         public void Save(string dir = "configuration/ranks_config.json")

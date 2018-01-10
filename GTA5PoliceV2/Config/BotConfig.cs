@@ -23,6 +23,8 @@ namespace GTA5PoliceV2.Config
         public ulong[] BotCommanders { get; set; }
         public int Filters { get; set; }
         public string[] FilteredWords { get; set; }
+        public bool PoliceAdd { get; set; }
+        public bool EmsAdd { get; set; }
 
         public BotConfig()
         {
@@ -39,6 +41,8 @@ namespace GTA5PoliceV2.Config
             BotCommanders = new ulong[10];
             Filters = 4;
             FilteredWords = new string[20];
+            PoliceAdd = false;
+            EmsAdd = false;
         }
 
         public void Save(string dir = "configuration/config.json")

@@ -111,6 +111,8 @@ namespace GTA5PoliceV2
                 config.FilteredWords[1] = "Nigger";
                 config.FilteredWords[2] = "Nibba";
                 config.FilteredWords[3] = "Chink";
+                config.PoliceAdd = false;
+                config.EmsAdd = false;
                 config.Save();
                 Logger(new LogMessage(LogSeverity.Debug, "GTA5Police", "Bot config generated"));
             }
@@ -173,8 +175,8 @@ namespace GTA5PoliceV2
             if (!File.Exists(ranksConfigLoc))
             {
                 var config = new RanksConfig();
-                config.EMSHighRanks = 0;
-                config.PDHighRanks = 0;
+                config.EMSHighRanks = 2;
+                config.PDHighRanks = 5;
                 config.Save();
                 Logger(new LogMessage(LogSeverity.Debug, "GTA5Police", "Ranks config generated"));
             }

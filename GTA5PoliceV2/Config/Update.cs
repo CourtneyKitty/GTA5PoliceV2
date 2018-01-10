@@ -19,6 +19,8 @@ namespace GTA5PoliceV2.Config
             config.CommandCooldown = BotConfig.Load().CommandCooldown;
             config.Commanders = BotConfig.Load().Commanders;
             config.Filters = BotConfig.Load().Filters;
+            config.PoliceAdd = BotConfig.Load().PoliceAdd;
+            config.EmsAdd = BotConfig.Load().EmsAdd;
             for (int j = 0; j <= BotConfig.Load().Commanders - 1; j++)
             {
                 config.BotCommanders[j] = BotConfig.Load().BotCommanders[j];
