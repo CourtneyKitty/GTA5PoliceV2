@@ -182,7 +182,7 @@ namespace GTA5PoliceV2.Modules
                 }
             }
         }
-        
+
         [Command("ban")]
         [RequireUserPermission(GuildPermission.BanMembers)]
         [Alias("b")]
@@ -216,6 +216,61 @@ namespace GTA5PoliceV2.Modules
                 await chan.SendMessageAsync("", false, embed);
 
                 await Program.Logger(new LogMessage(LogSeverity.Info, "GTA5Police", "Ban command was used by " + Context.User + "."));
+                Statistics.AddOutgoingMessages();
+            }
+        }
+
+        [Command("emsadd")]
+        public async Task EmsAddAsync(IGuildUser user = null, [Remainder] IRole rank = null)
+        {
+            await Context.Message.DeleteAsync();
+
+            Errors errors = new Errors();
+            if (user == null) await errors.sendErrorTempAsync(Context.Channel, "Please enter the user you would like to add.", Colours.errorCol);
+            if (user == null) await errors.sendErrorTempAsync(Context.Channel, "Please enter the rank you would like to add the user to.", Colours.errorCol);
+
+            Success success = new Success();
+            if (user != null && rank !=null)
+            {
+                await user.AddRoleAsync(rank);
+                await success.sendSuccessTempAsync(Context.Channel, "Successful!", "Successfully added " + user + " to " + rank + "!", Colours.adminCol);
+            }
+        }
+
+        [Command("kick")]
+        [RequireUserPermission(GuildPermission.KickMembers)]
+        [Alias("k")]
+        public async Task KickAsync(IUser user = null, [Remainder] string reason = null)
+        {
+            Errors errors = new Errors();
+
+            if (user == null) await errors.sendErrorTempAsync(Context.Channel, "Please mention the user you would like to kick.", Colours.errorCol);
+            if (reason == null) await errors.sendErrorTempAsync(Context.Channel, "Please provide a reason for the kick!", Colours.errorCol);
+
+            if (user != null && reason != null)
+            {
+                await Context.Guild.AddBanAsync(user, 0, reason);
+                await Context.Guild.RemoveBanAsync(user);
+
+                IUser kickHammerOwner = Context.Message.Author;
+                int kickDay = DateTime.Now.Day;
+                int kickMonth = DateTime.Now.Month;
+                int kickYear = DateTime.Now.Year;
+                TimeSpan kickTime = DateTime.Now.TimeOfDay;
+
+                var embed = new EmbedBuilder() { Color = Colours.errorCol };
+                embed.WithAuthor("User was kicked from Discord");
+                embed.WithThumbnailUrl(References.GetGta5policeLogo());
+                embed.AddField(new EmbedFieldBuilder() { Name = "Discord User", Value = user.Username.ToString(), IsInline = true });
+                embed.AddField(new EmbedFieldBuilder() { Name = "Discord Id", Value = user.Id, IsInline = true });
+                embed.AddField(new EmbedFieldBuilder() { Name = "Reason", Value = reason, IsInline = false });
+                embed.AddField(new EmbedFieldBuilder() { Name = "Kicked By", Value = kickHammerOwner, IsInline = true });
+                embed.AddField(new EmbedFieldBuilder() { Name = "Time", Value = kickMonth + "/" + kickDay + "/" + kickYear + " - " + kickTime, IsInline = true });
+
+                var chan = await Context.Guild.GetTextChannelAsync(BotConfig.Load().LogsId);
+                await chan.SendMessageAsync("", false, embed);
+
+                await Program.Logger(new LogMessage(LogSeverity.Info, "GTA5Police", "Kick command was used by " + Context.User + "."));
                 Statistics.AddOutgoingMessages();
             }
         }
