@@ -197,6 +197,7 @@ namespace GTA5PoliceV2.Modules
 
             if (user != null && reason != null)
             {
+                BanChecks.SetIsCommandBan();
                 await Context.Guild.AddBanAsync(user, 7, reason);
 
                 IUser banHammerOwner = Context.Message.Author;
@@ -214,7 +215,6 @@ namespace GTA5PoliceV2.Modules
                 embed.AddField(new EmbedFieldBuilder() { Name = "Banned By", Value = banHammerOwner, IsInline = true });
                 embed.AddField(new EmbedFieldBuilder() { Name = "Time", Value = banMonth + "/" + banDay + "/" + banYear + " - " + banTime, IsInline = true });
 
-                BanChecks.SetIsCommandBan();
                 var chan = await Context.Guild.GetTextChannelAsync(BotConfig.Load().LogsId);
                 await chan.SendMessageAsync("", false, embed);
 
@@ -235,8 +235,12 @@ namespace GTA5PoliceV2.Modules
 
             if (user != null && reason != null)
             {
-                await Context.Guild.AddBanAsync(user, 0, reason);
-                await Context.Guild.RemoveBanAsync(user);
+                BanChecks.SetIsCommandBan();
+
+                var userName = user as SocketGuildUser;
+                await userName.KickAsync();
+                //await Context.Guild.AddBanAsync(user, 0, reason);
+                //await Context.Guild.RemoveBanAsync(user);
 
                 IUser kickHammerOwner = Context.Message.Author;
                 int kickDay = DateTime.Now.Day;

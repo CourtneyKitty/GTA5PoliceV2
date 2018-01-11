@@ -87,17 +87,21 @@ namespace GTA5PoliceV2
         }
         public async Task AnnounceUnbannedUserAsync(SocketUser user, SocketGuild guild)
         {
-            var server = bot.Guilds.FirstOrDefault(x => x.Id == BotConfig.Load().ServerId);
-            var logChannel = server.GetTextChannel(BotConfig.Load().LogsId);
+            if (!BanChecks.GetIsCommandBan())
+            {
+                var server = bot.Guilds.FirstOrDefault(x => x.Id == BotConfig.Load().ServerId);
+                var logChannel = server.GetTextChannel(BotConfig.Load().LogsId);
 
-            var logEmbed = new EmbedBuilder() { Color = Colours.adminCol };
-            logEmbed.WithAuthor("User was unbanned from Discord");
-            logEmbed.WithThumbnailUrl(References.GetGta5policeLogo());
-            logEmbed.AddField(new EmbedFieldBuilder() { Name = "Discord User", Value = user.Username.ToString(), IsInline = true });
-            logEmbed.AddField(new EmbedFieldBuilder() { Name = "DiscordId", Value = user.Id, IsInline = true });
+                var logEmbed = new EmbedBuilder() { Color = Colours.adminCol };
+                logEmbed.WithAuthor("User was unbanned from Discord");
+                logEmbed.WithThumbnailUrl(References.GetGta5policeLogo());
+                logEmbed.AddField(new EmbedFieldBuilder() { Name = "Discord User", Value = user.Username.ToString(), IsInline = true });
+                logEmbed.AddField(new EmbedFieldBuilder() { Name = "DiscordId", Value = user.Id, IsInline = true });
 
-            await logChannel.SendMessageAsync("", false, logEmbed);
-            Statistics.AddOutgoingMessages();
+                await logChannel.SendMessageAsync("", false, logEmbed);
+                Statistics.AddOutgoingMessages();
+            }
+            BanChecks.ResetIsCommandBan();
         }
 
         public async Task SetGameAsync() { await bot.SetGameAsync("GTA5Police.com"); }
