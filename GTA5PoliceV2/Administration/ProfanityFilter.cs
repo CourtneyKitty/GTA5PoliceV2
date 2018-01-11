@@ -33,7 +33,7 @@ namespace GTA5PoliceV2.Administration
 
             if (message.ToString().ToLower().Contains("@y'all"))
             {
-                if ((message.Author as IGuildUser).GuildPermissions.MentionEveryone)
+                if (!(message.Author as IGuildUser).GuildPermissions.MentionEveryone)
                 {
                     var msg = await message.Channel.SendMessageAsync("@everyone");
                     await msg.DeleteAsync();
