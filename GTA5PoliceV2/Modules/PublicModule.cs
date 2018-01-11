@@ -53,6 +53,7 @@ namespace GTA5PoliceV2.Modules
                 var embed = new EmbedBuilder() { Color = Colours.generalCol };
                 embed.WithAuthor("GTA5Police Rules", References.GetGta5policeLogo());
                 embed.Title = "Click to view all GTA5Police rules.";
+                embed.Description = "**Teamspeak IP: gta5police.com**";
                 embed.WithUrl(References.GetRulesURL());
                 embed.WithThumbnailUrl(References.GetGta5policeLogo());
                 embed.WithImageUrl(References.GetHowBanURL());
@@ -85,7 +86,7 @@ namespace GTA5PoliceV2.Modules
             {
                 var embed = new EmbedBuilder() { Color = Colours.generalCol };
                 embed.WithAuthor("GTA5Police Links", References.GetGta5policeLogo());
-                embed.Description = "Useful GTA5Police links for you. Teamspeak IP: gta5police.com";
+                embed.Description = "Useful GTA5Police links for you.\n**Teamspeak IP: gta5police.com**";
                 embed.WithThumbnailUrl(References.GetGta5policeLogo());
                 embed.AddField(new EmbedFieldBuilder() { Name = "Website", Value = References.GetWebsiteURL() });
                 embed.AddField(new EmbedFieldBuilder() { Name = "Dashboard", Value = References.GetDashboardURL() });
@@ -123,14 +124,14 @@ namespace GTA5PoliceV2.Modules
                 var embed = new EmbedBuilder() { Color = Colours.generalCol };
                 embed.WithAuthor("GTA5Police Applications", References.GetGta5policeLogo());
                 embed.WithUrl(References.GetApplicationsURL());
-                embed.Description = "Whitelist jobs and server applications.";
+                embed.Description = "Whitelist jobs and server applications.\n**Teamspeak IP: gta5police.com**";
                 embed.WithThumbnailUrl(References.GetGta5policeLogo());
                 embed.AddField(new EmbedFieldBuilder() { Name = "Whitelist Servers", Value = References.GetWhitelistURL() });
                 embed.AddField(new EmbedFieldBuilder() { Name = "Police", Value = References.GetPoliceURL() });
                 embed.AddField(new EmbedFieldBuilder() { Name = "EMS", Value = References.GetEmsURL() });
                 embed.AddField(new EmbedFieldBuilder() { Name = "Mechanic", Value = References.GetMechanicURL() });
                 embed.AddField(new EmbedFieldBuilder() { Name = "Taxi", Value = References.GetTaxiURL() });
-                embed.AddField(new EmbedFieldBuilder() { Name = "Stream Notifications", Value = References.GetStreamURL() });
+                embed.AddField(new EmbedFieldBuilder() { Name = "Stream Verification", Value = References.GetStreamURL() });
                 embed.WithFooter("Requested by " + Context.User);
                 embed.WithCurrentTimestamp();
 
@@ -193,7 +194,7 @@ namespace GTA5PoliceV2.Modules
                 var embed = new EmbedBuilder() { Color = Colours.generalCol };
                 var blankField = new EmbedFieldBuilder() { Name = "\u200b", Value = "\u200b" };
                 embed.WithAuthor("Bot Uptime and Statistics", References.GetGta5policeLogo());
-                embed.WithDescription("Here are all the statistics since last startup.");
+                embed.WithDescription("Here are all the statistics since last startup.\n**Teamspeak IP: gta5police.com**");
                 embed.WithThumbnailUrl(References.GetGta5policeLogo());
                 embed.WithUrl("http://www.blurrdev.com/gta5police.html");
                 embed.AddField(new EmbedFieldBuilder() { Name = "Bot Uptime", Value = DateTime.Now.TimeOfDay - Cooldowns.GetStartupTime() });

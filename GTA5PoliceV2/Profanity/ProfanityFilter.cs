@@ -19,7 +19,7 @@ namespace GTA5PoliceV2.Profanity
             if (message == null)
                 return;
 
-            if (message.ToString().ToLower().Contains("where rp") || message.ToString().ToLower().Contains("wheres rp"))
+            if (message.ToString().ToLower().Contains("where rp") || message.ToString().ToLower().Contains("wheres rp") || message.ToString().ToLower().Contains("admen"))
             {
                 await Program.Logger(new LogMessage(LogSeverity.Critical, "NEWB", "ADMEN NEEDED!"));
                 var embed = new EmbedBuilder() { Color = Colours.adminCol };
@@ -28,6 +28,7 @@ namespace GTA5PoliceV2.Profanity
                 embed.WithDescription("RP is **everywhere!**");
                 embed.WithCurrentTimestamp();
                 await message.Channel.SendMessageAsync("", false, embed);
+                Statistics.AddOutgoingMessages();
             }
 
             for (int i = 0; i <= BotConfig.Load().Filters - 1; i++)
