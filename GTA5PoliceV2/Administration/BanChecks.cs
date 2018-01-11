@@ -17,5 +17,10 @@ namespace GTA5PoliceV2.Administration
         {
             isCommandBan = true;
         }
+
+        public static void ResetIsCommandBan()
+        {
+            isCommandBan = false;
+        }
     }
 }

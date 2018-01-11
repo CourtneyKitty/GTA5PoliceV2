@@ -9,6 +9,7 @@ using Discord.WebSocket;
 using System.Diagnostics;
 using System;
 using System.Linq;
+using GTA5PoliceV2.Administration;
 
 namespace GTA5PoliceV2.Modules
 {
@@ -213,6 +214,7 @@ namespace GTA5PoliceV2.Modules
                 embed.AddField(new EmbedFieldBuilder() { Name = "Banned By", Value = banHammerOwner, IsInline = true });
                 embed.AddField(new EmbedFieldBuilder() { Name = "Time", Value = banMonth + "/" + banDay + "/" + banYear + " - " + banTime, IsInline = true });
 
+                BanChecks.SetIsCommandBan();
                 var chan = await Context.Guild.GetTextChannelAsync(BotConfig.Load().LogsId);
                 await chan.SendMessageAsync("", false, embed);
 
