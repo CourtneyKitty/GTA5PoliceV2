@@ -1,4 +1,5 @@
-﻿using Discord.WebSocket;
+﻿using Discord;
+using Discord.WebSocket;
 using GTA5PoliceV2.Config;
 using GTA5PoliceV2.Util;
 using System;
@@ -14,8 +15,20 @@ namespace GTA5PoliceV2.Profanity
         public static async Task ProfanityCheckAsync(SocketMessage pMsg)
         {
             var message = pMsg as SocketUserMessage;
+            var user = pMsg.Author;
             if (message == null)
                 return;
+
+            if (message.ToString().ToLower().Contains("where rp") || message.ToString().ToLower().Contains("wheres rp"))
+            {
+                await Program.Logger(new LogMessage(LogSeverity.Critical, "NEWB", "ADMEN NEEDED!"));
+                var embed = new EmbedBuilder() { Color = Colours.adminCol };
+                embed.WithAuthor(user.Username.ToString(), user.GetAvatarUrl());
+                embed.WithTitle("ADMEN WHERE RP");
+                embed.WithDescription("RP is **everywhere!**");
+                embed.WithCurrentTimestamp();
+                await message.Channel.SendMessageAsync("", false, embed);
+            }
 
             for (int i = 0; i <= BotConfig.Load().Filters - 1; i++)
             {
