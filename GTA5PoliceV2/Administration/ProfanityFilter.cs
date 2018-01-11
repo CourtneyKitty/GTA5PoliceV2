@@ -19,7 +19,7 @@ namespace GTA5PoliceV2.Administration
             if (message == null)
                 return;
 
-            if (message.ToString().ToLower().Contains("where rp") || message.ToString().ToLower().Contains("wheres rp") || message.ToString().ToLower().Contains("admen"))
+            if (message.ToString().ToLower().Contains("where rp") || message.ToString().ToLower().Contains("wheres rp") || message.ToString().ToLower().Contains("admen") || message.ToString().ToLower().Contains("where is rp"))
             {
                 await Program.Logger(new LogMessage(LogSeverity.Critical, "NEWB", "ADMEN NEEDED!"));
                 var embed = new EmbedBuilder() { Color = Colours.adminCol };
