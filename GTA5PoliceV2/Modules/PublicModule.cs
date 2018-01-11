@@ -70,6 +70,7 @@ namespace GTA5PoliceV2.Modules
         }
 
         [Command("links")]
+        [Alias("teamspeak", "ts")]
         public async Task Links()
         {
             var channel = Context.Channel;

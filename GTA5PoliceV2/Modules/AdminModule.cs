@@ -262,39 +262,80 @@ namespace GTA5PoliceV2.Modules
         [Command("emsadd")]
         public async Task EmsAddAsync(IGuildUser user = null, [Remainder] IRole rank = null)
         {
-            Statistics.AddCommandRequests();
-
-            var author = Context.Message.Author as SocketGuildUser;
-            bool isHigh = false;
-
-            for (int i = 0; i <= RanksConfig.Load().EMSHighRanks - 1; i++)
+            if (BotConfig.Load().EmsAdd)
             {
-                var role = (author as IGuildUser).Guild.Roles.FirstOrDefault(x => x.Name == RanksConfig.Load().EMSHighRanksArray[i]);
-                if (author.Roles.Contains(role)) isHigh = true;
-            }
+                Statistics.AddCommandRequests();
 
-            if (isHigh)
-            {
-                await Context.Message.DeleteAsync();
+                var author = Context.Message.Author as SocketGuildUser;
+                bool isHigh = false;
 
-                Errors errors = new Errors();
-                if (user == null) await errors.sendErrorTempAsync(Context.Channel, "Please enter the user you would like to add.", Colours.errorCol);
-                if (user == null) await errors.sendErrorTempAsync(Context.Channel, "Please enter the rank you would like to add the user to.", Colours.errorCol);
-
-                Success success = new Success();
-                if (user != null && rank != null)
+                for (int i = 0; i <= RanksConfig.Load().EMSHighRanks - 1; i++)
                 {
-                    if (rank.Name.ToLower().Equals("ems probationary") || rank.Name.ToLower().Equals("ems paramedic") || rank.Name.ToLower().Equals("ems specialist/doctor"))
+                    var role = (author as IGuildUser).Guild.Roles.FirstOrDefault(x => x.Name == RanksConfig.Load().EMSHighRanksArray[i]);
+                    if (author.Roles.Contains(role)) isHigh = true;
+                }
+
+                if (isHigh)
+                {
+                    await Context.Message.DeleteAsync();
+
+                    Errors errors = new Errors();
+                    if (user == null) await errors.sendErrorTempAsync(Context.Channel, "Please enter the user you would like to add.", Colours.errorCol);
+                    if (user == null) await errors.sendErrorTempAsync(Context.Channel, "Please enter the rank you would like to add the user to.", Colours.errorCol);
+
+                    Success success = new Success();
+                    if (user != null && rank != null)
                     {
-                        await user.AddRoleAsync(rank);
-                        await success.sendSuccessTempAsync(Context.Channel, "Successful!", "Successfully added " + user + " to " + rank + "!", Colours.adminCol);
+                        if (rank.Name.ToLower().Equals("ems probationary") || rank.Name.ToLower().Equals("ems paramedic") || rank.Name.ToLower().Equals("ems specialist/doctor"))
+                        {
+                            await user.AddRoleAsync(rank);
+                            await success.sendSuccessTempAsync(Context.Channel, "Successful!", "Successfully added " + user + " to " + rank + "!", Colours.adminCol);
+                        }
+                        else await errors.sendErrorTempAsync(Context.Channel, "That isn't even a ems rank you fool!", Colours.errorCol);
                     }
-                    else await errors.sendErrorTempAsync(Context.Channel, "That isn't even a ems rank you fool!", Colours.errorCol);
                 }
             }
         }
 
-        [Command("policeadd")]
+        [Command("emsrem")]
+        public async Task EmsRemAsync(IGuildUser user = null, [Remainder] IRole rank = null)
+        {
+            if (BotConfig.Load().EmsAdd)
+            {
+                Statistics.AddCommandRequests();
+
+                var author = Context.Message.Author as SocketGuildUser;
+                bool isHigh = false;
+
+                for (int i = 0; i <= RanksConfig.Load().EMSHighRanks - 1; i++)
+                {
+                    var role = (author as IGuildUser).Guild.Roles.FirstOrDefault(x => x.Name == RanksConfig.Load().EMSHighRanksArray[i]);
+                    if (author.Roles.Contains(role)) isHigh = true;
+                }
+
+                if (isHigh)
+                {
+                    await Context.Message.DeleteAsync();
+
+                    Errors errors = new Errors();
+                    if (user == null) await errors.sendErrorTempAsync(Context.Channel, "Please enter the user you would like to remove.", Colours.errorCol);
+                    if (user == null) await errors.sendErrorTempAsync(Context.Channel, "Please enter the rank you would like to remove the user to.", Colours.errorCol);
+
+                    Success success = new Success();
+                    if (user != null && rank != null)
+                    {
+                        if (rank.Name.ToLower().Equals("ems probationary") || rank.Name.ToLower().Equals("ems paramedic") || rank.Name.ToLower().Equals("ems specialist/doctor"))
+                        {
+                            await user.RemoveRoleAsync(rank);
+                            await success.sendSuccessTempAsync(Context.Channel, "Successful!", "Successfully remove " + user + " to " + rank + "!", Colours.adminCol);
+                        }
+                        else await errors.sendErrorTempAsync(Context.Channel, "That isn't even a ems rank you fool!", Colours.errorCol);
+                    }
+                }
+            }
+        }
+
+        [Command("copadd")]
         public async Task PoliceAddAsync(IGuildUser user = null, [Remainder] IRole rank = null)
         {
             if (BotConfig.Load().PoliceAdd)
@@ -325,6 +366,44 @@ namespace GTA5PoliceV2.Modules
                         {
                             await user.AddRoleAsync(rank);
                             await success.sendSuccessTempAsync(Context.Channel, "Successful!", "Successfully added " + user + " to " + rank + "!", Colours.adminCol);
+                        }
+                        else await errors.sendErrorTempAsync(Context.Channel, "That isn't even a police rank you fool!", Colours.errorCol);
+                    }
+                }
+            }
+        }
+
+        [Command("coprem")]
+        public async Task PoliceRemAsync(IGuildUser user = null, [Remainder] IRole rank = null)
+        {
+            if (BotConfig.Load().PoliceAdd)
+            {
+                Statistics.AddCommandRequests();
+
+                var author = Context.Message.Author as SocketGuildUser;
+                bool isHigh = false;
+
+                for (int i = 0; i <= RanksConfig.Load().PDHighRanks - 1; i++)
+                {
+                    var role = (author as IGuildUser).Guild.Roles.FirstOrDefault(x => x.Name == RanksConfig.Load().PDHighRanksArray[i]);
+                    if (author.Roles.Contains(role)) isHigh = true;
+                }
+
+                if (isHigh)
+                {
+                    await Context.Message.DeleteAsync();
+
+                    Errors errors = new Errors();
+                    if (user == null) await errors.sendErrorTempAsync(Context.Channel, "Please enter the user you would like to remove.", Colours.errorCol);
+                    if (user == null) await errors.sendErrorTempAsync(Context.Channel, "Please enter the rank you would like to add the user to.", Colours.errorCol);
+
+                    Success success = new Success();
+                    if (user != null && rank != null)
+                    {
+                        if (rank.Name.ToLower().Equals("police officer") || rank.Name.ToLower().Equals("police sergeant"))
+                        {
+                            await user.RemoveRoleAsync(rank);
+                            await success.sendSuccessTempAsync(Context.Channel, "Successful!", "Successfully removed " + user + " from " + rank + "!", Colours.adminCol);
                         }
                         else await errors.sendErrorTempAsync(Context.Channel, "That isn't even a police rank you fool!", Colours.errorCol);
                     }
