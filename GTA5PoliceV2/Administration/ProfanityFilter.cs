@@ -31,6 +31,15 @@ namespace GTA5PoliceV2.Administration
                 Statistics.AddOutgoingMessages();
             }
 
+            if (message.ToString().ToLower().Contains("@y'all"))
+            {
+                if ((message.Author as IGuildUser).GuildPermissions.MentionEveryone)
+                {
+                    var msg = await message.Channel.SendMessageAsync("@everyone");
+                    await msg.DeleteAsync();
+                }
+            }
+
             for (int i = 0; i <= BotConfig.Load().Filters - 1; i++)
             {
                 if (message.ToString().ToLower().Contains(BotConfig.Load().FilteredWords[i].ToLower()))
