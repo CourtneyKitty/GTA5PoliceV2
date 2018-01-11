@@ -11,7 +11,7 @@ using System.Linq;
 using System.Threading;
 using GTA5PoliceV2.Connection;
 using GTA5PoliceV2.DevReports;
-using GTA5PoliceV2.Profanity;
+using GTA5PoliceV2.Administration;
 
 namespace GTA5PoliceV2
 {
