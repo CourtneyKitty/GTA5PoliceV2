@@ -425,6 +425,13 @@ namespace GTA5PoliceV2.Modules
             }
         }
 
+        // Delete message
+        // Close timers
+        // Reset all stats
+        // Reset cooldowns
+        // Reset startup
+        // Run new instance
+
         int restartTime = 30;
         [Command("restart")]
         [Alias("r")]
@@ -434,13 +441,17 @@ namespace GTA5PoliceV2.Modules
             {
                 if (Context.User.Id == BotConfig.Load().BotCommanders[i])
                 {
-
+                    await Program.Logger(new LogMessage(LogSeverity.Critical, "GTA5Police", "Restarting bot procedure started..."));
                     await Context.Message.DeleteAsync();
-
-                    await Program.Logger(new LogMessage(LogSeverity.Info, "GTA5Police", "Attempting restart..."));
+                    
+                    await Program.Logger(new LogMessage(LogSeverity.Critical, "GTA5Police", "Shutting down service..."));
                     CommandHandler.CloseTimers();
-                    if (References.IsStartUp() == false) References.SetStartUp(true);
+                    References.SetStartUp(true);
                     await Cooldowns.ResetCommandCooldownAsync();
+                    Cooldowns.ResetMessageTimerCooldown();
+                    await Program.Logger(new LogMessage(LogSeverity.Critical, "GTA5Police", "Shut down service."));
+
+                    await Program.Logger(new LogMessage(LogSeverity.Critical, "GTA5Police", "Restarting now."));
                     Program.Main(null);
                 }
             }
