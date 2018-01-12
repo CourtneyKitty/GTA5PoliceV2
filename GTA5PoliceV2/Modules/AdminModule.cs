@@ -438,6 +438,7 @@ namespace GTA5PoliceV2.Modules
                     await Context.Message.DeleteAsync();
 
                     await Program.Logger(new LogMessage(LogSeverity.Info, "GTA5Police", "Attempting restart..."));
+                    CommandHandler.CloseTimers();
                     if (References.IsStartUp() == false) References.SetStartUp(true);
                     await Cooldowns.ResetCommandCooldownAsync();
                     Program.Main(null);

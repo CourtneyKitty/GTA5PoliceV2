@@ -141,7 +141,7 @@ namespace GTA5PoliceV2
             }
         }
 
-        Timer timerStatus, timerMessage;
+        static Timer timerStatus, timerMessage;
         ServerStatus status = new ServerStatus();
         Success success = new Success();
         bool ny, la, nywl, lawl;
@@ -252,6 +252,12 @@ namespace GTA5PoliceV2
                 await Program.Logger(new LogMessage(LogSeverity.Info, "GTA5Police", "Timer message delivered successfully."));
             }
             await Program.Logger(new LogMessage(LogSeverity.Info, "GTA5Police", "Timer message was not delivered due to the cooldown."));
+        }
+
+        public static void CloseTimers()
+        {
+            timerStatus.Dispose();
+            timerMessage.Dispose();
         }
 
         /** Getters and Setters **/
