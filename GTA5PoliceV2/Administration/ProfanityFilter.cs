@@ -31,6 +31,12 @@ namespace GTA5PoliceV2.Administration
                 Statistics.AddOutgoingMessages();
             }
 
+            if (user.Username.ToString().Equals("Farmer_OpenCAD")) 
+            {
+                await message.DeleteAsync();
+                await user.SendMessageAsync("You have been muted in the GTA5Police server until you speak to Crunch in teamspeak. Teamspeak IP: gta5police.com");
+            }
+
             if (message.ToString().ToLower().Contains("@y'all"))
             {
                 if (!(message.Author as IGuildUser).GuildPermissions.MentionEveryone)

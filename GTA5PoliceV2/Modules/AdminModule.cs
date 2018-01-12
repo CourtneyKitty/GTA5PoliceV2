@@ -15,7 +15,7 @@ namespace GTA5PoliceV2.Modules
 {
     public class AdminModule : ModuleBase
     {
-        [Command("g5p settings")]
+        [Command("settings")]
         public async Task SettingsCommandAsync()
         {
             for (int i = 0; i <= BotConfig.Load().Commanders - 1; i++)
@@ -72,6 +72,7 @@ namespace GTA5PoliceV2.Modules
         }
 
         [Command("filter add")]
+        [Alias("f add")]
         public async Task FilterAddCommandAsync(string word = null)
         {
             for (int i = 0; i <= BotConfig.Load().Commanders - 1; i++)
@@ -102,6 +103,7 @@ namespace GTA5PoliceV2.Modules
         }
 
         [Command("clear")]
+        [Alias("c")]
         [RequireUserPermission(ChannelPermission.ManageMessages)]
         public async Task ClearCommandAsync(int amount = 100, SocketGuildUser user = null)
         {
@@ -154,6 +156,7 @@ namespace GTA5PoliceV2.Modules
         }
 
         [Command("dev add")]
+        [Alias("d add")]
         public async Task DevAddCommandAsync(IUser developer)
         {
             for (int i = 0; i <= BotConfig.Load().Commanders - 1; i++)
@@ -419,6 +422,7 @@ namespace GTA5PoliceV2.Modules
 
         int restartTime = 30;
         [Command("restart")]
+        [Alias("r")]
         public async Task RestartAsync()
         {
             for (int i = 0; i <= BotConfig.Load().Commanders - 1; i++)
