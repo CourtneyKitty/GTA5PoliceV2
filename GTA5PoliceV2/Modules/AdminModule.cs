@@ -200,8 +200,10 @@ namespace GTA5PoliceV2.Modules
 
             if (user != null && reason != null)
             {
+                await Context.Message.DeleteAsync();
                 BanChecks.SetIsCommandBan();
                 await Context.Guild.AddBanAsync(user, 7, reason);
+                await Context.Channel.SendMessageAsync("", false, new EmbedBuilder() { Color = Colours.adminCol, ImageUrl = "https://media.giphy.com/media/QnF7zdtDsXmg/giphy.gif", Title = "User banned from the server!" });
 
                 IUser banHammerOwner = Context.Message.Author;
                 int banDay = DateTime.Now.Day;
@@ -238,6 +240,9 @@ namespace GTA5PoliceV2.Modules
 
             if (user != null && reason != null)
             {
+                await Context.Message.DeleteAsync();
+                await Context.Channel.SendMessageAsync("", false, new EmbedBuilder() { Color = Colours.adminCol, ImageUrl = "https://giphy.com/gifs/idiocracy-mike-jude-3o7TKwVQMoQh2At9qU", Title = "User kicked from the server!" });
+
                 BanChecks.SetIsCommandBan();
 
                 var userName = user as SocketGuildUser;
@@ -429,6 +434,7 @@ namespace GTA5PoliceV2.Modules
             {
                 if (Context.User.Id == BotConfig.Load().BotCommanders[i])
                 {
+
                     await Context.Message.DeleteAsync();
 
                     await Program.Logger(new LogMessage(LogSeverity.Info, "GTA5Police", "Attempting restart..."));
