@@ -425,14 +425,6 @@ namespace GTA5PoliceV2.Modules
             }
         }
 
-        // Delete message
-        // Close timers
-        // Reset all stats
-        // Reset cooldowns
-        // Reset startup
-        // Run new instance
-
-        int restartTime = 30;
         [Command("restart")]
         [Alias("r")]
         public async Task RestartAsync()
