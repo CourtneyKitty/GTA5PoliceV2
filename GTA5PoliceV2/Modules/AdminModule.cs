@@ -241,7 +241,7 @@ namespace GTA5PoliceV2.Modules
             if (user != null && reason != null)
             {
                 await Context.Message.DeleteAsync();
-                await Context.Channel.SendMessageAsync("", false, new EmbedBuilder() { Color = Colours.adminCol, ImageUrl = "https://giphy.com/gifs/idiocracy-mike-jude-3o7TKwVQMoQh2At9qU", Title = "User kicked from the server!" });
+                await Context.Channel.SendMessageAsync("", false, new EmbedBuilder() { Color = Colours.adminCol, ImageUrl = "https://media1.giphy.com/media/3o7TKwVQMoQh2At9qU/giphy.gif", Title = "User kicked from the server!" });
 
                 BanChecks.SetIsCommandBan();
 
