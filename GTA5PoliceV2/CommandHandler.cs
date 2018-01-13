@@ -125,6 +125,7 @@ namespace GTA5PoliceV2
             var message = pMsg as SocketUserMessage;
             if (message == null)
                 return;
+
             Statistics.AddIncomingMessages();
             var context = new SocketCommandContext(bot, message);
             
@@ -132,6 +133,7 @@ namespace GTA5PoliceV2
             if (message.HasStringPrefix(BotConfig.Load().Prefix, ref argPos))
             {
                 Statistics.AddCommandRequests();
+                await StatusChange.CycleGameAsync();
 
                 if (message.Author.IsBot)
                     return;
