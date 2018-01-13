@@ -19,6 +19,7 @@ namespace GTA5PoliceV2.Administration
             if (message == null)
                 return;
 
+            /**
             if (message.ToString().ToLower().Contains("where rp") || message.ToString().ToLower().Contains("wheres rp") || message.ToString().ToLower().Contains("admen") || message.ToString().ToLower().Contains("where is rp"))
             {
                 await Program.Logger(new LogMessage(LogSeverity.Critical, "NEWB", "ADMEN NEEDED!"));
@@ -30,9 +31,10 @@ namespace GTA5PoliceV2.Administration
                 await message.Channel.SendMessageAsync("", false, embed);
                 Statistics.AddOutgoingMessages();
             }
+            /**
 
             /**
-            if (user.Username.ToString().Equals("Farmer_OpenCAD")) 
+            if (user.Username.ToString().Equals("MUTED USER")) 
             {
                 await message.DeleteAsync();
                 await user.SendMessageAsync("You have been muted in the GTA5Police server until you speak to Crunch in teamspeak. Teamspeak IP: gta5police.com");

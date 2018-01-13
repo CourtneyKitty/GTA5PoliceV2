@@ -146,6 +146,7 @@ namespace GTA5PoliceV2.Modules
         }
 
         [Command("clearcache")]
+        [Alias("cache", "cc")]
         public async Task ClearCache()
         {
             var channel = Context.Channel;
