@@ -14,6 +14,7 @@ namespace GTA5PoliceV2.Modules
         string errorMessage = ": This command has been used recently...";
 
         [Command("status")]
+        [Alias("server")]
         public async Task Status()
         {
             var channel = Context.Channel;
