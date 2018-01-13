@@ -19,10 +19,10 @@ namespace GTA5PoliceV2.Administration
             if (message == null)
                 return;
 
-            /**
+            
             if (message.ToString().ToLower().Contains("where rp") || message.ToString().ToLower().Contains("wheres rp") || message.ToString().ToLower().Contains("admen") || message.ToString().ToLower().Contains("where is rp"))
             {
-                await Program.Logger(new LogMessage(LogSeverity.Critical, "NEWB", "ADMEN NEEDED!"));
+                /**await Program.Logger(new LogMessage(LogSeverity.Critical, "NEWB", "ADMEN NEEDED!"));
                 var embed = new EmbedBuilder() { Color = Colours.adminCol };
                 embed.WithAuthor(user.Username.ToString(), user.GetAvatarUrl());
                 embed.WithTitle("ADMEN WHERE RP");
@@ -30,8 +30,10 @@ namespace GTA5PoliceV2.Administration
                 embed.WithCurrentTimestamp();
                 await message.Channel.SendMessageAsync("", false, embed);
                 Statistics.AddOutgoingMessages();
+                **/
+                Statistics.AddAdmenRequests();
             }
-            /**
+            
 
             /**
             if (user.Username.ToString().Equals("MUTED USER")) 

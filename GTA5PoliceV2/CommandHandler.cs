@@ -117,6 +117,7 @@ namespace GTA5PoliceV2
             Statistics.ResetStatusChanges();
             Statistics.ResetErrorsDetected();
             Statistics.ResetProfanityDetected();
+            Statistics.ResetAdmenRequests();
         }
 
         public async Task HandleCommandAsync(SocketMessage pMsg)

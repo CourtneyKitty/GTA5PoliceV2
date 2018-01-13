@@ -6,7 +6,7 @@ namespace GTA5PoliceV2.Util
 {
     class Statistics
     {
-        private static int incomingMessages, outgoingMessages, commandRequests, timerMessages, statusChanges, errorsDetected, profanityDetected;
+        private static int incomingMessages, outgoingMessages, commandRequests, timerMessages, statusChanges, errorsDetected, profanityDetected, admenRequests;
 
         public static int GetIncomingMessages() { return incomingMessages; }
         public static int GetOutgoingMessages() { return outgoingMessages; }
@@ -15,6 +15,7 @@ namespace GTA5PoliceV2.Util
         public static int GetStatusChanges() { return statusChanges; }
         public static int GetErrorsDetected() { return errorsDetected; }
         public static int GetProfanityDetected() { return profanityDetected; }
+        public static int GetAdmenRequests() { return admenRequests;  }
 
         public static void AddIncomingMessages() { incomingMessages++; }
         public static void AddOutgoingMessages() { outgoingMessages++; }
@@ -23,6 +24,7 @@ namespace GTA5PoliceV2.Util
         public static void AddStatusChanges() { statusChanges++; }
         public static void AddErrorsDetected() { errorsDetected++; }
         public static void AddProfanityDetected() { profanityDetected++; }
+        public static void AddAdmenRequests() { admenRequests++; }
 
         public static void ResetIncomingMessages() { incomingMessages = 0; }
         public static void ResetOutgoingMessages() { outgoingMessages = 0; }
@@ -31,5 +33,6 @@ namespace GTA5PoliceV2.Util
         public static void ResetStatusChanges() { statusChanges = 0; }
         public static void ResetErrorsDetected() { errorsDetected = 0; }
         public static void ResetProfanityDetected() { profanityDetected = 0; }
+        public static void ResetAdmenRequests() { admenRequests = 0; }
     }
 }
