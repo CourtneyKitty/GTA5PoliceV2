@@ -149,7 +149,7 @@ namespace GTA5PoliceV2
         Success success = new Success();
         bool ny, la, nywl, lawl;
         SocketGuild server;
-        IMessageChannel channel;
+        static IMessageChannel channel;
 
         public async Task StartTimersAsync()
         {
@@ -254,7 +254,7 @@ namespace GTA5PoliceV2
                 Cooldowns.ResetMessageTimerCooldown();
                 await Program.Logger(new LogMessage(LogSeverity.Info, "GTA5Police", "Timer message delivered successfully."));
             }
-            await Program.Logger(new LogMessage(LogSeverity.Info, "GTA5Police", "Timer message was not delivered due to the cooldown."));
+            else await Program.Logger(new LogMessage(LogSeverity.Info, "GTA5Police", "Timer message was not delivered due to the cooldown."));
         }
 
         public static void CloseTimers()
@@ -265,6 +265,21 @@ namespace GTA5PoliceV2
 
         /** Getters and Setters **/
         public static DiscordSocketClient GetBot() { return bot; }
+
+        public static void SetLastTimerMessage(IUserMessage msg)
+        {
+            lastTimerMessage = msg;
+        }
+
+        public static IUserMessage GetLastTimerMessage()
+        {
+            return lastTimerMessage;
+        }
+
+        public static IMessageChannel GetTimerChannel()
+        {
+            return channel;
+        }
 
     }
 }

@@ -13,9 +13,44 @@ namespace GTA5PoliceV2.Modules
         Errors errors = new Errors();
         string errorMessage = ": This command has been used recently...";
 
+        [Command("help")]
+        [Alias("?")]
+        public async Task HelpAsync()
+        {
+            await Context.Message.DeleteAsync();
+
+            if (Cooldowns.GetMessageTimerCooldown() >= BotConfig.Load().MessageTimerCooldown)
+            {
+                if (CommandHandler.GetLastTimerMessage() != null) await CommandHandler.GetLastTimerMessage().DeleteAsync();
+
+                Statistics.AddTimerMessages();
+                var embed = new EmbedBuilder() { Color = Colours.generalCol };
+                embed.WithAuthor("GTA5Police Help", References.GetGta5policeLogo());
+                embed.WithUrl(References.GetDashboardURL());
+                embed.Description = "Be sure to check out our rules and policies, as well as other useful links!";
+                embed.WithThumbnailUrl(References.GetGta5policeLogo());
+                embed.AddField(new EmbedFieldBuilder() { Name = "!Rules", Value = "Rules and How We Ban." });
+                embed.AddField(new EmbedFieldBuilder() { Name = "!Apply", Value = "Police, EMS, Mechanic, and Whitelist Applications" });
+                embed.AddField(new EmbedFieldBuilder() { Name = "!Links", Value = "Useful Links." });
+                embed.AddField(new EmbedFieldBuilder() { Name = "!Status", Value = "View the current status of the servers." });
+                embed.WithFooter("Message Timer with " + BotConfig.Load().MessageTimerInterval + " minute interval");
+                embed.WithCurrentTimestamp();
+
+                var msg = await CommandHandler.GetTimerChannel().SendMessageAsync("", false, embed);
+                CommandHandler.SetLastTimerMessage(msg);
+                Cooldowns.ResetMessageTimerCooldown();
+                await Program.Logger(new LogMessage(LogSeverity.Info, "GTA5Police", "Timer message delivered successfully."));
+            }
+            else
+            {
+                await errors.sendErrorTempAsync(Context.Channel, "Help wasn't delivered as it was recently posted by the message timer.", Colours.errorCol);
+                await Program.Logger(new LogMessage(LogSeverity.Info, "GTA5Police", "Timer message was not delivered due to the cooldown."));
+            }
+        }
+
         [Command("status")]
         [Alias("server")]
-        public async Task Status()
+        public async Task StatusAsync()
         {
             var channel = Context.Channel;
             var user = Context.User;
@@ -39,7 +74,7 @@ namespace GTA5PoliceV2.Modules
         }
 
         [Command("rules")]
-        public async Task Rules()
+        public async Task RulesAsync()
         {
             var channel = Context.Channel;
             var user = Context.User;
@@ -73,7 +108,7 @@ namespace GTA5PoliceV2.Modules
 
         [Command("links")]
         [Alias("teamspeak", "ts")]
-        public async Task Links()
+        public async Task LinksAsync()
         {
             var channel = Context.Channel;
             var user = Context.User;
@@ -110,7 +145,7 @@ namespace GTA5PoliceV2.Modules
         }
 
         [Command("apply")]
-        public async Task Apply()
+        public async Task ApplyAsync()
         {
             var channel = Context.Channel;
             var user = Context.User;
@@ -148,7 +183,7 @@ namespace GTA5PoliceV2.Modules
 
         [Command("clearcache")]
         [Alias("cache", "cc")]
-        public async Task ClearCache()
+        public async Task ClearCachAsync()
         {
             var channel = Context.Channel;
             var user = Context.User;
@@ -181,7 +216,7 @@ namespace GTA5PoliceV2.Modules
 
         [Command("uptime")]
         [Alias("stats", "statistics")]
-        public async Task Uptime()
+        public async Task UptimeAsync()
         {
             var channel = Context.Channel;
             var user = Context.User;
