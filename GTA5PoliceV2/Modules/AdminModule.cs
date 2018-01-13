@@ -23,6 +23,8 @@ namespace GTA5PoliceV2.Modules
                 if (BotConfig.Load().BotCommanders[i] == Context.User.Id)
                 {
                     var embed = new EmbedBuilder() { Color = Colours.adminCol };
+                    var blankField = new EmbedFieldBuilder() { Name = "\u200b", Value = "\u200b" };
+
                     embed.WithAuthor("GTA5PoliceV2 Settings", References.GetGta5policeLogo());
                     embed.WithThumbnailUrl(References.GetGta5policeLogo());
 
@@ -33,8 +35,8 @@ namespace GTA5PoliceV2.Modules
                         if (filtered != null) filtered = filtered + ", " + filter;
                         if (filtered == null) filtered = filter;
                     }
-                    if (filtered != null) embed.AddField(new EmbedFieldBuilder() { Name = "Filtered Words", Value = filtered });
-                    if (filtered == null) embed.AddField(new EmbedFieldBuilder() { Name = "Filtered Words", Value = "No filtered words." });
+                    if (filtered != null) embed.AddField(new EmbedFieldBuilder() { Name = "Filtered Words", Value = filtered, IsInline = true });
+                    if (filtered == null) embed.AddField(new EmbedFieldBuilder() { Name = "Filtered Words", Value = "No filtered words.", IsInline = true });
 
                     string commanders = null;
                     for (int j = 0; j <= BotConfig.Load().Commanders - 1; j++)
@@ -43,22 +45,60 @@ namespace GTA5PoliceV2.Modules
                         if (commanders != null) commanders = commanders + ", " + commander;
                         if (commanders == null) commanders = commander;
                     }
-                    if (commanders != null) embed.AddField(new EmbedFieldBuilder() { Name = "Bot commanders", Value = commanders });
-                    if (commanders == null) embed.AddField(new EmbedFieldBuilder() { Name = "Bot commanders", Value = "No commanders." });
+                    if (commanders != null) embed.AddField(new EmbedFieldBuilder() { Name = "Bot commanders", Value = commanders, IsInline = true });
+                    if (commanders == null) embed.AddField(new EmbedFieldBuilder() { Name = "Bot commanders", Value = "No commanders.", IsInline = true });
 
 
                     embed.AddField(new EmbedFieldBuilder() { Name = "Server Id", Value = BotConfig.Load().ServerId, IsInline = true });
                     embed.AddField(new EmbedFieldBuilder() { Name = "Logs Id", Value = BotConfig.Load().LogsId, IsInline = true });
-                    embed.AddField(new EmbedFieldBuilder() { Name = "Timer Channel Id", Value = BotConfig.Load().TimerChannelId, IsInline = false });
-                    embed.AddField(new EmbedFieldBuilder() { Name = "Timer Interval (Minutes)", Value = BotConfig.Load().MessageTimerInterval, IsInline = true });
-                    embed.AddField(new EmbedFieldBuilder() { Name = "Timer Cooldown (Messages)", Value = BotConfig.Load().MessageTimerCooldown, IsInline = true });
-                    embed.AddField(new EmbedFieldBuilder() { Name = "Server IP", Value = ConnectionsConfig.Load().ServerIp });
+                    embed.AddField(blankField);
+                    embed.AddField(new EmbedFieldBuilder() { Name = "Timer Channel Id", Value = BotConfig.Load().TimerChannelId, IsInline = true });
+                    embed.AddField(new EmbedFieldBuilder() { Name = "Status Timer Interval (Minutes)", Value = BotConfig.Load().StatusTimerInterval, IsInline = true });
+                    embed.AddField(new EmbedFieldBuilder() { Name = "Message Timer Interval (Minutes)", Value = BotConfig.Load().MessageTimerInterval, IsInline = true });
+                    embed.AddField(new EmbedFieldBuilder() { Name = "Message Timer Cooldown (Messages)", Value = BotConfig.Load().MessageTimerCooldown, IsInline = true });
+                    embed.AddField(new EmbedFieldBuilder() { Name = "Command Cooldown (Seconds)", Value = BotConfig.Load().CommandCooldown, IsInline = true });
+                    embed.AddField(blankField);
+                    embed.AddField(new EmbedFieldBuilder() { Name = "Server IP", Value = ConnectionsConfig.Load().ServerIp, IsInline = true });
                     embed.AddField(new EmbedFieldBuilder() { Name = "NY Port", Value = ConnectionsConfig.Load().NyPort, IsInline = true });
                     embed.AddField(new EmbedFieldBuilder() { Name = "LA Port", Value = ConnectionsConfig.Load().LaPort, IsInline = true });
                     embed.AddField(new EmbedFieldBuilder() { Name = "NY WL Port", Value = ConnectionsConfig.Load().NyWlPort, IsInline = true });
                     embed.AddField(new EmbedFieldBuilder() { Name = "LA WL Port", Value = ConnectionsConfig.Load().LaWlPort, IsInline = true });
 
-                    embed.WithFooter(new EmbedFooterBuilder() { Text = "Requested by " + Context.User });
+                    embed.AddField(blankField);
+                    embed.AddField(new EmbedFieldBuilder() { Name = "EMS Add/Remove", Value = BotConfig.Load().EmsAdd, IsInline = true });
+                    string emsHighUps = null;
+                    for (int j = 0; j <= RanksConfig.Load().EMSHighRanks - 1; j++)
+                    {
+                        var emsHighUp = RanksConfig.Load().EMSHighRanksArray[j];
+                        if (emsHighUps != null) emsHighUps = emsHighUps + ", " + emsHighUp;
+                        if (emsHighUps == null) emsHighUps = emsHighUp;
+                    }
+                    if (commanders != null) embed.AddField(new EmbedFieldBuilder() { Name = "EMS Highup Ranks", Value = emsHighUps, IsInline = true });
+                    if (commanders == null) embed.AddField(new EmbedFieldBuilder() { Name = "EMS Highup Ranks", Value = "No high up ranks?", IsInline = true });
+                    
+                    embed.AddField(new EmbedFieldBuilder() { Name = "Cop Add/Remove", Value = BotConfig.Load().PoliceAdd, IsInline = true });
+                    string copHighUps = null;
+                    for (int j = 0; j <= RanksConfig.Load().PDHighRanks - 1; j++)
+                    {
+                        var copHighUp = RanksConfig.Load().PDHighRanksArray[j];
+                        if (copHighUps != null) copHighUps = copHighUps + ", " + copHighUp;
+                        if (copHighUps == null) copHighUps = copHighUp;
+                    }
+                    if (commanders != null) embed.AddField(new EmbedFieldBuilder() { Name = "Police Highup Ranks", Value = copHighUps, IsInline = true });
+                    if (commanders == null) embed.AddField(new EmbedFieldBuilder() { Name = "Police Highup Ranks", Value = "No high up ranks?", IsInline = true });
+
+                    embed.AddField(blankField);
+                    string devs = null;
+                    for (int j = 0; j <= DevConfig.Load().Devs - 1; j++)
+                    {
+                        var dev = Context.Client.GetUserAsync(DevConfig.Load().Developers[j]).Result.ToString();
+                        if (devs != null) devs = devs + ", " + dev;
+                        if (devs == null) devs = dev;
+                    }
+                    if (devs != null) embed.AddField(new EmbedFieldBuilder() { Name = "Developers", Value = devs, IsInline = true });
+                    if (devs == null) embed.AddField(new EmbedFieldBuilder() { Name = "Developers", Value = "No developers added", IsInline = true });
+
+                    embed.WithFooter(new EmbedFooterBuilder() { Text = References.NAME + References.VERSION });
                     embed.WithCurrentTimestamp();
 
                     await Context.Message.DeleteAsync();
@@ -152,7 +192,7 @@ namespace GTA5PoliceV2.Modules
             embed.WithImageUrl(References.GetHowBanURL());
             embed.WithFooter("We hope you enjoy your stay!");
             embed.WithCurrentTimestamp();
-            await Context.User.SendMessageAsync("", false, embed);
+            await Context.Channel.SendMessageAsync("", false, embed);
         }
 
         [Command("dev add")]
