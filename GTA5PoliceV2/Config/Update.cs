@@ -32,6 +32,16 @@ namespace GTA5PoliceV2.Config
             return config;
         }
 
+        public static ConnectionsConfig UpdateConnectionsConfig(ConnectionsConfig config)
+        {
+            config.ServerIp = ConnectionsConfig.Load().ServerIp;
+            config.NyPort = ConnectionsConfig.Load().NyPort;
+            config.LaPort = ConnectionsConfig.Load().LaPort;
+            config.NyWlPort = ConnectionsConfig.Load().NyWlPort;
+            config.LaWlPort = ConnectionsConfig.Load().LaWlPort;
+            return config;
+        }
+
         public static DevConfig UpdateDevConfig(DevConfig config)
         {
             config.DevReports = DevConfig.Load().DevReports;
