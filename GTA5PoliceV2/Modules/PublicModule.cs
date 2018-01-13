@@ -14,12 +14,12 @@ namespace GTA5PoliceV2.Modules
         string errorMessage = ": This command has been used recently...";
 
         [Command("help")]
-        [Alias("?")]
+        [Alias("?", "!")]
         public async Task HelpAsync()
         {
             await Context.Message.DeleteAsync();
 
-            if (Cooldowns.GetMessageTimerCooldown() >= BotConfig.Load().MessageTimerCooldown)
+            if (Cooldowns.GetMessageTimerCooldown() >= BotConfig.Load().MessageTimerCooldown / 2)
             {
                 if (CommandHandler.GetLastTimerMessage() != null) await CommandHandler.GetLastTimerMessage().DeleteAsync();
 
@@ -29,10 +29,10 @@ namespace GTA5PoliceV2.Modules
                 embed.WithUrl(References.GetDashboardURL());
                 embed.Description = "Be sure to check out our rules and policies, as well as other useful links!";
                 embed.WithThumbnailUrl(References.GetGta5policeLogo());
-                embed.AddField(new EmbedFieldBuilder() { Name = "!Rules", Value = "Rules and How We Ban." });
-                embed.AddField(new EmbedFieldBuilder() { Name = "!Apply", Value = "Police, EMS, Mechanic, and Whitelist Applications" });
-                embed.AddField(new EmbedFieldBuilder() { Name = "!Links", Value = "Useful Links." });
-                embed.AddField(new EmbedFieldBuilder() { Name = "!Status", Value = "View the current status of the servers." });
+                embed.AddField(new EmbedFieldBuilder() { Name = BotConfig.Load().Prefix + "Rules", Value = "Rules and How We Ban." });
+                embed.AddField(new EmbedFieldBuilder() { Name = BotConfig.Load().Prefix + "Apply", Value = "Police, EMS, Mechanic, and Whitelist Applications" });
+                embed.AddField(new EmbedFieldBuilder() { Name = BotConfig.Load().Prefix + "Links", Value = "Useful Links." });
+                embed.AddField(new EmbedFieldBuilder() { Name = BotConfig.Load().Prefix + "Status", Value = "View the current status of the servers." });
                 embed.WithFooter("Message Timer with " + BotConfig.Load().MessageTimerInterval + " minute interval");
                 embed.WithCurrentTimestamp();
 

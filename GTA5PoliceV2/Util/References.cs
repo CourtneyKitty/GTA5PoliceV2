@@ -8,7 +8,7 @@ namespace GTA5PoliceV2.Util
     class References
     {
         public static string NAME = "GTA5Police";
-        public static string VERSION = "V2.4.14";
+        public static string VERSION = "V2.5";
 
         public static string GetGta5policeLogo() { return UrlConfig.Load().Logo; }
         public static string GetRulesURL() { return UrlConfig.Load().Rules; }
