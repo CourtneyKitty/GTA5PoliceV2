@@ -12,8 +12,6 @@ namespace GTA5PoliceV2.Modules
 {
     public class AdminModule : ModuleBase
     {
-        
-
         [Command("filter add")]
         [Alias("f add")]
         public async Task FilterAddCommandAsync(string word = null)
@@ -217,7 +215,7 @@ namespace GTA5PoliceV2.Modules
         }
 
         [Command("emsadd")]
-        public async Task EmsAddAsync(IGuildUser user = null, [Remainder] IRole rank = null)
+        public async Task EmsAddAsync(IGuildUser user = null, int station = 0, [Remainder] IRole rank = null)
         {
             if (BotConfig.Load().EmsAdd)
             {
@@ -235,10 +233,16 @@ namespace GTA5PoliceV2.Modules
                 if (isHigh)
                 {
                     await Context.Message.DeleteAsync();
-
+                    
                     Errors errors = new Errors();
+                    var station1 = Context.Guild.Roles.FirstOrDefault(x => x.Name == "EMS Station 1");
+                    var station2 = Context.Guild.Roles.FirstOrDefault(x => x.Name == "EMS Station 2");
+
                     if (user == null) await errors.sendErrorTempAsync(Context.Channel, "Please enter the user you would like to add.", Colours.errorCol);
                     if (user == null) await errors.sendErrorTempAsync(Context.Channel, "Please enter the rank you would like to add the user to.", Colours.errorCol);
+                    if (station <= 0 || station >= 3) await errors.sendErrorTempAsync(Context.Channel, "Please enter the station you would like to add the user to.", Colours.errorCol);
+                    if (station1 == null) await errors.sendErrorTempAsync(Context.Channel, "Station1 == null", Colours.errorCol);
+                    if (station2 == null) await errors.sendErrorTempAsync(Context.Channel, "Station2 == null", Colours.errorCol);
 
                     Success success = new Success();
                     if (user != null && rank != null)
@@ -246,6 +250,8 @@ namespace GTA5PoliceV2.Modules
                         if (rank.Name.ToLower().Equals("ems probationary") || rank.Name.ToLower().Equals("ems paramedic") || rank.Name.ToLower().Equals("ems specialist/doctor"))
                         {
                             await user.AddRoleAsync(rank);
+                            if (station == 1) await user.AddRoleAsync(station1);
+                            if (station == 2) await user.AddRoleAsync(station2);
                             await success.sendSuccessTempAsync(Context.Channel, "Successful!", "Successfully added " + user + " to " + rank + "!", Colours.adminCol);
                         }
                         else await errors.sendErrorTempAsync(Context.Channel, "That isn't even a ems rank you fool!", Colours.errorCol);
@@ -255,7 +261,7 @@ namespace GTA5PoliceV2.Modules
         }
 
         [Command("emsrem")]
-        public async Task EmsRemAsync(IGuildUser user = null, [Remainder] IRole rank = null)
+        public async Task EmsRemAsync(IGuildUser user = null, int station = 0, [Remainder] IRole rank = null)
         {
             if (BotConfig.Load().EmsAdd)
             {
@@ -275,8 +281,14 @@ namespace GTA5PoliceV2.Modules
                     await Context.Message.DeleteAsync();
 
                     Errors errors = new Errors();
+                    var station1 = Context.Guild.Roles.FirstOrDefault(x => x.Name == "EMS Station 1");
+                    var station2 = Context.Guild.Roles.FirstOrDefault(x => x.Name == "EMS Station 2");
+
                     if (user == null) await errors.sendErrorTempAsync(Context.Channel, "Please enter the user you would like to remove.", Colours.errorCol);
                     if (user == null) await errors.sendErrorTempAsync(Context.Channel, "Please enter the rank you would like to remove the user to.", Colours.errorCol);
+                    if (station <= 0 || station >= 3) await errors.sendErrorTempAsync(Context.Channel, "Please enter the station you would like to remove the user from.", Colours.errorCol);
+                    if (station1 == null) await errors.sendErrorTempAsync(Context.Channel, "Station1 == null", Colours.errorCol);
+                    if (station2 == null) await errors.sendErrorTempAsync(Context.Channel, "Station2 == null", Colours.errorCol);
 
                     Success success = new Success();
                     if (user != null && rank != null)
@@ -284,6 +296,8 @@ namespace GTA5PoliceV2.Modules
                         if (rank.Name.ToLower().Equals("ems probationary") || rank.Name.ToLower().Equals("ems paramedic") || rank.Name.ToLower().Equals("ems specialist/doctor"))
                         {
                             await user.RemoveRoleAsync(rank);
+                            if (station == 1) await user.RemoveRoleAsync(station1);
+                            if (station == 2) await user.RemoveRoleAsync(station2);
                             await success.sendSuccessTempAsync(Context.Channel, "Successful!", "Successfully remove " + user + " to " + rank + "!", Colours.adminCol);
                         }
                         else await errors.sendErrorTempAsync(Context.Channel, "That isn't even a ems rank you fool!", Colours.errorCol);
