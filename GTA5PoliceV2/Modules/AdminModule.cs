@@ -307,7 +307,7 @@ namespace GTA5PoliceV2.Modules
         }
 
         [Command("copadd")]
-        public async Task PoliceAddAsync(IGuildUser user = null, [Remainder] IRole rank = null)
+        public async Task PoliceAddAsync(IGuildUser user = null, string squad = null, [Remainder] IRole rank = null)
         {
             if (BotConfig.Load().PoliceAdd)
             {
@@ -327,8 +327,22 @@ namespace GTA5PoliceV2.Modules
                     await Context.Message.DeleteAsync();
 
                     Errors errors = new Errors();
+                    var alpha = Context.Guild.Roles.FirstOrDefault(x => x.Name == "Alpha Squad");
+                    var bravo = Context.Guild.Roles.FirstOrDefault(x => x.Name == "Bravo Squad");
+                    var charlie = Context.Guild.Roles.FirstOrDefault(x => x.Name == "Charlie Squad");
+                    //var delta = Context.Guild.Roles.FirstOrDefault(x => x.Name == "Delta Squad");
+
+
                     if (user == null) await errors.sendErrorTempAsync(Context.Channel, "Please enter the user you would like to add.", Colours.errorCol);
-                    if (user == null) await errors.sendErrorTempAsync(Context.Channel, "Please enter the rank you would like to add the user to.", Colours.errorCol);
+                    if (rank == null) await errors.sendErrorTempAsync(Context.Channel, "Please enter the rank you would like to add the user to.", Colours.errorCol);
+                    if (!squad.ToLower().Equals("a")) await errors.sendErrorTempAsync(Context.Channel, "Please enter the squad letter you would like to add the user to.", Colours.errorCol);
+                    if (!squad.ToLower().Equals("b")) await errors.sendErrorTempAsync(Context.Channel, "Please enter the squad letter you would like to add the user to.", Colours.errorCol);
+                    if (!squad.ToLower().Equals("c")) await errors.sendErrorTempAsync(Context.Channel, "Please enter the squad letter you would like to add the user to.", Colours.errorCol);
+                    //if (!squad.ToLower().Equals("d")) await errors.sendErrorTempAsync(Context.Channel, "Please enter the squad letter you would like to add the user to.", Colours.errorCol);
+                    if (alpha == null) await errors.sendErrorTempAsync(Context.Channel, "alpha == null", Colours.errorCol);
+                    if (bravo == null) await errors.sendErrorTempAsync(Context.Channel, "bravo == null", Colours.errorCol);
+                    if (charlie == null) await errors.sendErrorTempAsync(Context.Channel, "charlie == null", Colours.errorCol);
+                    //if (delta == null) await errors.sendErrorTempAsync(Context.Channel, "delta == null", Colours.errorCol);
 
                     Success success = new Success();
                     if (user != null && rank != null)
@@ -336,6 +350,10 @@ namespace GTA5PoliceV2.Modules
                         if (rank.Name.ToLower().Equals("police officer") || rank.Name.ToLower().Equals("police sergeant"))
                         {
                             await user.AddRoleAsync(rank);
+                            if (squad.ToLower().Equals("a")) await user.AddRoleAsync(alpha);
+                            if (squad.ToLower().Equals("b")) await user.AddRoleAsync(bravo);
+                            if (squad.ToLower().Equals("c")) await user.AddRoleAsync(charlie);
+                            //if (squad.ToLower().Equals("d")) await user.AddRoleAsync(delta);
                             await success.sendSuccessTempAsync(Context.Channel, "Successful!", "Successfully added " + user + " to " + rank + "!", Colours.adminCol);
                         }
                         else await errors.sendErrorTempAsync(Context.Channel, "That isn't even a police rank you fool!", Colours.errorCol);
@@ -345,7 +363,7 @@ namespace GTA5PoliceV2.Modules
         }
 
         [Command("coprem")]
-        public async Task PoliceRemAsync(IGuildUser user = null, [Remainder] IRole rank = null)
+        public async Task PoliceRemAsync(IGuildUser user = null, string squad = null, [Remainder] IRole rank = null)
         {
             if (BotConfig.Load().PoliceAdd)
             {
@@ -365,8 +383,22 @@ namespace GTA5PoliceV2.Modules
                     await Context.Message.DeleteAsync();
 
                     Errors errors = new Errors();
+                    var alpha = Context.Guild.Roles.FirstOrDefault(x => x.Name == "Alpha Squad");
+                    var bravo = Context.Guild.Roles.FirstOrDefault(x => x.Name == "Bravo Squad");
+                    var charlie = Context.Guild.Roles.FirstOrDefault(x => x.Name == "Charlie Squad");
+                    //var delta = Context.Guild.Roles.FirstOrDefault(x => x.Name == "Delta Squad");
+
                     if (user == null) await errors.sendErrorTempAsync(Context.Channel, "Please enter the user you would like to remove.", Colours.errorCol);
                     if (user == null) await errors.sendErrorTempAsync(Context.Channel, "Please enter the rank you would like to add the user to.", Colours.errorCol);
+                    if (squad == null) await errors.sendErrorTempAsync(Context.Channel, "Please enter the squad letter you would like to add the user to.", Colours.errorCol);
+                    if (!squad.ToLower().Equals("a")) await errors.sendErrorTempAsync(Context.Channel, "Please enter the squad letter you would like to remove the user from.", Colours.errorCol);
+                    if (!squad.ToLower().Equals("b")) await errors.sendErrorTempAsync(Context.Channel, "Please enter the squad letter you would like to remove the user from.", Colours.errorCol);
+                    if (!squad.ToLower().Equals("c")) await errors.sendErrorTempAsync(Context.Channel, "Please enter the squad letter you would like to remove the user from.", Colours.errorCol);
+                    //if (!squad.ToLower().Equals("d")) await errors.sendErrorTempAsync(Context.Channel, "Please enter the squad letter you would like to remove the user from.", Colours.errorCol);
+                    if (alpha == null) await errors.sendErrorTempAsync(Context.Channel, "alpha == null", Colours.errorCol);
+                    if (bravo == null) await errors.sendErrorTempAsync(Context.Channel, "bravo == null", Colours.errorCol);
+                    if (charlie == null) await errors.sendErrorTempAsync(Context.Channel, "charlie == null", Colours.errorCol);
+                    //if (delta == null) await errors.sendErrorTempAsync(Context.Channel, "delta == null", Colours.errorCol);
 
                     Success success = new Success();
                     if (user != null && rank != null)
@@ -374,6 +406,10 @@ namespace GTA5PoliceV2.Modules
                         if (rank.Name.ToLower().Equals("police officer") || rank.Name.ToLower().Equals("police sergeant"))
                         {
                             await user.RemoveRoleAsync(rank);
+                            if (squad.ToLower().Equals("a")) await user.RemoveRoleAsync(alpha);
+                            if (squad.ToLower().Equals("b")) await user.RemoveRoleAsync(bravo);
+                            if (squad.ToLower().Equals("c")) await user.RemoveRoleAsync(charlie);
+                            //if (squad.ToLower().Equals("d")) await user.RemoveRoleAsync(delta);
                             await success.sendSuccessTempAsync(Context.Channel, "Successful!", "Successfully removed " + user + " from " + rank + "!", Colours.adminCol);
                         }
                         else await errors.sendErrorTempAsync(Context.Channel, "That isn't even a police rank you fool!", Colours.errorCol);
