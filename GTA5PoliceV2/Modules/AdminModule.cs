@@ -37,7 +37,7 @@ namespace GTA5PoliceV2.Modules
                     var message = await Context.Channel.SendMessageAsync("", false, embed);
                     await Delete.DelayDeleteEmbedAsync(message, 120);
 
-                    await Program.Logger(new LogMessage(LogSeverity.Info, "GTA5Police", "Filter add command was used by " + Context.User + "."));
+                    await Program.Logger(new LogMessage(LogSeverity.Info, "GTA5Police Admin Commands", "Filter add command was used by " + Context.User + "."));
                     Statistics.AddOutgoingMessages();
                 }
             }
@@ -58,8 +58,8 @@ namespace GTA5PoliceV2.Modules
                     await errors.sendErrorAsync(Context.Channel, "You can not clear more than 100! Deleting 100.", Colours.errorCol);
                     var messageHistory = await Context.Channel.GetMessagesAsync(101).Flatten();
                     await Context.Channel.DeleteMessagesAsync(messageHistory);
-                    await Program.Logger(new LogMessage(LogSeverity.Info, "GTA5Police", "Clear command was used by " + Context.User + "."));
-                    await Program.Logger(new LogMessage(LogSeverity.Verbose, "GTA5Police", "100 messages were deleted in the channel " + Context.Channel.Name + " by " + Context.User + "."));
+                    await Program.Logger(new LogMessage(LogSeverity.Info, "GTA5Police Admin Commands", "Clear command was used by " + Context.User + "."));
+                    await Program.Logger(new LogMessage(LogSeverity.Verbose, "GTA5Police Admin Commands", "100 messages were deleted in the channel " + Context.Channel.Name + " by " + Context.User + "."));
                 }
                 else if (amount < 1) await errors.sendErrorTempAsync(Context.Channel, "You can not clear a negative amount of messages!", Colours.errorCol);
                 else
@@ -68,8 +68,8 @@ namespace GTA5PoliceV2.Modules
 
                     await Context.Channel.DeleteMessagesAsync(messageHistory);
 
-                    await Program.Logger(new LogMessage(LogSeverity.Info, "GTA5Police", "Clear command was used by " + Context.User + "."));
-                    await Program.Logger(new LogMessage(LogSeverity.Verbose, "GTA5Police", amount + " messages were deleted in the channel " + Context.Channel.Name + " by " + Context.User + "."));
+                    await Program.Logger(new LogMessage(LogSeverity.Info, "GTA5Police Admin Commands", "Clear command was used by " + Context.User + "."));
+                    await Program.Logger(new LogMessage(LogSeverity.Verbose, "GTA5Police Admin Commands", amount + " messages were deleted in the channel " + Context.Channel.Name + " by " + Context.User + "."));
                 }
             }
         }
@@ -123,7 +123,7 @@ namespace GTA5PoliceV2.Modules
                     var message = await Context.Channel.SendMessageAsync("", false, embed);
                     await Delete.DelayDeleteEmbedAsync(message, 120);
 
-                    await Program.Logger(new LogMessage(LogSeverity.Info, "GTA5Police", "Dev add command was used by " + Context.User + "."));
+                    await Program.Logger(new LogMessage(LogSeverity.Info, "GTA5Police Admin Commands", "Dev add command was used by " + Context.User + "."));
                     Statistics.AddOutgoingMessages();
                 }
             }
@@ -164,7 +164,7 @@ namespace GTA5PoliceV2.Modules
                 var chan = await Context.Guild.GetTextChannelAsync(BotConfig.Load().LogsId);
                 await chan.SendMessageAsync("", false, embed);
 
-                await Program.Logger(new LogMessage(LogSeverity.Info, "GTA5Police", "Ban command was used by " + Context.User + "."));
+                await Program.Logger(new LogMessage(LogSeverity.Info, "GTA5Police Admin Commands", "Ban command was used by " + Context.User + "."));
                 Statistics.AddOutgoingMessages();
             }
         }
@@ -209,7 +209,7 @@ namespace GTA5PoliceV2.Modules
                 var chan = await Context.Guild.GetTextChannelAsync(BotConfig.Load().LogsId);
                 await chan.SendMessageAsync("", false, embed);
 
-                await Program.Logger(new LogMessage(LogSeverity.Info, "GTA5Police", "Kick command was used by " + Context.User + "."));
+                await Program.Logger(new LogMessage(LogSeverity.Info, "GTA5Police Admin Commands", "Kick command was used by " + Context.User + " on the user " + user + "."));
                 Statistics.AddOutgoingMessages();
             }
         }
@@ -426,17 +426,17 @@ namespace GTA5PoliceV2.Modules
             {
                 if (Context.User.Id == BotConfig.Load().BotCommanders[i])
                 {
-                    await Program.Logger(new LogMessage(LogSeverity.Critical, "GTA5Police", "Restarting bot procedure started..."));
+                    await Program.Logger(new LogMessage(LogSeverity.Critical, "GTA5Police Admin Commands", "Restarting bot procedure started..."));
                     await Context.Message.DeleteAsync();
                     
-                    await Program.Logger(new LogMessage(LogSeverity.Critical, "GTA5Police", "Shutting down service..."));
+                    await Program.Logger(new LogMessage(LogSeverity.Critical, "GTA5Police Admin Commands", "Shutting down service..."));
                     CommandHandler.CloseTimers();
                     References.SetStartUp(true);
                     await Cooldowns.ResetCommandCooldownAsync();
                     Cooldowns.ResetMessageTimerCooldown();
-                    await Program.Logger(new LogMessage(LogSeverity.Critical, "GTA5Police", "Shut down service."));
+                    await Program.Logger(new LogMessage(LogSeverity.Critical, "GTA5Police Admin Commands", "Shut down service."));
 
-                    await Program.Logger(new LogMessage(LogSeverity.Critical, "GTA5Police", "Restarting now."));
+                    await Program.Logger(new LogMessage(LogSeverity.Critical, "GTA5Police Admin Commands", "Restarting now."));
                     Program.Main(null);
                 }
             }

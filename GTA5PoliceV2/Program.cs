@@ -31,19 +31,19 @@ namespace GTA5PoliceV2
             });
 
             client.Log += Logger;
-            await Logger(new LogMessage(LogSeverity.Info, "GTA5Police", "Starting up bot."));
+            await Logger(new LogMessage(LogSeverity.Info, "GTA5Police Start Up", "Starting up bot."));
 
-            await Logger(new LogMessage(LogSeverity.Info, "GTA5Police", "Logging in started."));
+            await Logger(new LogMessage(LogSeverity.Info, "GTA5Police Start Up", "Logging in started."));
             await client.LoginAsync(TokenType.Bot, BotConfig.Load().Token);
 
             await client.StartAsync();
-            await Logger(new LogMessage(LogSeverity.Info, "GTA5Police", "Started up bot."));
+            await Logger(new LogMessage(LogSeverity.Info, "GTA5Police Start Up", "Started up bot."));
 
-            await Logger(new LogMessage(LogSeverity.Info, "GTA5Police", "Doing service provider stuff."));
+            await Logger(new LogMessage(LogSeverity.Info, "GTA5Police Start Up", "Doing service provider stuff."));
             var serviceProvider = ConfigureServices();
             handler = new CommandHandler(serviceProvider);
             await handler.ConfigureAsync();
-            await Logger(new LogMessage(LogSeverity.Info, "GTA5Police", "Start up fully complete."));
+            await Logger(new LogMessage(LogSeverity.Info, "GTA5Police Start Up", "Start up fully complete."));
 
             //Block this program untill it is closed
             await Task.Delay(-1);
@@ -92,7 +92,7 @@ namespace GTA5PoliceV2
             {
                 var config = new BotConfig();
 
-                Logger(new LogMessage(LogSeverity.Debug, "GTA5Police", "Enter the following info for the config."));
+                Logger(new LogMessage(LogSeverity.Debug, "GTA5Police Configuration", "Enter the following info for the configuration."));
                 Console.Write("Bot Prefix: ");
                 config.Token = Console.ReadLine();
                 Console.Write("Bot Token: ");
@@ -114,9 +114,9 @@ namespace GTA5PoliceV2
                 config.PoliceAdd = false;
                 config.EmsAdd = false;
                 config.Save();
-                Logger(new LogMessage(LogSeverity.Debug, "GTA5Police", "Bot config generated"));
+                Logger(new LogMessage(LogSeverity.Debug, "GTA5Police Configuration", "Main configuration generated"));
             }
-            Logger(new LogMessage(LogSeverity.Debug, "GTA5Police", "Configuration has been loaded"));
+            Logger(new LogMessage(LogSeverity.Debug, "GTA5Police Configuration", "Main configuration has been loaded"));
 
             if (!File.Exists(connectionsLoc))
             {
@@ -128,9 +128,9 @@ namespace GTA5PoliceV2
                 connections.NyWlPort = 30151;
                 connections.LaWlPort = 30142;
                 connections.Save();
-                Logger(new LogMessage(LogSeverity.Debug, "GTA5Police", "Connections config generated"));
+                Logger(new LogMessage(LogSeverity.Debug, "GTA5Police Configuration", "Connections configuration generated"));
             }
-            Logger(new LogMessage(LogSeverity.Debug, "GTA5Police", "Connections configuration has been loaded"));
+            Logger(new LogMessage(LogSeverity.Debug, "GTA5Police Configuration", "Connections configuration has been loaded"));
 
             if (!File.Exists(urlsLoc))
             {
@@ -157,9 +157,9 @@ namespace GTA5PoliceV2
                 url.ClearCache = "https://gta5police.com/forums/index.php?/topic/921-how-to-clear-fivem-cache/";
 
                 url.Save();
-                Logger(new LogMessage(LogSeverity.Debug, "GTA5Police", "URL config generated"));
+                Logger(new LogMessage(LogSeverity.Debug, "GTA5Police Configuration", "URL configuration generated"));
             }
-            Logger(new LogMessage(LogSeverity.Debug, "GTA5Police", "URL configuration has been loaded"));
+            Logger(new LogMessage(LogSeverity.Debug, "GTA5Police Configuration", "URL configuration has been loaded"));
 
             if (!File.Exists(devConfigLoc))
             {
@@ -168,9 +168,9 @@ namespace GTA5PoliceV2
                 config.DevReports = 394177874657148940;
                 config.Devs = 0;
                 config.Save();
-                Logger(new LogMessage(LogSeverity.Debug, "GTA5Police", "Dev config generated"));
+                Logger(new LogMessage(LogSeverity.Debug, "GTA5Police Configuration", "Dev config generated"));
             }
-            Logger(new LogMessage(LogSeverity.Debug, "GTA5Police", "Developer configuration has been loaded"));
+            Logger(new LogMessage(LogSeverity.Debug, "GTA5Police Configuration", "Developer configuration has been loaded"));
 
             if (!File.Exists(ranksConfigLoc))
             {
@@ -178,9 +178,9 @@ namespace GTA5PoliceV2
                 config.EMSHighRanks = 2;
                 config.PDHighRanks = 5;
                 config.Save();
-                Logger(new LogMessage(LogSeverity.Debug, "GTA5Police", "Ranks config generated"));
+                Logger(new LogMessage(LogSeverity.Debug, "GTA5Police Configuration", "Ranks configuration generated"));
             }
-            Logger(new LogMessage(LogSeverity.Debug, "GTA5Police", "Ranks configuration has been loaded"));
+            Logger(new LogMessage(LogSeverity.Debug, "GTA5Police Configuration", "Ranks configuration has been loaded"));
         }
         public IServiceProvider ConfigureServices()
         {

@@ -252,9 +252,9 @@ namespace GTA5PoliceV2
 
                 lastTimerMessage = await channel.SendMessageAsync("", false, embed);
                 Cooldowns.ResetMessageTimerCooldown();
-                await Program.Logger(new LogMessage(LogSeverity.Info, "GTA5Police", "Timer message delivered successfully."));
+                await Program.Logger(new LogMessage(LogSeverity.Info, "GTA5Police Timers", "Timer message delivered successfully."));
             }
-            else await Program.Logger(new LogMessage(LogSeverity.Info, "GTA5Police", "Timer message was not delivered due to the cooldown."));
+            else await Program.Logger(new LogMessage(LogSeverity.Info, "GTA5Police Timers", "Timer message was not delivered due to the cooldown."));
         }
 
         public static void CloseTimers()

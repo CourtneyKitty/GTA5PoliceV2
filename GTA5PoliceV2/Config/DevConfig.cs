@@ -25,13 +25,13 @@ namespace GTA5PoliceV2.Config
         {
             string file = Path.Combine(appdir, dir);
             File.WriteAllText(file, ToJson());
-            Program.Logger(new LogMessage(LogSeverity.Info, "GTA5Police", "Dev configuration saved successfully."));
+            Program.Logger(new LogMessage(LogSeverity.Info, "GTA5Police Configuration", "Dev configuration saved successfully."));
         }
         public static DevConfig Load(string dir = "configuration/dev_config.json")
         {
             string file = Path.Combine(appdir, dir);
             return JsonConvert.DeserializeObject<DevConfig>(File.ReadAllText(file));
-            Program.Logger(new LogMessage(LogSeverity.Info, "GTA5Police", "Dev configuration loaded successfully."));
+            Program.Logger(new LogMessage(LogSeverity.Info, "GTA5Police Configuration", "Dev configuration loaded successfully."));
         }
         public string ToJson()
             => JsonConvert.SerializeObject(this, Formatting.Indented);

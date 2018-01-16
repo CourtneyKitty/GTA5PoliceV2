@@ -25,6 +25,7 @@ namespace GTA5PoliceV2.Modules
                 {
                     await Context.Message.DeleteAsync();
                     await Context.Channel.SendMessageAsync("Not yet implemented the settings help, for now refer to Admin discord in #text-code-etc-dump");
+                    await Program.Logger(new LogMessage(LogSeverity.Info, "GTA5Police Configuration Commands", "Settings command was used by " + Context.User + "."));
                 }
             }
         }
@@ -45,6 +46,7 @@ namespace GTA5PoliceV2.Modules
                     config.Save();
 
                     await success.sendSuccessTempAsync(Context.Channel, "Prefix Set", "Prefix set to `" + prefix + "` successfully!", Colours.adminCol);
+                    await Program.Logger(new LogMessage(LogSeverity.Info, "GTA5Police Configuration Commands", "Settings command was used by " + Context.User + "."));
                 }
             }
         }
@@ -65,6 +67,7 @@ namespace GTA5PoliceV2.Modules
                     config.Save();
 
                     await success.sendSuccessTempAsync(Context.Channel, "Logs Channel Set", "Channel set to `" + channel.Name + "` successfully!", Colours.adminCol);
+                    await Program.Logger(new LogMessage(LogSeverity.Info, "GTA5Police Configuration Commands", "Settings command was used by " + Context.User + "."));
                 }
             }
         }
@@ -85,6 +88,7 @@ namespace GTA5PoliceV2.Modules
                     config.Save();
 
                     await success.sendSuccessTempAsync(Context.Channel, "Timers Channel Set", "Channel set to `" + channel.Name + "` successfully!", Colours.adminCol);
+                    await Program.Logger(new LogMessage(LogSeverity.Info, "GTA5Police Configuration Commands", "Settings command was used by " + Context.User + "."));
                 }
             }
         }
@@ -105,6 +109,7 @@ namespace GTA5PoliceV2.Modules
                     config.Save();
 
                     await success.sendSuccessTempAsync(Context.Channel, "Status Timer Interval Set", "Status timer interval set to `" + minutes + " minutes` successfully!", Colours.adminCol);
+                    await Program.Logger(new LogMessage(LogSeverity.Info, "GTA5Police Configuration Commands", "Settings command was used by " + Context.User + "."));
                 }
             }
         }
@@ -125,6 +130,7 @@ namespace GTA5PoliceV2.Modules
                     config.Save();
 
                     await success.sendSuccessTempAsync(Context.Channel, "Message Timer Interval Set", "Message timer interval set to `" + seconds + " seconds` successfully!", Colours.adminCol);
+                    await Program.Logger(new LogMessage(LogSeverity.Info, "GTA5Police Configuration Commands", "Settings command was used by " + Context.User + "."));
                 }
             }
         }
@@ -145,6 +151,7 @@ namespace GTA5PoliceV2.Modules
                     config.Save();
 
                     await success.sendSuccessTempAsync(Context.Channel, "Message Timer Cooldown Set", "Message timer cooldown set to `" + messages + " messages` successfully!", Colours.adminCol);
+                    await Program.Logger(new LogMessage(LogSeverity.Info, "GTA5Police Configuration Commands", "Settings command was used by " + Context.User + "."));
                 }
             }
         }
@@ -165,6 +172,7 @@ namespace GTA5PoliceV2.Modules
                     config.Save();
 
                     await success.sendSuccessTempAsync(Context.Channel, "Command Cooldown Set", "Command cooldown set to `" + seconds + " seconds` successfully!", Colours.adminCol);
+                    await Program.Logger(new LogMessage(LogSeverity.Info, "GTA5Police Configuration Commands", "Settings command was used by " + Context.User + "."));
                 }
             }
         }
@@ -186,6 +194,7 @@ namespace GTA5PoliceV2.Modules
                     config.Save();
 
                     await success.sendSuccessTempAsync(Context.Channel, "Cop Add", "Cop add has been toggled successfully! Now set to " + BotConfig.Load().PoliceAdd, Colours.adminCol);
+                    await Program.Logger(new LogMessage(LogSeverity.Info, "GTA5Police Configuration Commands", "Settings command was used by " + Context.User + "."));
                 }
             }
         }
@@ -207,6 +216,7 @@ namespace GTA5PoliceV2.Modules
                     config.Save();
 
                     await success.sendSuccessTempAsync(Context.Channel, "EMS Add", "EMS add has been toggled successfully! Now set to " + BotConfig.Load().EmsAdd, Colours.adminCol);
+                    await Program.Logger(new LogMessage(LogSeverity.Info, "GTA5Police Configuration Commands", "Settings command was used by " + Context.User + "."));
                 }
             }
         }
@@ -227,6 +237,7 @@ namespace GTA5PoliceV2.Modules
                     config.Save();
 
                     await success.sendSuccessTempAsync(Context.Channel, "IP Change", "IP Changed for the server box to " + ip, Colours.adminCol);
+                    await Program.Logger(new LogMessage(LogSeverity.Info, "GTA5Police Configuration Commands", "Settings command was used by " + Context.User + "."));
                 }
             }
         }
@@ -276,6 +287,7 @@ namespace GTA5PoliceV2.Modules
                     else
                         await errors.sendErrorTempAsync(Context.Channel, "Enter a valid server ID! ID's: 1=NY, 2=LA, 3=NYWL, 4=LAWL", Colours.errorCol);
 
+                    await Program.Logger(new LogMessage(LogSeverity.Info, "GTA5Police Configuration Commands", "Settings command was used by " + Context.User + "."));
                 }
             }
         }
@@ -373,7 +385,7 @@ namespace GTA5PoliceV2.Modules
                     var message = await Context.Channel.SendMessageAsync("", false, embed);
                     await Delete.DelayDeleteEmbedAsync(message, 120);
 
-                    await Program.Logger(new LogMessage(LogSeverity.Info, "GTA5Police", "Settings command was used by " + Context.User + "."));
+                    await Program.Logger(new LogMessage(LogSeverity.Info, "GTA5Police Configuration Commands", "Settings command was used by " + Context.User + "."));
                     Statistics.AddOutgoingMessages();
                 }
             }

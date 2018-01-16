@@ -69,6 +69,7 @@ namespace GTA5PoliceV2.Administration
         {
             var server = bot.Guilds.FirstOrDefault(x => x.Id == BotConfig.Load().ServerId);
             await server.AddBanAsync(pMsg.Author, 7, "Profanity detected in discord chat. Check server logs for more information.");
+            await Program.Logger(new LogMessage(LogSeverity.Info, "GTA5Police Profanity", "Profanity was detected by the user " + pMsg.Author.Username + "."));
         }
     }
 }

@@ -9,7 +9,7 @@ namespace GTA5PoliceV2.Util
         public async Task sendSuccessAsync(ISocketMessageChannel channel, string title, string desc, Color color)
         {
             Statistics.AddOutgoingMessages();
-            await Program.Logger(new LogMessage(LogSeverity.Verbose, "GTA5Police", title + ": " + desc));
+            await Program.Logger(new LogMessage(LogSeverity.Verbose, "GTA5Police Success", title + ": " + desc));
             var embed = new EmbedBuilder() { Color = color };
             embed.Title = (title);
             embed.Description = (desc);
@@ -19,7 +19,7 @@ namespace GTA5PoliceV2.Util
         public async Task sendSuccessAsync(IMessageChannel channel, string title, string desc, Color color)
         {
             Statistics.AddOutgoingMessages();
-            await Program.Logger(new LogMessage(LogSeverity.Verbose, "GTA5Police", title + ": " + desc));
+            await Program.Logger(new LogMessage(LogSeverity.Verbose, "GTA5Police Success", title + ": " + desc));
             var embed = new EmbedBuilder() { Color = color };
             embed.Title = (title);
             embed.Description = (desc);
@@ -29,7 +29,7 @@ namespace GTA5PoliceV2.Util
         public async Task sendSuccessAsync(ISocketMessageChannel channel, string title, string desc, Color color, string url)
         {
             Statistics.AddOutgoingMessages();
-            await Program.Logger(new LogMessage(LogSeverity.Verbose, "GTA5Police", title + ": " + desc));
+            await Program.Logger(new LogMessage(LogSeverity.Verbose, "GTA5Police Success", title + ": " + desc));
             var embed = new EmbedBuilder() { Color = color };
             embed.Title = (title);
             embed.Description = (desc);
@@ -40,7 +40,7 @@ namespace GTA5PoliceV2.Util
         public async Task sendSuccessAsync(IMessageChannel channel, string title, string desc, Color color, string url)
         {
             Statistics.AddOutgoingMessages();
-            await Program.Logger(new LogMessage(LogSeverity.Verbose, "GTA5Police", title + ": " + desc));
+            await Program.Logger(new LogMessage(LogSeverity.Verbose, "GTA5Police Success", title + ": " + desc));
             var embed = new EmbedBuilder() { Color = color };
             embed.Title = (title);
             embed.Description = (desc);
@@ -51,7 +51,7 @@ namespace GTA5PoliceV2.Util
         public async Task sendSuccessTempAsync(ISocketMessageChannel channel, string title, string desc, Color color)
         {
             Statistics.AddOutgoingMessages();
-            await Program.Logger(new LogMessage(LogSeverity.Verbose, "GTA5Police", title + ": " + desc));
+            await Program.Logger(new LogMessage(LogSeverity.Verbose, "GTA5Police Success", title + ": " + desc));
             var embed = new EmbedBuilder() { Color = color };
             embed.Title = (title);
             embed.Description = (desc);
@@ -62,7 +62,7 @@ namespace GTA5PoliceV2.Util
         public async Task sendSuccessTempAsync(IMessageChannel channel, string title, string desc, Color color)
         {
             Statistics.AddOutgoingMessages();
-            await Program.Logger(new LogMessage(LogSeverity.Verbose, "GTA5Police", title + ": " + desc));
+            await Program.Logger(new LogMessage(LogSeverity.Verbose, "GTA5Police Success", title + ": " + desc));
             var embed = new EmbedBuilder() { Color = color };
             embed.Title = (title);
             embed.Description = (desc);
@@ -73,7 +73,7 @@ namespace GTA5PoliceV2.Util
         public async Task sendSuccessTempAsync(ISocketMessageChannel channel, string title, string desc, Color color, string url)
         {
             Statistics.AddOutgoingMessages();
-            await Program.Logger(new LogMessage(LogSeverity.Verbose, "GTA5Police", title + ": " + desc));
+            await Program.Logger(new LogMessage(LogSeverity.Verbose, "GTA5Police Success", title + ": " + desc));
             var embed = new EmbedBuilder() { Color = color };
             embed.Title = (title);
             embed.Description = (desc);
@@ -85,7 +85,7 @@ namespace GTA5PoliceV2.Util
         public async Task sendSuccessTempAsync(IMessageChannel channel, string title, string desc, Color color, string url)
         {
             Statistics.AddOutgoingMessages();
-            await Program.Logger(new LogMessage(LogSeverity.Verbose, "GTA5Police", title + ": " + desc));
+            await Program.Logger(new LogMessage(LogSeverity.Verbose, "GTA5Police Success", title + ": " + desc));
             var embed = new EmbedBuilder() { Color = color };
             embed.Title = (title);
             embed.Description = (desc);
@@ -97,7 +97,7 @@ namespace GTA5PoliceV2.Util
         public async Task sendSuccessTempAsync(IMessageChannel channel, string title, string desc, Color color, string url, int time)
         {
             Statistics.AddOutgoingMessages();
-            await Program.Logger(new LogMessage(LogSeverity.Verbose, "GTA5Police", title + ": " + desc));
+            await Program.Logger(new LogMessage(LogSeverity.Verbose, "GTA5Police Success", title + ": " + desc));
             var embed = new EmbedBuilder() { Color = color };
             embed.Title = (title);
             embed.Description = (desc);

@@ -26,7 +26,7 @@ namespace GTA5PoliceV2.Util
             applyLast = DateTime.Now.TimeOfDay.Subtract(new TimeSpan(0, 0, (int)BotConfig.Load().CommandCooldown));
             clearcacheLast = DateTime.Now.TimeOfDay.Subtract(new TimeSpan(0, 0, (int)BotConfig.Load().CommandCooldown));
             uptimeLast = DateTime.Now.TimeOfDay.Subtract(new TimeSpan(0, 0, (int)BotConfig.Load().CommandCooldown));
-            await Program.Logger(new LogMessage(LogSeverity.Info, "GTA5Police", "Command cooldowns reset."));
+            await Program.Logger(new LogMessage(LogSeverity.Info, "GTA5Police Cooldowns", "Command cooldowns reset."));
         }
 
         public static async Task AddCooldownMessageAsync(SocketMessage pMsg)

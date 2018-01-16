@@ -45,7 +45,7 @@ namespace GTA5PoliceV2.Connection
             }
             else
             {
-                Program.Logger(new LogMessage(LogSeverity.Critical, "GTA5Police", "Houston we have a problem!"));
+                Program.Logger(new LogMessage(LogSeverity.Critical, "GTA5Police Connection", "Houston we have a problem!"));
                 mainStatus = false;
             }
         }
@@ -65,7 +65,7 @@ namespace GTA5PoliceV2.Connection
                 try
                 {
                     sender.Connect(remoteEP);
-                    Program.Logger(new LogMessage(LogSeverity.Debug, "GTA5Police", "Successfully connected to server ID: " + id));
+                    Program.Logger(new LogMessage(LogSeverity.Debug, "GTA5Police Connection", "Successfully connected to server ID: " + id));
                     if (id == 1) isNyLive = true;
                     if (id == 2) isLaLive = true;
                     if (id == 3) isNyWlLive = true;
@@ -82,7 +82,7 @@ namespace GTA5PoliceV2.Connection
                 /** Null exception **/
                 catch (ArgumentNullException ane)
                 {
-                    Program.Logger(new LogMessage(LogSeverity.Error, "GTA5Police", "Null exception when trying to connect to server id: " + id));
+                    Program.Logger(new LogMessage(LogSeverity.Error, "GTA5Police Connection", "Null exception when trying to connect to server id: " + id));
                     if (id == 1) isNyLive = false;
                     if (id == 2) isLaLive = false;
                     if (id == 3) isNyWlLive = false;
@@ -91,7 +91,7 @@ namespace GTA5PoliceV2.Connection
                 /** Socket exception **/
                 catch (SocketException se)
                 {
-                    Program.Logger(new LogMessage(LogSeverity.Warning, "GTA5Police", "Socket exception when trying to connect to server id: " + id));
+                    Program.Logger(new LogMessage(LogSeverity.Warning, "GTA5Police Connection", "Socket exception when trying to connect to server id: " + id));
                     if (id == 1) isNyLive = false;
                     if (id == 2) isLaLive = false;
                     if (id == 3) isNyWlLive = false;
@@ -101,7 +101,7 @@ namespace GTA5PoliceV2.Connection
                 catch (Exception e)
                 {
                     Console.WriteLine("Unexpected exception when trying to connect to server id: " + id);
-                    Program.Logger(new LogMessage(LogSeverity.Error, "GTA5Police", "Unexpected exception when trying to connect to server id: " + id));
+                    Program.Logger(new LogMessage(LogSeverity.Error, "GTA5Police Connection", "Unexpected exception when trying to connect to server id: " + id));
                     if (id == 1) isNyLive = false;
                     if (id == 2) isLaLive = false;
                     if (id == 3) isNyWlLive = false;
@@ -111,7 +111,7 @@ namespace GTA5PoliceV2.Connection
             /** Exception **/
             catch (Exception e)
             {
-                Program.Logger(new LogMessage(LogSeverity.Error, "GTA5Police", "Exception when trying to connect to server id: " + id));
+                Program.Logger(new LogMessage(LogSeverity.Error, "GTA5Police Connection", "Exception when trying to connect to server id: " + id));
                 if (id == 1) isNyLive = false;
                 if (id == 2) isLaLive = false;
                 if (id == 3) isNyWlLive = false;

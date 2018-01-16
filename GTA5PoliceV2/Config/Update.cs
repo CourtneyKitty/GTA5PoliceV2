@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Discord;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -29,6 +30,8 @@ namespace GTA5PoliceV2.Config
             {
                 config.FilteredWords[j] = BotConfig.Load().FilteredWords[j];
             }
+
+            Program.Logger(new LogMessage(LogSeverity.Info, "GTA5Police Configuration", "Main configuration update used."));
             return config;
         }
 
@@ -39,6 +42,8 @@ namespace GTA5PoliceV2.Config
             config.LaPort = ConnectionsConfig.Load().LaPort;
             config.NyWlPort = ConnectionsConfig.Load().NyWlPort;
             config.LaWlPort = ConnectionsConfig.Load().LaWlPort;
+
+            Program.Logger(new LogMessage(LogSeverity.Info, "GTA5Police Configuration", "Connections configuration update used."));
             return config;
         }
 
@@ -50,6 +55,8 @@ namespace GTA5PoliceV2.Config
             {
                 config.Developers[j] = DevConfig.Load().Developers[j];
             }
+
+            Program.Logger(new LogMessage(LogSeverity.Info, "GTA5Police Configuration", "Developer configuration update used."));
             return config;
         }
 
@@ -67,6 +74,7 @@ namespace GTA5PoliceV2.Config
                 config.PDHighRanksArray[j] = RanksConfig.Load().PDHighRanksArray[j];
             }
 
+            Program.Logger(new LogMessage(LogSeverity.Info, "GTA5Police Configuration", "Ranks configuration update used."));
             return config;
         }
     }

@@ -12,7 +12,7 @@ namespace GTA5PoliceV2.Util
         {
             Statistics.AddErrorsDetected();
             Statistics.AddOutgoingMessages();
-            await Program.Logger(new LogMessage(LogSeverity.Error, "GTA5Police", error));
+            await Program.Logger(new LogMessage(LogSeverity.Error, "GTA5Police Errors", error));
             var embed = new EmbedBuilder() { Color = color };
             embed.Title = ("ERROR");
             embed.Description = (error);
@@ -23,7 +23,7 @@ namespace GTA5PoliceV2.Util
         {
             Statistics.AddErrorsDetected();
             Statistics.AddOutgoingMessages();
-            await Program.Logger(new LogMessage(LogSeverity.Error, "GTA5Police", error));
+            await Program.Logger(new LogMessage(LogSeverity.Error, "GTA5Police Errors", error));
             var embed = new EmbedBuilder() { Color = color };
             embed.Title = ("ERROR");
             embed.Description = (error);
@@ -35,7 +35,7 @@ namespace GTA5PoliceV2.Util
         {
             Statistics.AddErrorsDetected();
             Statistics.AddOutgoingMessages();
-            await Program.Logger(new LogMessage(LogSeverity.Error, "GTA5Police", error));
+            await Program.Logger(new LogMessage(LogSeverity.Error, "GTA5Police Errors", error));
             var embed = new EmbedBuilder() { Color = color };
             embed.Title = ("ERROR");
             embed.Description = (error);
@@ -47,7 +47,7 @@ namespace GTA5PoliceV2.Util
         {
             Statistics.AddErrorsDetected();
             Statistics.AddOutgoingMessages();
-            await Program.Logger(new LogMessage(LogSeverity.Error, "GTA5Police", error));
+            await Program.Logger(new LogMessage(LogSeverity.Error, "GTA5Police Errors", error));
             var embed = new EmbedBuilder() { Color = color };
             embed.Title = ("ERROR");
             embed.Description = (error);

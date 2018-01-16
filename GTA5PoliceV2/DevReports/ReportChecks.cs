@@ -12,11 +12,11 @@ namespace GTA5PoliceV2.DevReports
             {
                 if (DevConfig.Load().Developers[i] == user.Id)
                 {
-                    Program.Logger(new LogMessage(LogSeverity.Info, "GTA5Police", "This isn't a report, it is a dev!"));
+                    Program.Logger(new LogMessage(LogSeverity.Info, "GTA5Police Dev Reports", "This isn't a report, it is a dev!"));
                     return true;
                 }
             }
-            Program.Logger(new LogMessage(LogSeverity.Info, "GTA5Police", "This isn't a dev, it is a report!"));
+            Program.Logger(new LogMessage(LogSeverity.Info, "GTA5Police Dev Reports", "This isn't a dev, it is a report!"));
             return false;
         }
 
@@ -28,12 +28,12 @@ namespace GTA5PoliceV2.DevReports
                 {
                     if (message.ToLower().Contains("describe:"))
                     {
-                        Program.Logger(new LogMessage(LogSeverity.Info, "GTA5Police", "This report is the correct layout!"));
+                        Program.Logger(new LogMessage(LogSeverity.Info, "GTA5Police Dev Reports", "This report is the correct layout!"));
                         return true;
                     }
                 }
             }
-            Program.Logger(new LogMessage(LogSeverity.Info, "GTA5Police", "This report is not the correct layout!"));
+            Program.Logger(new LogMessage(LogSeverity.Info, "GTA5Police Dev Reports", "This report is not the correct layout!"));
             return false;
         }
 
