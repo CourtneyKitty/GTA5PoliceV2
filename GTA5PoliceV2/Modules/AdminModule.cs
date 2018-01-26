@@ -74,6 +74,41 @@ namespace GTA5PoliceV2.Modules
             }
         }
 
+        [Command("delete")]
+        [Alias("d")]
+        public async Task DeleteCommandAsync(int amount = 100, SocketGuildUser user = null)
+        {
+            Errors errors = new Errors();
+            await Context.Message.DeleteAsync();
+            for (int i = 0; i <= DevConfig.Load().Devs - 1; i++)
+            {
+                if (DevConfig.Load().Developers[i] == Context.Message.Author.Id)
+                {
+                    if (user == null)
+                    {
+                        if (amount > 100)
+                        {
+                            await errors.sendErrorAsync(Context.Channel, "You can not clear more than 100! Deleting 100.", Colours.errorCol);
+                            var messageHistory = await Context.Channel.GetMessagesAsync(101).Flatten();
+                            await Context.Channel.DeleteMessagesAsync(messageHistory);
+                            await Program.Logger(new LogMessage(LogSeverity.Info, "GTA5Police Admin Commands", "Clear command was used by " + Context.User + "."));
+                            await Program.Logger(new LogMessage(LogSeverity.Verbose, "GTA5Police Admin Commands", "100 messages were deleted in the channel " + Context.Channel.Name + " by " + Context.User + "."));
+                        }
+                        else if (amount < 1) await errors.sendErrorTempAsync(Context.Channel, "You can not clear a negative amount of messages!", Colours.errorCol);
+                        else
+                        {
+                            var messageHistory = await Context.Channel.GetMessagesAsync(amount).Flatten();
+
+                            await Context.Channel.DeleteMessagesAsync(messageHistory);
+
+                            await Program.Logger(new LogMessage(LogSeverity.Info, "GTA5Police Admin Commands", "Clear command was used by " + Context.User + "."));
+                            await Program.Logger(new LogMessage(LogSeverity.Verbose, "GTA5Police Admin Commands", amount + " messages were deleted in the channel " + Context.Channel.Name + " by " + Context.User + "."));
+                        }
+                    }
+                }
+            }
+        }
+
         [Command("welcometohell")]
         public async Task WelcomeCommandAsync()
         {

@@ -29,6 +29,7 @@ namespace GTA5PoliceV2
             map = provider;
             bot = map.GetService<DiscordSocketClient>();
             bot.UserJoined += AnnounceUserJoinedAsync;
+            bot.UserJoined += AutoBanAsync;
             bot.UserJoined += WelcomeUserJoinedAsync;
             bot.UserLeft += AnnounceLeftUserAsync;
             bot.UserBanned += AnnounceBannedUserAsync;
@@ -42,6 +43,21 @@ namespace GTA5PoliceV2
             bot.MessageReceived += Reports.HandleReportAsync;
             bot.MessageReceived += ProfanityFilter.ProfanityCheckAsync;
             bot.MessageReceived += Cooldowns.AddCooldownMessageAsync;
+        }
+
+        private async Task AutoBanAsync(SocketGuildUser user)
+        {
+            var offender = user as IUser;
+            var server = bot.Guilds.FirstOrDefault(x => x.Id == BotConfig.Load().ServerId);
+            var guild = server as IGuild;
+
+            for (int i = 0; i <= AutoBans.Load().Bans; i++)
+            {
+                if (offender.Id == AutoBans.Load().Offenders[i])
+                {
+                    await AutoBan.AutoBanAsync(guild, offender);
+                }
+            }
         }
 
         public async Task AnnounceLeftUserAsync(SocketGuildUser user) {}

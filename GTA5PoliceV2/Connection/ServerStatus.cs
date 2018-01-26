@@ -30,12 +30,13 @@ namespace GTA5PoliceV2.Connection
 
         /** Ping main server. If connection is good, try to connect to game servers. **/
         string g5pIP = ConnectionsConfig.Load().ServerIp;
+
         public void PingServers()
         {
             var ping = new Ping();
             
-            var reply = ping.SendPingAsync(g5pIP);
-            if (!reply.Status.Equals(IPStatus.Success))
+            var reply = ping.Send(g5pIP);
+            if (reply != null)
             {
                 mainStatus = true;
                 pingServer(nyPort, 1);
