@@ -22,11 +22,11 @@ namespace GTA5PoliceV2.Suggestions
 
         public static bool IsCorrectLayout(string message)
         {
-            if (message.ToLower().Contains("Suggestion Title:"))
+            if (message.ToLower().Contains("suggestion title:"))
             {
-                if (message.ToLower().Contains("Suggestion Topic"))
+                if (message.ToLower().Contains("suggestion topic:"))
                 {
-                    if (message.ToLower().Contains("Suggestion Description"))
+                    if (message.ToLower().Contains("suggestion description:"))
                     {
                         Program.Logger(new LogMessage(LogSeverity.Info, "GTA5Police Suggestions", "This suggestion is the correct layout!"));
                         return true;
