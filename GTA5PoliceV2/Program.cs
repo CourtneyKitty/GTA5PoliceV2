@@ -168,6 +168,7 @@ namespace GTA5PoliceV2
 
                 config.DevReports = 394177874657148940;
                 config.Devs = 0;
+                config.Suggestions = 366955141771034625;
                 config.Save();
                 Logger(new LogMessage(LogSeverity.Debug, "GTA5Police Configuration", "Dev config generated"));
             }

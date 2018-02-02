@@ -13,12 +13,14 @@ namespace GTA5PoliceV2.Config
         public ulong DevReports { get; set; }
         public int Devs { get; set; }
         public ulong[] Developers { get; set; }
+        public ulong Suggestions { get; set; }
 
         public DevConfig()
         {
             DevReports = 0;
             Devs = 0;
             Developers = new ulong[15];
+            Suggestions = 0;
         }
 
         public void Save(string dir = "configuration/dev_config.json")
