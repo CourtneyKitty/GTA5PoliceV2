@@ -11,7 +11,7 @@ namespace GTA5PoliceV2.Suggestions
     class Suggestion
     {
 
-        public static async Task HandleReportAsync(SocketMessage pMsg)
+        public static async Task HandleSuggestionAsync(SocketMessage pMsg)
         {
             Errors errors = new Errors();
             var message = pMsg as SocketUserMessage;
