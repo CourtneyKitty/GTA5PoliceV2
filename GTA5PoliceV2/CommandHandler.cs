@@ -177,7 +177,7 @@ namespace GTA5PoliceV2
             
             ny = false; la = false; nywl = false; lawl = false;
             timerStatus = new Timer(SendStatusAsync, null, 0, 1000 * 60 * BotConfig.Load().StatusTimerInterval);
-            timerMessage = new Timer(SendMessageAsync, null, 0, 1000 * 60 * BotConfig.Load().MessageTimerInterval);
+            timerMessage = new Timer(SendStatusMessageAsync, null, 0, 1000 * 60 * BotConfig.Load().MessageTimerInterval);
 
             var message = await channel.SendMessageAsync("Timers started.");
             await Delete.DelayDeleteMessageAsync(message, 5);
@@ -191,13 +191,13 @@ namespace GTA5PoliceV2
                 Statistics.AddStatusChanges();
                 if (References.IsStartUp() == true)
                 {
-                    if (status.getNyStatus()) await success.sendSuccessTempAsync(channel, "Server Status Change", "New York has come online!", Colours.generalCol, References.GetDashboardURL(), 5);
-                    if (!status.getNyStatus()) await success.sendSuccessTempAsync(channel, "Server Status Change", "New York has gone offline!", Colours.generalCol, References.GetDashboardURL(), 5);
+                    if (status.getNyStatus()) await success.sendSuccessTempAsync(channel, "Server Status Change", "EMS worked their magic on New York City, we are back live!", Colours.generalCol, References.GetDashboardURL(), 5);
+                    if (!status.getNyStatus()) await success.sendSuccessTempAsync(channel, "Server Status Change", "PD successfully neutralized suspect, New York City in a coma waiting for EMS assistance!", Colours.generalCol, References.GetDashboardURL(), 5);
                 }
                 else
                 {
-                    if (status.getNyStatus()) await success.sendSuccessAsync(channel, "Server Status Change", "New York has come online!", Colours.generalCol, References.GetDashboardURL());
-                    if (!status.getNyStatus()) await success.sendSuccessAsync(channel, "Server Status Change", "New York has gone offline!", Colours.generalCol, References.GetDashboardURL());
+                    if (status.getNyStatus()) await success.sendSuccessAsync(channel, "Server Status Change", "EMS worked their magic on New York City, we are back live!", Colours.generalCol, References.GetDashboardURL());
+                    if (!status.getNyStatus()) await success.sendSuccessAsync(channel, "Server Status Change", "PD successfully neutralized suspect, New York City in a coma waiting for EMS assistance!", Colours.generalCol, References.GetDashboardURL());
                 }
                 ny = status.getNyStatus();
             }
@@ -206,13 +206,13 @@ namespace GTA5PoliceV2
                 Statistics.AddStatusChanges();
                 if (References.IsStartUp() == true)
                 {
-                    if (status.getLaStatus()) await success.sendSuccessTempAsync(channel, "Server Status Change", "Los Angeles has come online!", Colours.generalCol, References.GetDashboardURL(), 5);
-                    if (!status.getLaStatus()) await success.sendSuccessTempAsync(channel, "Server Status Change", "Los Angeles has gone offline!", Colours.generalCol, References.GetDashboardURL(), 5);
+                    if (status.getLaStatus()) await success.sendSuccessTempAsync(channel, "Server Status Change", "EMS worked their magic on Los Angeles, we are back live!", Colours.generalCol, References.GetDashboardURL(), 5);
+                    if (!status.getLaStatus()) await success.sendSuccessTempAsync(channel, "Server Status Change", "PD successfully neutralized suspect, Los Angeles in a coma waiting for EMS assistance!", Colours.generalCol, References.GetDashboardURL(), 5);
                 }
                 else
                 {
-                    if (status.getLaStatus()) await success.sendSuccessAsync(channel, "Server Status Change", "Los Angeles has come online!", Colours.generalCol, References.GetDashboardURL());
-                    if (!status.getLaStatus()) await success.sendSuccessAsync(channel, "Server Status Change", "Los Angeles has gone offline!", Colours.generalCol, References.GetDashboardURL());
+                    if (status.getLaStatus()) await success.sendSuccessAsync(channel, "Server Status Change", "EMS worked their magic on Los Angeles, we are back live!", Colours.generalCol, References.GetDashboardURL());
+                    if (!status.getLaStatus()) await success.sendSuccessAsync(channel, "Server Status Change", "PD successfully neutralized suspect, Los Angeles in a coma waiting for EMS assistance!", Colours.generalCol, References.GetDashboardURL());
                 }
                 la = status.getLaStatus();
             }
@@ -221,13 +221,13 @@ namespace GTA5PoliceV2
                 Statistics.AddStatusChanges();
                 if (References.IsStartUp() == true)
                 {
-                    if (status.getNyWlStatus()) await success.sendSuccessTempAsync(channel, "Server Status Change", "New York Whitelist has come online!", Colours.generalCol, References.GetDashboardURL(), 5);
-                    if (!status.getNyWlStatus()) await success.sendSuccessTempAsync(channel, "Server Status Change", "New York Whitelist has gone offline!", Colours.generalCol, References.GetDashboardURL(), 5);
+                    if (status.getNyWlStatus()) await success.sendSuccessTempAsync(channel, "Server Status Change", "EMS worked their magic on New York City Whitelist, we are back live!", Colours.generalCol, References.GetDashboardURL(), 5);
+                    if (!status.getNyWlStatus()) await success.sendSuccessTempAsync(channel, "Server Status Change", "PD successfully neutralized suspect, New York City Whitelist in a coma waiting for EMS assistance!", Colours.generalCol, References.GetDashboardURL(), 5);
                 }
                 else
                 {
-                    if (status.getNyWlStatus()) await success.sendSuccessAsync(channel, "Server Status Change", "New York Whitelist has come online!", Colours.generalCol, References.GetDashboardURL());
-                    if (!status.getNyWlStatus()) await success.sendSuccessAsync(channel, "Server Status Change", "New York Whitelist has gone offline!", Colours.generalCol, References.GetDashboardURL());
+                    if (status.getNyWlStatus()) await success.sendSuccessAsync(channel, "Server Status Change", "EMS worked their magic on New York City Whitelist, we are back live!", Colours.generalCol, References.GetDashboardURL());
+                    if (!status.getNyWlStatus()) await success.sendSuccessAsync(channel, "Server Status Change", "PD successfully neutralized suspect, New York City Whitelist in a coma waiting for EMS assistance!", Colours.generalCol, References.GetDashboardURL());
                 }
                 nywl = status.getNyWlStatus();
             }
@@ -236,26 +236,25 @@ namespace GTA5PoliceV2
                 Statistics.AddStatusChanges();
                 if (References.IsStartUp() == true)
                 {
-                    if (status.getLaWlStatus()) await success.sendSuccessTempAsync(channel, "Server Status Change", "Los Angeles Whitelist has come online!", Colours.generalCol, References.GetDashboardURL(), 5);
-                    if (!status.getLaWlStatus()) await success.sendSuccessTempAsync(channel, "Server Status Change", "Los Angeles Whitelist has gone offline!", Colours.generalCol, References.GetDashboardURL(), 5);
+                    if (status.getLaWlStatus()) await success.sendSuccessTempAsync(channel, "Server Status Change", "EMS worked their magic on Los Angeles Whitelist, we are back live!", Colours.generalCol, References.GetDashboardURL(), 5);
+                    if (!status.getLaWlStatus()) await success.sendSuccessTempAsync(channel, "Server Status Change", "PD successfully neutralized suspect, Los Angeles Whitelist in a coma waiting for EMS assistance!", Colours.generalCol, References.GetDashboardURL(), 5);
                 }
                 else
                 {
-                    if (status.getLaWlStatus()) await success.sendSuccessAsync(channel, "Server Status Change", "Los Angeles Whitelist has come online!", Colours.generalCol, References.GetDashboardURL());
-                    if (!status.getLaWlStatus()) await success.sendSuccessAsync(channel, "Server Status Change", "Los Angeles Whitelist has gone offline!", Colours.generalCol, References.GetDashboardURL());
+                    if (status.getLaWlStatus()) await success.sendSuccessAsync(channel, "Server Status Change", "EMS worked their magic on Los Angeles Whitelist, we are back live!", Colours.generalCol, References.GetDashboardURL());
+                    if (!status.getLaWlStatus()) await success.sendSuccessAsync(channel, "Server Status Change", "PD successfully neutralized suspect, Los Angeles Whitelist in a coma waiting for EMS assistance!", Colours.generalCol, References.GetDashboardURL());
                 }
                 lawl = status.getLaWlStatus();
             }
             if (References.IsStartUp() == true) References.SetStartUp(false);
         }
 
-        public async void SendMessageAsync(object state)
+        public async void SendStatusMessageAsync(object state)
         {
             if (Cooldowns.GetMessageTimerCooldown() >= BotConfig.Load().MessageTimerCooldown)
             {
                 if (lastTimerMessage != null) await lastTimerMessage.DeleteAsync();
-
-                Statistics.AddTimerMessages();
+                
                 var embed = new EmbedBuilder() { Color = Colours.generalCol };
                 embed.WithAuthor("GTA5Police Help", References.GetGta5policeLogo());
                 embed.WithUrl(References.GetDashboardURL());
@@ -270,6 +269,7 @@ namespace GTA5PoliceV2
 
                 lastTimerMessage = await channel.SendMessageAsync("", false, embed);
                 Cooldowns.ResetMessageTimerCooldown();
+                Statistics.AddTimerMessages();
                 await Program.Logger(new LogMessage(LogSeverity.Info, "GTA5Police Timers", "Timer message delivered successfully."));
             }
             else await Program.Logger(new LogMessage(LogSeverity.Info, "GTA5Police Timers", "Timer message was not delivered due to the cooldown."));

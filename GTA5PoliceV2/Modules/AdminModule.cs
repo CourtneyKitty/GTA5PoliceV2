@@ -282,7 +282,7 @@ namespace GTA5PoliceV2.Modules
                     Success success = new Success();
                     if (user != null && rank != null)
                     {
-                        if (rank.Name.ToLower().Equals("ems probationary") || rank.Name.ToLower().Equals("ems paramedic") || rank.Name.ToLower().Equals("ems specialist/doctor"))
+                        if (rank.Name.ToLower().Equals("emr") || rank.Name.ToLower().Equals("emt") || rank.Name.ToLower().Equals("ems paramedic"))
                         {
                             await user.AddRoleAsync(rank);
                             if (station == 1) await user.AddRoleAsync(station1);
@@ -328,12 +328,12 @@ namespace GTA5PoliceV2.Modules
                     Success success = new Success();
                     if (user != null && rank != null)
                     {
-                        if (rank.Name.ToLower().Equals("ems probationary") || rank.Name.ToLower().Equals("ems paramedic") || rank.Name.ToLower().Equals("ems specialist/doctor"))
+                        if (rank.Name.ToLower().Equals("emr") || rank.Name.ToLower().Equals("emt") || rank.Name.ToLower().Equals("ems paramedic"))
                         {
                             await user.RemoveRoleAsync(rank);
                             if (station == 1) await user.RemoveRoleAsync(station1);
                             if (station == 2) await user.RemoveRoleAsync(station2);
-                            await success.sendSuccessTempAsync(Context.Channel, "Successful!", "Successfully remove " + user + " to " + rank + "!", Colours.adminCol);
+                            await success.sendSuccessTempAsync(Context.Channel, "Successful!", "Successfully removed " + user + " from " + rank + "!", Colours.adminCol);
                         }
                         else await errors.sendErrorTempAsync(Context.Channel, "That isn't even a ems rank you fool!", Colours.errorCol);
                     }

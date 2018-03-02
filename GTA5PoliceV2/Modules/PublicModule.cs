@@ -5,6 +5,7 @@ using GTA5PoliceV2.Util;
 using GTA5PoliceV2.Connection;
 using Discord;
 using System;
+using Discord.WebSocket;
 
 namespace GTA5PoliceV2.Modules
 {
@@ -97,7 +98,7 @@ namespace GTA5PoliceV2.Modules
                 embed.WithCurrentTimestamp();
 
                 var message = await Context.Channel.SendMessageAsync("", false, embed);
-                await Delete.DelayDeleteEmbedAsync(message, (int) Cooldowns.GetCommandCooldown());
+                await Delete.DelayDeleteEmbedAsync(message, (int)Cooldowns.GetCommandCooldown());
 
                 await Program.Logger(new LogMessage(LogSeverity.Info, "GTA5Police Commands", "Rules command was used by " + user + "."));
                 Cooldowns.SetRulesLast(current);
@@ -255,6 +256,15 @@ namespace GTA5PoliceV2.Modules
                 Statistics.AddOutgoingMessages();
             }
             else await errors.sendErrorTempAsync(channel, user + errorMessage + "\nCooldown " + difference + "/" + Cooldowns.GetCommandCooldown() + " seconds", Colours.errorCol);
+        }
+
+        [Command("meta")]
+        public async Task MetaAsync(IUser walking)
+        {
+            await Context.Message.DeleteAsync();
+
+            var message = await Context.Channel.SendMessageAsync(walking.Mention + " **#METAPLEASE**");
+            await Delete.DelayDeleteEmbedAsync(message, (int)Cooldowns.GetCommandCooldown());
         }
     }
 }
