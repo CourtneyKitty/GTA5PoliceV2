@@ -31,21 +31,28 @@ namespace GTA5PoliceV2
             });
 
             client.Log += Logger;
-            await Logger(new LogMessage(LogSeverity.Info, "GTA5Police Start Up", "Starting up bot."));
+            await Logger(new LogMessage(LogSeverity.Info, "GTA5Police Start Up", "Launching bot."));
+            await Logger(new LogMessage(LogSeverity.Info, "GTA5Police Start Up", "Initialization started."));
 
-            await Logger(new LogMessage(LogSeverity.Info, "GTA5Police Start Up", "Logging in started."));
+            await Logger(new LogMessage(LogSeverity.Info, "GTA5Police Start Up", "Log in started."));
             await client.LoginAsync(TokenType.Bot, BotConfig.Load().Token);
+            await Logger(new LogMessage(LogSeverity.Info, "GTA5Police Start Up", "Log in complete."));
 
             await client.StartAsync();
-            await Logger(new LogMessage(LogSeverity.Info, "GTA5Police Start Up", "Started up bot."));
+            await Logger(new LogMessage(LogSeverity.Info, "GTA5Police Start Up", "Bot successfully launched."));
 
-            await Logger(new LogMessage(LogSeverity.Info, "GTA5Police Start Up", "Doing service provider stuff."));
+            await Logger(new LogMessage(LogSeverity.Info, "GTA5Police Start Up", "Connecting to service provider."));
             var serviceProvider = ConfigureServices();
+            await Logger(new LogMessage(LogSeverity.Info, "GTA5Police Start Up", "Command handler initialization started."));
             handler = new CommandHandler(serviceProvider);
+            await Logger(new LogMessage(LogSeverity.Info, "GTA5Police Start Up", "Command handler initialization complete."));
+            await Logger(new LogMessage(LogSeverity.Info, "GTA5Police Start Up", "Config initialization started."));
             await handler.ConfigureAsync();
-            await Logger(new LogMessage(LogSeverity.Info, "GTA5Police Start Up", "Start up fully complete."));
+            await Logger(new LogMessage(LogSeverity.Info, "GTA5Police Start Up", "Config initialization complete."));
+            await Logger(new LogMessage(LogSeverity.Info, "GTA5Police Start Up", "Initialization complete."));
+            await Logger(new LogMessage(LogSeverity.Info, "GTA5Police Start Up", "Bot ready for use."));
 
-            //Block this program untill it is closed
+            //Block this program until it is closed
             await Task.Delay(-1);
         }
         public static Task Logger(LogMessage lmsg)
@@ -79,6 +86,7 @@ namespace GTA5PoliceV2
 
         public static void EnsureBotConfigExists()
         {
+            Logger(new LogMessage(LogSeverity.Info, "GTA5Police Start Up", "Searching for existing configurations."));
             if (!Directory.Exists(Path.Combine(AppContext.BaseDirectory, "configuration")))
                 Directory.CreateDirectory(Path.Combine(AppContext.BaseDirectory, "configuration"));
 
@@ -107,11 +115,7 @@ namespace GTA5PoliceV2
                 config.CommandCooldown = 120.0d;
                 config.Commanders = 1;
                 config.BotCommanders[0] = 211938243535568896;
-                config.Filters = 4;
-                config.FilteredWords[0] = "Nigga";
-                config.FilteredWords[1] = "Nigger";
-                config.FilteredWords[2] = "Nibba";
-                config.FilteredWords[3] = "Chink";
+                config.Filters = 0;
                 config.PoliceAdd = false;
                 config.EmsAdd = false;
                 config.Save();

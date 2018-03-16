@@ -45,8 +45,7 @@ namespace GTA5PoliceV2.Config
             EmsAdd = false;
         }
 
-        private const string save = "configuration/" + name + "config.json";
-        public void Save(string dir = save)
+        public void Save(string dir = "configuration/config.json")
         {
             string file = Path.Combine(appdir, dir);
             File.WriteAllText(file, ToJson());
