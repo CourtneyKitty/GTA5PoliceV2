@@ -51,6 +51,7 @@ namespace GTA5PoliceV2.Config
         {
             config.DevReports = DevConfig.Load().DevReports;
             config.Devs = DevConfig.Load().Devs;
+            config.Suggestions = DevConfig.Load().Suggestions;
             for (int j = 0; j <= DevConfig.Load().Devs - 1; j++)
             {
                 config.Developers[j] = DevConfig.Load().Developers[j];
