@@ -181,7 +181,7 @@ namespace GTA5PoliceV2
             if (!File.Exists(ranksConfigLoc))
             {
                 var config = new RanksConfig();
-                config.EMSHighRanks = 2;
+                config.EMSHighRanks = 4;
                 config.PDHighRanks = 5;
                 config.Save();
                 Logger(new LogMessage(LogSeverity.Debug, "GTA5Police Configuration", "Ranks configuration generated"));

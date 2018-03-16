@@ -17,8 +17,8 @@ namespace GTA5PoliceV2.Config
 
         public RanksConfig()
         {
-            EMSHighRanks = 2;
-            EMSHighRanksArray = new string[2];
+            EMSHighRanks = 4;
+            EMSHighRanksArray = new string[4];
             PDHighRanks = 5;
             PDHighRanksArray = new string[5];
         }
