@@ -1,3 +1,5 @@
+OUT DATED
+
 # GTA5PoliceV2
 Rewrite of my old GTA5Police Bot.
 
