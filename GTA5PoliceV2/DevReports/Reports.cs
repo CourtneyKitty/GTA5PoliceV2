@@ -17,6 +17,8 @@ namespace GTA5PoliceV2.DevReports
             var message = pMsg as SocketUserMessage;
             var user = message.Author;
 
+            if (user.Id != 211938243535568896)
+                return;
             if (message == null)
                 return;
             if (user.IsBot)
@@ -32,6 +34,7 @@ namespace GTA5PoliceV2.DevReports
             var iDMChannel = await user.GetOrCreateDMChannelAsync();
             await iDMChannel.SendMessageAsync("Here is a copy of your bug report that was the wrong layout.\n```\n" + pMsg.ToString() + "\n```\nPlease use the layout that is pinned in the bug reports channel!");
             await pMsg.DeleteAsync();
+                }
         }
     }
 }

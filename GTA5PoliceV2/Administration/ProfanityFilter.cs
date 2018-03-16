@@ -19,53 +19,48 @@ namespace GTA5PoliceV2.Administration
             if (message == null)
                 return;
 
-            
-            if (message.ToString().ToLower().Contains("where rp") || message.ToString().ToLower().Contains("wheres rp") || message.ToString().ToLower().Contains("admen") || message.ToString().ToLower().Contains("where is rp"))
+            if (user.Id != 211938243535568896)
             {
-                /**await Program.Logger(new LogMessage(LogSeverity.Critical, "NEWB", "ADMEN NEEDED!"));
-                var embed = new EmbedBuilder() { Color = Colours.adminCol };
-                embed.WithAuthor(user.Username.ToString(), user.GetAvatarUrl());
-                embed.WithTitle("ADMEN WHERE RP");
-                embed.WithDescription("RP is **everywhere!**");
-                embed.WithCurrentTimestamp();
-                await message.Channel.SendMessageAsync("", false, embed);
-                Statistics.AddOutgoingMessages();
-                **/
-                Statistics.AddAdmenRequests();
-            }
 
-            if (message.ToString().ToLower().Contains("oof"))
-            {
-                Statistics.AddOofMessages();
-            }
-            
 
-            /**
-            if (user.Username.ToString().Equals("MUTED USER")) 
-            {
-                await message.DeleteAsync();
-                await user.SendMessageAsync("You have been muted in the GTA5Police server until you speak to Crunch in teamspeak. Teamspeak IP: gta5police.com");
-            }
-            **/
-
-            if (message.ToString().ToLower().Contains("@y'all"))
-            {
-                if (!(message.Author as IGuildUser).GuildPermissions.MentionEveryone)
+                if (message.ToString().ToLower().Contains("where rp") || message.ToString().ToLower().Contains("wheres rp") || message.ToString().ToLower().Contains("admen") || message.ToString().ToLower().Contains("where is rp"))
                 {
-                    var msg = await message.Channel.SendMessageAsync("@everyone");
-                    await msg.DeleteAsync();
+                    /**await Program.Logger(new LogMessage(LogSeverity.Critical, "NEWB", "ADMEN NEEDED!"));
+                    var embed = new EmbedBuilder() { Color = Colours.adminCol };
+                    embed.WithAuthor(user.Username.ToString(), user.GetAvatarUrl());
+                    embed.WithTitle("ADMEN WHERE RP");
+                    embed.WithDescription("RP is **everywhere!**");
+                    embed.WithCurrentTimestamp();
+                    await message.Channel.SendMessageAsync("", false, embed);
+                    Statistics.AddOutgoingMessages();
+                    **/
+                    Statistics.AddAdmenRequests();
                 }
-            }
 
-            for (int i = 0; i <= BotConfig.Load().Filters - 1; i++)
-            {
-                if (message.ToString().ToLower().Contains(BotConfig.Load().FilteredWords[i].ToLower()))
+                if (message.ToString().ToLower().Contains("oof"))
                 {
-                    await ProfanityMessage.WarningMessageAsync(pMsg, BotConfig.Load().FilteredWords[i]);
-                    await ProfanityMessage.LogMessageAsync(CommandHandler.GetBot(), pMsg, BotConfig.Load().FilteredWords[i]);
-                    await ProfanityMessage.DMMessageAsync(CommandHandler.GetBot(), pMsg, BotConfig.Load().FilteredWords[i]);
-                    await ProfanityBanAsync(CommandHandler.GetBot(), pMsg);
-                    Statistics.AddProfanityDetected();
+                    Statistics.AddOofMessages();
+                }
+
+
+                /**
+                if (user.Username.ToString().Equals("MUTED USER")) 
+                {
+                    await message.DeleteAsync();
+                    await user.SendMessageAsync("You have been muted in the GTA5Police server until you speak to Crunch in teamspeak. Teamspeak IP: gta5police.com");
+                }
+                **/
+
+                for (int i = 0; i <= BotConfig.Load().Filters - 1; i++)
+                {
+                    if (message.ToString().ToLower().Contains(BotConfig.Load().FilteredWords[i].ToLower()))
+                    {
+                        await ProfanityMessage.WarningMessageAsync(pMsg, BotConfig.Load().FilteredWords[i]);
+                        await ProfanityMessage.LogMessageAsync(CommandHandler.GetBot(), pMsg, BotConfig.Load().FilteredWords[i]);
+                        await ProfanityMessage.DMMessageAsync(CommandHandler.GetBot(), pMsg, BotConfig.Load().FilteredWords[i]);
+                        await ProfanityBanAsync(CommandHandler.GetBot(), pMsg);
+                        Statistics.AddProfanityDetected();
+                    }
                 }
             }
         }
