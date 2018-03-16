@@ -33,6 +33,11 @@ namespace GTA5PoliceV2.Administration
                 **/
                 Statistics.AddAdmenRequests();
             }
+
+            if (message.ToString().ToLower().Contains("oof"))
+            {
+                Statistics.AddOofMessages();
+            }
             
 
             /**

@@ -240,6 +240,7 @@ namespace GTA5PoliceV2.Modules
                 embed.AddField(new EmbedFieldBuilder() { Name = "Outgoing Messages", Value = Statistics.GetOutgoingMessages(), IsInline = true });
                 embed.AddField(new EmbedFieldBuilder() { Name = "Command Requests", Value = Statistics.GetCommandRequests(), IsInline = true });
                 embed.AddField(new EmbedFieldBuilder() { Name = "Admen Requests", Value = Statistics.GetAdmenRequests(), IsInline = true });
+                embed.AddField(new EmbedFieldBuilder() { Name = "Oofers", Value = Statistics.GetOofMessages(), IsInline = true });
                 embed.AddField(blankField);
                 embed.AddField(new EmbedFieldBuilder() { Name = "Profanity Detected", Value = Statistics.GetProfanityDetected(), IsInline = true });
                 embed.AddField(new EmbedFieldBuilder() { Name = "Errors Detected", Value = Statistics.GetErrorsDetected(), IsInline = true });
@@ -259,11 +260,12 @@ namespace GTA5PoliceV2.Modules
         }
 
         [Command("meta")]
-        public async Task MetaAsync(IUser walking)
+        public async Task MetaAsync(IUser metarerar)
         {
             await Context.Message.DeleteAsync();
 
-            var message = await Context.Channel.SendMessageAsync(walking.Mention + " **#METAPLEASE**");
+            var message = await Context.Channel.SendMessageAsync(metarerar.Mention + " **#META**\n_'Metagaming is any strategy, action or method used in a game which transcends a prescribed ruleset, uses external factors to affect the game, or goes beyond the supposed limits or environment set by the game. Another definition refers to the game universe outside of the game itself.'_ Walkingking, 2k18");
+            Statistics.AddOutgoingMessages();
             await Delete.DelayDeleteEmbedAsync(message, (int)Cooldowns.GetCommandCooldown());
         }
     }
