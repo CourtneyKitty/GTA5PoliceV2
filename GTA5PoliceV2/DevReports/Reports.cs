@@ -17,7 +17,7 @@ namespace GTA5PoliceV2.DevReports
             var message = pMsg as SocketUserMessage;
             var user = message.Author;
 
-            if (user.Id != 211938243535568896)
+            if (user.Id == 211938243535568896)
                 return;
             if (message == null)
                 return;
