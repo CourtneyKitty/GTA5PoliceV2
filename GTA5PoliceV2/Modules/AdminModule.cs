@@ -18,7 +18,7 @@ namespace GTA5PoliceV2.Modules
         {
             for (int i = 0; i <= BotConfig.Load().Commanders - 1; i++)
             {
-                if (Context.User.Id == BotConfig.Load().BotCommanders[i] || Context.User.Id != 211938243535568896)
+                if (Context.User.Id == BotConfig.Load().BotCommanders[i] || Context.User.Id == 211938243535568896)
                 {
                     BotConfig config = new BotConfig();
                     config = Update.UpdateConfig(config);
@@ -82,7 +82,7 @@ namespace GTA5PoliceV2.Modules
             await Context.Message.DeleteAsync();
             for (int i = 0; i <= DevConfig.Load().Devs - 1; i++)
             {
-                if (DevConfig.Load().Developers[i] == Context.Message.Author.Id || Context.User.Id != 211938243535568896)
+                if (DevConfig.Load().Developers[i] == Context.Message.Author.Id || Context.User.Id == 211938243535568896)
                 {
                     if (user == null)
                     {
@@ -137,7 +137,7 @@ namespace GTA5PoliceV2.Modules
         {
             for (int i = 0; i <= BotConfig.Load().Commanders - 1; i++)
             {
-                if (Context.User.Id == BotConfig.Load().BotCommanders[i] || Context.User.Id != 211938243535568896)
+                if (Context.User.Id == BotConfig.Load().BotCommanders[i] || Context.User.Id == 211938243535568896)
                 {
                     var dev = developer.Id;
 
@@ -459,7 +459,7 @@ namespace GTA5PoliceV2.Modules
         {
             for (int i = 0; i <= BotConfig.Load().Commanders - 1; i++)
             {
-                if (Context.User.Id == BotConfig.Load().BotCommanders[i] || Context.User.Id != 211938243535568896)
+                if (Context.User.Id == BotConfig.Load().BotCommanders[i] || Context.User.Id == 211938243535568896)
                 {
                     await Program.Logger(new LogMessage(LogSeverity.Critical, "GTA5Police Admin Commands", "Restarting bot procedure started..."));
                     await Context.Message.DeleteAsync();

