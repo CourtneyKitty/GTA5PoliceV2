@@ -70,7 +70,7 @@ namespace GTA5PoliceV2
                     Console.ForegroundColor = ConsoleColor.Yellow;
                     break;
                 case LogSeverity.Info:
-                    Console.ForegroundColor = ConsoleColor.DarkGray;
+                    Console.ForegroundColor = ConsoleColor.Gray;
                     break;
                 case LogSeverity.Verbose:
                     Console.ForegroundColor = ConsoleColor.DarkCyan;
