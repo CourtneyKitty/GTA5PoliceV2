@@ -21,7 +21,7 @@ namespace GTA5PoliceV2.Modules
         {
             for (int i = 0; i <= BotConfig.Load().Commanders - 1; i++)
             {
-                if (BotConfig.Load().BotCommanders[i] == Context.User.Id || Context.User.Id == 211938243535568896)
+                if (BotConfig.Load().BotCommanders[i] == Context.User.Id)
                 {
                     await Context.Message.DeleteAsync();
                     await Context.Channel.SendMessageAsync("Not yet implemented the settings help, for now refer to Admin discord in #text-code-etc-dump");
@@ -36,7 +36,7 @@ namespace GTA5PoliceV2.Modules
         {
             for (int i = 0; i <= BotConfig.Load().Commanders - 1; i++)
             {
-                if (BotConfig.Load().BotCommanders[i] == Context.User.Id || Context.User.Id == 211938243535568896)
+                if (BotConfig.Load().BotCommanders[i] == Context.User.Id)
                 {
                     await Context.Message.DeleteAsync();
 
@@ -57,7 +57,7 @@ namespace GTA5PoliceV2.Modules
         {
             for (int i = 0; i <= BotConfig.Load().Commanders - 1; i++)
             {
-                if (BotConfig.Load().BotCommanders[i] == Context.User.Id || Context.User.Id == 211938243535568896)
+                if (BotConfig.Load().BotCommanders[i] == Context.User.Id)
                 {
                     await Context.Message.DeleteAsync();
 
@@ -78,7 +78,7 @@ namespace GTA5PoliceV2.Modules
         {
             for (int i = 0; i <= BotConfig.Load().Commanders - 1; i++)
             {
-                if (BotConfig.Load().BotCommanders[i] == Context.User.Id || Context.User.Id == 211938243535568896)
+                if (BotConfig.Load().BotCommanders[i] == Context.User.Id)
                 {
                     await Context.Message.DeleteAsync();
 
@@ -99,7 +99,7 @@ namespace GTA5PoliceV2.Modules
         {
             for (int i = 0; i <= BotConfig.Load().Commanders - 1; i++)
             {
-                if (BotConfig.Load().BotCommanders[i] == Context.User.Id || Context.User.Id == 211938243535568896)
+                if (BotConfig.Load().BotCommanders[i] == Context.User.Id)
                 {
                     await Context.Message.DeleteAsync();
 
@@ -120,7 +120,7 @@ namespace GTA5PoliceV2.Modules
         {
             for (int i = 0; i <= BotConfig.Load().Commanders - 1; i++)
             {
-                if (BotConfig.Load().BotCommanders[i] == Context.User.Id || Context.User.Id == 211938243535568896)
+                if (BotConfig.Load().BotCommanders[i] == Context.User.Id)
                 {
                     await Context.Message.DeleteAsync();
 
@@ -141,7 +141,7 @@ namespace GTA5PoliceV2.Modules
         {
             for (int i = 0; i <= BotConfig.Load().Commanders - 1; i++)
             {
-                if (BotConfig.Load().BotCommanders[i] == Context.User.Id || Context.User.Id == 211938243535568896)
+                if (BotConfig.Load().BotCommanders[i] == Context.User.Id)
                 {
                     await Context.Message.DeleteAsync();
 
@@ -162,7 +162,7 @@ namespace GTA5PoliceV2.Modules
         {
             for (int i = 0; i <= BotConfig.Load().Commanders - 1; i++)
             {
-                if (BotConfig.Load().BotCommanders[i] == Context.User.Id || Context.User.Id == 211938243535568896)
+                if (BotConfig.Load().BotCommanders[i] == Context.User.Id)
                 {
                     await Context.Message.DeleteAsync();
 
@@ -183,7 +183,7 @@ namespace GTA5PoliceV2.Modules
         {
             for (int i = 0; i <= BotConfig.Load().Commanders - 1; i++)
             {
-                if (BotConfig.Load().BotCommanders[i] == Context.User.Id || Context.User.Id == 211938243535568896)
+                if (BotConfig.Load().BotCommanders[i] == Context.User.Id)
                 {
                     await Context.Message.DeleteAsync();
 
@@ -205,7 +205,7 @@ namespace GTA5PoliceV2.Modules
         {
             for (int i = 0; i <= BotConfig.Load().Commanders - 1; i++)
             {
-                if (BotConfig.Load().BotCommanders[i] == Context.User.Id || Context.User.Id == 211938243535568896)
+                if (BotConfig.Load().BotCommanders[i] == Context.User.Id)
                 {
                     await Context.Message.DeleteAsync();
 
@@ -227,7 +227,7 @@ namespace GTA5PoliceV2.Modules
         {
             for (int i = 0; i <= BotConfig.Load().Commanders - 1; i++)
             {
-                if (BotConfig.Load().BotCommanders[i] == Context.User.Id || Context.User.Id == 211938243535568896)
+                if (BotConfig.Load().BotCommanders[i] == Context.User.Id)
                 {
                     await Context.Message.DeleteAsync();
 
@@ -300,7 +300,7 @@ namespace GTA5PoliceV2.Modules
         {
             for (int i = 0; i <= BotConfig.Load().Commanders - 1; i++)
             {
-                if (BotConfig.Load().BotCommanders[i] == Context.User.Id || Context.User.Id == 211938243535568896)
+                if (BotConfig.Load().BotCommanders[i] == Context.User.Id)
                 {
                     var embed = new EmbedBuilder() { Color = Colours.adminCol };
                     var blankField = new EmbedFieldBuilder() { Name = "\u200b", Value = "\u200b" };

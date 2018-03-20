@@ -19,9 +19,6 @@ namespace GTA5PoliceV2.Administration
             if (message == null)
                 return;
 
-
-            if (user.Id != 211938243535568896)
-            {
                 if (message.ToString().ToLower().Contains("where rp") || message.ToString().ToLower().Contains("wheres rp") || message.ToString().ToLower().Contains("admen") || message.ToString().ToLower().Contains("where is rp"))
                 {
                     /**await Program.Logger(new LogMessage(LogSeverity.Critical, "NEWB", "ADMEN NEEDED!"));
@@ -61,7 +58,6 @@ namespace GTA5PoliceV2.Administration
                         Statistics.AddProfanityDetected();
                     }
                 }
-            }
         }
 
         public static async Task ProfanityBanAsync(DiscordSocketClient bot, SocketMessage pMsg)
