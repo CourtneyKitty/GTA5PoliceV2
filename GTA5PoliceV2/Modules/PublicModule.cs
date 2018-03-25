@@ -241,6 +241,7 @@ namespace GTA5PoliceV2.Modules
                 embed.AddField(new EmbedFieldBuilder() { Name = "Command Requests", Value = Statistics.GetCommandRequests(), IsInline = true });
                 embed.AddField(new EmbedFieldBuilder() { Name = "Admen Requests", Value = Statistics.GetAdmenRequests(), IsInline = true });
                 embed.AddField(new EmbedFieldBuilder() { Name = "Oofers", Value = Statistics.GetOofMessages(), IsInline = true });
+                embed.AddField(new EmbedFieldBuilder() { Name = "Meta Messages", Value = Statistics.GetMetaMessages(), IsInline = true });
                 embed.AddField(blankField);
                 embed.AddField(new EmbedFieldBuilder() { Name = "Profanity Detected", Value = Statistics.GetProfanityDetected(), IsInline = true });
                 embed.AddField(new EmbedFieldBuilder() { Name = "Errors Detected", Value = Statistics.GetErrorsDetected(), IsInline = true });
@@ -266,6 +267,7 @@ namespace GTA5PoliceV2.Modules
 
             var message = await Context.Channel.SendMessageAsync(metarerar.Mention + " **#META**\n_'Metagaming is any strategy, action or method used in a game which transcends a prescribed ruleset, uses external factors to affect the game, or goes beyond the supposed limits or environment set by the game. Another definition refers to the game universe outside of the game itself.'_ Walkingking, 2k18");
             Statistics.AddOutgoingMessages();
+            Statistics.AddMetaMessages();
         }
     }
 }
