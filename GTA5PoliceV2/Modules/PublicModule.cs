@@ -266,7 +266,6 @@ namespace GTA5PoliceV2.Modules
 
             var message = await Context.Channel.SendMessageAsync(metarerar.Mention + " **#META**\n_'Metagaming is any strategy, action or method used in a game which transcends a prescribed ruleset, uses external factors to affect the game, or goes beyond the supposed limits or environment set by the game. Another definition refers to the game universe outside of the game itself.'_ Walkingking, 2k18");
             Statistics.AddOutgoingMessages();
-            await Delete.DelayDeleteEmbedAsync(message, (int)Cooldowns.GetCommandCooldown());
         }
     }
 }
