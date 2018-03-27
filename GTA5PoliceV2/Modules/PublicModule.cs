@@ -206,7 +206,7 @@ namespace GTA5PoliceV2.Modules
                 embed.WithCurrentTimestamp();
 
                 var message = await Context.Channel.SendMessageAsync("", false, embed);
-                await Delete.DelayDeleteEmbedAsync(message, (int)Cooldowns.GetCommandCooldown());
+                //await Delete.DelayDeleteEmbedAsync(message, (int)Cooldowns.GetCommandCooldown());
 
                 await Program.Logger(new LogMessage(LogSeverity.Info, "GTA5Police Commands", "Clearcache command was used by " + user + "."));
                 Cooldowns.SetClearcacheLast(current);
