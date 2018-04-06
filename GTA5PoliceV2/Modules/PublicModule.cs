@@ -132,6 +132,7 @@ namespace GTA5PoliceV2.Modules
                 embed.AddField(new EmbedFieldBuilder() { Name = "Suggestions", Value = References.GetSuggestionsURL() });
                 embed.AddField(new EmbedFieldBuilder() { Name = "Donations", Value = References.GetDonateURL() });
                 embed.AddField(new EmbedFieldBuilder() { Name = "Vacbanned - For Steam Hex", Value = References.GetVacbannedURL() });
+                embed.AddField(new EmbedFieldBuilder() { Name = "Greggs", Value = "https://www.greggs.co.uk/" });
                 embed.WithFooter("Requested by " + Context.User);
                 embed.WithCurrentTimestamp();
 
