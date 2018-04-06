@@ -48,8 +48,19 @@ I am about done with my plans for this bot. Here is a list of things I thought a
 - Make sure there are no bugs within your changes, obviously a few might slip through but DO NOT pr anything that will break the bot.
 
 ## Further Information
-- This bot is using the .net Discord API (version 2.0.0)
+- This bot is using the .net Discord API (version 1.0.2)
 - The workspace is set up using .NET Core (.NET Framework 4.6.1)
+- All Deps
+  - Discord.Net v1.0.2
+  - Discord.Net.Core v1.0.2
+  - Discord.Net.Commands v1.0.2
+  - Discord.Net.Providers.WS4Net v1.0.2
+  - Discord.Net.Rest v1.0.2
+  - Discord.Net.Rpc v1.0.2
+  - Discord.Net.Webhoook v1.0.2
+  - Discord.Net.WenSocket v1.0.2
+  - Microsoft.NETCore.App v2.0.0
+- Bruze MPG Community Discord (Use this for any further information or help) - http://www.discord.me/bruze
 
 ## License
 This work is licensed under the Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License. To view a copy of this license, visit http://creativecommons.org/licenses/by-nc-sa/4.0/ or send a letter to Creative Commons, PO Box 1866, Mountain View, CA 94042, USA.
