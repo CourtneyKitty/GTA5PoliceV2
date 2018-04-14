@@ -9,6 +9,8 @@ namespace GTA5PoliceV2.Util
     {
         public static string NAME = "GTA5Police";
         public static string VERSION = "V2.5";
+        public static string DEVELOPER = "BlurrDev";
+        public static string GetDeveloperLogo() { return "https://cdn.discordapp.com/attachments/384068652963463168/434783053462765570/Blurr.png"; }
 
         public static string GetGta5policeLogo() { return UrlConfig.Load().Logo; }
         public static string GetRulesURL() { return UrlConfig.Load().Rules; }

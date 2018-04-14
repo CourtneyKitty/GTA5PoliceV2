@@ -270,5 +270,34 @@ namespace GTA5PoliceV2.Modules
             Statistics.AddOutgoingMessages();
             Statistics.AddMetaMessages();
         }
+
+        [Command("developer")]
+        [Alias("dev", "info")]
+        public async Task DeveloperAsync()
+        {
+            var channel = Context.Channel;
+            var user = Context.User;
+            await Context.Message.DeleteAsync();
+
+            var embed = new EmbedBuilder() { Color = Colours.generalCol };
+            embed.WithAuthor("GTA5PoliceV2 Developer", References.GetDeveloperLogo());
+            embed.Description = "Information regarding the GTA5PoliceV2 bot developement.";
+            embed.WithThumbnailUrl(References.GetDeveloperLogo());
+            embed.AddField(new EmbedFieldBuilder() { Name = "Developer", Value = "BlurrDev" });
+            embed.AddField(new EmbedFieldBuilder() { Name = "Developers Work", Value = "https://github.com/byBlurr" });
+            embed.AddField(new EmbedFieldBuilder() { Name = "Developers Website", Value = "http://www.blurrdev.com/ - Currently Offline" });
+            embed.AddField(new EmbedFieldBuilder() { Name = "GTA5PoliceV2 Source Code", Value = "https://github.com/byBlurr/GTA5PoliceV2" });
+            embed.AddField(new EmbedFieldBuilder() { Name = "Contributors", Value = "KnightDev" });
+            embed.AddField(new EmbedFieldBuilder() { Name = "Contributors Work", Value = "https://github.com/byBlurr/GTA5PoliceV2/graphs/contributors" });
+            embed.AddField(new EmbedFieldBuilder() { Name = "Pull Requests", Value = "If you are a developer and interested in adding new features to the GTA5PoliceV2 bot, you can! Fork the GTA5PoliceV2 source code and read the readme." });
+            embed.WithFooter("Requested by " + Context.User);
+            embed.WithCurrentTimestamp();
+
+            var message = await Context.Channel.SendMessageAsync("", false, embed);
+
+            await Program.Logger(new LogMessage(LogSeverity.Info, "GTA5Police Commands", "Developer command was used by " + user + "."));
+
+            Statistics.AddOutgoingMessages();
+        }
     }
 }
