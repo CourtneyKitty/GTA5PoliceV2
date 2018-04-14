@@ -258,7 +258,7 @@ namespace GTA5PoliceV2.Modules
                         config = Update.UpdateConnectionsConfig(config);
                         config.NyPort = port;
                         config.Save();
-                        await success.sendSuccessTempAsync(Context.Channel, "Port Change", "Port changed to " + port + "for New York.", Colours.adminCol);
+                        await success.sendSuccessTempAsync(Context.Channel, "Port Change", "Port changed to " + port + " for New York.", Colours.adminCol);
                     }
                     else if (id == 2)
                     {
@@ -266,7 +266,7 @@ namespace GTA5PoliceV2.Modules
                         config = Update.UpdateConnectionsConfig(config);
                         config.LaPort = port;
                         config.Save();
-                        await success.sendSuccessTempAsync(Context.Channel, "Port Change", "Port changed to " + port + "for Los Angeles.", Colours.adminCol);
+                        await success.sendSuccessTempAsync(Context.Channel, "Port Change", "Port changed to " + port + " for Los Angeles.", Colours.adminCol);
                     }
                     else if (id == 3)
                     {
@@ -274,7 +274,7 @@ namespace GTA5PoliceV2.Modules
                         config = Update.UpdateConnectionsConfig(config);
                         config.NyWlPort = port;
                         config.Save();
-                        await success.sendSuccessTempAsync(Context.Channel, "Port Change", "Port changed to " + port + "for Whitelist New York.", Colours.adminCol);
+                        await success.sendSuccessTempAsync(Context.Channel, "Port Change", "Port changed to " + port + " for Whitelist New York.", Colours.adminCol);
                     }
                     else if (id == 4)
                     {
@@ -282,7 +282,7 @@ namespace GTA5PoliceV2.Modules
                         config = Update.UpdateConnectionsConfig(config);
                         config.LaWlPort = port;
                         config.Save();
-                        await success.sendSuccessTempAsync(Context.Channel, "Port Change", "Port changed to " + port + "for Whitelist Los Angeles.", Colours.adminCol);
+                        await success.sendSuccessTempAsync(Context.Channel, "Port Change", "Port changed to " + port + " for Whitelist Los Angeles.", Colours.adminCol);
                     }
                     else
                         await errors.sendErrorTempAsync(Context.Channel, "Enter a valid server ID! ID's: 1=NY, 2=LA, 3=NYWL, 4=LAWL", Colours.errorCol);
