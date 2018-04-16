@@ -34,6 +34,7 @@ namespace GTA5PoliceV2.Modules
                 embed.AddField(new EmbedFieldBuilder() { Name = BotConfig.Load().Prefix + "Apply", Value = "Police, EMS, Mechanic, and Whitelist Applications" });
                 embed.AddField(new EmbedFieldBuilder() { Name = BotConfig.Load().Prefix + "Links", Value = "Useful Links." });
                 embed.AddField(new EmbedFieldBuilder() { Name = BotConfig.Load().Prefix + "Status", Value = "View the current status of the servers." });
+                embed.AddField(new EmbedFieldBuilder() { Name = BotConfig.Load().Prefix + "Developer", Value = "Displays information on the developer(s) of the bot." });
                 embed.WithFooter("Message Timer with " + BotConfig.Load().MessageTimerInterval + " minute interval");
                 embed.WithCurrentTimestamp();
 
@@ -281,7 +282,7 @@ namespace GTA5PoliceV2.Modules
 
             var embed = new EmbedBuilder() { Color = Colours.generalCol };
             embed.WithAuthor("GTA5PoliceV2 Developer", References.GetDeveloperLogo());
-            embed.Description = "Information regarding the GTA5PoliceV2 bot developement.";
+            embed.Description = "Information regarding the GTA5PoliceV2 bot development.";
             embed.WithThumbnailUrl(References.GetDeveloperLogo());
             embed.AddField(new EmbedFieldBuilder() { Name = "Developer", Value = "BlurrDev" });
             embed.AddField(new EmbedFieldBuilder() { Name = "Developers Work", Value = "https://github.com/byBlurr" });
