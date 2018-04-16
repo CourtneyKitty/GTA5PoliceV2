@@ -229,6 +229,23 @@ namespace GTA5PoliceV2.Modules
             TimeSpan current = DateTime.Now.TimeOfDay;
             double difference = current.TotalSeconds - last.TotalSeconds;
 
+            TimeSpan uptimeTime = DateTime.Now.TimeOfDay - Cooldowns.GetStartupTime();
+            int startHours = uptimeTime.Hours;
+            if (startHours < 0) { startHours = startHours + 24; }
+            int startMinutes = uptimeTime.Minutes;
+            int startSeconds = uptimeTime.Seconds;
+
+            int startDays = DateTime.Now.Date.Day - Cooldowns.GetStartupDate().Day;
+            if (startDays < 0)
+            {
+                startDays = ((startDays - startDays) - startDays);
+                int startMonth = Cooldowns.GetStartupDate().Month;
+                int startYear = Cooldowns.GetStartupDate().Year;
+                int maxDaysInMonth = DateTime.DaysInMonth(startYear, startMonth);
+                int extraDays = maxDaysInMonth - Cooldowns.GetStartupDate().Day;
+                startDays = startDays + extraDays;
+            }
+
             if (difference >= Cooldowns.GetCommandCooldown() || difference < 0)
             {
                 var embed = new EmbedBuilder() { Color = Colours.generalCol };
@@ -237,7 +254,8 @@ namespace GTA5PoliceV2.Modules
                 embed.WithDescription("Here are all the statistics since last startup.\n**Teamspeak IP: gta5police.com**");
                 embed.WithThumbnailUrl(References.GetGta5policeLogo());
                 embed.WithUrl("http://www.blurrdev.com/gta5police.html");
-                embed.AddField(new EmbedFieldBuilder() { Name = "Bot Uptime", Value = DateTime.Now.TimeOfDay - Cooldowns.GetStartupTime() });
+                //embed.AddField(new EmbedFieldBuilder() { Name = "Bot Uptime", Value = DateTime.Now.TimeOfDay - Cooldowns.GetStartupTime() });
+                embed.AddField(new EmbedFieldBuilder() { Name = "Bot Uptime", Value = "Days: "+ startDays +" | Hours: "+ startHours +" | Minutes: " + startMinutes +" | Seconds: " + startSeconds });
                 embed.AddField(new EmbedFieldBuilder() { Name = "Incoming Messages", Value = Statistics.GetIncomingMessages(), IsInline = true });
                 embed.AddField(new EmbedFieldBuilder() { Name = "Outgoing Messages", Value = Statistics.GetOutgoingMessages(), IsInline = true });
                 embed.AddField(new EmbedFieldBuilder() { Name = "Command Requests", Value = Statistics.GetCommandRequests(), IsInline = true });

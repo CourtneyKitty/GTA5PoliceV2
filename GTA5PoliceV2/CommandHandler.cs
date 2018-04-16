@@ -143,6 +143,7 @@ namespace GTA5PoliceV2
         public async Task StartupAsync()
         {
             Cooldowns.SetStartupTime(DateTime.Now.TimeOfDay);
+            Cooldowns.SetStartupDate(DateTime.Now.Date);
             Statistics.ResetIncomingMessages();
             Statistics.ResetOutgoingMessages();
             Statistics.ResetCommandRequests();

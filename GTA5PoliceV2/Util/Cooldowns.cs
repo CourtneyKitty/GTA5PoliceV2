@@ -11,6 +11,7 @@ namespace GTA5PoliceV2.Util
     class Cooldowns
     {
         private static TimeSpan startupTime;
+        private static DateTime startupDate;
         private static TimeSpan CommandCooldown;
 
         private static int MessageTimerCooldown = 0;
@@ -40,6 +41,8 @@ namespace GTA5PoliceV2.Util
 
         public static void SetStartupTime(TimeSpan time) { startupTime = time; }
         public static TimeSpan GetStartupTime() { return startupTime; }
+        public static void SetStartupDate(DateTime date) { startupDate = date; }
+        public static DateTime GetStartupDate() { return startupDate; }
 
         public static void AddMessageToCooldown() { MessageTimerCooldown++; }
         public static void ResetMessageTimerCooldown() { MessageTimerCooldown = 0; }
