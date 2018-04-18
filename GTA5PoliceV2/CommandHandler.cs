@@ -13,6 +13,7 @@ using GTA5PoliceV2.Connection;
 using GTA5PoliceV2.DevReports;
 using GTA5PoliceV2.Administration;
 using GTA5PoliceV2.Suggestions;
+using GTA5PoliceV2.Profiles;
 
 namespace GTA5PoliceV2
 {
@@ -45,7 +46,18 @@ namespace GTA5PoliceV2
             bot.MessageReceived += Suggestion.HandleSuggestionAsync;
             bot.MessageReceived += ProfanityFilter.ProfanityCheckAsync;
             bot.MessageReceived += Cooldowns.AddCooldownMessageAsync;
+            bot.MessageReceived += SetRolesAsync;
             bot.MessageReceived += dbibne;
+        }
+
+        private async Task SetRolesAsync(SocketMessage pMsg)
+        {
+            var message = pMsg as SocketUserMessage;
+            var server = bot.Guilds.FirstOrDefault(x => x.Id == BotConfig.Load().ServerId);
+            var guild = server as IGuild;
+            if (message == null)
+                return;
+            await RoleManager.SetRolesAsync(pMsg, guild);
         }
 
         private async Task AutoBanAsync(SocketGuildUser user)

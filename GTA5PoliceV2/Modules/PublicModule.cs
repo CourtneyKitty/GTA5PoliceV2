@@ -255,7 +255,7 @@ namespace GTA5PoliceV2.Modules
                 embed.WithThumbnailUrl(References.GetGta5policeLogo());
                 embed.WithUrl("http://www.blurrdev.com/gta5police.html");
                 //embed.AddField(new EmbedFieldBuilder() { Name = "Bot Uptime", Value = DateTime.Now.TimeOfDay - Cooldowns.GetStartupTime() });
-                embed.AddField(new EmbedFieldBuilder() { Name = "Bot Uptime", Value = "Days: "+ startDays +" | Hours: "+ startHours +" | Minutes: " + startMinutes +" | Seconds: " + startSeconds });
+                embed.AddField(new EmbedFieldBuilder() { Name = "Bot Uptime", Value = "Days: " + startDays + " | Hours: " + startHours + " | Minutes: " + startMinutes + " | Seconds: " + startSeconds });
                 embed.AddField(new EmbedFieldBuilder() { Name = "Incoming Messages", Value = Statistics.GetIncomingMessages(), IsInline = true });
                 embed.AddField(new EmbedFieldBuilder() { Name = "Outgoing Messages", Value = Statistics.GetOutgoingMessages(), IsInline = true });
                 embed.AddField(new EmbedFieldBuilder() { Name = "Command Requests", Value = Statistics.GetCommandRequests(), IsInline = true });
