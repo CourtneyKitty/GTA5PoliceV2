@@ -69,8 +69,8 @@ namespace GTA5PoliceV2.Modules
             if (hex != null)
             {
                 if (!hex.Contains("steam:")) hex = "steam:" + hex;
-                if (hex.Length < 21) await errors.sendErrorTempAsync(Context.Channel, "Please enter a valid hex.", Colours.errorCol);
-                if (hex.Length > 21) await errors.sendErrorTempAsync(Context.Channel, "Please enter a valid hex.", Colours.errorCol);
+                if (hex.Length < 21) { await errors.sendErrorTempAsync(Context.Channel, "Please enter a valid hex.", Colours.errorCol); return; }
+                if (hex.Length > 21) { await errors.sendErrorTempAsync(Context.Channel, "Please enter a valid hex.", Colours.errorCol); return; }
 
                 Profile profile = new Profile();
                 profile = UpdateProfile(Context.User.Id, profile);
@@ -88,26 +88,33 @@ namespace GTA5PoliceV2.Modules
         [Command("joinheist")]
         public async Task JoinHeistAsync(int dolla = 0)
         {
-            if (RoleManager.IsCiv(Context.Guild as IGuild, Context.User.Id))
+            if (RoleManager.IsCiv(Context.Guild as IGuild, Context.User))
             {
-                if (dolla > 0 && dolla <= Profile.Load(Context.User.Id).Money)
+                if (dolla > 0)
                 {
-                    await success.sendSuccessTempAsync(Context.Channel, "Robberies", "Successfully invested $" + dolla + " into a bank robbery.", Colours.generalCol);
+                    if (dolla <= Profile.Load(Context.User.Id).Money)
+                    {
+                        await success.sendSuccessTempAsync(Context.Channel, "Robberies", "Successfully invested $" + dolla + " into a bank robbery.", Colours.generalCol);
+                    }
+                    else
+                    {
+                        await errors.sendErrorTempAsync(Context.Channel, "You can not afford that.", Colours.errorCol);
+                    }
                 }
                 else
                 {
                     await errors.sendErrorTempAsync(Context.Channel, "Please enter a valid amount of money.", Colours.errorCol);
                 }
             }
-            else if (RoleManager.IsPolice(Context.Guild as IGuild, Context.User.Id))
+            else if (RoleManager.IsPolice(Context.Guild as IGuild, Context.User))
             {
                 await success.sendSuccessTempAsync(Context.Channel, "Robberies", "Successfully added to bank robbery defense as Police.", Colours.generalCol);
             }
-            else if (RoleManager.IsEMS(Context.Guild as IGuild, Context.User.Id))
+            else if (RoleManager.IsEMS(Context.Guild as IGuild, Context.User))
             {
                 await success.sendSuccessTempAsync(Context.Channel, "Robberies", "Successfully added to bank robbery defense as EMS.", Colours.generalCol);
             }
-            else if (RoleManager.IsMechanic(Context.Guild as IGuild, Context.User.Id))
+            else if (RoleManager.IsMechanic(Context.Guild as IGuild, Context.User))
             {
                 await success.sendSuccessTempAsync(Context.Channel, "Robberies", "You're a mechanic, I guess you can sit and watch?", Colours.generalCol);
             }
@@ -122,13 +129,13 @@ namespace GTA5PoliceV2.Modules
             embed.Description = "Displaying users profile!";
             embed.WithThumbnailUrl(avatar);
             embed.AddField(new EmbedFieldBuilder() { Name = "Display Name", Value = Profile.Load(user.Id).PlayerNAME });
-            embed.AddField(new EmbedFieldBuilder() { Name = "ID", Value = Profile.Load(user.Id).PlayerID });
-            embed.AddField(new EmbedFieldBuilder() { Name = "HEX", Value = Profile.Load(user.Id).PlayerHEX });
+            embed.AddField(new EmbedFieldBuilder() { Name = "ID", Value = Profile.Load(user.Id).PlayerID, IsInline = true });
+            embed.AddField(new EmbedFieldBuilder() { Name = "HEX", Value = Profile.Load(user.Id).PlayerHEX, IsInline = true });
             embed.AddField(new EmbedFieldBuilder() { Name = "Money", Value = "$"+Profile.Load(user.Id).Money });
-            embed.AddField(new EmbedFieldBuilder() { Name = "Bank Robberies", Value = Profile.Load(user.Id).Attempts });
-            embed.AddField(new EmbedFieldBuilder() { Name = "Successful (Criminal)", Value = Profile.Load(user.Id).SuccessfulWins });
-            embed.AddField(new EmbedFieldBuilder() { Name = "Successful (Police)", Value = Profile.Load(user.Id).SuccessfulDefends });
-            embed.AddField(new EmbedFieldBuilder() { Name = "Revives (EMS)", Value = Profile.Load(user.Id).Revives });
+            embed.AddField(new EmbedFieldBuilder() { Name = "Bank Robberies", Value = Profile.Load(user.Id).Attempts, IsInline = true });
+            embed.AddField(new EmbedFieldBuilder() { Name = "Successful (Criminal)", Value = Profile.Load(user.Id).SuccessfulWins, IsInline = true });
+            embed.AddField(new EmbedFieldBuilder() { Name = "Successful (Police)", Value = Profile.Load(user.Id).SuccessfulDefends, IsInline = true });
+            embed.AddField(new EmbedFieldBuilder() { Name = "Revives (EMS)", Value = Profile.Load(user.Id).Revives, IsInline = true });
             embed.WithFooter("Displaying profile for " + user.Username);
             embed.WithCurrentTimestamp();
 
