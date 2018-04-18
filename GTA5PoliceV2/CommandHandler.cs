@@ -96,6 +96,11 @@ namespace GTA5PoliceV2
             embed.WithFooter("We hope you enjoy your stay!");
             embed.WithCurrentTimestamp();
             await user.SendMessageAsync("", false, embed);
+
+            var server = bot.Guilds.FirstOrDefault(x => x.Id == BotConfig.Load().ServerId);
+            var guild = server as IGuild;
+            await user.AddRoleAsync(guild.Roles.FirstOrDefault(x => x.Name == "Civilian"));
+
             Statistics.AddOutgoingMessages();
         }
         public async Task AnnounceBannedUserAsync(SocketUser user, SocketGuild guild)
