@@ -95,5 +95,81 @@ namespace GTA5PoliceV2.Profiles
                 }
             }
         }
+
+        public static bool IsCiv(IGuild iguild, ulong id)
+        {
+            var user = iguild.GetUserAsync(id) as IGuildUser;
+            for (int i = 0; i < civRoles.Length; i++)
+            {
+                var civRole = iguild.Roles.FirstOrDefault(x => x.Name == civRoles[i]);
+                ulong roleExist = 0;
+                roleExist = user.RoleIds.FirstOrDefault(x => x.Equals(civRole.Id));
+
+
+                if (roleExist != 0)
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        public static bool IsPolice(IGuild iguild, ulong id)
+        {
+            var user = iguild.GetUserAsync(id) as IGuildUser;
+            for (int i = 0; i < policeRoles.Length; i++)
+            {
+                var policeRole = iguild.Roles.FirstOrDefault(x => x.Name == policeRoles[i]);
+                ulong roleExist = 0;
+                roleExist = user.RoleIds.FirstOrDefault(x => x.Equals(policeRole.Id));
+
+
+                if (roleExist != 0)
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        public static bool IsEMS(IGuild iguild, ulong id)
+        {
+            var user = iguild.GetUserAsync(id) as IGuildUser;
+            for (int i = 0; i < emsRoles.Length; i++)
+            {
+                var emsRole = iguild.Roles.FirstOrDefault(x => x.Name == emsRoles[i]);
+                ulong roleExist = 0;
+                roleExist = user.RoleIds.FirstOrDefault(x => x.Equals(emsRole.Id));
+
+
+                if (roleExist != 0)
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        public static bool IsMechanic(IGuild iguild, ulong id)
+        {
+            var user = iguild.GetUserAsync(id) as IGuildUser;
+            for (int i = 0; i < mechanicRoles.Length; i++)
+            {
+                var mechanicRole = iguild.Roles.FirstOrDefault(x => x.Name == mechanicRoles[i]);
+                ulong roleExist = 0;
+                roleExist = user.RoleIds.FirstOrDefault(x => x.Equals(mechanicRole.Id));
+
+
+                if (roleExist != 0)
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
     }
 }
