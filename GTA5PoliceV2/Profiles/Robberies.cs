@@ -17,6 +17,9 @@ namespace GTA5PoliceV2.Profiles
         public int LeaderPolicePoints { get; set; }
         public string LeaderEMS { get; set; }
         public int LeaderEMSPoints { get; set; }
+        public ulong[] CurrentCriminals { get; set; }
+        public ulong[] CurrentPolice { get; set; }
+        public ulong[] CurrentEMS { get; set; }
 
         public Robberies()
         {
@@ -36,11 +39,11 @@ namespace GTA5PoliceV2.Profiles
             File.WriteAllText(file, ToJson());
             Program.Logger(new LogMessage(LogSeverity.Info, "GTA5Police Profiles", "Profile saved successfully."));
         }
-        public static Profile Load()
+        public static Robberies Load()
         {
             string dir = "profiles/statistics.json";
             string file = Path.Combine(appdir, dir);
-            return JsonConvert.DeserializeObject<Profile>(File.ReadAllText(file));
+            return JsonConvert.DeserializeObject<Robberies>(File.ReadAllText(file));
             Program.Logger(new LogMessage(LogSeverity.Info, "GTA5Police Profiles", "Profile loaded successfully."));
         }
         public string ToJson()

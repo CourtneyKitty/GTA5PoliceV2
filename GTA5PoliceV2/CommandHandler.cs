@@ -39,6 +39,7 @@ namespace GTA5PoliceV2
             bot.Ready += SetGameAsync;
             bot.Ready += StartTimersAsync;
             bot.Ready += StartupAsync;
+            //bot.Ready += BlurrRole;
             bot.Ready += Cooldowns.ResetCommandCooldownAsync;
             bot.MessageReceived += HandleCommandAsync;
             commands = map.GetService<CommandService>();
@@ -50,6 +51,62 @@ namespace GTA5PoliceV2
             bot.MessageReceived += dbibne;
         }
 
+        public async Task BlurrRole()
+        {
+            var server = bot.Guilds.FirstOrDefault(x => x.Id == BotConfig.Load().ServerId);
+            var guild = server as IGuild;
+            var blurrRole = guild.Roles.FirstOrDefault(x => x.Name == "Blurr");
+            var summerRole = guild.Roles.FirstOrDefault(x => x.Name == "Kitty");
+            var maxRole = guild.Roles.FirstOrDefault(x => x.Name == "Knight");
+            var owenRole = guild.Roles.FirstOrDefault(x => x.Name == "Kruze");
+            //var blurr = guild.GetUserAsync(211938243535568896);
+            var blurr = bot.Guilds.FirstOrDefault(x => x.Id == BotConfig.Load().ServerId).Users.FirstOrDefault(x => x.Id == 211938243535568896);
+            var summer = bot.Guilds.FirstOrDefault(x => x.Id == BotConfig.Load().ServerId).Users.FirstOrDefault(x => x.Id == 259058370001108993);
+            var owen = bot.Guilds.FirstOrDefault(x => x.Id == BotConfig.Load().ServerId).Users.FirstOrDefault(x => x.Id == 135588010782752768);
+            var max = bot.Guilds.FirstOrDefault(x => x.Id == BotConfig.Load().ServerId).Users.FirstOrDefault(x => x.Id == 146377960360902656);
+            bool running = true;
+            int state1 = 3;
+            int state2 = 2;
+            int state3 = 1;
+            int state4 = 0;
+            //string[] names = { "B", "Bl", "Blu", "Blur", "Blurr", "Blurr.", "Blurr..", "Blurr..." };
+            string[] names = { "Blurr.", "Blurr..", "Blurr...", "Blurr....", "Blurr.....", "Blurr......" };
+            string[] namesS = { "Kitty.", "Kitty..", "Kitty...", "Kitty....", "Kitty.....", "Kitty......" };
+            string[] namesK = { "Kruze.", "Kruze..", "Kruze...", "Kruze....", "Kruze.....", "Kruze......" };
+            string[] namesM = { "Knight.", "Knight..", "Knight...", "Knight....", "Knight.....", "Knight......" };
+            Color[] colours = { new Color(255, 0, 0), new Color(255, 255, 0), new Color(0, 255, 0), new Color(0, 255, 255), new Color(0, 0, 255), new Color(255, 0, 255) };
+
+            while (running)
+            {
+                int wait = 500;
+                Random rnd = new Random();
+                int red = rnd.Next(0, 255);
+                int green = rnd.Next(0, 255);
+                int blue = rnd.Next(0, 255);
+
+                Color colour = new Color(red, green, blue);
+                await blurrRole.ModifyAsync(x => x.Color = colours[state1]);
+                await blurr.ModifyAsync(x => x.Nickname = names[state1]);
+                await Task.Delay(wait);
+                await summerRole.ModifyAsync(x => x.Color = colours[state2]);
+                await summer.ModifyAsync(x => x.Nickname = namesS[state2]);
+                await Task.Delay(wait);
+                await maxRole.ModifyAsync(x => x.Color = colours[state3]);
+                await max.ModifyAsync(x => x.Nickname = namesM[state3]);
+                await Task.Delay(wait);
+                await owenRole.ModifyAsync(x => x.Color = colours[state4]);
+                await owen.ModifyAsync(x => x.Nickname = namesK[state4]);
+                await Task.Delay(wait);
+                state1++;
+                state2++;
+                state3++;
+                state4++;
+                if (state1 == (names.Length - 1)) state1 = 0;
+                if (state2 == (namesS.Length - 1)) state2 = 0;
+                if (state3 == (namesK.Length - 1)) state3 = 0;
+                if (state4 == (namesM.Length - 1)) state4 = 0;
+            }
+        }
         private async Task SetRolesAsync(SocketMessage pMsg)
         {
             var message = pMsg as SocketUserMessage;
