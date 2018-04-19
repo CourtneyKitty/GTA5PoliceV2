@@ -22,7 +22,7 @@ namespace GTA5PoliceV2.Profiles
             robberies.LeaderEMSPoints = Robberies.Load().LeaderEMSPoints;
             robberies.RobberyChannel = Robberies.Load().RobberyChannel;
             robberies.CurrentCriminals = Robberies.Load().CurrentCriminals;
-            robberies.CurrentCriminals[Robberies.Load().CurrentCriminals.Length] = robber;
+            robberies.CurrentCriminals = Util.Array.Insert(robberies.CurrentCriminals, robber);
             robberies.CurrentPolice = Robberies.Load().CurrentPolice;
             robberies.CurrentEMS = Robberies.Load().CurrentEMS;
             invested = invested + investment;
@@ -41,7 +41,7 @@ namespace GTA5PoliceV2.Profiles
             robberies.RobberyChannel = Robberies.Load().RobberyChannel;
             robberies.CurrentCriminals = Robberies.Load().CurrentCriminals;
             robberies.CurrentPolice = Robberies.Load().CurrentPolice;
-            robberies.CurrentPolice[Robberies.Load().CurrentPolice.Length] = cop;
+            robberies.CurrentPolice = Util.Array.Insert(robberies.CurrentPolice, cop);
             robberies.CurrentEMS = Robberies.Load().CurrentEMS;
             robberies.Save();
         }
@@ -59,7 +59,7 @@ namespace GTA5PoliceV2.Profiles
             robberies.CurrentCriminals = Robberies.Load().CurrentCriminals;
             robberies.CurrentPolice = Robberies.Load().CurrentPolice;
             robberies.CurrentEMS = Robberies.Load().CurrentEMS;
-            robberies.CurrentEMS[Robberies.Load().CurrentEMS.Length] = medic;
+            robberies.CurrentEMS = Util.Array.Insert(robberies.CurrentEMS, medic);
             robberies.Save();
         }
 
