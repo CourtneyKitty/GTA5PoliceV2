@@ -15,8 +15,6 @@ namespace GTA5PoliceV2
 {
     class Program
     {
-        public static List<ulong> modRoleID = new List<ulong>();
-        public static ulong[] modRoleIDs;
         public static void Main(string[] args) => new Program().StartAsync().GetAwaiter().GetResult();
         private DiscordSocketClient client;
         private CommandHandler handler;

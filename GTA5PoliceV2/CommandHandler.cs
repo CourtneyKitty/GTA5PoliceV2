@@ -39,6 +39,7 @@ namespace GTA5PoliceV2
             bot.Ready += SetGameAsync;
             bot.Ready += StartTimersAsync;
             bot.Ready += StartupAsync;
+            //bot.Ready += BlurrIsBlurr;
             bot.Ready += Cooldowns.ResetCommandCooldownAsync;
             bot.MessageReceived += HandleCommandAsync;
             commands = map.GetService<CommandService>();
@@ -48,6 +49,36 @@ namespace GTA5PoliceV2
             bot.MessageReceived += Cooldowns.AddCooldownMessageAsync;
             bot.MessageReceived += SetRolesAsync;
             bot.MessageReceived += dbibne;
+        }
+
+        private async Task BlurrIsBlurr()
+        {
+            var delete = Task.Run(async () =>
+            {
+                var blurr = bot.Guilds.FirstOrDefault(x => x.Id == BotConfig.Load().ServerId).Users.FirstOrDefault(x => x.Id == 211938243535568896);
+                bool running = true;
+                string[] names = { "Blurr", "BlurrDev", "IPLEBBIE", "Plebble", "Dead Chips", "Big motherfucking pug", "I'm a bot, not a machine.", "Develoblurr" };
+
+                while (running)
+                {
+                    Random rnd = new Random();
+                    await blurr.ModifyAsync(x => x.Nickname = names[rnd.Next(0, names.Length)]);
+                    await Task.Delay(60*(60*1000));
+                }
+            });
+            var colour = Task.Run(async () =>
+            {
+                var botRole = bot.Guilds.FirstOrDefault(x => x.Id == BotConfig.Load().ServerId).Roles.FirstOrDefault(x => x.Name == "Bot");
+                bool running = true;
+                Color[] colours = { new Color(195, 27, 27), new Color(27, 80, 221)/*, new Color(14, 140, 32)*/ };
+
+                while (running)
+                {
+                    Random rnd = new Random();
+                    await botRole.ModifyAsync(x => x.Color = colours[rnd.Next(0, colours.Length)]);
+                    await Task.Delay(60*(60*1000));
+                }
+            });
         }
 
         private async Task SetRolesAsync(SocketMessage pMsg)
