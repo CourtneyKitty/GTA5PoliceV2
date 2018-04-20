@@ -159,6 +159,7 @@ namespace GTA5PoliceV2
 
         public async Task StartupAsync()
         {
+            await Delete.DelayDeleteMessageAsync(await channel.SendMessageAsync("GTA5PoliceV2 startup procedure.", false, null), 5);
             Cooldowns.SetStartupTime(DateTime.Now.TimeOfDay);
             Cooldowns.SetStartupDate(DateTime.Now.Date);
             Statistics.ResetIncomingMessages();
