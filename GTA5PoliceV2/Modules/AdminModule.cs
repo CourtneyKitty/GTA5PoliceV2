@@ -287,9 +287,19 @@ namespace GTA5PoliceV2.Modules
                             await user.AddRoleAsync(rank);
                             if (station == 1) await user.AddRoleAsync(station1);
                             if (station == 2) await user.AddRoleAsync(station2);
+
+                            var role = (author as IGuildUser).Guild.Roles.FirstOrDefault(x => x.Name == "Civilian");
+                            if (user.Guild.Roles.Contains(role))
+                            {
+                                await user.RemoveRoleAsync(role);
+                            }
+
                             await success.sendSuccessTempAsync(Context.Channel, "Successful!", "Successfully added " + user + " to " + rank + "!", Colours.adminCol);
                         }
                         else await errors.sendErrorTempAsync(Context.Channel, "That isn't even a ems rank you fool!", Colours.errorCol);
+
+                        
+
                     }
                 }
             }
@@ -391,6 +401,13 @@ namespace GTA5PoliceV2.Modules
                             if (squad.ToLower().Equals("c")) await user.AddRoleAsync(charlie);
                             //if (squad.ToLower().Equals("d")) await user.AddRoleAsync(delta);
                             await success.sendSuccessTempAsync(Context.Channel, "Successful!", "Successfully added " + user + " to " + rank + "!", Colours.adminCol);
+
+                            var role = (author as IGuildUser).Guild.Roles.FirstOrDefault(x => x.Name == "Civilian");
+                            if (user.Guild.Roles.Contains(role))
+                            {
+                                await user.RemoveRoleAsync(role);
+                            }
+
                         }
                         else await errors.sendErrorTempAsync(Context.Channel, "That isn't even a police rank you fool!", Colours.errorCol);
                     }
