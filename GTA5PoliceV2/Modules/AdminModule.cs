@@ -331,6 +331,7 @@ namespace GTA5PoliceV2.Modules
                         if (rank.Name.ToLower().Equals("emr") || rank.Name.ToLower().Equals("emt") || rank.Name.ToLower().Equals("ems paramedic"))
                         {
                             await user.RemoveRoleAsync(rank);
+                            await user.AddRoleAsync(Context.Guild.Roles.FirstOrDefault(x => x.Name == "Civilian"));
                             if (station == 1) await user.RemoveRoleAsync(station1);
                             if (station == 2) await user.RemoveRoleAsync(station2);
                             await success.sendSuccessTempAsync(Context.Channel, "Successful!", "Successfully removed " + user + " from " + rank + "!", Colours.adminCol);
@@ -441,6 +442,7 @@ namespace GTA5PoliceV2.Modules
                         if (rank.Name.ToLower().Equals("police officer") || rank.Name.ToLower().Equals("police sergeant"))
                         {
                             await user.RemoveRoleAsync(rank);
+                            await user.AddRoleAsync(Context.Guild.Roles.FirstOrDefault(x => x.Name == "Civilian"));
                             if (squad.ToLower().Equals("a")) await user.RemoveRoleAsync(alpha);
                             if (squad.ToLower().Equals("b")) await user.RemoveRoleAsync(bravo);
                             if (squad.ToLower().Equals("c")) await user.RemoveRoleAsync(charlie);
