@@ -285,9 +285,22 @@ namespace GTA5PoliceV2.Modules
         {
             await Context.Message.DeleteAsync();
 
-            var message = await Context.Channel.SendMessageAsync(metarerar.Mention + " **#META**\n_'Metagaming is any strategy, action or method used in a game which transcends a prescribed ruleset, uses external factors to affect the game, or goes beyond the supposed limits or environment set by the game. Another definition refers to the game universe outside of the game itself.'_ Walkingking, 2k18");
-            Statistics.AddOutgoingMessages();
-            Statistics.AddMetaMessages();
+
+            var channel = Context.Channel;
+            var user = Context.User;
+            await Context.Message.DeleteAsync();
+
+            TimeSpan last = Cooldowns.GetClearcacheLast();
+            TimeSpan current = DateTime.Now.TimeOfDay;
+            double difference = current.TotalSeconds - last.TotalSeconds;
+
+            if (difference >= Cooldowns.GetCommandCooldown() || difference < 0)
+            {
+                var message = await Context.Channel.SendMessageAsync(metarerar.Mention + " **#META**\n_'Metagaming is any strategy, action or method used in a game which transcends a prescribed ruleset, uses external factors to affect the game, or goes beyond the supposed limits or environment set by the game. Another definition refers to the game universe outside of the game itself.'_ Walkingking, 2k18");
+                Statistics.AddOutgoingMessages();
+                Statistics.AddMetaMessages();
+            }
+            else await errors.sendErrorTempAsync(channel, user + errorMessage + "\nCooldown " + difference + "/" + Cooldowns.GetCommandCooldown() + " seconds", Colours.errorCol);
         }
 
         [Command("developer")]
