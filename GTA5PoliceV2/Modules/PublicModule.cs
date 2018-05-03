@@ -283,14 +283,11 @@ namespace GTA5PoliceV2.Modules
         [Command("meta")]
         public async Task MetaAsync(IUser metarerar)
         {
-            await Context.Message.DeleteAsync();
-
-
             var channel = Context.Channel;
             var user = Context.User;
             await Context.Message.DeleteAsync();
 
-            TimeSpan last = Cooldowns.GetClearcacheLast();
+            TimeSpan last = Cooldowns.GetMetaLast();
             TimeSpan current = DateTime.Now.TimeOfDay;
             double difference = current.TotalSeconds - last.TotalSeconds;
 

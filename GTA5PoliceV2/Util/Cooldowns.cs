@@ -15,7 +15,7 @@ namespace GTA5PoliceV2.Util
         private static TimeSpan CommandCooldown;
 
         private static int MessageTimerCooldown = 0;
-        private static TimeSpan statusLast, rulesLast, linksLast, applyLast, clearcacheLast, uptimeLast;
+        private static TimeSpan statusLast, rulesLast, linksLast, applyLast, clearcacheLast, uptimeLast, metaLast;
 
         public static double GetCommandCooldown() { return BotConfig.Load().CommandCooldown; }
 
@@ -27,6 +27,7 @@ namespace GTA5PoliceV2.Util
             applyLast = DateTime.Now.TimeOfDay.Subtract(new TimeSpan(0, 0, (int)BotConfig.Load().CommandCooldown));
             clearcacheLast = DateTime.Now.TimeOfDay.Subtract(new TimeSpan(0, 0, (int)BotConfig.Load().CommandCooldown));
             uptimeLast = DateTime.Now.TimeOfDay.Subtract(new TimeSpan(0, 0, (int)BotConfig.Load().CommandCooldown));
+            metaLast = DateTime.Now.TimeOfDay.Subtract(new TimeSpan(0, 0, (int)BotConfig.Load().CommandCooldown));
             await Program.Logger(new LogMessage(LogSeverity.Info, "GTA5Police Cooldowns", "Command cooldowns reset."));
         }
 
@@ -60,6 +61,8 @@ namespace GTA5PoliceV2.Util
         public static TimeSpan GetClearcacheLast() { return clearcacheLast; }
         public static void SetUptimeLast(TimeSpan last) { uptimeLast = last; }
         public static TimeSpan GetUptimeLast() { return uptimeLast; }
+        public static void SetMetaLast(TimeSpan last) { metaLast = last; }
+        public static TimeSpan GetMetaLast() { return metaLast; }
     }
 
 }
