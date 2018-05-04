@@ -128,9 +128,9 @@ namespace GTA5PoliceV2
             embed.WithCurrentTimestamp();
             await user.SendMessageAsync("", false, embed);
 
-            var server = bot.Guilds.FirstOrDefault(x => x.Id == BotConfig.Load().ServerId);
-            var guild = server as IGuild;
-            await user.AddRoleAsync(guild.Roles.FirstOrDefault(x => x.Name == "Civilian"));
+            //var server = bot.Guilds.FirstOrDefault(x => x.Id == BotConfig.Load().ServerId);
+            //var guild = server as IGuild;
+            //await user.AddRoleAsync(guild.Roles.FirstOrDefault(x => x.Name == "Civilian"));
 
             Statistics.AddOutgoingMessages();
         }
