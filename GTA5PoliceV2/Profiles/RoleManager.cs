@@ -85,7 +85,7 @@ namespace GTA5PoliceV2.Profiles
                     var civRole = guild.Roles.FirstOrDefault(x => x.Name == "Civilian");
                     await user.RemoveRoleAsync(civRole);
                 }
-            }
+            }/*
             else
             {
                 if (!hasCiv)
@@ -93,7 +93,7 @@ namespace GTA5PoliceV2.Profiles
                     var civRole = guild.Roles.FirstOrDefault(x => x.Name == "Civilian");
                     await user.AddRoleAsync(civRole);
                 }
-            }
+            }*/
         }
     }
 }

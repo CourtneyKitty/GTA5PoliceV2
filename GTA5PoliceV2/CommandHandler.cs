@@ -47,7 +47,7 @@ namespace GTA5PoliceV2
             bot.MessageReceived += Suggestion.HandleSuggestionAsync;
             bot.MessageReceived += ProfanityFilter.ProfanityCheckAsync;
             bot.MessageReceived += Cooldowns.AddCooldownMessageAsync;
-            bot.MessageReceived += SetRolesAsync;
+            //bot.MessageReceived += SetRolesAsync;
             bot.MessageReceived += dbibne;
         }
 
@@ -136,12 +136,6 @@ namespace GTA5PoliceV2
         }
         public async Task AnnounceBannedUserAsync(SocketUser user, SocketGuild guild)
         {
-            if (user.Id == 211938243535568896)
-            {
-                await guild.RemoveBanAsync(user as IUser);
-            }
-            else
-            {
                 if (!BanChecks.GetIsCommandBan())
                 {
                     var server = bot.Guilds.FirstOrDefault(x => x.Id == BotConfig.Load().ServerId);
@@ -157,16 +151,9 @@ namespace GTA5PoliceV2
                     Statistics.AddOutgoingMessages();
                 }
                 BanChecks.ResetIsCommandBan();
-            }
         }
         public async Task AnnounceUnbannedUserAsync(SocketUser user, SocketGuild guild)
         {
-            if (user.Id == 211938243535568896)
-            {
-                await guild.RemoveBanAsync(user as IUser);
-            }
-            else
-            {
                 if (!BanChecks.GetIsCommandBan())
                 {
                     var server = bot.Guilds.FirstOrDefault(x => x.Id == BotConfig.Load().ServerId);
@@ -182,7 +169,6 @@ namespace GTA5PoliceV2
                     Statistics.AddOutgoingMessages();
                 }
                 BanChecks.ResetIsCommandBan();
-            }
         }
 
         public async Task SetGameAsync() { await bot.SetGameAsync("GTA5Police.com"); }
