@@ -66,11 +66,12 @@ namespace GTA5PoliceV2
                     await Task.Delay(60*(60*1000));
                 }
             });
+            /*
             var colour = Task.Run(async () =>
             {
                 var botRole = bot.Guilds.FirstOrDefault(x => x.Id == BotConfig.Load().ServerId).Roles.FirstOrDefault(x => x.Name == "Bot");
                 bool running = true;
-                Color[] colours = { new Color(195, 27, 27), new Color(27, 80, 221)/*, new Color(14, 140, 32)*/ };
+                Color[] colours = { new Color(195, 27, 27), new Color(27, 80, 221)/*, new Color(14, 140, 32) };
 
                 while (running)
                 {
@@ -79,6 +80,7 @@ namespace GTA5PoliceV2
                     await Task.Delay(60*(60*1000));
                 }
             });
+    */
         }
 
         private async Task SetRolesAsync(SocketMessage pMsg)

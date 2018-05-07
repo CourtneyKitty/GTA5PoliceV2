@@ -548,7 +548,7 @@ namespace GTA5PoliceV2.Modules
                     Success success = new Success();
                     if (user != null && rank != null)
                     {
-                        if (rank.Name.ToLower().Equals("police officer") || rank.Name.ToLower().Equals("police sergeant"))
+                        if (rank.Name.ToLower().Equals("probationary tech") || rank.Name.ToLower().Equals("technician") || rank.Name.ToLower().Equals("senior tech"))
                         {
                             await user.RemoveRoleAsync(rank);
                             await user.AddRoleAsync(Context.Guild.Roles.FirstOrDefault(x => x.Name == "Civilian"));
