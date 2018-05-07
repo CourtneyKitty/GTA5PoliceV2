@@ -39,7 +39,7 @@ namespace GTA5PoliceV2
             bot.Ready += SetGameAsync;
             bot.Ready += StartTimersAsync;
             bot.Ready += StartupAsync;
-            //bot.Ready += BlurrIsBlurr;
+            bot.Ready += BlurrIsBlurr;
             bot.Ready += Cooldowns.ResetCommandCooldownAsync;
             bot.MessageReceived += HandleCommandAsync;
             commands = map.GetService<CommandService>();
@@ -47,7 +47,7 @@ namespace GTA5PoliceV2
             bot.MessageReceived += Suggestion.HandleSuggestionAsync;
             bot.MessageReceived += ProfanityFilter.ProfanityCheckAsync;
             bot.MessageReceived += Cooldowns.AddCooldownMessageAsync;
-            //bot.MessageReceived += SetRolesAsync;
+            bot.MessageReceived += SetRolesAsync;
             bot.MessageReceived += dbibne;
         }
 

@@ -14,6 +14,8 @@ namespace GTA5PoliceV2.Config
         public string[] EMSHighRanksArray { get; set; }
         public int PDHighRanks { get; set; }
         public string[] PDHighRanksArray { get; set; }
+        public int MechHighRanks { get; set; }
+        public string[] MechHighRanksArray { get; set; }
 
         public RanksConfig()
         {
@@ -21,6 +23,8 @@ namespace GTA5PoliceV2.Config
             EMSHighRanksArray = new string[4];
             PDHighRanks = 5;
             PDHighRanksArray = new string[5];
+            MechHighRanks = 3;
+            MechHighRanksArray = new string[3];
         }
 
         public void Save(string dir = "configuration/ranks_config.json")

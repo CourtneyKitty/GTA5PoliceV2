@@ -442,8 +442,8 @@ namespace GTA5PoliceV2.Modules
                     //var delta = Context.Guild.Roles.FirstOrDefault(x => x.Name == "Delta Squad");
 
                     if (user == null) await errors.sendErrorTempAsync(Context.Channel, "Please enter the user you would like to remove.", Colours.errorCol);
-                    if (user == null) await errors.sendErrorTempAsync(Context.Channel, "Please enter the rank you would like to add the user to.", Colours.errorCol);
-                    if (squad == null) await errors.sendErrorTempAsync(Context.Channel, "Please enter the squad letter you would like to add the user to.", Colours.errorCol);
+                    if (user == null) await errors.sendErrorTempAsync(Context.Channel, "Please enter the rank you would like to remove from the user to.", Colours.errorCol);
+                    if (squad == null) await errors.sendErrorTempAsync(Context.Channel, "Please enter the squad letter you would like to remove from the user to.", Colours.errorCol);
                     if (!squad.ToLower().Equals("a")) await errors.sendErrorTempAsync(Context.Channel, "Please enter the squad letter you would like to remove the user from.", Colours.errorCol);
                     if (!squad.ToLower().Equals("b")) await errors.sendErrorTempAsync(Context.Channel, "Please enter the squad letter you would like to remove the user from.", Colours.errorCol);
                     if (!squad.ToLower().Equals("c")) await errors.sendErrorTempAsync(Context.Channel, "Please enter the squad letter you would like to remove the user from.", Colours.errorCol);
@@ -467,6 +467,94 @@ namespace GTA5PoliceV2.Modules
                             await success.sendSuccessTempAsync(Context.Channel, "Successful!", "Successfully removed " + user + " from " + rank + "!", Colours.adminCol);
                         }
                         else await errors.sendErrorTempAsync(Context.Channel, "That isn't even a police rank you fool!", Colours.errorCol);
+                    }
+                }
+            }
+        }
+
+        [Command("mechadd")]
+        public async Task MechAddAsync(IGuildUser user = null, [Remainder] IRole rank = null)
+        {
+            if (BotConfig.Load().PoliceAdd)
+            {
+                Statistics.AddCommandRequests();
+
+                var author = Context.Message.Author as SocketGuildUser;
+                bool isHigh = false;
+
+                for (int i = 0; i <= RanksConfig.Load().MechHighRanks - 1; i++)
+                {
+                    var role = (author as IGuildUser).Guild.Roles.FirstOrDefault(x => x.Name == RanksConfig.Load().MechHighRanksArray[i]);
+                    if (author.Roles.Contains(role)) isHigh = true;
+                }
+
+                if (isHigh)
+                {
+                    await Context.Message.DeleteAsync();
+
+                    Errors errors = new Errors();
+                    
+
+
+                    if (user == null) await errors.sendErrorTempAsync(Context.Channel, "Please enter the user you would like to add.", Colours.errorCol);
+                    if (rank == null) await errors.sendErrorTempAsync(Context.Channel, "Please enter the rank you would like to add the user to.", Colours.errorCol);
+
+                    Success success = new Success();
+                    if (user != null && rank != null)
+                    {
+                        if (rank.Name.ToLower().Equals("probationary tech") || rank.Name.ToLower().Equals("technician") || rank.Name.ToLower().Equals("senior tech"))
+                        {
+                            await user.AddRoleAsync(rank);
+                            await success.sendSuccessTempAsync(Context.Channel, "Successful!", "Successfully added " + user + " to " + rank + "!", Colours.adminCol);
+
+                            var role = (author as IGuildUser).Guild.Roles.FirstOrDefault(x => x.Name == "Civilian");
+                            if (user.Guild.Roles.Contains(role))
+                            {
+                                await user.RemoveRoleAsync(role);
+                            }
+
+                        }
+                        else await errors.sendErrorTempAsync(Context.Channel, "That isn't even a mechanic rank you fool!", Colours.errorCol);
+                    }
+                }
+            }
+        }
+
+        [Command("mechrem")]
+        public async Task MechRemAsync(IGuildUser user = null, [Remainder] IRole rank = null)
+        {
+            if (BotConfig.Load().PoliceAdd)
+            {
+                Statistics.AddCommandRequests();
+
+                var author = Context.Message.Author as SocketGuildUser;
+                bool isHigh = false;
+
+                for (int i = 0; i <= RanksConfig.Load().MechHighRanks - 1; i++)
+                {
+                    var role = (author as IGuildUser).Guild.Roles.FirstOrDefault(x => x.Name == RanksConfig.Load().MechHighRanksArray[i]);
+                    if (author.Roles.Contains(role)) isHigh = true;
+                }
+
+                if (isHigh)
+                {
+                    await Context.Message.DeleteAsync();
+
+                    Errors errors = new Errors();
+
+                    if (user == null) await errors.sendErrorTempAsync(Context.Channel, "Please enter the user you would like to remove.", Colours.errorCol);
+                    if (user == null) await errors.sendErrorTempAsync(Context.Channel, "Please enter the rank you would like to remove from the user to.", Colours.errorCol);
+
+                    Success success = new Success();
+                    if (user != null && rank != null)
+                    {
+                        if (rank.Name.ToLower().Equals("police officer") || rank.Name.ToLower().Equals("police sergeant"))
+                        {
+                            await user.RemoveRoleAsync(rank);
+                            await user.AddRoleAsync(Context.Guild.Roles.FirstOrDefault(x => x.Name == "Civilian"));
+                            await success.sendSuccessTempAsync(Context.Channel, "Successful!", "Successfully removed " + user + " from " + rank + "!", Colours.adminCol);
+                        }
+                        else await errors.sendErrorTempAsync(Context.Channel, "That isn't even a mechanic rank you fool!", Colours.errorCol);
                     }
                 }
             }
