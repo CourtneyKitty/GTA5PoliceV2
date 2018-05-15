@@ -252,8 +252,8 @@ namespace GTA5PoliceV2
                 Statistics.AddStatusChanges();
                 if (References.IsStartUp() == true)
                 {
-                    if (status.getNyStatus()) await success.sendSuccessTempAsync(channel, "Server Status Change", "New York City, is now online!", Colours.generalCol, References.GetDashboardURL(), 5);
-                    if (!status.getNyStatus()) await success.sendSuccessTempAsync(channel, "Server Status Change", "New York City has gone offline...", Colours.generalCol, References.GetDashboardURL(), 5);
+                    if (status.getNyStatus()) await channel.SendMessageAsync("New York City, is now online!") /*success.sendSuccessTempAsync(channel, "Server Status Change", "New York City, is now online!", Colours.generalCol, References.GetDashboardURL(), 5)*/;
+                    if (!status.getNyStatus()) await channel.SendMessageAsync("New York City has gone offline...") /*success.sendSuccessTempAsync(channel, "Server Status Change", "New York City has gone offline...", Colours.generalCol, References.GetDashboardURL(), 5)*/;
                 }
                 else
                 {
@@ -267,8 +267,8 @@ namespace GTA5PoliceV2
                 Statistics.AddStatusChanges();
                 if (References.IsStartUp() == true)
                 {
-                    if (status.getLaStatus()) await success.sendSuccessTempAsync(channel, "Server Status Change", "Los Angeles, is now online!", Colours.generalCol, References.GetDashboardURL(), 5);
-                    if (!status.getLaStatus()) await success.sendSuccessTempAsync(channel, "Server Status Change", "Los Angeles has gone offline...", Colours.generalCol, References.GetDashboardURL(), 5);
+                    if (status.getLaStatus()) await channel.SendMessageAsync("Los Angeles, is now online!") /*success.sendSuccessTempAsync(channel, "Server Status Change", "Los Angeles, is now online!", Colours.generalCol, References.GetDashboardURL(), 5)*/;
+                    if (!status.getLaStatus()) await channel.SendMessageAsync("Los Angelas has gone offline...") /*success.sendSuccessTempAsync(channel, "Server Status Change", "Los Angeles has gone offline...", Colours.generalCol, References.GetDashboardURL(), 5)*/;
                 }
                 else
                 {
@@ -282,8 +282,8 @@ namespace GTA5PoliceV2
                 Statistics.AddStatusChanges();
                 if (References.IsStartUp() == true)
                 {
-                    if (status.getNyWlStatus()) await success.sendSuccessTempAsync(channel, "Server Status Change", "New York City Whitelist, is now online!", Colours.generalCol, References.GetDashboardURL(), 5);
-                    if (!status.getNyWlStatus()) await success.sendSuccessTempAsync(channel, "Server Status Change", "New York City Whitelist has gone offline...", Colours.generalCol, References.GetDashboardURL(), 5);
+                    //if (status.getNyWlStatus()) await channel.SendMessageAsync("New York City Whitelist, is now online!") /*success.sendSuccessTempAsync(channel, "Server Status Change", "New York City Whitelist, is now online!", Colours.generalCol, References.GetDashboardURL(), 5)*/;
+                    //if (!status.getNyWlStatus()) await channel.SendMessageAsync("New York City Whitelist has gone offline...") /*success.sendSuccessTempAsync(channel, "Server Status Change", "New York City Whitelist has gone offline...", Colours.generalCol, References.GetDashboardURL(), 5)*/;
                 }
                 else
                 {
@@ -297,8 +297,8 @@ namespace GTA5PoliceV2
                 Statistics.AddStatusChanges();
                 if (References.IsStartUp() == true)
                 {
-                    if (status.getLaWlStatus()) await success.sendSuccessTempAsync(channel, "Server Status Change", "Los Angeles Whitelist, is now online!", Colours.generalCol, References.GetDashboardURL(), 5);
-                    if (!status.getLaWlStatus()) await success.sendSuccessTempAsync(channel, "Server Status Change", "Los Angeles Whitelist has gone offline...", Colours.generalCol, References.GetDashboardURL(), 5);
+                    //if (status.getLaWlStatus()) await channel.SendMessageAsync("Los Angeles Whitelist, is now online!") /*success.sendSuccessTempAsync(channel, "Server Status Change", "Los Angeles Whitelist, is now online!", Colours.generalCol, References.GetDashboardURL(), 5)*/;
+                    //if (!status.getLaWlStatus()) await channel.SendMessageAsync("Los Angeles Whitelist has gone offline...") /*success.sendSuccessTempAsync(channel, "Server Status Change", "Los Angeles Whitelist has gone offline...", Colours.generalCol, References.GetDashboardURL(), 5)*/;
                 }
                 else
                 {
